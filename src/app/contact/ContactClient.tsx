@@ -2,10 +2,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { CONTACT, PAGES } from "@/data/rr-data";
+import { CONTACT, PAGES, PHOTOS } from "@/data/rr-data";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import Success from "@/components/Success";
+import { SocialIcon } from "@/components/SocialIcons";
 
 const OWNERS: Record<string, string> = { Selling: "the sales team", Buying: "the sales team", Renting: "the leasing team", "Property management": "the property management team", Maintenance: "your property manager", Other: "reception" };
 const PH: Record<string, string> = { Selling: "e.g. Thinking of selling our 4-bed in Rochedale South next year.", Buying: "e.g. Looking for a 3-bed house in Underwood or Springwood under $900k.", Renting: "e.g. Can I arrange a private inspection for the Shailer Park rental?", "Property management": "e.g. Considering changing agents for my Woodridge unit.", Maintenance: "e.g. Hot water system not heating at ...", Other: "How can we help?" };
@@ -24,18 +25,22 @@ export default function ContactClient() {
   ];
   return (
     <main>
-      <section className="page-head page-head--pad">
-        <Crumb items={[["Contact"]]} />
-        <div className="cols2" style={{ gridTemplateColumns: "1.1fr 1fr", gap: "clamp(32px,5vw,80px)", alignItems: "end" }}>
-          <Lines as="h1" className="display-lg" lines={["Buying, selling or", "renting in Logan?"]} />
-          <div style={{ display: "grid", gap: 8 }}>
-            <a href={CONTACT.phoneHref} style={{ color: "var(--ink)", textDecoration: "none", fontSize: "clamp(1.6rem,1.2rem + 1.6vw,2.6rem)", fontWeight: 800, letterSpacing: "-.02em", lineHeight: 1 }}>{CONTACT.phone}</a>
-            <div style={{ fontSize: 15, color: "var(--grey-2)", lineHeight: 1.5 }}>67 Springwood Road, Springwood QLD 4127<br />Mon–Fri 9:00am–5:00pm · Sat by appointment <span className="mono-note" style={{ fontSize: 10 }}>hours to confirm</span></div>
+      <section className="hero hero--page" style={{ minHeight: "80svh" }}>
+        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.contact}')` }} />
+        <div className="hero__shade" aria-hidden="true" />
+        <div className="hero__body">
+          <Crumb tone="light" items={[["Contact"]]} />
+          <div className="stack-m" style={{ flexWrap: "wrap", gap: 32, alignItems: "flex-end" }}>
+            <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Buying, selling or", <>renting in <span style={{ color: "var(--red)" }}>Logan?</span></>]} />
+            <div style={{ display: "grid", gap: 8 }}>
+              <a href={CONTACT.phoneHref} style={{ color: "#fff", textDecoration: "none", fontSize: "clamp(1.6rem,1.2rem + 1.6vw,2.6rem)", fontWeight: 800, letterSpacing: "-.02em", lineHeight: 1 }}>{CONTACT.phone}</a>
+              <div className="hero__meta">67 Springwood Road, Springwood QLD 4127<br />Mon–Fri 9:00am–5:00pm · Sat by appointment <span className="mono-note mono-note--light" style={{ fontSize: 10 }}>hours to confirm</span></div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section--bg" style={{ padding: "0 var(--pad-x) clamp(48px,6vw,80px)" }}>
+      <section className="section--bg" style={{ padding: "clamp(40px,5vw,64px) var(--pad-x) clamp(48px,6vw,80px)" }}>
         <div data-stagger className="channels">
           {channels.map((c) => {
             const inner = (<><div className="tile__k">{c.k}</div><div style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-.01em", wordBreak: "break-word" }}>{c.v}</div><div className="tile__sub">{c.sub}</div></>);
@@ -80,7 +85,7 @@ export default function ContactClient() {
             <div data-reveal className="contact-info">
               <div style={{ display: "grid", gap: 4 }}><div className="contact-info__k">Office</div><div className="contact-info__v">67 Springwood Road<br />Springwood QLD 4127</div></div>
               <div style={{ display: "grid", gap: 4 }}><div className="contact-info__k">Parking</div><div className="contact-info__v">On site and street parking <span className="mono-note" style={{ fontSize: 10 }}>to confirm</span></div></div>
-              <div style={{ display: "grid", gap: 4 }}><div className="contact-info__k">Follow</div><div style={{ display: "flex", gap: 8 }}><a href={CONTACT.facebook} target="_blank" rel="noopener" aria-label="Facebook" className="social-dark">f</a><a href={CONTACT.instagram} target="_blank" rel="noopener" aria-label="Instagram" className="social-dark">ig</a><a href={CONTACT.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" className="social-dark">in</a></div></div>
+              <div style={{ display: "grid", gap: 4 }}><div className="contact-info__k">Follow</div><div style={{ display: "flex", gap: 8 }}><a href={CONTACT.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook" className="social-dark"><SocialIcon kind="facebook" /></a><a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram" className="social-dark"><SocialIcon kind="instagram" /></a><a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn" className="social-dark"><SocialIcon kind="linkedin" /></a></div></div>
               <div style={{ display: "grid", gap: 4 }}><div className="contact-info__k">Reviews</div><a href={CONTACT.rma} target="_blank" rel="noopener" className="contact-info__v" style={{ color: "var(--ink)", textDecoration: "none" }}>4.9 ★ · 485 on RateMyAgent ↗</a></div>
             </div>
           </div>

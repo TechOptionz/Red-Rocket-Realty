@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { BUYER_TIPS, LAND, PAGES, SALE, SELLER_TIPS } from "@/data/rr-data";
+import { BUYER_TIPS, LAND, PAGES, PHOTOS, SALE, SELLER_TIPS } from "@/data/rr-data";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import Success from "@/components/Success";
@@ -34,18 +34,22 @@ export default function GuidesClient() {
 
   return (
     <main>
-      <section className="page-head page-head--pad">
-        <Crumb items={[[b ? "Buyer guide" : "Seller guide"]]} />
-        <div className="stack-m" style={{ flexWrap: "wrap" }}>
-          <div style={{ display: "grid", gap: 18, maxWidth: 820 }}>
-            <div className="kicker">Guides</div>
-            <Lines key={guide} as="h1" className="display-lg" lines={b ? ["Buying a home", "in Logan, step by step."] : ["Selling your home", "for the best price."]} />
-            <p className="lead" style={{ maxWidth: "56ch" }}>{b ? "Six things to settle before you make an offer, from the deposit to the inspection, written by the people who sell here every week." : "Five things that move the price, from research and repairs to presentation and promotion."}</p>
+      <section className="hero hero--page" style={{ minHeight: "80svh" }}>
+        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.guides}')` }} />
+        <div className="hero__shade" aria-hidden="true" />
+        <div className="hero__body">
+        <Crumb tone="light" items={[[b ? "Buyer guide" : "Seller guide"]]} />
+        <div className="stack-m" style={{ flexWrap: "wrap", gap: 32, alignItems: "flex-end" }}>
+          <div style={{ display: "grid", gap: 20, maxWidth: 900 }}>
+            <div className="kicker kicker--photo">Guides</div>
+            <Lines key={guide} as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={b ? ["Buying a home", <>in Logan, <span style={{ color: "var(--red)" }}>step by step.</span></>] : ["Selling your home", <>for the <span style={{ color: "var(--red)" }}>best price.</span></>]} />
+            <p className="hero__sub">{b ? "Six things to settle before you make an offer, from the deposit to the inspection, written by the people who sell here every week." : "Five things that move the price, from research and repairs to presentation and promotion."}</p>
           </div>
           <div role="tablist" aria-label="Guide" className="seg">
             <button type="button" role="tab" className="seg__btn" style={{ padding: "0 20px" }} data-on={b ? "1" : "0"} onClick={() => set("buyer")}>For buyers</button>
             <button type="button" role="tab" className="seg__btn" style={{ padding: "0 20px" }} data-on={b ? "0" : "1"} onClick={() => set("seller")}>For sellers</button>
           </div>
+        </div>
         </div>
       </section>
 

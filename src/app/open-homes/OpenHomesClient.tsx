@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { CONTACT, LAND, PAGES, RENT, SALE, decorate, formatRent, propHref, specs } from "@/data/rr-data";
+import { CONTACT, LAND, PAGES, PHOTOS, RENT, SALE, decorate, formatRent, propHref, specs } from "@/data/rr-data";
 import { icsEvent, icsFile } from "@/lib/ics";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
@@ -26,18 +26,25 @@ export default function OpenHomesClient() {
 
   return (
     <main>
-      <section className="page-head">
-        <Crumb items={[["Buy", PAGES.listings + "?mode=buy"], ["Open homes"]]} />
-        <div className="stack-m" style={{ flexWrap: "wrap" }}>
-          <div style={{ display: "grid", gap: 18, maxWidth: 820 }}>
-            <Lines as="h1" className="display-lg" lines={["Open homes", "this week."]} />
-            <p className="lead" style={{ maxWidth: "56ch" }}>Every published inspection for sales and rentals, grouped by day. Add one to your calendar or plan a route for Saturday.</p>
+      <section className="hero hero--page" style={{ minHeight: "72svh" }}>
+        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.openHomes}')` }} />
+        <div className="hero__shade" aria-hidden="true" />
+        <div className="hero__body">
+        <Crumb tone="light" items={[["Buy", PAGES.listings + "?mode=buy"], ["Open homes"]]} />
+        <div className="stack-m" style={{ flexWrap: "wrap", gap: 32, alignItems: "flex-end" }}>
+          <div style={{ display: "grid", gap: 20, maxWidth: 900 }}>
+            <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Open homes", <><span style={{ color: "var(--red)" }}>this week.</span></>]} />
+            <p className="hero__sub">Every published inspection for sales and rentals, grouped by day. Add one to your calendar or plan a route for Saturday.</p>
           </div>
           <div role="tablist" aria-label="Listing type" className="seg">
             {([["all", "All"], ["buy", "For sale"], ["rent", "For rent"]] as const).map(([v, l]) => <button key={v} type="button" role="tab" className="seg__btn" data-on={mode === v ? "1" : "0"} onClick={() => setMode(v)}>{l}</button>)}
           </div>
         </div>
-        <div className="oh-bar">
+        </div>
+      </section>
+
+      <section className="hero-bar">
+        <div className="oh-bar" style={{ paddingTop: 24 }}>
           <span><b style={{ color: "var(--ink)", fontWeight: 800 }}>{items.length}</b> inspections across {days.length} days</span>
           <a href={icsFile(items.map((i) => i.ev), "Open homes")} download="red-rocket-open-homes.ics" className="pill pill--ghost pill--sm">Add all to calendar ↓</a>
         </div>

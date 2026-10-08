@@ -28,7 +28,7 @@ export default function RentClient() {
   return (
     <main>
       <section className="hero" style={{ minHeight: "80svh" }}>
-        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.macLiving}')` }} />
+        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.rent}')` }} />
         <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.1) 40%,rgba(15,17,20,.95) 100%)" }} />
         <div style={{ position: "relative", width: "100%", padding: "170px var(--pad-x) clamp(56px,7vw,96px)", display: "grid", gap: 28 }}>
           <Crumb tone="light" items={[["Rent"]]} />
@@ -70,7 +70,7 @@ export default function RentClient() {
           </div>
           <div data-stagger style={{ display: "grid" }}>
             {STEPS.map(([title, body], i) => (
-              <div key={title} className="numbered"><div className="numbered__n">0{i + 1}</div><div style={{ display: "grid", gap: 10 }}><h3 className="numbered__title">{title}</h3><p className="numbered__body">{body}</p></div></div>
+              <div key={title} data-glow="row" className="numbered"><div data-glow-n className="numbered__n">0{i + 1}</div><div style={{ display: "grid", gap: 10 }}><h3 data-glow-t className="numbered__title">{title}</h3><p className="numbered__body">{body}</p></div></div>
             ))}
             <div className="rule" />
           </div>

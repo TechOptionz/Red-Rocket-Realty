@@ -39,7 +39,7 @@ export default function PMClient() {
             </div>
           </div>
           <div data-reveal="clip" className="pm-hero__img">
-            <div style={{ position: "absolute", inset: 0, backgroundImage: `url('${PHOTOS.macKitchen}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
+            <div style={{ position: "absolute", inset: 0, backgroundImage: `url('${PHOTOS.hero.pm}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
             <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg,rgba(22,24,29,.6) 0%,rgba(22,24,29,0) 40%)" }} />
           </div>
         </div>
@@ -47,10 +47,10 @@ export default function PMClient() {
 
       <section className="section--white" style={{ padding: "clamp(48px,5vw,72px) var(--pad-x)", borderBottom: "1px solid rgba(17,19,24,.1)" }}>
         <div data-stagger className="proof-light">
-          <div style={{ display: "grid", gap: 6 }}><div className="proof-light__n">10</div><div className="proof-light__k">People in PM, leasing and inspections</div></div>
-          <div style={{ display: "grid", gap: 6 }}><div className="proof-light__n">4×</div><div className="proof-light__k">Routine inspections a year, with photo reports</div></div>
-          <div style={{ display: "grid", gap: 6 }}><div className="proof-light__n">4.9</div><div className="proof-light__k">Agency rating on RateMyAgent</div></div>
-          <div style={{ display: "grid", gap: 6 }}><div className="proof-light__n">You</div><div className="proof-light__k">Approve every tenant. Always.</div></div>
+          <div data-glow style={{ display: "grid", gap: 6 }}><div className="proof-light__n">10</div><div className="proof-light__k">People in PM, leasing and inspections</div></div>
+          <div data-glow style={{ display: "grid", gap: 6 }}><div className="proof-light__n">4×</div><div className="proof-light__k">Routine inspections a year, with photo reports</div></div>
+          <div data-glow style={{ display: "grid", gap: 6 }}><div className="proof-light__n">4.9</div><div className="proof-light__k">Agency rating on RateMyAgent</div></div>
+          <div data-glow style={{ display: "grid", gap: 6 }}><div className="proof-light__n">You</div><div className="proof-light__k">Approve every tenant. Always.</div></div>
         </div>
       </section>
 
@@ -60,7 +60,7 @@ export default function PMClient() {
         </div>
         <div data-stagger className="tiles">
           {SERVICES.map(([title, body], i) => (
-            <div key={title} className="tile"><div className="tile__n">0{i + 1}</div><h3 className="tile__title">{title}</h3><p className="tile__body">{body}</p></div>
+            <div key={title} data-glow="card" data-tilt="lift" className="tile"><div data-glow-n style={{ width: "max-content" }} className="tile__n">0{i + 1}</div><h3 className="tile__title">{title}</h3><p className="tile__body">{body}</p></div>
           ))}
         </div>
       </section>

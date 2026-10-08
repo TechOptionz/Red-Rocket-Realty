@@ -36,6 +36,7 @@ export default function TeamStrip() {
               <div style={{ display: "grid", gap: 3 }}>
                 <div className="team-card__name">{t.name}</div>
                 <div className="team-card__role">{t.role}</div>
+                {t.tagline ? <div className="team-card__strip-tag">{t.tagline}</div> : null}
                 <div className="team-card__mobile">{t.mobile}</div>
               </div>
             </Link>

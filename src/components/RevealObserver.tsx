@@ -6,7 +6,9 @@ import { usePathname } from "next/navigation";
  * Site-wide scroll choreography, ported from the prototype:
  * - [data-reveal] / [data-stagger] get data-in when they enter the viewport
  * - [data-mag] buttons lean toward the pointer (desktop only)
- * - [data-tilt] cards tilt in 3D under the cursor
+ * - [data-tilt] cards tilt in 3D under the cursor (data-tilt="lift" also raises them)
+ * - [data-glow] blocks track the pointer: --mx/--my (px) and --dx/--dy (-.5..0.5)
+ *   drive a cursor spotlight, a glowing border and magnetic numbers in CSS
  * - [data-drift] backgrounds drift on scroll
  */
 export default function RevealObserver() {
@@ -75,14 +77,36 @@ export default function RevealObserver() {
         const dx = (e.clientX - r.left) / r.width - 0.5;
         const dy = (e.clientY - r.top) / r.height - 0.5;
         tt.setAttribute("data-tilting", "1");
-        tt.style.transform = "perspective(1200px) rotateX(" + (-dy * 5).toFixed(2) + "deg) rotateY(" + (dx * 6).toFixed(2) + "deg) translateZ(0)";
+        const lift = tt.getAttribute("data-tilt") === "lift" ? " translateY(-6px)" : "";
+        tt.style.transform = "perspective(1200px) rotateX(" + (-dy * 5).toFixed(2) + "deg) rotateY(" + (dx * 6).toFixed(2) + "deg) translateZ(0)" + lift;
+      }
+      const g = target && target.closest ? (target.closest("[data-glow]") as HTMLElement | null) : null;
+      document.querySelectorAll<HTMLElement>("[data-glow][data-glowing]").forEach((el) => {
+        if (el !== g) unglow(el);
+      });
+      if (g) {
+        const r = g.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        g.style.setProperty("--mx", x.toFixed(0) + "px");
+        g.style.setProperty("--my", y.toFixed(0) + "px");
+        g.style.setProperty("--dx", (x / r.width - 0.5).toFixed(3));
+        g.style.setProperty("--dy", (y / r.height - 0.5).toFixed(3));
+        g.setAttribute("data-glowing", "1");
       }
     };
-    const onLeave = () =>
+    const unglow = (el: HTMLElement) => {
+      el.removeAttribute("data-glowing");
+      el.style.setProperty("--dx", "0");
+      el.style.setProperty("--dy", "0");
+    };
+    const onLeave = () => {
       document.querySelectorAll<HTMLElement>("[data-tilt][data-tilting]").forEach((el) => {
         el.removeAttribute("data-tilting");
         el.style.transform = "";
       });
+      document.querySelectorAll<HTMLElement>("[data-glow][data-glowing]").forEach(unglow);
+    };
     document.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerleave", onLeave, true);
 

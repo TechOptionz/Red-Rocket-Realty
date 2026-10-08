@@ -5,3 +5,7 @@ out
 next-env.d.ts
 .env*.local
 .DS_Store
+
+
+.photos-original/
+.venv-img2/

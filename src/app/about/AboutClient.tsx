@@ -13,7 +13,7 @@ const MILESTONES = [
   { year: "Today", title: "19 people, 485 reviews, 4.9 stars", body: "Sales, property management, leasing and inspections under one roof." },
 ];
 const KINDS = ["All", "Sellers", "Buyers", "Landlords"];
-const COVERS = [PHOTOS.boskLiving, PHOTOS.rioLounge, PHOTOS.macLiving, PHOTOS.deckLounge];
+const COVERS = [PHOTOS.boskLiving, PHOTOS.hunterLiving, PHOTOS.limeLiving, PHOTOS.parfreyDeck];
 
 export default function AboutClient() {
   const stmt = useRef<HTMLElement>(null);
@@ -43,18 +43,14 @@ export default function AboutClient() {
 
   return (
     <main>
-      <section className="page-head">
-        <Crumb items={[["About"]]} />
-        <div className="cols2" style={{ gridTemplateColumns: "1.1fr 1fr", gap: "clamp(32px,5vw,80px)", alignItems: "end", paddingBottom: "clamp(48px,6vw,80px)" }}>
-          <div style={{ display: "grid", gap: 22 }}>
-            <div className="kicker">Our story</div>
-            <Lines as="h1" className="display-lg" lines={["Logan locals,", "for over 25 years."]} />
-          </div>
-          <p style={{ fontSize: "clamp(17px,1.3vw,20px)", lineHeight: 1.55, color: "var(--grey-2)", maxWidth: "48ch" }}>Red Rocket Realty is committed to the property needs of Logan residents. We are focused on maintaining our position as the leading real estate agents in the area and the local experts that people can rely on and trust.</p>
-        </div>
-        <div data-reveal="clip" className="about-hero__img">
-          <div data-drift="0.08" style={{ position: "absolute", inset: "-10% 0", width: "100%", backgroundImage: `url('${PHOTOS.deck}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
-          <div className="img-note" style={{ right: 16, bottom: 14 }}>Temporary · replace with office or team photo</div>
+      <section className="hero hero--page" style={{ minHeight: "88svh" }}>
+        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.about}')` }} />
+        <div className="hero__shade" aria-hidden="true" />
+        <div className="hero__body">
+          <Crumb tone="light" items={[["About"]]} />
+          <div className="kicker kicker--photo">Our story</div>
+          <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Logan locals,", <>for over <span style={{ color: "var(--red)" }}>25 years.</span></>]} />
+          <p className="hero__sub">Red Rocket Realty is committed to the property needs of Logan residents. We are focused on maintaining our position as the leading real estate agents in the area and the local experts that people can rely on and trust.</p>
         </div>
       </section>
 
@@ -72,7 +68,7 @@ export default function AboutClient() {
           </div>
           <div style={{ display: "grid" }}>
             {ADVANTAGE.map(([title, body], i) => (
-              <div key={title} data-reveal className="numbered numbered--light"><div className="numbered__n">0{i + 1}</div><div style={{ display: "grid", gap: 10 }}><h3 className="numbered__title">{title}</h3><p className="numbered__body">{body}</p></div></div>
+              <div key={title} data-reveal data-glow="row" className="numbered numbered--light"><div data-glow-n className="numbered__n">0{i + 1}</div><div style={{ display: "grid", gap: 10 }}><h3 data-glow-t className="numbered__title">{title}</h3><p className="numbered__body">{body}</p></div></div>
             ))}
             <div className="rule rule--light" />
           </div>
@@ -83,7 +79,7 @@ export default function AboutClient() {
         <div style={{ display: "grid", gap: 18, marginBottom: 48, maxWidth: 720 }}><div className="kicker">Milestones</div><Lines className="h2" lines={["From Springwood,", "across Logan."]} /></div>
         <div data-stagger className="tl">
           {MILESTONES.map((m) => (
-            <div key={m.year}><div className="tl__year">{m.year}</div><div style={{ fontSize: 17, fontWeight: 800, letterSpacing: "-.01em" }}>{m.title}</div><p className="small" style={{ fontSize: 15, lineHeight: 1.55, color: "var(--grey-2)" }}>{m.body}</p></div>
+            <div key={m.year} data-glow="row"><div data-glow-n className="tl__year">{m.year}</div><div style={{ fontSize: 17, fontWeight: 800, letterSpacing: "-.01em" }}>{m.title}</div><p className="small" style={{ fontSize: 15, lineHeight: 1.55, color: "var(--grey-2)" }}>{m.body}</p></div>
           ))}
         </div>
         <p data-reveal className="mono-note" style={{ marginTop: 32 }}>Dates from the content pack and the current site · founding year and the &quot;over 25 years&quot; claim to be confirmed by the agency</p>

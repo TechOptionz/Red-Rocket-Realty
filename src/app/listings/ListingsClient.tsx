@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { LAND, PAGES, RENT, SALE, SEARCH, SOLD, type Listing } from "@/data/rr-data";
+import { LAND, PAGES, PHOTOS, RENT, SALE, SEARCH, SOLD, type Listing } from "@/data/rr-data";
 import PropertyCard from "@/components/PropertyCard";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
@@ -65,12 +65,15 @@ export default function ListingsClient() {
 
   return (
     <main>
-      <section className="page-head">
-        <Crumb items={[[kicker]]} />
-        <div className="stack-m" style={{ flexWrap: "wrap" }}>
+      <section className="hero hero--page" style={{ minHeight: "68svh" }}>
+        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.listings}')` }} />
+        <div className="hero__shade" aria-hidden="true" />
+        <div className="hero__body" style={{ paddingBottom: "clamp(88px,10vw,128px)" }}>
+        <Crumb tone="light" items={[[kicker]]} />
+        <div className="stack-m" style={{ flexWrap: "wrap", gap: 32, alignItems: "flex-end" }}>
           <div style={{ display: "grid", gap: 16 }}>
-            <Lines as="h1" className="display-lg" lines={[title]} key={mode} />
-            <div style={{ fontSize: 16, color: "var(--grey-2)", fontWeight: 500 }}><b style={{ fontWeight: 800, color: "var(--ink)" }}>{list.length}</b> {noun} · Logan City and surrounding areas</div>
+            <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={[title]} key={mode} />
+            <div className="hero__meta" style={{ fontSize: 16 }}><b>{list.length}</b> {noun} · Logan City and surrounding areas</div>
           </div>
           <div role="tablist" aria-label="Listing type" className="seg">
             {(["buy", "rent", "land", "sold"] as Mode[]).map((m) => (
@@ -78,7 +81,11 @@ export default function ListingsClient() {
             ))}
           </div>
         </div>
-        <form className="search-bar filters" onSubmit={(e) => e.preventDefault()}>
+        </div>
+      </section>
+
+      <section className="hero-bar">
+        <form className="search-bar filters filters--overlap" onSubmit={(e) => e.preventDefault()}>
           <label className="search-field search-field--sm" style={{ flexBasis: 160 }}><span>Suburb</span><select value={suburb} onChange={(e) => setSuburb(e.target.value)}><option value="">Any suburb</option>{suburbs.map((o) => <option key={o} value={o}>{o}</option>)}</select></label>
           <label className="search-field search-field--sm" style={{ flexBasis: 140 }}><span>Property type</span><select value={ptype} onChange={(e) => setPtype(e.target.value)}><option value="">Any type</option>{types.map((o) => <option key={o} value={o}>{o}</option>)}</select></label>
           <label className="search-field search-field--sm" style={{ flexBasis: 120 }}><span>{isRent ? "Rent from" : "Price from"}</span><select value={pfrom} onChange={(e) => setPfrom(e.target.value)}><option value="">Any</option>{prices.map((o) => <option key={o.v} value={o.v}>{o.label}</option>)}</select></label>

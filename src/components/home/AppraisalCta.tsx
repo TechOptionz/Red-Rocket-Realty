@@ -13,7 +13,7 @@ export default function AppraisalCta({ state, setState }: { state: ApprState; se
       </div>
       <div className="appr__shade" aria-hidden="true" />
       <div className="appr__body">
-        <div className="kicker">Thinking of selling or leasing?</div>
+        <div className="kicker kicker--photo">Thinking of selling or leasing?</div>
         <Lines className="display-xl" style={{ fontSize: "clamp(2.6rem,1.2rem + 5vw,6rem)", letterSpacing: "-.035em" }} lines={["How much is my", "property worth?"]} />
         <p data-reveal style={{ fontSize: 18, lineHeight: 1.5, color: "var(--grey-4)", maxWidth: "46ch" }}>Connecting you with your area expert. Free, with no obligation, for homes you want to sell or lease.</p>
         {state.step === 0 && (

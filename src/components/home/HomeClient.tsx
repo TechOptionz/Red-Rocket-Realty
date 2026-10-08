@@ -16,10 +16,10 @@ import ContactSection from "./ContactSection";
 
 const SUBURBS = ["Springwood", "Rochedale South", "Underwood", "Woodridge", "Kingston", "Marsden", "Slacks Creek", "Kuraby", "Shailer Park", "Logan Central"];
 const AREA_IMGS = [
-  [PHOTOS.boskFront, "Springwood · office at 67 Springwood Road"],
+  [PHOTOS.barbarallaFacade, "Springwood · 9/93 Barbaralla Drive"],
   [PHOTOS.heroPoster, "Rochedale South · 89 Passerine Drive, sold $1.5M"],
   [PHOTOS.rioFront, "Underwood · 12 Rio Court, sold $1.05M"],
-  [PHOTOS.macFacade, "Woodridge · Logan growth corridor"],
+  [PHOTOS.hunterFacade, "Woodridge · 8 Hunter Street"],
 ];
 
 export default function HomeClient() {
@@ -40,20 +40,20 @@ export default function HomeClient() {
           <div style={{ marginLeft: "auto", color: "var(--grey)", fontWeight: 500 }}>Logan City and surrounding areas · since the 1990s<span className="mono-tag" style={{ marginLeft: 8 }}>25+ yrs · verify</span></div>
         </div>
         <div className="about__grid">
-          <div style={{ display: "grid", gap: 28 }}>
-            <div className="kicker">About Red Rocket Realty</div>
-            <Lines className="display-md" lines={["Logan's leading agents,", "and the local experts", "you can rely on and trust."]} />
-          </div>
-          <div style={{ display: "grid", gap: 28 }}>
-            <div data-reveal="clip" className="about__img">
-              <div data-drift="0.06" className="drift-bg" style={{ backgroundImage: `url('${PHOTOS.deck}')` }} />
-              <div className="img-note">Temporary · replace with office or team photo</div>
+          <div className="about__text">
+            <div style={{ display: "grid", gap: 28 }}>
+              <div className="kicker">About Red Rocket Realty</div>
+              <Lines className="display-md" lines={["Logan's leading agents,", "and the local experts", "you can rely on and trust."]} />
             </div>
             <p data-reveal className="lead" style={{ maxWidth: "52ch", transitionDelay: ".1s" }}>Red Rocket Realty is committed to the property needs of Logan residents. From our office in Springwood we help people buy, sell and rent across Springwood, Rochedale South, Underwood, Woodridge and beyond, pairing thorough local knowledge with personable service. Every buyer, seller and renter is different, so the service is tailored, and we look after everything from paperwork to finance.</p>
             <div data-reveal style={{ display: "flex", flexWrap: "wrap", gap: 10, transitionDelay: ".2s" }}>
               <a href="#team" className="pill pill--dark pill--arrow"><span>Meet the team</span><span className="pill__arrow" aria-hidden="true">→</span></a>
               <a href="#reviews" className="pill pill--ghost">Read our reviews</a>
             </div>
+          </div>
+          <div data-reveal="clip" className="about__img">
+            <div data-drift="0.06" className="drift-bg" style={{ backgroundImage: `url('${PHOTOS.parfreyDeck}')` }} />
+            <div className="img-note">Temporary · replace with office or team photo</div>
           </div>
         </div>
       </section>
@@ -63,12 +63,12 @@ export default function HomeClient() {
       {/* Buy / Sell / Rent */}
       <section className="bsr">
         {[
-          { href: PAGES.listings + "?mode=buy", img: PHOTOS.macFacade, n: "01 · Interested in buying?", t: "Buy", p: "Houses, units, townhouses and land across Logan. Filter by suburb, type, price and features, or set an email alert and let the listings come to you.", cta: "Start searching now!" },
+          { href: PAGES.listings + "?mode=buy", img: PHOTOS.parkwayFacade, pos: undefined as string | undefined, n: "01 · Interested in buying?", t: "Buy", p: "Houses, units, townhouses and land across Logan. Filter by suburb, type, price and features, or set an email alert and let the listings come to you.", cta: "Start searching now!" },
           { href: PAGES.appraisal, img: PHOTOS.pool, n: "02 · Thinking of selling?", t: "Sell", p: "Hands-on from pricing to paperwork to negotiating with buyers. Local agents who know Logan values and how to present a home for its maximum price.", cta: "Sell your home today!" },
-          { href: PAGES.listings + "?mode=rent", img: PHOTOS.rioLounge, n: "03 · Looking for a rental?", t: "Rent", p: "Current rentals with weekly rent, availability and inspection times you can save to your calendar. After-hours viewings by appointment through our rentals team.", cta: "View properties for rent" },
+          { href: PAGES.listings + "?mode=rent", img: PHOTOS.limeLiving, pos: "center 68%", n: "03 · Looking for a rental?", t: "Rent", p: "Current rentals with weekly rent, availability and inspection times you can save to your calendar. After-hours viewings by appointment through our rentals team.", cta: "View properties for rent" },
         ].map((x) => (
           <Link key={x.t} href={x.href} className="bsr__panel">
-            <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${x.img}')` }} />
+            <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${x.img}')`, backgroundPosition: x.pos }} />
             <div className="bsr__shade" aria-hidden="true" />
             <div className="bsr__body">
               <div className="bsr__n">{x.n}</div>
@@ -104,9 +104,9 @@ export default function HomeClient() {
           </div>
           <div style={{ display: "grid" }}>
             {ADVANTAGE.map(([title, body], i) => (
-              <div key={title} data-reveal className="adv">
-                <div className="adv__n">0{i + 1}</div>
-                <div style={{ display: "grid", gap: 12 }}><h3 className="h3">{title}</h3><p className="body" style={{ maxWidth: "52ch" }}>{body}</p></div>
+              <div key={title} data-reveal data-glow="row" className="adv">
+                <div data-glow-n className="adv__n">0{i + 1}</div>
+                <div style={{ display: "grid", gap: 12 }}><h3 data-glow-t className="h3">{title}</h3><p className="body" style={{ maxWidth: "52ch" }}>{body}</p></div>
               </div>
             ))}
           </div>

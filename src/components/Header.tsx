@@ -93,9 +93,6 @@ export default function Header({ solid = false }: { solid?: boolean }) {
 
           <div className="hdr__right">
             <a className="hdr__phone" href={CONTACT.phoneHref}>{CONTACT.phone}</a>
-            <Link href={PAGES.listings + "?mode=buy"} aria-label="Search properties" className="hdr__icon">
-              <span className="hdr__search" aria-hidden="true"><span /></span>
-            </Link>
             <Link href={PAGES.appraisal} className="pill pill--white pill--arrow hdr__cta">
               <span>Request an appraisal</span>
               <span className="pill__arrow" aria-hidden="true">→</span>

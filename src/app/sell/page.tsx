@@ -16,7 +16,7 @@ const STEPS: [string, string][] = [
   ["Negotiate", "Every offer is presented in writing. We negotiate price and terms with your goals in mind."],
   ["Settle", "Contract to settlement handled with your solicitor. Then we help you find what comes next."],
 ];
-const COVERS = [PHOTOS.boskLiving, PHOTOS.rioLounge, PHOTOS.macLiving, PHOTOS.deckLounge];
+const COVERS = [PHOTOS.boskLiving, PHOTOS.hunterLiving, PHOTOS.limeLiving, PHOTOS.parfreyDeck];
 
 export default function SellPage() {
   return (
@@ -41,10 +41,10 @@ export default function SellPage() {
 
         <section className="section--ink" style={{ borderTop: "1px solid rgba(255,255,255,.08)" }}>
           <div data-stagger className="proof px">
-            <div><div className="proof__n">$1.5M</div><div className="proof__k">Highest recent sale · 89 Passerine Drive, Rochedale South</div></div>
-            <div><div className="proof__n">4.9<span style={{ color: "var(--red)" }}>★</span></div><div className="proof__k">RateMyAgent rating across {CONTACT.reviews} reviews</div></div>
-            <div><div className="proof__n">2017 · 2019</div><div className="proof__k">Agent of the Year, Underwood</div></div>
-            <div><div className="proof__n">25+ yrs</div><div className="proof__k">Selling across Logan City <span className="mono-note mono-note--light" style={{ fontSize: 10 }}>· confirm</span></div></div>
+            <div data-glow><div className="proof__n">$1.5M</div><div className="proof__k">Highest recent sale · 89 Passerine Drive, Rochedale South</div></div>
+            <div data-glow><div className="proof__n">4.9<span style={{ color: "var(--red)" }}>★</span></div><div className="proof__k">RateMyAgent rating across {CONTACT.reviews} reviews</div></div>
+            <div data-glow><div className="proof__n">2017 · 2019</div><div className="proof__k">Agent of the Year, Underwood</div></div>
+            <div data-glow><div className="proof__n">25+ yrs</div><div className="proof__k">Selling across Logan City <span className="mono-note mono-note--light" style={{ fontSize: 10 }}>· confirm</span></div></div>
           </div>
         </section>
 
@@ -57,9 +57,9 @@ export default function SellPage() {
             </div>
             <div data-stagger style={{ display: "grid" }}>
               {ADVANTAGE.map(([title, body], i) => (
-                <div key={title} className="step-row">
-                  <div className="step-row__n">0{i + 1}</div>
-                  <div style={{ display: "grid", gap: 10 }}><div className="step-row__title">{title}</div><p>{body}</p></div>
+                <div key={title} data-glow className="step-row">
+                  <div data-glow-n className="step-row__n">0{i + 1}</div>
+                  <div style={{ display: "grid", gap: 10 }}><div data-glow-t className="step-row__title">{title}</div><p>{body}</p></div>
                 </div>
               ))}
               <div className="rule" />
@@ -74,7 +74,7 @@ export default function SellPage() {
           </div>
           <div data-stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,220px),1fr))", gap: 16 }}>
             {STEPS.map(([title, body], i) => (
-              <div key={title} className="step-card"><div className="step-card__n">{i + 1}</div><div className="step-card__title">{title}</div><p>{body}</p></div>
+              <div key={title} data-glow="card" data-tilt="lift" className="step-card"><div data-glow-n className="step-card__n">{i + 1}</div><div className="step-card__title">{title}</div><p>{body}</p></div>
             ))}
           </div>
         </section>

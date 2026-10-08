@@ -69,7 +69,7 @@ export default function Hero({ onAppraise }: { onAppraise: (address: string) => 
 
   return (
     <section className="hero">
-      <div ref={bg} className="hero__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.pool.replace(".jpg", "-1024x683.jpg")}')` }} />
+      <div ref={bg} className="hero__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.pool}')` }} />
       <div className="hero__shade" aria-hidden="true" />
       <div ref={content} className="hero__content">
         <div style={{ display: "grid", gap: 22, maxWidth: 1100 }}>

@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { CONTACT, DEPTS, LAND, PAGES, SALE, SOLD, TEAM, decorate, decorateAgent, propHref } from "@/data/rr-data";
+import { AGENCY_AREAS, CONTACT, DEPTS, LAND, PAGES, PHOTOS, SALE, SOLD, TEAM, agentBlurb, agentHelp, agentHighlights, agentSocials, decorate, decorateAgent, propHref, telHref } from "@/data/rr-data";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
+import { SocialIcon, SocialLinks } from "@/components/SocialIcons";
 
 export default function TeamClient() {
   const [dept, setDept] = useState("All");
@@ -26,21 +27,29 @@ export default function TeamClient() {
   const team = TEAM.filter((t) => dept === "All" || t.dept === dept);
   const o = TEAM.find((t) => t.slug === open);
   const listings = o ? [...SALE, ...LAND, ...SOLD].filter((p) => p.agent === o.name || p.agent2 === o.name).slice(0, 4) : [];
+  const isOffice = (n: string) => n.replace(/\s/g, "") === CONTACT.phone.replace(/\s/g, "");
 
   return (
     <main>
-      <section className="page-head">
-        <Crumb items={[["About", PAGES.about], ["Our team"]]} />
-        <div className="stack-m" style={{ flexWrap: "wrap" }}>
-          <div style={{ display: "grid", gap: 18, maxWidth: 820 }}>
-            <Lines as="h1" className="display-lg" lines={["Nineteen locals.", "One team."]} />
-            <p className="lead" style={{ maxWidth: "56ch" }}>Directors, sales agents, property managers, leasing and inspections, all working from 67 Springwood Road. Pick a department or browse everyone.</p>
+      <section className="hero hero--page" style={{ minHeight: "80svh" }}>
+        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.team}')` }} />
+        <div className="hero__shade" aria-hidden="true" />
+        <div className="hero__body">
+          <Crumb tone="light" items={[["About", PAGES.about], ["Our team"]]} />
+          <div className="stack-m" style={{ flexWrap: "wrap", gap: 32, alignItems: "flex-end" }}>
+            <div style={{ display: "grid", gap: 20, maxWidth: 900 }}>
+              <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Nineteen locals.", <><span style={{ color: "var(--red)" }}>One</span> team.</>]} />
+              <p className="hero__sub">Directors, sales agents, property managers, leasing and inspections, all working from 67 Springwood Road. Pick a department or browse everyone.</p>
+            </div>
+            <a href={CONTACT.phoneHref} className="pill pill--white pill--arrow" style={{ flex: "none" }}><span>{CONTACT.phone}</span><span className="pill__arrow" aria-hidden="true">→</span></a>
           </div>
-          <a href={CONTACT.phoneHref} className="pill pill--dark pill--arrow" style={{ flex: "none" }}><span>{CONTACT.phone}</span><span className="pill__arrow" aria-hidden="true" style={{ background: "var(--red)", color: "#fff" }}>→</span></a>
         </div>
+      </section>
+
+      <section className="hero-bar">
         <div className="strip" role="tablist" aria-label="Department" style={{ gap: 8, padding: "40px 0 32px", borderBottom: "1px solid rgba(17,19,24,.12)" }}>
           {DEPTS.map((d) => (
-            <button key={d} type="button" role="tab" className="chip chip--white" data-on={d === dept ? "1" : "0"} onClick={() => setDept(d)}>{d} <span style={{ fontWeight: 500, opacity: .7 }}>{d === "All" ? TEAM.length : TEAM.filter((t) => t.dept === d).length}</span></button>
+            <button key={d} type="button" role="tab" aria-selected={d === dept} className="chip chip--white" data-on={d === dept ? "1" : "0"} onClick={() => setDept(d)}>{d} <span style={{ fontWeight: 500, opacity: .7 }}>{d === "All" ? TEAM.length : TEAM.filter((t) => t.dept === d).length}</span></button>
           ))}
         </div>
       </section>
@@ -49,18 +58,29 @@ export default function TeamClient() {
         <div className="team-grid">
           {team.map((t, i) => {
             const a = decorateAgent(t);
+            const office = isOffice(t.mobile);
             return (
-              <a key={dept + t.slug} data-card id={t.slug} href={"#" + t.slug} onClick={(e) => { e.preventDefault(); show(t.slug); }} className="card" style={{ animationDelay: Math.min(i, 8) * 0.05 + "s" }}>
-                <div className="card__media" style={{ aspectRatio: "3/4", background: "#d6d9df" }}>
-                  <div data-zoom className="card__img card__img--top" style={{ backgroundColor: "#d6d9df", backgroundImage: a.bgImage, color: "var(--grey)", padding: 16 }}>{a.imgTag ? (<><span>{a.imgTag}</span><br /><span>{a.imgLabel}</span></>) : null}</div>
-                  <span data-arrow className="card__arrow card__arrow--fill" aria-hidden="true" style={{ right: 12, bottom: 12 }}>→</span>
+              <article key={dept + t.slug} data-card id={t.slug} className="card team-card" style={{ animationDelay: Math.min(i, 8) * 0.05 + "s" }}>
+                <a href={"#" + t.slug} onClick={(e) => { e.preventDefault(); show(t.slug); }} className="team-card__link" aria-label={"Open profile: " + t.name}>
+                  <div className="card__media team-card__media">
+                    <div data-zoom className="card__img card__img--top" style={{ backgroundColor: "#d6d9df", backgroundImage: a.bgImage, color: "var(--grey)", padding: 16 }}>{a.imgTag ? (<><span>{a.imgTag}</span><br /><span>{a.imgLabel}</span></>) : null}</div>
+                    <span data-arrow className="card__arrow card__arrow--fill" aria-hidden="true" style={{ right: 12, bottom: 12 }}>→</span>
+                  </div>
+                  <div className="team-card__body">
+                    <div className="team-card__dept">{t.dept}</div>
+                    <div className="team-card__name">{t.name}</div>
+                    <div className="team-card__role">{t.role}</div>
+                    {t.tagline ? <p className="team-card__tag">{t.tagline}</p> : null}
+                  </div>
+                </a>
+                <div className="team-card__foot">
+                  <div className="team-card__foot-top">
+                    <a href={telHref(t.mobile)} className="team-card__phone"><SocialIcon kind="phone" size={13} /><span>{t.mobile}</span>{office ? <span className="team-card__phone-note">office</span> : null}</a>
+                    <SocialLinks links={agentSocials(t)} owner={t.name} size="sm" />
+                  </div>
+                  <a href={"mailto:" + t.email} className="team-card__email"><SocialIcon kind="email" size={13} /><span>{t.email}</span></a>
                 </div>
-                <div style={{ display: "grid", gap: 3 }}>
-                  <div className="team-card__name" style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-.01em" }}>{t.name}</div>
-                  <div style={{ fontSize: 13, color: "var(--grey)", fontWeight: 500 }}>{t.role}</div>
-                  <div style={{ fontSize: 13, color: "var(--red)", fontWeight: 700, marginTop: 4 }}>{t.mobile}</div>
-                </div>
-              </a>
+              </article>
             );
           })}
         </div>
@@ -73,8 +93,12 @@ export default function TeamClient() {
             <div style={{ display: "grid", gap: 16, alignContent: "start" }}>
               <div className="sheet__photo" style={{ backgroundImage: decorateAgent(o).bgImage }} />
               <div style={{ display: "grid", gap: 8 }}>
-                <a href={"tel:+61" + o.mobile.replace(/\D/g, "").slice(1)} className="pill pill--red pill--md" style={{ justifyContent: "center" }}>Call {o.mobile}</a>
+                <a href={telHref(o.mobile)} className="pill pill--red pill--md" style={{ justifyContent: "center" }}>Call {o.mobile}</a>
                 <a href={"mailto:" + o.email} className="pill pill--ghost pill--md" style={{ justifyContent: "center" }}>Email {o.name.split(" ")[0]}</a>
+              </div>
+              <div className="sheet__connect">
+                <span className="sheet__connect-k">Connect</span>
+                <SocialLinks links={agentSocials(o)} owner={o.name} />
               </div>
             </div>
             <div style={{ display: "grid", gap: 24, alignContent: "start", minWidth: 0 }}>
@@ -83,12 +107,40 @@ export default function TeamClient() {
                 <h2 className="h2" style={{ fontSize: "clamp(1.8rem,1.2rem + 2vw,3rem)" }}>{o.name}</h2>
                 <div style={{ fontSize: 16, color: "var(--grey-2)", fontWeight: 500 }}>{o.role}</div>
               </div>
-              {o.bio ? <p className="lead" style={{ lineHeight: 1.65, maxWidth: "64ch" }}>{o.bio}</p> : <p style={{ fontSize: 15, lineHeight: 1.6, color: "var(--grey)", maxWidth: "60ch", fontStyle: "italic" }}>Profile to be written. The current site publishes a name, role and contact details only. A two or three sentence bio and a new portrait are required before launch.</p>}
+              <p className="lead" style={{ lineHeight: 1.65, maxWidth: "64ch" }}>{agentBlurb(o)}</p>
+              {agentHighlights(o).length > 0 && (
+                <div className="sheet__stats">
+                  {agentHighlights(o).map((h) => (
+                    <div key={h.k} className="stat-tile"><div className="stat-tile__v">{h.v}</div><div className="stat-tile__k">{h.k}</div></div>
+                  ))}
+                </div>
+              )}
+              <div className="sheet__cols">
+                {o.career && o.career.length > 0 && (
+                  <div className="sheet__block">
+                    <div className="kicker kicker--muted">Career</div>
+                    <ul className="sheet__career">
+                      {o.career.map((c) => <li key={c}>{c}</li>)}
+                    </ul>
+                  </div>
+                )}
+                <div className="sheet__block">
+                  <div className="kicker kicker--muted">How {o.name.split(" ")[0]} can help</div>
+                  <ul className="sheet__help">
+                    {agentHelp(o).map((h) => <li key={h}><span className="sheet__tick" aria-hidden="true">✓</span>{h}</li>)}
+                  </ul>
+                </div>
+              </div>
               <div className="rows">
+                {o.experience ? <div className="row row--wide"><span className="row__k">Experience</span><span className="row__v">{o.experience}</span></div> : null}
                 {o.specialties ? <div className="row row--wide"><span className="row__k">Specialties</span><span className="row__v">{o.specialties}</span></div> : null}
                 {o.awards ? <div className="row row--wide"><span className="row__k">Awards</span><span className="row__v">{o.awards}</span></div> : null}
-                <div className="row row--wide"><span className="row__k">Mobile</span><span className="row__v"><a href={"tel:+61" + o.mobile.replace(/\D/g, "").slice(1)}>{o.mobile}</a></span></div>
+                {o.languages ? <div className="row row--wide"><span className="row__k">Languages</span><span className="row__v">{o.languages}</span></div> : null}
+                <div className="row row--wide"><span className="row__k">{isOffice(o.mobile) ? "Office" : "Mobile"}</span><span className="row__v"><a href={telHref(o.mobile)}>{o.mobile}</a></span></div>
                 <div className="row row--wide"><span className="row__k">Email</span><span className="row__v" style={{ wordBreak: "break-all" }}><a href={"mailto:" + o.email}>{o.email}</a></span></div>
+                <div className="row row--wide"><span className="row__k">Areas</span><span className="row__v">{o.areas || AGENCY_AREAS}</span></div>
+                <div className="row row--wide"><span className="row__k">Office</span><span className="row__v">{CONTACT.address}</span></div>
+                {o.rma ? <div className="row row--wide"><span className="row__k">Reviews</span><span className="row__v"><a href={o.rma} target="_blank" rel="noopener noreferrer">Verified client reviews on RateMyAgent ↗</a></span></div> : null}
               </div>
               {listings.length > 0 && (
                 <div style={{ display: "grid", gap: 14 }}>

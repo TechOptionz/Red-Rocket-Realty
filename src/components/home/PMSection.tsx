@@ -17,7 +17,7 @@ export default function PMSection() {
     <section id="property-management" className="pm">
       <div className="pm__grid">
         <div data-reveal="clip" className="pm__img">
-          <div data-drift="0.08" className="drift-bg" style={{ backgroundImage: `url('${PHOTOS.macLiving}')` }} />
+          <div data-drift="0.08" className="drift-bg" style={{ backgroundImage: `url('${PHOTOS.hunterLounge}')`, backgroundPosition: "center 70%" }} />
         </div>
         <div className="pm__body">
           <div style={{ display: "grid", gap: 18 }}>
@@ -27,8 +27,8 @@ export default function PMSection() {
           </div>
           <div data-reveal style={{ display: "grid", gap: 10 }}>
             {PANELS.map(([title, body], i) => (
-              <div key={title} className="svc" data-open={open === i ? "1" : "0"} tabIndex={0} onMouseEnter={() => setOpen(i)} onClick={() => setOpen(i)} onFocus={() => setOpen(i)}>
-                <div className="svc__head"><span className="svc__n">0{i + 1}</span><span className="svc__title">{title}</span></div>
+              <div key={title} data-glow className="svc" data-open={open === i ? "1" : "0"} tabIndex={0} onMouseEnter={() => setOpen(i)} onClick={() => setOpen(i)} onFocus={() => setOpen(i)}>
+                <div className="svc__head"><span data-glow-n style={{ display: "inline-block" }} className="svc__n">0{i + 1}</span><span className="svc__title">{title}</span></div>
                 <div><p>{body}</p></div>
               </div>
             ))}

@@ -2,6 +2,22 @@
 import Link from "next/link";
 import { CONTACT, PAGES } from "@/data/rr-data";
 import { useLogo } from "@/lib/useLogo";
+import { SocialIcon } from "@/components/SocialIcons";
+
+const WORD = "RED ROCKET";
+
+/** Giant footer wordmark: one span per letter so they can rise in with a stagger; the glow layer carries the red light sweep. */
+function WordLayer({ glow = false }: { glow?: boolean }) {
+  return (
+    <span className={"ftr__word-layer" + (glow ? " ftr__word-layer--glow" : "")}>
+      {Array.from(WORD).map((ch, i) => (
+        <span key={i} className={"ftr__ch" + (ch === " " ? " ftr__ch--gap" : "")} style={{ "--i": i } as React.CSSProperties}>
+          {ch === " " ? "\u00a0" : ch}
+        </span>
+      ))}
+    </span>
+  );
+}
 
 export default function Footer() {
   const { logo } = useLogo();
@@ -75,13 +91,16 @@ export default function Footer() {
           <a href="https://redrocketrealty.com.au/terms-of-use/" target="_blank" rel="noopener">Terms of Use</a>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
-          <a href={CONTACT.facebook} target="_blank" rel="noopener" aria-label="Facebook" className="ftr__social">f</a>
-          <a href={CONTACT.instagram} target="_blank" rel="noopener" aria-label="Instagram" className="ftr__social">ig</a>
-          <a href={CONTACT.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" className="ftr__social">in</a>
+          <a href={CONTACT.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook" className="ftr__social"><SocialIcon kind="facebook" /></a>
+          <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram" className="ftr__social"><SocialIcon kind="instagram" /></a>
+          <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn" className="ftr__social"><SocialIcon kind="linkedin" /></a>
         </div>
       </div>
       <div aria-hidden="true" className="ftr__word-wrap">
-        <div className="ftr__word" data-reveal="word">RED ROCKET</div>
+        <div className="ftr__word" data-reveal="word">
+          <WordLayer />
+          <WordLayer glow />
+        </div>
       </div>
     </footer>
   );

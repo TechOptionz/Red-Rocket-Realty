@@ -138,7 +138,18 @@ export default function PropertyClient({ p }: { p: Listing }) {
             </div>
             <div id="floorplan" data-reveal className="prop-block">
               <div className="kicker">Floor plan</div>
-              <div className="placeholder" style={{ aspectRatio: "16/9" }}>[FLOOR PLAN · feed · opens full size]</div>
+              {p.floorplans && p.floorplans.length ? (
+                <div style={{ display: "grid", gap: 16 }}>
+                  {p.floorplans.map((src, i) => (
+                    <a key={src} href={src} target="_blank" rel="noopener" className="floorplan" aria-label={"Open floor plan " + (i + 1) + " full size"}>
+                      <img src={src} alt={"Floor plan " + (p.floorplans!.length > 1 ? i + 1 : "") + " for " + p.address + ", " + p.suburb} loading="lazy" />
+                    </a>
+                  ))}
+                  <p className="small">Click a plan to open it full size.</p>
+                </div>
+              ) : (
+                <div style={{ padding: "18px 0", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)", fontSize: 15, color: "var(--grey-2)" }}>No floor plan has been supplied for this property. Download the brochure or contact the agent for layout details.</div>
+              )}
             </div>
             <div id="location" data-reveal className="prop-block">
               <div className="kicker">Location</div>
