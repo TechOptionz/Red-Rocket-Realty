@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ADVANTAGE, CONTACT, PAGES, PHOTOS, STORIES, TESTIMONIALS } from "@/data/rr-data";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
+import Photo from "@/components/Photo";
 
 const TEXT = "Every buyer, seller, landlord and tenant is different, so the service is tailored. From our office in Springwood we pair thorough local knowledge with personable service, and we look after everything from the paperwork to the finance.";
 const MILESTONES = [
@@ -44,7 +45,7 @@ export default function AboutClient() {
   return (
     <main>
       <section className="hero hero--page" style={{ minHeight: "88svh" }}>
-        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.about}')` }} />
+        <div className="bsr__bg" aria-hidden="true"><Photo src={PHOTOS.hero.about} sizes="100vw" priority quality={70} /></div>
         <div className="hero__shade" aria-hidden="true" />
         <div className="hero__body">
           <Crumb tone="light" items={[["About"]]} />
@@ -118,7 +119,7 @@ export default function AboutClient() {
           {STORIES.map((v, i) => (
             <a key={v.wistia} data-card href={"https://fast.wistia.net/embed/iframe/" + v.wistia} target="_blank" rel="noopener" className="card">
               <div className="story__media">
-                <div data-zoom style={{ position: "absolute", inset: 0, backgroundImage: `url("${COVERS[i]}")`, backgroundSize: "cover", backgroundPosition: "center" }} />
+                <div data-zoom style={{ position: "absolute", inset: 0 }}><Photo src={COVERS[i]} sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" /></div>
                 <div className="story__shade" aria-hidden="true" />
                 <div className="story__play"><span data-arrow aria-hidden="true">▶</span></div>
               </div>

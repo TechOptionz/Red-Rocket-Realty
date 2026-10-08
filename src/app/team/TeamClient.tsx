@@ -5,10 +5,14 @@ import { AGENCY_AREAS, CONTACT, DEPTS, LAND, PAGES, PHOTOS, SALE, SOLD, TEAM, ag
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import { SocialIcon, SocialLinks } from "@/components/SocialIcons";
+import Photo from "@/components/Photo";
 
 export default function TeamClient() {
   const [dept, setDept] = useState("All");
   const [open, setOpen] = useState("");
+  useEffect(() => {
+    try { const d = new URLSearchParams(window.location.search).get("dept"); if (d && DEPTS.includes(d)) setDept(d); } catch {}
+  }, []);
 
   useEffect(() => {
     const id = decodeURIComponent((window.location.hash || "").slice(1));
@@ -32,7 +36,7 @@ export default function TeamClient() {
   return (
     <main>
       <section className="hero hero--page" style={{ minHeight: "80svh" }}>
-        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.team}')` }} />
+        <div className="bsr__bg" aria-hidden="true"><Photo src={PHOTOS.hero.team} sizes="100vw" priority quality={70} /></div>
         <div className="hero__shade" aria-hidden="true" />
         <div className="hero__body">
           <Crumb tone="light" items={[["About", PAGES.about], ["Our team"]]} />
@@ -63,7 +67,7 @@ export default function TeamClient() {
               <article key={dept + t.slug} data-card id={t.slug} className="card team-card" style={{ animationDelay: Math.min(i, 8) * 0.05 + "s" }}>
                 <a href={"#" + t.slug} onClick={(e) => { e.preventDefault(); show(t.slug); }} className="team-card__link" aria-label={"Open profile: " + t.name}>
                   <div className="card__media team-card__media">
-                    <div data-zoom className="card__img card__img--top" style={{ backgroundColor: "#d6d9df", backgroundImage: a.bgImage, color: "var(--grey)", padding: 16 }}>{a.imgTag ? (<><span>{a.imgTag}</span><br /><span>{a.imgLabel}</span></>) : null}</div>
+                    <div data-zoom className="card__img card__img--top" style={{ backgroundColor: "#d6d9df", backgroundImage: t.photo ? undefined : a.bgImage, color: "var(--grey)", padding: 16 }}>{t.photo ? <Photo src={t.photo} sizes="(max-width: 720px) 66vw, 280px" position="center top" /> : null}{a.imgTag ? (<><span>{a.imgTag}</span><br /><span>{a.imgLabel}</span></>) : null}</div>
                     <span data-arrow className="card__arrow card__arrow--fill" aria-hidden="true" style={{ right: 12, bottom: 12 }}>→</span>
                   </div>
                   <div className="team-card__body">
@@ -91,7 +95,7 @@ export default function TeamClient() {
           <div className="sheet">
             <button type="button" aria-label="Close" className="sheet__close" onClick={close}>×</button>
             <div style={{ display: "grid", gap: 16, alignContent: "start" }}>
-              <div className="sheet__photo" style={{ backgroundImage: decorateAgent(o).bgImage }} />
+              <div className="sheet__photo" style={{ backgroundImage: o.photo ? undefined : decorateAgent(o).bgImage }}>{o.photo ? <Photo src={o.photo} sizes="(max-width: 980px) 100vw, 360px" position="center top" /> : null}</div>
               <div style={{ display: "grid", gap: 8 }}>
                 <a href={telHref(o.mobile)} className="pill pill--red pill--md" style={{ justifyContent: "center" }}>Call {o.mobile}</a>
                 <a href={"mailto:" + o.email} className="pill pill--ghost pill--md" style={{ justifyContent: "center" }}>Email {o.name.split(" ")[0]}</a>
@@ -148,7 +152,7 @@ export default function TeamClient() {
                   <div className="sheet__listings">
                     {listings.map((p) => (
                       <Link key={p.id} data-card href={propHref(p)} className="card" style={{ gap: 8 }}>
-                        <div className="card__media" style={{ aspectRatio: "3/2" }}><div data-zoom className="card__img" style={{ backgroundImage: decorate(p).bgImage }} /></div>
+                        <div className="card__media" style={{ aspectRatio: "3/2" }}><div data-zoom className="card__img" style={{ backgroundImage: p.photo ? undefined : decorate(p).bgImage }}>{p.photo ? <Photo src={p.photo} sizes="200px" /> : null}</div></div>
                         <div style={{ fontSize: 14, fontWeight: 800 }}>{p.address}</div>
                         <div style={{ fontSize: 12, color: "var(--grey)", fontWeight: 700, textTransform: "uppercase", letterSpacing: ".08em" }}>{p.suburb} · {p.price}</div>
                       </Link>

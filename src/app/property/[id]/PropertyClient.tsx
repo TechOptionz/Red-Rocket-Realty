@@ -6,6 +6,10 @@ import { icsFor } from "@/lib/ics";
 import Lines from "@/components/Lines";
 import PropertyCard from "@/components/PropertyCard";
 import Success from "@/components/Success";
+import Image from "next/image";
+import Photo from "@/components/Photo";
+import { FLOORPLAN_DIMS } from "@/data/floorplan-dims";
+import Lightbox from "@/components/Lightbox";
 
 const STRIPE = "repeating-linear-gradient(135deg,rgba(255,255,255,.022) 0 12px,transparent 12px 24px)";
 
@@ -13,21 +17,22 @@ export default function PropertyClient({ p }: { p: Listing }) {
   const [sent, setSent] = useState(false);
   const [name, setName] = useState("");
   const [shareLabel, setShareLabel] = useState("Share");
+  const [lb, setLb] = useState<number | null>(null);
 
   const isRent = !!p.rent, isSold = p.status === "Sold", isLand = p.type === "Land", isSale = !isRent && !isSold;
   const mode = isRent ? "rent" : isSold ? "sold" : isLand ? "land" : "buy";
   const listLabel = isRent ? "For rent" : isSold ? "Recently sold" : isLand ? "Land for sale" : "For sale";
   const listHref = PAGES.listings + "?mode=" + mode;
   const suburbHref = listHref + "&suburb=" + encodeURIComponent(p.suburb);
-  const priceText = isRent ? formatRent(p.rent!) : isSold ? "Sold · price from feed" : p.price;
+  const priceText = isRent ? formatRent(p.rent!) : isSold ? (p.price && /\d/.test(p.price) ? p.price : "Sold") : p.price;
   const ag = p.agent ? agentByName(p.agent) : undefined;
   const agent = isRent
     ? { name: "Red Rocket Realty Rentals", role: "Rentals and inspections", mobile: CONTACT.phone, tel: CONTACT.phoneHref, email: CONTACT.inspections, first: "Our rentals team", photo: "" }
     : ag
       ? { name: ag.name, role: ag.role, mobile: ag.mobile, tel: "tel:+61" + ag.mobile.replace(/\D/g, "").slice(1), email: ag.email, first: ag.name.split(" ")[0], photo: ag.photo }
       : { name: "Parnam Singh Heir", role: "Principal / Director", mobile: "0434 289 285", tel: "tel:+61434289285", email: "parnam@redrocketrealty.com.au", first: "Parnam", photo: "" };
-  const photos = p.photos || [];
-  const thumbs = [1, 2, 3, 4].map((i) => (photos[i] ? `url("${photos[i]}")` : STRIPE));
+  const photos = p.photos && p.photos.length ? p.photos : p.photo ? [p.photo] : [];
+  const thumbs = photos.slice(1, 5);
   const dec = decorate(p);
   const inspections = p.inspection ? [{ day: p.inspection.split(" · ")[0], time: p.inspection.split(" · ")[1] || "", ics: icsFor(p, p.inspection), file: "inspection-" + p.id + ".ics" }] : [];
   if (p.inspection && isSale) inspections.push({ day: "Wed 15 Oct", time: "5:00–5:30pm", ics: icsFor(p, "Wed 15 Oct · 5:00–5:30pm"), file: "inspection-" + p.id + "-2.ics" });
@@ -39,7 +44,6 @@ export default function PropertyClient({ p }: { p: Listing }) {
   const sourceNote = p.desc ? "Listing copy, features, ID, inspection and agent read from redrocketrealty.com.au on 7 Oct 2026" : "Sample listing · headline, description, features, ID and inspections come from the feed";
   const all = [...SALE, ...LAND, ...SOLD, ...RENT];
   const similar = all.filter((x) => x.id !== p.id && (isRent ? !!x.rent : !x.rent && x.status !== "Sold")).slice(0, 4);
-  const siteHref = p.listingId ? "https://redrocketrealty.com.au/" + (isLand ? "land" : "property") + "/" + (p.address + "-" + p.suburb + "-qld-" + (p.postcode || "")).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") + "/" : "#overview";
   const brochureHref = p.brochure ? "https://redrocketrealty.com.au?epl_br_action=generate&id=" + p.brochure : "#overview";
 
   const share = () => {
@@ -56,23 +60,41 @@ export default function PropertyClient({ p }: { p: Listing }) {
         <nav aria-label="Breadcrumb" className="crumb crumb--dim" style={{ marginBottom: 24 }}>
           <Link href={PAGES.home}>Home</Link><span aria-hidden="true">/</span><Link href={listHref}>{listLabel}</Link><span aria-hidden="true">/</span><Link href={suburbHref}>{p.suburb}</Link><span aria-hidden="true">/</span><span>{p.address}</span>
         </nav>
-        <div className="gallery">
-          <a data-reveal="clip" href={photos[0] || "#overview"} target="_blank" rel="noopener" aria-label="Open gallery" className="gallery__main">
-            <div data-zoom className="card__img" style={{ backgroundColor: p.shade, backgroundImage: dec.bgImage, padding: 24 }}>{dec.imgTag ? (<><span>{dec.imgTag}</span><br /><span>{dec.img}</span></>) : null}</div>
-            {p.status ? <span className={"tag" + (isSold ? " tag--sold" : "")} style={{ padding: "10px 14px", letterSpacing: ".14em" }}>{p.status}</span> : null}
-          </a>
-          <div className="gallery__thumbs">
-            {[1, 2, 3].map((i) => (
-              <a key={i} href={photos[i] || "#overview"} target="_blank" rel="noopener" aria-label={"Photo " + (i + 1)} className="gallery__thumb">
-                <div data-zoom style={{ backgroundImage: thumbs[i - 1] }}>{photos[i] ? "" : ["Kitchen", "Living", "Bedroom"][i - 1]}</div>
-              </a>
-            ))}
-            <a href={siteHref} target="_blank" rel="noopener" aria-label="View all photos" className="gallery__thumb" style={{ background: "#262a31" }}>
-              <div data-zoom style={{ backgroundImage: thumbs[3] }} />
-              <div className="gallery__more"><b>{photos.length || (isLand ? 2 : 25)}</b><span>View all photos</span></div>
-            </a>
+        {photos.length ? (
+          <div className={"gallery" + (thumbs.length === 0 ? " gallery--solo" : thumbs.length < 3 ? " gallery--col" : thumbs.length === 3 ? " gallery--three" : "")} style={thumbs.length > 0 && thumbs.length < 3 ? { ["--thumb-rows" as string]: thumbs.length } : undefined}>
+            <button type="button" data-reveal="clip" onClick={() => setLb(0)} aria-label={"Open photo 1 of " + photos.length} className="gallery__main">
+              <div data-zoom className="card__img" style={{ backgroundColor: p.shade, padding: 0 }}><Photo src={photos[0]} alt={p.address + ", " + p.suburb} sizes={thumbs.length ? "(max-width: 980px) 100vw, 60vw" : "100vw"} priority quality={80} /></div>
+              {p.status ? <span className={"tag" + (isSold ? " tag--sold" : "")} style={{ padding: "10px 14px", letterSpacing: ".14em" }}>{p.status}</span> : null}
+              {photos.length > 1 ? <span className="gallery__all"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 5h16v14H4zM4 15l5-5 4 4 3-3 4 4M15 9h.01" /></svg>Show all {photos.length} photos</span> : null}
+            </button>
+            {thumbs.length ? (
+              <div className="gallery__thumbs">
+                {thumbs.map((src, k) => {
+                  const idx = k + 1, isLast = k === thumbs.length - 1, extra = photos.length - 1 - thumbs.length;
+                  return (
+                    <button key={src} type="button" onClick={() => setLb(idx)} aria-label={"Open photo " + (idx + 1) + " of " + photos.length} className="gallery__thumb">
+                      <div data-zoom><Photo src={src} sizes="(max-width: 980px) 25vw, 20vw" quality={70} /></div>
+                      {isLast && extra > 0 ? <div className="gallery__more"><b>+{extra}</b><span>View all photos</span></div> : null}
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
           </div>
-        </div>
+        ) : (
+          <div className="gallery">
+            <div data-reveal="clip" className="gallery__main">
+              <div className="card__img" style={{ backgroundColor: p.shade, backgroundImage: dec.bgImage, padding: 24 }}>{dec.imgTag ? (<><span>{dec.imgTag}</span><br /><span>{dec.img}</span></>) : null}</div>
+              {p.status ? <span className={"tag" + (isSold ? " tag--sold" : "")} style={{ padding: "10px 14px", letterSpacing: ".14em" }}>{p.status}</span> : null}
+            </div>
+            <div className="gallery__thumbs">
+              {["Kitchen", "Living", "Bedroom", "Outdoor"].map((label) => (
+                <div key={label} className="gallery__thumb gallery__thumb--empty"><div style={{ backgroundImage: STRIPE }}>{label}</div></div>
+              ))}
+            </div>
+          </div>
+        )}
+        {lb !== null && photos.length ? <Lightbox photos={photos} index={lb} title={p.address} subtitle={p.suburb + " QLD" + (p.postcode ? " " + p.postcode : "")} onClose={() => setLb(null)} onIndex={setLb} /> : null}
         <div className="prop-head">
           <div style={{ display: "grid", gap: 14, minWidth: 0 }}>
             <Lines as="h1" className="display-lg" style={{ fontSize: "clamp(2rem,1.2rem + 3vw,4rem)", lineHeight: 1 }} lines={[p.address]} />
@@ -142,7 +164,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
                 <div style={{ display: "grid", gap: 16 }}>
                   {p.floorplans.map((src, i) => (
                     <a key={src} href={src} target="_blank" rel="noopener" className="floorplan" aria-label={"Open floor plan " + (i + 1) + " full size"}>
-                      <img src={src} alt={"Floor plan " + (p.floorplans!.length > 1 ? i + 1 : "") + " for " + p.address + ", " + p.suburb} loading="lazy" />
+                      <Image src={src} alt={"Floor plan " + (p.floorplans!.length > 1 ? i + 1 : "") + " for " + p.address + ", " + p.suburb} width={(FLOORPLAN_DIMS[src] || [1600, 1200])[0]} height={(FLOORPLAN_DIMS[src] || [1600, 1200])[1]} sizes="(max-width: 980px) 100vw, 60vw" quality={80} style={{ width: "100%", height: "auto" }} />
                     </a>
                   ))}
                   <p className="small">Click a plan to open it full size.</p>
@@ -167,7 +189,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
           <aside id="enquire" className="enquire">
             <div className="enquire__card">
               <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
-                <div style={{ display: "grid", gap: 4 }}><div className="kicker kicker--light" style={{ letterSpacing: ".14em" }}>{isRent ? "Weekly rent" : isSold ? "Status" : "Price"}</div><div style={{ fontSize: "clamp(1.4rem,1.2rem + .8vw,1.9rem)", fontWeight: 800, letterSpacing: "-.02em", lineHeight: 1 }}>{priceText}</div></div>
+                <div style={{ display: "grid", gap: 4 }}><div className="kicker kicker--light" style={{ letterSpacing: ".14em" }}>{isRent ? "Weekly rent" : isSold ? (/\d/.test(priceText || "") ? "Sold price" : "Status") : "Price"}</div><div style={{ fontSize: "clamp(1.4rem,1.2rem + .8vw,1.9rem)", fontWeight: 800, letterSpacing: "-.02em", lineHeight: 1 }}>{priceText}</div></div>
                 {inspections.length > 0 && (<div style={{ textAlign: "right", display: "grid", gap: 2 }}><div className="kicker kicker--light" style={{ letterSpacing: ".14em" }}>Next open home</div><div style={{ fontSize: 14, fontWeight: 700 }}>{inspections[0].day} · {inspections[0].time}</div></div>)}
               </div>
               {!sent ? (
@@ -185,7 +207,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
               )}
             </div>
             <div className="enquire__agent">
-              <div className="enquire__face" style={{ backgroundImage: agent.photo ? `url("${agent.photo}")` : "repeating-linear-gradient(135deg,rgba(17,19,24,.035) 0 8px,transparent 8px 16px)" }}>{agent.photo ? "" : "photo"}</div>
+              <div className="enquire__face" style={{ position: "relative", backgroundImage: agent.photo ? undefined : "repeating-linear-gradient(135deg,rgba(17,19,24,.035) 0 8px,transparent 8px 16px)" }}>{agent.photo ? <Photo src={agent.photo} sizes="72px" position="center top" /> : "photo"}</div>
               <div style={{ display: "grid", gap: 2, minWidth: 0 }}>
                 <div style={{ fontSize: 17, fontWeight: 800, letterSpacing: "-.01em" }}>{agent.name}</div>
                 <div style={{ fontSize: 13, color: "var(--grey)" }}>{agent.role}</div>

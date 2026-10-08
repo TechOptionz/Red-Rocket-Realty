@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { DEPTS, PAGES, TEAM, decorateAgent } from "@/data/rr-data";
 import Lines from "@/components/Lines";
+import Photo from "@/components/Photo";
 
 const shades = ["#d6d9df", "#cfd3da", "#dadde3", "#c8ccd3", "#d2d6dc"];
 
@@ -29,7 +30,8 @@ export default function TeamStrip() {
           return (
             <Link key={t.slug} data-card href={a.teamHref} className="card team-card">
               <div className="card__media" style={{ aspectRatio: "3/4", background: "#d6d9df" }}>
-                <div data-zoom className="card__img card__img--top" style={{ backgroundColor: shades[i % shades.length], backgroundImage: a.bgImage, color: "var(--grey)" }}>
+                <div data-zoom className="card__img card__img--top" style={{ backgroundColor: shades[i % shades.length], backgroundImage: t.photo ? undefined : a.bgImage, color: "var(--grey)" }}>
+                  {t.photo ? <Photo src={t.photo} sizes="(max-width: 720px) 66vw, 280px" position="center top" /> : null}
                   {a.imgTag ? (<><span>{a.imgTag}</span><br /><span>{a.imgLabel}</span></>) : null}
                 </div>
               </div>

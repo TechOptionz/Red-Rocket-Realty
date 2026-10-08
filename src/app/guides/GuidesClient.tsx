@@ -6,6 +6,7 @@ import { BUYER_TIPS, LAND, PAGES, PHOTOS, SALE, SELLER_TIPS } from "@/data/rr-da
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import Success from "@/components/Success";
+import Photo from "@/components/Photo";
 
 export default function GuidesClient() {
   const sp = useSearchParams();
@@ -35,7 +36,7 @@ export default function GuidesClient() {
   return (
     <main>
       <section className="hero hero--page" style={{ minHeight: "80svh" }}>
-        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.guides}')` }} />
+        <div className="bsr__bg" aria-hidden="true"><Photo src={PHOTOS.hero.guides} sizes="100vw" priority quality={70} /></div>
         <div className="hero__shade" aria-hidden="true" />
         <div className="hero__body">
         <Crumb tone="light" items={[[b ? "Buyer guide" : "Seller guide"]]} />

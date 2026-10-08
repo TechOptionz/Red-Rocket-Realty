@@ -5,6 +5,7 @@ import { CONTACT, LAND, PAGES, PHOTOS, RENT, SALE, decorate, formatRent, propHre
 import { icsEvent, icsFile } from "@/lib/ics";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
+import Photo from "@/components/Photo";
 
 const ORDER = ["Wed 8 Oct", "Thu 8 Oct", "Thu 9 Oct", "Sat 10 Oct", "Sat 11 Oct", "Wed 15 Oct"];
 const TIPS: [string, string][] = [
@@ -27,7 +28,7 @@ export default function OpenHomesClient() {
   return (
     <main>
       <section className="hero hero--page" style={{ minHeight: "72svh" }}>
-        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.openHomes}')` }} />
+        <div className="bsr__bg" aria-hidden="true"><Photo src={PHOTOS.hero.openHomes} sizes="100vw" priority quality={70} /></div>
         <div className="hero__shade" aria-hidden="true" />
         <div className="hero__body">
         <Crumb tone="light" items={[["Buy", PAGES.listings + "?mode=buy"], ["Open homes"]]} />
@@ -58,7 +59,7 @@ export default function OpenHomesClient() {
               const dec = decorate(i.p);
               return (
                 <Link key={i.p.id} href={propHref(i.p)} className="oh-row" style={{ animationDelay: Math.min(k, 6) * 0.06 + "s" }}>
-                  <div className="oh-row__thumb"><div data-zoom className="card__img" style={{ backgroundColor: i.p.shade, backgroundImage: dec.bgImage }} />{i.p.status ? <span className="tag" style={{ padding: "6px 10px", fontSize: 10 }}>{i.p.status}</span> : null}</div>
+                  <div className="oh-row__thumb"><div data-zoom className="card__img" style={{ backgroundColor: i.p.shade, backgroundImage: i.p.photo ? undefined : dec.bgImage }}>{i.p.photo ? <Photo src={i.p.photo} sizes="(max-width: 720px) 100vw, 180px" /> : null}</div>{i.p.status ? <span className="tag" style={{ padding: "6px 10px", fontSize: 10 }}>{i.p.status}</span> : null}</div>
                   <div style={{ display: "grid", gap: 4, minWidth: 0 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}><span className="oh-row__time">{i.time}</span><span className="oh-row__kind" style={{ background: i.isRent ? "var(--ink)" : "var(--red)" }}>{i.isRent ? "For rent" : "For sale"}</span></div>
                     <div style={{ fontSize: 16, fontWeight: 700 }}>{i.p.address}, {i.p.suburb}</div>

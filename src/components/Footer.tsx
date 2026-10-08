@@ -3,6 +3,8 @@ import Link from "next/link";
 import { CONTACT, PAGES } from "@/data/rr-data";
 import { useLogo } from "@/lib/useLogo";
 import { SocialIcon } from "@/components/SocialIcons";
+import Image from "next/image";
+import { logoSize } from "@/data/brand-dims";
 
 const WORD = "RED ROCKET";
 
@@ -34,9 +36,9 @@ export default function Footer() {
         </div>
       </div>
       <div className="ftr__grid">
-        <div className="ftr__col" style={{ gap: 20 }}>
+        <div className="ftr__col ftr__brand" style={{ gap: 20 }}>
           <Link href={PAGES.home} aria-label="Red Rocket Realty home" style={{ display: "flex", alignItems: "center", color: "#fff", textDecoration: "none" }}>
-            <img src={logo.dark} alt="Red Rocket Realty" style={{ width: "auto", height: logo.footerH }} />
+            <Image src={logo.dark} alt="Red Rocket Realty" {...logoSize(logo.dark, logo.footerH)} style={{ maxHeight: logo.footerH, width: "auto", height: "auto" }} />
           </Link>
           <p style={{ color: "var(--grey-light)", fontSize: 15, lineHeight: 1.55, maxWidth: "30ch" }}>Committed to the property needs of Logan residents. The local experts you can rely on and trust.</p>
           <div className="ftr__k" style={{ marginTop: 8 }}>Springwood | Underwood Real Estate</div>

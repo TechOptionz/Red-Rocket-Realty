@@ -25,20 +25,27 @@ export default function RevealObserver() {
         }),
       { rootMargin: "0px 0px -6% 0px", threshold: 0.02 },
     );
-    const scan = () =>
+    let driftEls: HTMLElement[] = [];
+    const scan = () => {
       document.querySelectorAll("[data-reveal]:not([data-obs]),[data-stagger]:not([data-obs])").forEach((el) => {
         el.setAttribute("data-obs", "1");
         io.observe(el);
       });
+      driftEls = Array.from(document.querySelectorAll<HTMLElement>("[data-drift]"));
+    };
     scan();
     const fallback = () =>
       document.querySelectorAll("[data-reveal]:not([data-in]),[data-stagger]:not([data-in])").forEach((el) => {
         const r = el.getBoundingClientRect();
         if (r.top < window.innerHeight * 0.96 && r.bottom > 0) el.setAttribute("data-in", "1");
       });
-    window.addEventListener("scroll", fallback, { passive: true });
-    window.addEventListener("resize", fallback);
-    const fbTimer = setInterval(fallback, 600);
+    let fbRaf = 0;
+    const fallbackSoon = () => {
+      if (!fbRaf) fbRaf = requestAnimationFrame(() => { fbRaf = 0; fallback(); });
+    };
+    window.addEventListener("scroll", fallbackSoon, { passive: true });
+    window.addEventListener("resize", fallbackSoon);
+    const fbTimer = setInterval(fallbackSoon, 600);
     let st: ReturnType<typeof setTimeout> | undefined;
     const mo = new MutationObserver(() => {
       clearTimeout(st);
@@ -48,16 +55,28 @@ export default function RevealObserver() {
 
     const fine =
       window.matchMedia("(hover:hover) and (pointer:fine)").matches && !window.matchMedia("(prefers-reduced-motion:reduce)").matches;
-    const onMove = (e: PointerEvent) => {
-      if (!fine) return;
+    let curMag: HTMLElement | null = null;
+    let curTilt: HTMLElement | null = null;
+    let curGlow: HTMLElement | null = null;
+    const unglow = (el: HTMLElement) => {
+      el.removeAttribute("data-glowing");
+      el.style.setProperty("--dx", "0");
+      el.style.setProperty("--dy", "0");
+    };
+    const untilt = (el: HTMLElement) => {
+      el.removeAttribute("data-tilting");
+      el.style.transform = "";
+    };
+    const unmag = (el: HTMLElement) => {
+      el.style.transform = "";
+      el.removeAttribute("data-magon");
+    };
+    const applyMove = (e: PointerEvent) => {
       const target = e.target as HTMLElement | null;
-      const t = target && target.closest ? (target.closest("[data-mag]") as HTMLElement | null) : null;
-      document.querySelectorAll<HTMLElement>("[data-mag][data-magon]").forEach((el) => {
-        if (el !== t) {
-          el.style.transform = "";
-          el.removeAttribute("data-magon");
-        }
-      });
+      const closest = (sel: string) => (target && target.closest ? (target.closest(sel) as HTMLElement | null) : null);
+      const t = closest("[data-mag]");
+      if (curMag && curMag !== t) unmag(curMag);
+      curMag = t;
       if (t) {
         const r = t.getBoundingClientRect();
         const dx = (e.clientX - (r.left + r.width / 2)) / r.width;
@@ -65,13 +84,9 @@ export default function RevealObserver() {
         t.setAttribute("data-magon", "1");
         t.style.transform = "translate(" + (dx * 10).toFixed(1) + "px," + (dy * 8).toFixed(1) + "px)";
       }
-      const tt = target && target.closest ? (target.closest("[data-tilt]") as HTMLElement | null) : null;
-      document.querySelectorAll<HTMLElement>("[data-tilt][data-tilting]").forEach((el) => {
-        if (el !== tt) {
-          el.removeAttribute("data-tilting");
-          el.style.transform = "";
-        }
-      });
+      const tt = closest("[data-tilt]");
+      if (curTilt && curTilt !== tt) untilt(curTilt);
+      curTilt = tt;
       if (tt) {
         const r = tt.getBoundingClientRect();
         const dx = (e.clientX - r.left) / r.width - 0.5;
@@ -80,10 +95,9 @@ export default function RevealObserver() {
         const lift = tt.getAttribute("data-tilt") === "lift" ? " translateY(-6px)" : "";
         tt.style.transform = "perspective(1200px) rotateX(" + (-dy * 5).toFixed(2) + "deg) rotateY(" + (dx * 6).toFixed(2) + "deg) translateZ(0)" + lift;
       }
-      const g = target && target.closest ? (target.closest("[data-glow]") as HTMLElement | null) : null;
-      document.querySelectorAll<HTMLElement>("[data-glow][data-glowing]").forEach((el) => {
-        if (el !== g) unglow(el);
-      });
+      const g = closest("[data-glow]");
+      if (curGlow && curGlow !== g) unglow(curGlow);
+      curGlow = g;
       if (g) {
         const r = g.getBoundingClientRect();
         const x = e.clientX - r.left;
@@ -95,17 +109,19 @@ export default function RevealObserver() {
         g.setAttribute("data-glowing", "1");
       }
     };
-    const unglow = (el: HTMLElement) => {
-      el.removeAttribute("data-glowing");
-      el.style.setProperty("--dx", "0");
-      el.style.setProperty("--dy", "0");
+    // One layout read/write pass per frame, whatever the pointer's report rate (high-DPI mice and 150% scaling can deliver several hundred events a second).
+    let moveRaf = 0;
+    let lastMove: PointerEvent | null = null;
+    const onMove = (e: PointerEvent) => {
+      if (!fine) return;
+      lastMove = e;
+      if (!moveRaf) moveRaf = requestAnimationFrame(() => { moveRaf = 0; if (lastMove) applyMove(lastMove); });
     };
     const onLeave = () => {
-      document.querySelectorAll<HTMLElement>("[data-tilt][data-tilting]").forEach((el) => {
-        el.removeAttribute("data-tilting");
-        el.style.transform = "";
-      });
-      document.querySelectorAll<HTMLElement>("[data-glow][data-glowing]").forEach(unglow);
+      if (curTilt) untilt(curTilt);
+      if (curGlow) unglow(curGlow);
+      if (curMag) unmag(curMag);
+      curTilt = curGlow = curMag = null;
     };
     document.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerleave", onLeave, true);
@@ -113,7 +129,7 @@ export default function RevealObserver() {
     let raf = 0;
     const drift = () => {
       const vh = window.innerHeight;
-      document.querySelectorAll<HTMLElement>("[data-drift]").forEach((el) => {
+      driftEls.forEach((el) => {
         const r = (el.parentElement || el).getBoundingClientRect();
         if (r.bottom < 0 || r.top > vh) return;
         const k = parseFloat(el.getAttribute("data-drift") || "") || 0.08;
@@ -136,10 +152,13 @@ export default function RevealObserver() {
       mo.disconnect();
       clearInterval(fbTimer);
       clearTimeout(st);
-      window.removeEventListener("scroll", fallback);
-      window.removeEventListener("resize", fallback);
+      cancelAnimationFrame(fbRaf);
+      window.removeEventListener("scroll", fallbackSoon);
+      window.removeEventListener("resize", fallbackSoon);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(moveRaf);
+      onLeave();
       document.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerleave", onLeave, true);
     };

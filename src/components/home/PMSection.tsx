@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { PHOTOS } from "@/data/rr-data";
 import Lines from "@/components/Lines";
+import Photo from "@/components/Photo";
 
 const PANELS: [string, string][] = [
   ["Tenant selection", "Tenants are vetted closely on identity, income, rental history and references. We recommend; you approve every tenant."],
@@ -17,7 +18,7 @@ export default function PMSection() {
     <section id="property-management" className="pm">
       <div className="pm__grid">
         <div data-reveal="clip" className="pm__img">
-          <div data-drift="0.08" className="drift-bg" style={{ backgroundImage: `url('${PHOTOS.hunterLounge}')`, backgroundPosition: "center 70%" }} />
+          <div data-drift="0.08" className="drift-bg"><Photo src={PHOTOS.hunterLounge} sizes="(max-width: 980px) 100vw, 50vw" position="center 70%" /></div>
         </div>
         <div className="pm__body">
           <div style={{ display: "grid", gap: 18 }}>

@@ -5,6 +5,7 @@ import { CONTACT, PAGES, PHOTOS, TEAM, decorateAgent } from "@/data/rr-data";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import Success from "@/components/Success";
+import Photo from "@/components/Photo";
 
 const SERVICES: [string, string][] = [
   ["Marketing and leasing", "Professional photos, listing on the major portals and our site, open times run by our leasing officer, and applications screened within 48 hours."],
@@ -39,7 +40,7 @@ export default function PMClient() {
             </div>
           </div>
           <div data-reveal="clip" className="pm-hero__img">
-            <div style={{ position: "absolute", inset: 0, backgroundImage: `url('${PHOTOS.hero.pm}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
+            <div style={{ position: "absolute", inset: 0 }}><Photo src={PHOTOS.hero.pm} sizes="(max-width: 980px) 100vw, 50vw" priority quality={70} /></div>
             <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg,rgba(22,24,29,.6) 0%,rgba(22,24,29,0) 40%)" }} />
           </div>
         </div>
@@ -98,7 +99,7 @@ export default function PMClient() {
             const a = decorateAgent(t);
             return (
               <Link key={t.slug} data-card href={a.teamHref} className="card" style={{ width: "min(240px,66vw)", gap: 12 }}>
-                <div className="card__media" style={{ aspectRatio: "3/4", background: "#d6d9df" }}><div data-zoom className="card__img card__img--top" style={{ backgroundImage: a.bgImage }} /></div>
+                <div className="card__media" style={{ aspectRatio: "3/4", background: "#d6d9df" }}><div data-zoom className="card__img card__img--top" style={{ backgroundImage: t.photo ? undefined : a.bgImage }}>{t.photo ? <Photo src={t.photo} sizes="(max-width: 720px) 66vw, 240px" position="center top" /> : null}</div></div>
                 <div style={{ display: "grid", gap: 2 }}><div style={{ fontSize: 16, fontWeight: 800, letterSpacing: "-.01em" }}>{t.name}</div><div style={{ fontSize: 13, color: "var(--grey)" }}>{t.role}</div></div>
               </Link>
             );

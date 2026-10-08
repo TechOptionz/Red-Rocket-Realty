@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { CONTACT, PAGES, PHOTOS } from "@/data/rr-data";
 import Lines from "@/components/Lines";
+import Photo from "@/components/Photo";
 
 export type ApprState = { step: 0 | 1 | 2; addr: string; kind: string };
 
@@ -9,7 +10,7 @@ export default function AppraisalCta({ state, setState }: { state: ApprState; se
   return (
     <section id="appraisal" className="appr">
       <div data-reveal="clip" aria-hidden="true" style={{ position: "absolute", inset: 0 }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `url('${PHOTOS.limeTwilight}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div style={{ position: "absolute", inset: 0 }}><Photo src={PHOTOS.limeTwilight} sizes="100vw" /></div>
       </div>
       <div className="appr__shade" aria-hidden="true" />
       <div className="appr__body">

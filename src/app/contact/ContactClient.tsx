@@ -7,6 +7,7 @@ import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import Success from "@/components/Success";
 import { SocialIcon } from "@/components/SocialIcons";
+import Photo from "@/components/Photo";
 
 const OWNERS: Record<string, string> = { Selling: "the sales team", Buying: "the sales team", Renting: "the leasing team", "Property management": "the property management team", Maintenance: "your property manager", Other: "reception" };
 const PH: Record<string, string> = { Selling: "e.g. Thinking of selling our 4-bed in Rochedale South next year.", Buying: "e.g. Looking for a 3-bed house in Underwood or Springwood under $900k.", Renting: "e.g. Can I arrange a private inspection for the Shailer Park rental?", "Property management": "e.g. Considering changing agents for my Woodridge unit.", Maintenance: "e.g. Hot water system not heating at ...", Other: "How can we help?" };
@@ -26,7 +27,7 @@ export default function ContactClient() {
   return (
     <main>
       <section className="hero hero--page" style={{ minHeight: "80svh" }}>
-        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.contact}')` }} />
+        <div className="bsr__bg" aria-hidden="true"><Photo src={PHOTOS.hero.contact} sizes="100vw" priority quality={70} /></div>
         <div className="hero__shade" aria-hidden="true" />
         <div className="hero__body">
           <Crumb tone="light" items={[["Contact"]]} />

@@ -6,6 +6,7 @@ import { LAND, PAGES, PHOTOS, RENT, SALE, SEARCH, SOLD, type Listing } from "@/d
 import PropertyCard from "@/components/PropertyCard";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
+import Photo from "@/components/Photo";
 
 type Mode = "buy" | "rent" | "land" | "sold";
 const TITLES: Record<Mode, [string, string, string]> = {
@@ -66,7 +67,7 @@ export default function ListingsClient() {
   return (
     <main>
       <section className="hero hero--page" style={{ minHeight: "68svh" }}>
-        <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.hero.listings}')` }} />
+        <div className="bsr__bg" aria-hidden="true"><Photo src={PHOTOS.hero.listings} sizes="100vw" priority quality={70} /></div>
         <div className="hero__shade" aria-hidden="true" />
         <div className="hero__body" style={{ paddingBottom: "clamp(88px,10vw,128px)" }}>
         <Crumb tone="light" items={[[kicker]]} />

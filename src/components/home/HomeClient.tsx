@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { ADVANTAGE, AREAS, CONTACT, PAGES, PHOTOS, SOLD, decorate, propHref, specs } from "@/data/rr-data";
+import { ADVANTAGE, AREAS, CONTACT, PAGES, PHOTOS, SOLD, propHref, specs } from "@/data/rr-data";
 import Lines from "@/components/Lines";
 import Intro from "./Intro";
 import Hero from "./Hero";
@@ -13,6 +13,7 @@ import TeamStrip from "./TeamStrip";
 import Reviews from "./Reviews";
 import AppraisalCta, { type ApprState } from "./AppraisalCta";
 import ContactSection from "./ContactSection";
+import Photo from "@/components/Photo";
 
 const SUBURBS = ["Springwood", "Rochedale South", "Underwood", "Woodridge", "Kingston", "Marsden", "Slacks Creek", "Kuraby", "Shailer Park", "Logan Central"];
 const AREA_IMGS = [
@@ -52,7 +53,7 @@ export default function HomeClient() {
             </div>
           </div>
           <div data-reveal="clip" className="about__img">
-            <div data-drift="0.06" className="drift-bg" style={{ backgroundImage: `url('${PHOTOS.parfreyDeck}')` }} />
+            <div data-drift="0.06" className="drift-bg"><Photo src={PHOTOS.parfreyDeck} sizes="(max-width: 980px) 100vw, 50vw" /></div>
             <div className="img-note">Temporary · replace with office or team photo</div>
           </div>
         </div>
@@ -68,7 +69,7 @@ export default function HomeClient() {
           { href: PAGES.listings + "?mode=rent", img: PHOTOS.limeLiving, pos: "center 68%", n: "03 · Looking for a rental?", t: "Rent", p: "Current rentals with weekly rent, availability and inspection times you can save to your calendar. After-hours viewings by appointment through our rentals team.", cta: "View properties for rent" },
         ].map((x) => (
           <Link key={x.t} href={x.href} className="bsr__panel">
-            <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${x.img}')`, backgroundPosition: x.pos }} />
+            <div className="bsr__bg" aria-hidden="true"><Photo src={x.img} sizes="(max-width: 980px) 100vw, 34vw" position={x.pos} /></div>
             <div className="bsr__shade" aria-hidden="true" />
             <div className="bsr__body">
               <div className="bsr__n">{x.n}</div>
@@ -127,10 +128,9 @@ export default function HomeClient() {
         </div>
         <div className="sold-grid">
           {sold.map((p, i) => {
-            const d = decorate(p);
             return (
               <Link key={p.id} data-card data-tilt data-reveal href={propHref(p)} className="sold-card" style={{ transitionDelay: (i % 3) * 0.08 + "s" }}>
-                <div data-zoom className="card__img" style={{ backgroundColor: p.shade, backgroundImage: d.bgImage, padding: 24 }} />
+                <div data-zoom className="card__img" style={{ backgroundColor: p.shade, padding: 24 }}><Photo src={p.photo!} sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" /></div>
                 <div data-dim aria-hidden="true" style={{ position: "absolute", inset: 0, background: "#000", opacity: 0 }} />
                 <div className="sold-card__shade" aria-hidden="true" />
                 <span className="tag" style={{ padding: "9px 14px", letterSpacing: ".14em" }}>Sold</span>
@@ -167,7 +167,7 @@ export default function HomeClient() {
           <div data-reveal="clip" className="areas__bleed">
             <div style={{ position: "absolute", inset: 0 }}>
               {AREA_IMGS.map(([img, cap], i) => (
-                <div key={i} className="areas__bg" data-bg={i} style={{ backgroundImage: `url('${img}')` }}>
+                <div key={i} className="areas__bg" data-bg={i}><Photo src={img} sizes="(max-width: 980px) 100vw, 55vw" />
                   <div className="areas__cap"><span aria-hidden="true" />{cap}</div>
                 </div>
               ))}

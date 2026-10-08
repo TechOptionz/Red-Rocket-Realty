@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { PAGES, PHOTOS, SEARCH } from "@/data/rr-data";
+import Photo from "@/components/Photo";
 
 const LABELS = ["Your situation", "Property type", "Rooms", "Location", "Timing", "Notes", "Your details"];
 const INTENTS = [["Thinking of selling", "I want to know what my home is worth"], ["Ready to sell now", "I want to list in the next few weeks"], ["Investor", "Sale or rental appraisal for an investment property"], ["Just curious", "No plans yet, keep me informed"]];
@@ -24,14 +25,14 @@ export default function AppraisalClient() {
     <main className="section--dark">
       <section className="ap">
         <div className="ap__side">
-          <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: `url('${PHOTOS.hero.appraisal}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
+          <div aria-hidden="true" style={{ position: "absolute", inset: 0 }}><Photo src={PHOTOS.hero.appraisal} sizes="(max-width: 980px) 100vw, 50vw" priority quality={70} /></div>
           <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(15,17,20,.5) 0%,rgba(15,17,20,.2) 40%,rgba(15,17,20,.96) 100%)" }} />
           <div className="ap__side-body">
             <div className="kicker kicker--photo">Free market appraisal</div>
             <h1 className="display-lg" style={{ fontSize: "clamp(2.4rem,1.4rem + 3.4vw,4.8rem)", letterSpacing: "-.035em" }}>How much is your home worth?</h1>
             <p className="lead lead--light" style={{ lineHeight: 1.55, maxWidth: "46ch" }}>Seven quick questions. A local agent reviews recent comparable sales and calls you within one business day. No obligation, no cost.</p>
             <div style={{ display: "flex", alignItems: "center", gap: 14, paddingTop: 12, borderTop: "1px solid rgba(255,255,255,.14)" }}>
-              <div style={{ width: 52, height: 52, borderRadius: "50%", overflow: "hidden", background: "#2b2f37", backgroundImage: "url('/photos/uploads/2020/05/parnam-singh-heir.jpg')", backgroundSize: "cover", backgroundPosition: "center top", flex: "none" }} />
+              <div style={{ position: "relative", width: 52, height: 52, borderRadius: "50%", overflow: "hidden", background: "#2b2f37", flex: "none" }}><Photo src="/photos/uploads/2020/05/parnam-singh-heir.jpg" sizes="52px" position="center top" /></div>
               <div style={{ display: "grid", gap: 2 }}><div style={{ fontSize: 15, fontWeight: 800 }}>Parnam Singh Heir</div><div style={{ fontSize: 13, color: "var(--grey-light)" }}>Principal / Director · Agent of the Year, Underwood 2017 and 2019</div></div>
             </div>
           </div>

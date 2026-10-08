@@ -1,8 +1,9 @@
 "use client";
 import { useRef } from "react";
 import Link from "next/link";
-import { SALE, PAGES, decorate, propHref, specs } from "@/data/rr-data";
+import { SALE, PAGES, propHref, specs } from "@/data/rr-data";
 import Lines from "@/components/Lines";
+import Photo from "@/components/Photo";
 
 export default function FeaturedStrip() {
   const strip = useRef<HTMLDivElement>(null);
@@ -55,11 +56,10 @@ export default function FeaturedStrip() {
       </div>
       <div ref={strip} className="acc-strip" onPointerDown={dragStart}>
         {featured.map((p, i) => {
-          const d = decorate(p);
           const blurb = p.headline || (p.desc && p.desc[0] ? p.desc[0].split(". ")[0] + "." : p.land ? p.type + " on " + p.land + " in " + p.suburb + "." : p.type + " in " + p.suburb + ".");
           return (
             <Link key={p.id} href={propHref(p)} className="acc-card" data-reveal style={{ transitionDelay: Math.min(i, 6) * 0.08 + "s" }}>
-              <div className="acc-card__img" style={{ backgroundColor: p.shade, backgroundImage: d.bgImage }} />
+              <div className="acc-card__img" style={{ backgroundColor: p.shade }}><Photo src={p.photo!} sizes="(max-width: 720px) 74vw, 520px" /></div>
               <div className="acc-card__shade" aria-hidden="true" />
               {p.status ? <span className="tag">{p.status}</span> : null}
               <span className="acc-card__arrow" aria-hidden="true">→</span>

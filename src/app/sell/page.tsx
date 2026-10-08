@@ -6,6 +6,7 @@ import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import PropertyCard from "@/components/PropertyCard";
 import { ADVANTAGE, CONTACT, PAGES, PHOTOS, SOLD, STORIES } from "@/data/rr-data";
+import Photo from "@/components/Photo";
 
 export const metadata: Metadata = { title: "Sell your home", description: "A hands-on sale from the first appraisal to settlement day with Logan's local experts." };
 
@@ -24,7 +25,7 @@ export default function SellPage() {
       <Header />
       <main>
         <section className="hero" style={{ minHeight: "88svh" }}>
-          <div className="bsr__bg" aria-hidden="true" style={{ backgroundImage: `url('${PHOTOS.heroPoster}')` }} />
+          <div className="bsr__bg" aria-hidden="true"><Photo src={PHOTOS.heroPoster} sizes="100vw" priority quality={70} /></div>
           <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.1) 40%,rgba(15,17,20,.95) 100%)" }} />
           <div style={{ position: "relative", width: "100%", padding: "170px var(--pad-x) clamp(56px,7vw,96px)", display: "grid", gap: 24 }}>
             <Crumb tone="light" items={[["Sell"]]} />
@@ -96,7 +97,7 @@ export default function SellPage() {
             {STORIES.map((v, i) => (
               <a key={v.wistia} data-card href={"https://fast.wistia.net/embed/iframe/" + v.wistia} target="_blank" rel="noopener" className="card">
                 <div className="story__media">
-                  <div data-zoom style={{ position: "absolute", inset: 0, backgroundColor: "#23262d", backgroundImage: `url("${COVERS[i]}")`, backgroundSize: "cover", backgroundPosition: "center" }} />
+                  <div data-zoom style={{ position: "absolute", inset: 0, backgroundColor: "#23262d" }}><Photo src={COVERS[i]} sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" /></div>
                   <div className="story__shade" aria-hidden="true" />
                   <div className="story__play"><span data-arrow aria-hidden="true">▶</span></div>
                   <div className="story__note">Wistia · {v.wistia} · 2017 · re-confirm consent</div>

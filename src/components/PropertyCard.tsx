@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { decorate, formatRent, propHref, type Listing } from "@/data/rr-data";
+import Photo from "@/components/Photo";
 
 type Props = {
   p: Listing;
@@ -43,7 +44,8 @@ export default function PropertyCard({ p, ratio = "3/2", light, width, showMeta,
   return (
     <Link data-card href={propHref(p)} className={"card" + (light ? " card--light" : "")} style={{ width, ...style }}>
       <div className="card__media" style={{ aspectRatio: ratio }}>
-        <div data-zoom className="card__img" style={{ backgroundColor: p.shade, backgroundImage: d.bgImage }}>
+        <div data-zoom className="card__img" style={{ backgroundColor: p.shade, backgroundImage: p.photo ? undefined : d.bgImage }}>
+          {p.photo ? <Photo src={p.photo} sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 420px" /> : null}
           {d.imgTag ? (<><span>{d.imgTag}</span><br /><span>{d.img}</span></>) : null}
         </div>
         <div className="card__shade" aria-hidden="true" />
