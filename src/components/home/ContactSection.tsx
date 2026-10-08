@@ -39,7 +39,7 @@ export default function ContactSection() {
               <label className="field">Email<input name="email" type="email" required autoComplete="email" className="input" /></label>
               <label className="field">Phone <span className="opt">(optional)</span><input name="phone" type="tel" autoComplete="tel" className="input" /></label>
               <label className="field">Message<textarea name="message" required rows={4} className="input" /></label>
-              <label className="check"><input type="checkbox" required />I agree to Red Rocket Realty storing my details to respond to this enquiry, as described in the <a href="https://redrocketrealty.com.au/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</label>
+              <label className="check"><input type="checkbox" required /><span>I agree to Red Rocket Realty storing my details to respond to this enquiry, as described in the <a href="https://redrocketrealty.com.au/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
               <button type="submit" className="pill pill--red" style={{ justifySelf: "start", padding: "0 28px" }}>Submit</button>
             </form>
           ) : (

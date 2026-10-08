@@ -105,7 +105,7 @@ export default function AppraisalClient() {
                 <label className="field field--dark">Phone<input name="phone" type="tel" required autoComplete="tel" className="input input--dark" style={{ height: 56, borderRadius: 14, padding: "0 18px", fontSize: 16 }} /></label>
               </div>
               <label className="field field--dark">Email<input name="email" type="email" required autoComplete="email" className="input input--dark" style={{ height: 56, borderRadius: 14, padding: "0 18px", fontSize: 16 }} /></label>
-              <label className="check check--light"><input type="checkbox" required />I agree to be contacted about this appraisal and have read the <a href="https://redrocketrealty.com.au/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</label>
+              <label className="check check--light"><input type="checkbox" required /><span>I agree to be contacted about this appraisal and have read the <a href="https://redrocketrealty.com.au/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center" }}>
                 <button type="submit" className="pill pill--red pill--lg" style={{ padding: "0 30px" }}>Request my appraisal</button>
                 <span style={{ fontSize: 13, color: "var(--grey-3)" }}>We reply within one business day.</span>

@@ -122,6 +122,11 @@
 .proof__k { font-size: 13px; color: var(--grey-light); transition: color .3s; }
 .proof > div[data-glow] { --glow: rgba(213, 39, 58, .24); }
 @media (hover: hover) and (pointer: fine) { .proof > div[data-glowing] .proof__k { color: #fff; } }
+@media (max-width: 720px) {
+  /* Single column: the dividers run under each stat instead of down the right edge. */
+  .proof > div { padding: 22px 0; border-right: 0; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+  .proof > div:last-child { border-bottom: 0; }
+}
 .step-row { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 24px; padding: 32px 24px; border-top: 1px solid var(--line); border-radius: 16px; cursor: default; transition: background .3s, color .3s; }
 .step-row__n { font-size: 13px; font-weight: 700; letter-spacing: .12em; color: var(--grey); transition: color .3s; }
 .step-row[data-glow] { --glow: rgba(213, 39, 58, .3); }
@@ -196,7 +201,7 @@
 .proof-light > div[data-glow] { border-radius: 16px; padding: 20px; margin: -20px; }
 @media (hover: hover) and (pointer: fine) { .proof-light > div[data-glowing] .proof-light__k { color: var(--ink); } }
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 16px; }
-.yield { background: var(--ink-2); border-radius: 28px; padding: clamp(28px, 4vw, 48px); border: 1px solid rgba(255, 255, 255, .1); display: grid; gap: 28px; }
+.yield { background: var(--ink-2); border-radius: 28px; padding: clamp(20px, 4vw, 48px); min-width: 0; border: 1px solid rgba(255, 255, 255, .1); display: grid; gap: 28px; }
 .yield__n { font-size: clamp(3rem, 2rem + 4vw, 6rem); font-weight: 800; letter-spacing: -.04em; line-height: 1; color: var(--red); }
 .yield__k { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--grey-light); }
 .yield__row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .12); }
@@ -285,6 +290,8 @@
 .logo-grid figure[data-dark] figcaption { color: var(--grey-light); }
 .logo-grid figcaption a { font-weight: 700; text-decoration: none; }
 .logo-grid figure[data-dark] figcaption a { color: #fff; }
+.logo-grid img { max-width: 100%; object-fit: contain; }
+@media (max-width: 480px) { .logo-grid figure { padding: 24px 20px; } }
 
 /* ---------- Team cards (profile grid) ---------- */
 .team-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 264px), 1fr)); gap: 44px 28px; }
@@ -308,6 +315,11 @@
 .team-card__phone svg, .team-card__email svg { flex: none; color: var(--grey-3); }
 @media (hover: hover) and (pointer: fine) {
   .team-grid .team-card:hover { border-color: transparent; box-shadow: 0 18px 44px -18px rgba(17, 19, 24, .28), 0 2px 6px rgba(17, 19, 24, .05); transform: translateY(-3px); }
+}
+@media (pointer: coarse) {
+  .team-card__foot { gap: 6px; }
+  .team-card__phone, .team-card__email { min-height: 36px; }
+  .social-row--sm .social-btn { width: 36px; height: 36px; }
 }
 .sheet__connect { display: grid; gap: 10px; padding-top: 16px; border-top: 1px solid var(--line); }
 .sheet__connect-k { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--grey); }
@@ -340,3 +352,24 @@
 .sheet__career li:last-child::after { display: none; }
 .sheet__help li { display: flex; gap: 10px; align-items: flex-start; }
 .sheet__tick { flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 11px; font-weight: 800; display: grid; place-items: center; margin-top: 1px; }
+
+/* ---------- Phone refinements ---------- */
+@media (max-width: 720px) {
+  /* Sell advantage rows: number above the title instead of a 72px side column with 24px side padding. */
+  .step-row { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; border-radius: 0; }
+  /* Property header: price and actions line up under the left-aligned title. */
+  .prop-head > div:last-child { justify-items: start !important; }
+  .prop-head > div:last-child > div { justify-content: flex-start !important; }
+  /* Team: two compact columns, so 19 people are not 19 screens. */
+  .team-grid { grid-template-columns: 1fr 1fr; gap: 20px 12px; }
+  .team-card__body { padding: 14px 14px 12px; }
+  .team-grid .team-card__name { font-size: 16px; }
+  .team-card__tag { display: none; }
+  .team-card__foot { padding: 10px 14px 14px; gap: 4px; }
+  .team-card__foot-top { flex-wrap: wrap; gap: 6px 10px; }
+  .team-card__phone { font-size: 13px; }
+  .team-card__email { font-size: 12px; }
+  .team-card__email span { white-space: normal; overflow-wrap: anywhere; line-height: 1.3; }
+}
+@media (max-width: 480px) { .contact-info { grid-template-columns: 1fr; } }
+@media (max-width: 359px) { .team-grid { grid-template-columns: 1fr; } }

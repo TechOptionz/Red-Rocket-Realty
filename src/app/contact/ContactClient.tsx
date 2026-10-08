@@ -44,7 +44,7 @@ export default function ContactClient() {
       <section className="section--bg" style={{ padding: "clamp(40px,5vw,64px) var(--pad-x) clamp(48px,6vw,80px)" }}>
         <div data-stagger className="channels">
           {channels.map((c) => {
-            const inner = (<><div className="tile__k">{c.k}</div><div style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-.01em", wordBreak: "break-word" }}>{c.v}</div><div className="tile__sub">{c.sub}</div></>);
+            const inner = (<><div className="tile__k">{c.k}</div><div style={{ fontSize: "clamp(14px, 3.9vw, 18px)", fontWeight: 800, letterSpacing: "-.01em", overflowWrap: "anywhere" }}>{c.v}</div><div className="tile__sub">{c.sub}</div></>);
             return c.href.startsWith("/") ? <Link key={c.k} href={c.href} className="tile" style={{ padding: 24, gap: 8 }}>{inner}</Link> : <a key={c.k} href={c.href} className="tile" style={{ padding: 24, gap: 8 }}>{inner}</a>;
           })}
         </div>
@@ -69,7 +69,7 @@ export default function ContactClient() {
                 </div>
                 <label className="field field--dark" style={{ color: "var(--grey)" }}>Email<input name="email" type="email" required autoComplete="email" className="input input--md" /></label>
                 <label className="field field--dark" style={{ color: "var(--grey)" }}>Message<textarea name="message" required rows={5} placeholder={PH[topic]} className="input input--md" /></label>
-                <label className="check"><input type="checkbox" required />I agree to be contacted and have read the <a href="https://redrocketrealty.com.au/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</label>
+                <label className="check"><input type="checkbox" required /><span>I agree to be contacted and have read the <a href="https://redrocketrealty.com.au/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
                 <button type="submit" className="pill pill--red" style={{ justifySelf: "start", padding: "0 28px" }}>Send message</button>
               </form>
             ) : (

@@ -19,7 +19,7 @@ export default function BrandPage() {
   return (
     <>
       <Header solid />
-      <main className="section--bg" style={{ padding: "150px var(--pad-x) var(--sec-y)" }}>
+      <main className="section--bg" style={{ padding: "clamp(110px, 20vw, 150px) var(--pad-x) var(--sec-y)" }}>
         <div style={{ display: "grid", gap: 40, maxWidth: 1240, margin: "0 auto" }}>
           <header style={{ display: "grid", gap: 12 }}>
             <div className="kicker">Brand · logo files</div>
