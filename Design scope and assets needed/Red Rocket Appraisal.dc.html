@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0f1114;color:#fff;font-family:'Red Hat Display',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#d5273a}a:hover{color:#b81e2f}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #d5273a;outline-offset:3px}
+select option{color:#111318}
+::placeholder{color:#8a8f99}
+[data-choice]{transition:background .25s,border-color .25s,color .25s,transform .25s}
+@media (hover:hover) and (pointer:fine){[data-choice]:hover{border-color:#fff!important;transform:translateY(-2px)}}
+[data-pane]{animation:apFade .5s cubic-bezier(.22,.61,.36,1) both}
+@keyframes apFade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+[data-bar]{transition:width .6s cubic-bezier(.22,.61,.36,1)}
+@media (max-width:980px){[data-cols2]{grid-template-columns:1fr!important}[data-side]{min-height:0!important}[data-side]>div:last-child{padding:120px 20px 32px!important;gap:12px!important}[data-side] h1{font-size:clamp(1.9rem,8vw,2.6rem)!important}[data-side] p{font-size:15px!important}[data-form]{padding:32px 20px 56px!important}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</helmet>
+<dc-import name="RRHeader" solid="{{ true }}" hint-size="100%,100%" data-rr-header-mount style="position:fixed;top:0;left:0;right:0;height:0;z-index:90;pointer-events:none"></dc-import>
+
+<section data-screen-label="Appraisal" data-cols2 style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:100svh">
+  <div data-side style="position:relative;overflow:hidden;background:#16181d">
+    <div aria-hidden="true" style="position:absolute;inset:0;background-image:url('https://redrocketrealty.com.au/wp-content/uploads/2026/10/4-Boskenne-Street-Rochedale-South-QLD-4123-13.jpg');background-size:cover;background-position:center"></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,17,20,.5) 0%,rgba(15,17,20,.2) 40%,rgba(15,17,20,.96) 100%)"></div>
+    <div style="position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:160px clamp(28px,4vw,64px) clamp(48px,6vw,80px);gap:20px;box-sizing:border-box">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#d5273a">Free market appraisal</div>
+      <h1 style="margin:0;font-size:clamp(2.4rem,1.4rem + 3.4vw,4.8rem);font-weight:800;letter-spacing:-.035em;line-height:.98">How much is your home worth?</h1>
+      <p style="margin:0;font-size:17px;line-height:1.55;color:#c9ccd3;max-width:46ch">Seven quick questions. A local agent reviews recent comparable sales and calls you within one business day. No obligation, no cost.</p>
+      <div style="display:flex;align-items:center;gap:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.14)">
+        <div style="width:52px;height:52px;border-radius:50%;overflow:hidden;background:#2b2f37;background-image:url('https://redrocketrealty.com.au/wp-content/uploads/2020/05/parnam-singh-heir.jpg');background-size:cover;background-position:center top;flex:none"></div>
+        <div style="display:grid;gap:2px"><div style="font-size:15px;font-weight:800">Parnam Singh Heir</div><div style="font-size:13px;color:#c9ccd3">Principal / Director · Agent of the Year, Underwood 2017 and 2019</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div data-form style="display:flex;flex-direction:column;justify-content:center;padding:140px clamp(20px,5vw,80px) clamp(48px,6vw,80px);min-width:0;box-sizing:border-box">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px;flex-wrap:wrap">
+      <nav aria-label="Breadcrumb" style="display:flex;gap:10px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a8f99"><a href="Red%20Rocket%20Home.dc.html" style="color:#8a8f99;text-decoration:none" style-hover="color:#fff">Home</a><span aria-hidden="true">/</span><a href="Red%20Rocket%20Sell.dc.html" style="color:#8a8f99;text-decoration:none" style-hover="color:#fff">Sell</a><span aria-hidden="true">/</span><span style="color:#fff">Appraisal</span></nav>
+      <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a8f99">{{ stepLabel }}</div>
+    </div>
+    <div aria-hidden="true" style="height:3px;background:rgba(255,255,255,.12);border-radius:3px;overflow:hidden;margin-bottom:40px"><div data-bar style="height:100%;background:#d5273a;width: {{ progress }}"></div></div>
+
+    <sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+      <div data-pane style="display:grid;gap:24px">
+        <h2 style="margin:0;font-size:clamp(1.6rem,1.2rem + 1.6vw,2.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.05">Which best describes your situation?</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px">
+          <sc-for list="{{ intents }}" as="o" hint-placeholder-count="4">
+            <button data-choice type="button" onClick="{{ o.onClick }}" style="text-align:left;padding:22px 20px;border-radius:16px;border:1px solid rgba(255,255,255,.18);cursor:pointer;font-family:inherit;color:#fff;display:grid;gap:6px;background: {{ o.bg }};border-color: {{ o.bc }}"><span style="font-size:17px;font-weight:800;letter-spacing:-.01em">{{ o.label }}</span><span style="font-size:13px;color:#c9ccd3">{{ o.sub }}</span></button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+      <div data-pane style="display:grid;gap:24px">
+        <h2 style="margin:0;font-size:clamp(1.6rem,1.2rem + 1.6vw,2.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.05">What type of property is it?</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:12px">
+          <sc-for list="{{ types }}" as="o" hint-placeholder-count="5"><button data-choice type="button" onClick="{{ o.onClick }}" style="padding:22px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.18);cursor:pointer;font:800 16px 'Red Hat Display',system-ui,sans-serif;color:#fff;background: {{ o.bg }};border-color: {{ o.bc }}">{{ o.label }}</button></sc-for>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+      <div data-pane style="display:grid;gap:28px">
+        <h2 style="margin:0;font-size:clamp(1.6rem,1.2rem + 1.6vw,2.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.05">Tell us about the home.</h2>
+        <div style="display:grid;gap:10px"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Bedrooms</div><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ beds }}" as="o" hint-placeholder-count="6"><button data-choice type="button" onClick="{{ o.onClick }}" style="min-width:56px;height:52px;padding:0 18px;border-radius:100px;border:1px solid rgba(255,255,255,.18);cursor:pointer;font:800 15px 'Red Hat Display',system-ui,sans-serif;color:#fff;background: {{ o.bg }};border-color: {{ o.bc }}">{{ o.label }}</button></sc-for></div></div>
+        <div style="display:grid;gap:10px"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Bathrooms</div><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ baths }}" as="o" hint-placeholder-count="4"><button data-choice type="button" onClick="{{ o.onClick }}" style="min-width:56px;height:52px;padding:0 18px;border-radius:100px;border:1px solid rgba(255,255,255,.18);cursor:pointer;font:800 15px 'Red Hat Display',system-ui,sans-serif;color:#fff;background: {{ o.bg }};border-color: {{ o.bc }}">{{ o.label }}</button></sc-for></div></div>
+        <div style="display:grid;gap:10px"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Car spaces</div><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ cars }}" as="o" hint-placeholder-count="4"><button data-choice type="button" onClick="{{ o.onClick }}" style="min-width:56px;height:52px;padding:0 18px;border-radius:100px;border:1px solid rgba(255,255,255,.18);cursor:pointer;font:800 15px 'Red Hat Display',system-ui,sans-serif;color:#fff;background: {{ o.bg }};border-color: {{ o.bc }}">{{ o.label }}</button></sc-for></div></div>
+        <button type="button" onClick="{{ next }}" style="justify-self:start;height:56px;padding:0 28px;border-radius:100px;border:0;background:#d5273a;color:#fff;cursor:pointer;font:700 14px 'Red Hat Display',system-ui,sans-serif">Continue</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
+      <div data-pane style="display:grid;gap:24px">
+        <h2 style="margin:0;font-size:clamp(1.6rem,1.2rem + 1.6vw,2.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.05">Where is the property?</h2>
+        <label style="display:grid;gap:8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Street address<input value="{{ address }}" onChange="{{ setAddress }}" placeholder="e.g. 67 Springwood Road" autocomplete="street-address" style="height:60px;border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:0 18px;font:500 17px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none;transition:border-color .3s" style-focus="border-color:#fff"></label>
+        <label style="display:grid;gap:8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Suburb<select value="{{ suburb }}" onChange="{{ setSuburb }}" style="appearance:none;-webkit-appearance:none;height:60px;border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:0 18px;font:500 17px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none;cursor:pointer"><option value="">Choose a suburb</option><sc-for list="{{ suburbs }}" as="o" hint-placeholder-count="0"><option value="{{ o }}">{{ o }}</option></sc-for><option value="Other">Other · tell us in the notes</option></select></label>
+        <button type="button" onClick="{{ next }}" disabled="{{ s4Disabled }}" style="justify-self:start;height:56px;padding:0 28px;border-radius:100px;border:0;background:#d5273a;color:#fff;cursor:pointer;font:700 14px 'Red Hat Display',system-ui,sans-serif;opacity: {{ s4Opacity }}">Continue</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ s5 }}" hint-placeholder-val="{{ false }}">
+      <div data-pane style="display:grid;gap:24px">
+        <h2 style="margin:0;font-size:clamp(1.6rem,1.2rem + 1.6vw,2.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.05">When are you thinking of selling?</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px">
+          <sc-for list="{{ timings }}" as="o" hint-placeholder-count="4"><button data-choice type="button" onClick="{{ o.onClick }}" style="padding:22px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.18);cursor:pointer;font:800 16px 'Red Hat Display',system-ui,sans-serif;color:#fff;background: {{ o.bg }};border-color: {{ o.bc }}">{{ o.label }}</button></sc-for>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ s6 }}" hint-placeholder-val="{{ false }}">
+      <div data-pane style="display:grid;gap:24px">
+        <h2 style="margin:0;font-size:clamp(1.6rem,1.2rem + 1.6vw,2.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.05">Anything we should know?</h2>
+        <p style="margin:0;font-size:15px;line-height:1.55;color:#c9ccd3">Renovations, a granny flat, a pool, tenants in place, or what matters most to you about the sale. Optional.</p>
+        <textarea value="{{ notes }}" onChange="{{ setNotes }}" rows="4" placeholder="e.g. Renovated kitchen in 2024, currently tenanted until March." style="border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:16px 18px;font:500 16px/1.5 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none;resize:vertical;transition:border-color .3s" style-focus="border-color:#fff"></textarea>
+        <button type="button" onClick="{{ next }}" style="justify-self:start;height:56px;padding:0 28px;border-radius:100px;border:0;background:#d5273a;color:#fff;cursor:pointer;font:700 14px 'Red Hat Display',system-ui,sans-serif">Continue</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ s7 }}" hint-placeholder-val="{{ false }}">
+      <form data-pane onSubmit="{{ submit }}" style="display:grid;gap:20px">
+        <h2 style="margin:0;font-size:clamp(1.6rem,1.2rem + 1.6vw,2.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.05">Where should we send the appraisal?</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+          <label style="display:grid;gap:8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Full name<input name="name" required autocomplete="name" style="height:56px;border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:0 18px;font:500 16px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none;transition:border-color .3s" style-focus="border-color:#fff"></label>
+          <label style="display:grid;gap:8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Phone<input name="phone" type="tel" required autocomplete="tel" style="height:56px;border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:0 18px;font:500 16px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none;transition:border-color .3s" style-focus="border-color:#fff"></label>
+        </div>
+        <label style="display:grid;gap:8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Email<input name="email" type="email" required autocomplete="email" style="height:56px;border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:0 18px;font:500 16px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none;transition:border-color .3s" style-focus="border-color:#fff"></label>
+        <label style="display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.5;color:#c9ccd3"><input type="checkbox" required style="margin-top:3px;accent-color:#d5273a;width:18px;height:18px;flex:none">I agree to be contacted about this appraisal and have read the <a href="https://redrocketrealty.com.au/privacy-policy/" target="_blank" rel="noopener" style="color:#fff;font-weight:700">Privacy Policy</a>.</label>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+          <button type="submit" style="height:60px;padding:0 30px;border-radius:100px;border:0;background:#d5273a;color:#fff;cursor:pointer;font:700 15px 'Red Hat Display',system-ui,sans-serif;transition:background .3s" style-hover="background:#b81e2f">Request my appraisal</button>
+          <span style="font-size:13px;color:#8a8f99">We reply within one business day.</span>
+        </div>
+      </form>
+    </sc-if>
+    <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+      <div data-pane style="display:grid;gap:20px">
+        <div style="width:56px;height:56px;border-radius:50%;background:#d5273a;color:#fff;display:grid;place-items:center;font-size:22px;font-weight:800">✓</div>
+        <h2 style="margin:0;font-size:clamp(1.8rem,1.2rem + 2vw,3rem);font-weight:800;letter-spacing:-.025em;line-height:1.05">Thanks, {{ firstName }}. We're on it.</h2>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#c9ccd3;max-width:52ch">{{ summary }} A local agent will call you within one business day to arrange a visit and talk through comparable sales.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a href="Red%20Rocket%20Listings.dc.html?mode=sold" style="display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:100px;background:#fff;color:#111318;text-decoration:none;font-size:14px;font-weight:700">See what's sold nearby</a>
+          <a href="Red%20Rocket%20Guides.dc.html?guide=seller" style="display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:100px;border:1px solid rgba(255,255,255,.26);color:#fff;text-decoration:none;font-size:14px;font-weight:700">Read the seller guide</a>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ back }}" style="justify-self:start;margin-top:32px;height:44px;padding:0 4px;border:0;background:transparent;color:#8a8f99;cursor:pointer;font:700 13px 'Red Hat Display',system-ui,sans-serif" style-hover="color:#fff">← Back</button></sc-if>
+  </div>
+</section>
+
+<dc-import name="RRFooter" hint-size="100%,900px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { D: null, step: 1, intent: '', type: '', beds: '', baths: '', cars: '', address: '', suburb: '', timing: '', notes: '', done: false, firstName: '' };
+  componentDidMount() { import('./rr-data.js').then(m => this.setState({ D: m })).catch(e => console.warn('data', e)); }
+  pick(key, value, advance) { this.setState(Object.assign({ [key]: value }, advance ? { step: this.state.step + 1 } : {})); }
+  opts(list, key, advance) { const cur = this.state[key]; return list.map(o => { const v = typeof o === 'string' ? o : o.label; return Object.assign(typeof o === 'string' ? { label: o } : o, { bg: cur === v ? '#fff' : 'rgba(255,255,255,.04)', bc: cur === v ? '#fff' : 'rgba(255,255,255,.18)', onClick: () => this.pick(key, v, advance) }); }).map(o => this.state[key] === o.label ? Object.assign({}, o, { bg: '#d5273a', bc: '#d5273a' }) : o); }
+  renderVals() {
+    const s = this.state, D = s.D, total = 7;
+    const labels = ['Your situation', 'Property type', 'Rooms', 'Location', 'Timing', 'Notes', 'Your details'];
+    const r = { stepLabel: s.done ? 'Request sent' : 'Step ' + s.step + ' of ' + total + ' · ' + labels[s.step - 1], progress: (s.done ? 100 : Math.round(((s.step - 1) / total) * 100)) + '%', done: s.done, canBack: !s.done && s.step > 1 };
+    for (let i = 1; i <= 7; i++) r['s' + i] = !s.done && s.step === i;
+    r.intents = this.opts([{ label: 'Thinking of selling', sub: 'I want to know what my home is worth' }, { label: 'Ready to sell now', sub: 'I want to list in the next few weeks' }, { label: 'Investor', sub: 'Sale or rental appraisal for an investment property' }, { label: 'Just curious', sub: 'No plans yet, keep me informed' }], 'intent', true);
+    r.types = this.opts(['House', 'Townhouse', 'Unit', 'Land', 'Acreage'], 'type', true);
+    r.beds = this.opts(['1', '2', '3', '4', '5', '6+'], 'beds', false);
+    r.baths = this.opts(['1', '2', '3', '4+'], 'baths', false);
+    r.cars = this.opts(['0', '1', '2', '3+'], 'cars', false);
+    r.timings = this.opts(['As soon as possible', 'Within 3 months', '3 to 6 months', 'Just researching'], 'timing', true);
+    r.suburbs = D ? D.SEARCH.buySuburbs : [];
+    r.address = s.address; r.suburb = s.suburb; r.notes = s.notes;
+    r.setAddress = e => this.setState({ address: e.target.value }); r.setSuburb = e => this.setState({ suburb: e.target.value }); r.setNotes = e => this.setState({ notes: e.target.value });
+    r.s4Disabled = !(s.address.trim() && s.suburb); r.s4Opacity = r.s4Disabled ? '.5' : '1';
+    r.next = () => this.setState({ step: Math.min(total, s.step + 1) }); r.back = () => this.setState({ step: Math.max(1, s.step - 1) });
+    r.submit = e => { e.preventDefault(); const name = (new FormData(e.target).get('name') || '').toString().trim(); this.setState({ done: true, firstName: name.split(' ')[0] || 'there' }); };
+    r.firstName = s.firstName;
+    r.summary = s.done ? 'We\u2019ve logged a ' + (s.type || 'property').toLowerCase() + (s.beds ? ' with ' + s.beds + ' bedrooms' : '') + ' at ' + s.address + ', ' + s.suburb + ' (' + (s.timing || 'timing to be confirmed').toLowerCase() + ').' : '';
+    return r;
+  }
+}
+</script>
+</body>
+</html>

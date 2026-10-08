@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:#111318;font-family:'Red Hat Display',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#d5273a}a:hover{color:#b81e2f}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #d5273a;outline-offset:3px}
+[data-reveal]{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1)}
+[data-reveal][data-in]{opacity:1;transform:none}
+[data-reveal="lines"]{opacity:1;transform:none;transition:none}
+[data-reveal="lines"]>span{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+[data-reveal="lines"]>span>span{display:block;transform:translateY(112%);transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+[data-reveal="lines"][data-in]>span>span{transform:none}
+[data-reveal="lines"]>span:nth-child(2)>span{transition-delay:.1s}
+[data-tip]{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1)}
+[data-tip][data-in]{opacity:1;transform:none}
+[data-tip] [data-num]{display:inline-block;transition:color .5s,transform .7s cubic-bezier(.22,.61,.36,1)}
+[data-tip] [data-num]{color:#d6d9df;transform:scale(.85);transform-origin:left top}
+[data-tip][data-active="1"] [data-num]{color:#d5273a;transform:none}
+[data-tip] h2{transition:color .5s}
+[data-tip]:not([data-active="1"]) h2{color:#6f747e}
+[data-tip] p{transition:color .5s}
+[data-tip]:not([data-active="1"]) p{color:#9aa0ab}
+[data-tip] [data-rule]{height:2px;background:#e3e5e9;position:relative;overflow:hidden;border-radius:2px}
+[data-tip] [data-rule]>span{position:absolute;inset:0;background:#d5273a;transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.22,.61,.36,1)}
+[data-tip][data-active="1"] [data-rule]>span{transform:none}
+[data-toc] a{transition:color .3s,padding-left .3s}
+[data-toc] a[data-active="1"]{color:#d5273a!important;padding-left:12px}
+@media (max-width:980px){[data-cols2]{grid-template-columns:minmax(0,1fr)!important}[data-sticky]{position:static!important}[data-toc]{display:none!important}}
+@media (max-width:720px){article[data-tip]{grid-template-columns:minmax(0,1fr)!important;gap:10px!important}}
+@media (max-width:720px){[data-stack-m]{flex-direction:column!important;align-items:flex-start!important}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}[data-reveal],[data-reveal]>span>span{opacity:1!important;transform:none!important}}
+</style>
+</helmet>
+<dc-import name="RRHeader" solid="{{ true }}" hint-size="100%,100%" data-rr-header-mount style="position:fixed;top:0;left:0;right:0;height:0;z-index:90;pointer-events:none"></dc-import>
+
+<section data-screen-label="Guide header" style="background:#f4f5f6;padding:150px clamp(20px,5.5vw,80px) clamp(40px,5vw,64px)">
+  <nav aria-label="Breadcrumb" style="display:flex;gap:10px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6f747e;margin-bottom:28px"><a href="Red%20Rocket%20Home.dc.html" style="color:#6f747e;text-decoration:none" style-hover="color:#111318">Home</a><span aria-hidden="true">/</span><span style="color:#111318">{{ crumb }}</span></nav>
+  <div data-stack-m style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+    <div style="display:grid;gap:18px;max-width:820px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#d5273a">Guides</div>
+      <h1 data-reveal="lines" style="margin:0;font-size:clamp(2.4rem,1.2rem + 4vw,5.2rem);font-weight:800;letter-spacing:-.03em;line-height:.98"><span><span>{{ title1 }}</span></span><span><span>{{ title2 }}</span></span></h1>
+      <p style="margin:0;font-size:17px;line-height:1.6;color:#474b54;max-width:56ch">{{ intro }}</p>
+    </div>
+    <div role="tablist" aria-label="Guide" style="display:flex;gap:4px;background:#fff;border-radius:100px;padding:4px;border:1px solid rgba(17,19,24,.1)">
+      <button type="button" role="tab" onClick="{{ setBuyer }}" style="height:44px;padding:0 20px;border-radius:100px;border:0;cursor:pointer;font:700 12px 'Red Hat Display',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;transition:background .3s,color .3s;background: {{ buyerBg }};color: {{ buyerFg }}">For buyers</button>
+      <button type="button" role="tab" onClick="{{ setSeller }}" style="height:44px;padding:0 20px;border-radius:100px;border:0;cursor:pointer;font:700 12px 'Red Hat Display',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;transition:background .3s,color .3s;background: {{ sellerBg }};color: {{ sellerFg }}">For sellers</button>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Guide body" style="background:#fff;padding:clamp(56px,7vw,96px) clamp(20px,5.5vw,80px);overflow-x:clip">
+  <div data-cols2 style="display:grid;grid-template-columns:280px minmax(0,1fr);min-width:0;gap:clamp(40px,6vw,96px);align-items:start">
+    <nav data-toc data-sticky aria-label="On this page" style="position:sticky;top:130px;display:grid;gap:2px;align-content:start">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6f747e;padding:0 0 12px">On this page</div>
+      <sc-for list="{{ toc }}" as="t" hint-placeholder-count="6"><a href="{{ t.href }}" data-active="{{ t.active }}" style="display:block;padding:10px 0;color:#111318;text-decoration:none;font-size:14px;font-weight:700;border-top:1px solid #e3e5e9">{{ t.n }} &nbsp; {{ t.label }}</a></sc-for>
+      <div style="border-top:1px solid #e3e5e9"></div>
+      <sc-if value="{{ isBuyer }}" hint-placeholder-val="{{ true }}"><a href="#offer" style="display:block;padding:10px 0;color:#111318;text-decoration:none;font-size:14px;font-weight:700">07 &nbsp; Make an offer</a></sc-if>
+    </nav>
+    <div style="display:grid;gap:clamp(40px,5vw,64px);min-width:0;max-width:100%;grid-template-columns:minmax(0,1fr)">
+      <sc-for list="{{ tips }}" as="tp" hint-placeholder-count="6">
+        <article data-tip data-reveal id="{{ tp.id }}" data-active="{{ tp.active }}" style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:20px;scroll-margin-top:140px">
+          <div data-num style="font-size:clamp(1.8rem,1.2rem + 1.6vw,2.8rem);font-weight:800;line-height:1;letter-spacing:-.03em">{{ tp.n }}</div>
+          <div style="display:grid;gap:12px"><div data-rule aria-hidden="true"><span></span></div><h2 style="margin:0;font-size:clamp(1.4rem,1rem + 1.4vw,2.2rem);font-weight:800;letter-spacing:-.02em;line-height:1.1">{{ tp.title }}</h2><p style="margin:0;font-size:17px;line-height:1.65;color:#474b54;max-width:64ch">{{ tp.body }}</p></div>
+        </article>
+      </sc-for>
+      <sc-if value="{{ isBuyer }}" hint-placeholder-val="{{ true }}">
+        <article id="offer" style="display:grid;gap:24px;padding:clamp(28px,4vw,48px);border-radius:24px;background:#16181d;color:#fff;scroll-margin-top:140px">
+          <div style="display:grid;gap:10px"><div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#d5273a">Expression of interest</div><h2 style="margin:0;font-size:clamp(1.6rem,1.1rem + 1.6vw,2.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.08">Ready to make an offer?</h2><p style="margin:0;font-size:16px;line-height:1.6;color:#c9ccd3;max-width:60ch">Submit a written offer online with your price, deposit, finance and settlement terms. The listing agent presents it to the seller and comes back to you.</p></div>
+          <sc-if value="{{ oIdle }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ submitOffer }}" style="display:grid;gap:12px">
+              <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Property<select name="property" required style="appearance:none;-webkit-appearance:none;height:52px;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:0 16px;font:500 15px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none;cursor:pointer"><option value="" style="color:#111318">Choose a current listing</option><sc-for list="{{ listings }}" as="l" hint-placeholder-count="0"><option value="{{ l.id }}" style="color:#111318">{{ l.label }}</option></sc-for></select></label>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:12px">
+                <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Offer price<input name="price" required inputmode="numeric" placeholder="$" style="height:52px;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:0 16px;font:500 15px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none" style-focus="border-color:#fff"></label>
+                <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Deposit<input name="deposit" inputmode="numeric" placeholder="$" style="height:52px;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:0 16px;font:500 15px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none" style-focus="border-color:#fff"></label>
+                <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Finance<select name="finance" style="appearance:none;-webkit-appearance:none;height:52px;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:0 16px;font:500 15px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none;cursor:pointer"><option style="color:#111318">Subject to finance · 14 days</option><option style="color:#111318">Subject to finance · 21 days</option><option style="color:#111318">Cash · unconditional</option></select></label>
+                <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Settlement<select name="settlement" style="appearance:none;-webkit-appearance:none;height:52px;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:0 16px;font:500 15px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none;cursor:pointer"><option style="color:#111318">30 days</option><option style="color:#111318">45 days</option><option style="color:#111318">60 days</option><option style="color:#111318">Other · see notes</option></select></label>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px">
+                <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Full name<input name="name" required autocomplete="name" style="height:52px;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:0 16px;font:500 15px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none" style-focus="border-color:#fff"></label>
+                <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Phone<input name="phone" type="tel" required autocomplete="tel" style="height:52px;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:0 16px;font:500 15px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none" style-focus="border-color:#fff"></label>
+                <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Email<input name="email" type="email" required autocomplete="email" style="height:52px;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:0 16px;font:500 15px 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none" style-focus="border-color:#fff"></label>
+              </div>
+              <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9ccd3">Conditions and notes <span style="font-weight:500;text-transform:none;letter-spacing:0">(optional)</span><textarea name="notes" rows="3" placeholder="Building and pest, inclusions, anything the seller should know." style="border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 16px;font:500 15px/1.5 'Red Hat Display',system-ui,sans-serif;color:#fff;background:rgba(255,255,255,.06);outline:none;resize:vertical" style-focus="border-color:#fff"></textarea></label>
+              <label style="display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.5;color:#c9ccd3"><input type="checkbox" required style="margin-top:3px;accent-color:#d5273a;width:18px;height:18px;flex:none">I understand this is an expression of interest, not a binding contract, and the agent will contact me to formalise the offer.</label>
+              <button type="submit" style="height:56px;border-radius:100px;border:0;background:#d5273a;color:#fff;cursor:pointer;font:700 14px 'Red Hat Display',system-ui,sans-serif;justify-self:start;padding:0 28px;transition:background .3s" style-hover="background:#b81e2f">Submit expression of interest</button>
+            </form>
+          </sc-if>
+          <sc-if value="{{ oSent }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;gap:12px"><div style="width:52px;height:52px;border-radius:50%;background:#d5273a;color:#fff;display:grid;place-items:center;font-size:20px;font-weight:800">✓</div><div style="font-size:22px;font-weight:800">Offer received.</div><p style="margin:0;font-size:15px;line-height:1.6;color:#c9ccd3">Thanks, {{ oName }}. The listing agent will call you to confirm the details before presenting it to the seller.</p><button type="button" onClick="{{ oReset }}" style="height:44px;padding:0 18px;border-radius:100px;border:1px solid rgba(255,255,255,.26);background:transparent;color:#fff;cursor:pointer;font:700 13px 'Red Hat Display',system-ui,sans-serif;justify-self:start">Submit another</button></div>
+          </sc-if>
+        </article>
+      </sc-if>
+      <sc-if value="{{ isSeller }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:28px 32px;border-radius:24px;background:#16181d;color:#fff">
+          <div style="display:grid;gap:6px"><div style="font-size:20px;font-weight:800;letter-spacing:-.01em">Start with the price.</div><div style="font-size:14px;color:#c9ccd3">A free appraisal gives you a realistic range from recent comparable sales.</div></div>
+          <a href="Red%20Rocket%20Appraisal.dc.html" style="display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 8px 0 24px;border-radius:100px;background:#fff;color:#111318;text-decoration:none;font-size:14px;font-weight:700;transition:background .3s,color .3s" style-hover="background:#d5273a;color:#fff"><span>Request an appraisal</span><span aria-hidden="true" style="width:40px;height:40px;border-radius:50%;background:#d5273a;color:#fff;display:grid;place-items:center">→</span></a>
+        </div>
+      </sc-if>
+      <p style="margin:0;font:500 11px/1.6 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#6f747e">Guide text from the current Tips for Buyers and Tips for Sellers pages, lightly edited · deposit and LMI figures to be reviewed against current lender policy</p>
+    </div>
+  </div>
+</section>
+
+<dc-import name="RRFooter" hint-size="100%,900px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { D: null, guide: 'buyer', active: '', oSent: false, oName: '' };
+  componentDidMount() {
+    const q = new URLSearchParams(window.location.search); if (q.get('guide') === 'seller') this.setState({ guide: 'seller' });
+    import('./rr-data.js').then(m => this.setState({ D: m })).catch(e => console.warn('data', e));
+    this.io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.setAttribute('data-in', '1'); this.io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px', threshold: 0.02 });
+    this.scan = () => document.querySelectorAll('[data-reveal]:not([data-obs])').forEach(el => { el.setAttribute('data-obs', '1'); this.io.observe(el); });
+    this.scan();
+    this.revealFallback = () => document.querySelectorAll('[data-reveal]:not([data-in]),[data-stagger]:not([data-in])').forEach(el => { const r = el.getBoundingClientRect(); if (r.top < window.innerHeight * 0.96 && r.bottom > 0) el.setAttribute('data-in', '1'); });
+    window.addEventListener('scroll', this.revealFallback, { passive: true }); window.addEventListener('resize', this.revealFallback);
+    this.fbTimer = setInterval(this.revealFallback, 600);
+    this.mo = new MutationObserver(() => { clearTimeout(this.st); this.st = setTimeout(this.scan, 120); });
+    this.mo.observe(document.body, { childList: true, subtree: true });
+    this.onScroll = () => { const arts = [...document.querySelectorAll('article[data-tip]')]; let cur = ''; arts.forEach(a => { if (a.getBoundingClientRect().top < window.innerHeight * 0.45) cur = a.id; }); if (!cur && arts[0]) cur = arts[0].id; if (cur !== this.state.active) this.setState({ active: cur }); };
+    this.onScroll();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this.revealFallback); window.removeEventListener('resize', this.revealFallback); clearInterval(this.fbTimer); if (this.io) this.io.disconnect(); if (this.mo) this.mo.disconnect(); window.removeEventListener('scroll', this.onScroll); }
+  set(guide) { this.setState({ guide, active: '' }); try { history.replaceState(null, '', '?guide=' + guide); } catch (e) {} window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  renderVals() {
+    const D = this.state.D, s = this.state, b = s.guide === 'buyer';
+    const raw = D ? (b ? D.BUYER_TIPS : D.SELLER_TIPS) : [];
+    const tips = raw.map(([title, body], i) => ({ id: 'tip-' + (i + 1), n: '0' + (i + 1), title, body, active: s.active === 'tip-' + (i + 1) || (!s.active && i === 0) ? '1' : '' }));
+    const toc = tips.map(t => ({ href: '#' + t.id, n: t.n, label: t.title, active: s.active === t.id ? '1' : '' }));
+    const listings = D ? D.SALE.concat(D.LAND).map(p => ({ id: p.id, label: p.address + ', ' + p.suburb + ' · ' + p.price })) : [];
+    return {
+      crumb: b ? 'Buyer guide' : 'Seller guide', title1: b ? 'Buying a home' : 'Selling your home', title2: b ? 'in Logan, step by step.' : 'for the best price.',
+      intro: b ? 'Six things to settle before you make an offer, from the deposit to the inspection, written by the people who sell here every week.' : 'Five things that move the price, from research and repairs to presentation and promotion.',
+      isBuyer: b, isSeller: !b, setBuyer: () => this.set('buyer'), setSeller: () => this.set('seller'),
+      buyerBg: b ? '#111318' : 'transparent', buyerFg: b ? '#fff' : '#111318', sellerBg: b ? 'transparent' : '#111318', sellerFg: b ? '#111318' : '#fff',
+      tips, toc, listings,
+      oIdle: !s.oSent, oSent: s.oSent, oName: s.oName,
+      submitOffer: e => { e.preventDefault(); this.setState({ oSent: true, oName: (new FormData(e.target).get('name') || 'there').toString().split(' ')[0] }); },
+      oReset: () => this.setState({ oSent: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

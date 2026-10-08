@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#f4f5f6;color:#111318;font-family:'Red Hat Display',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#d5273a}a:hover{color:#b81e2f}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #d5273a;outline-offset:3px}
+[data-reveal]{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1)}
+[data-reveal][data-in]{opacity:1;transform:none}
+[data-reveal="lines"]{opacity:1;transform:none;transition:none}
+[data-reveal="lines"]>span{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+[data-reveal="lines"]>span>span{display:block;transform:translateY(112%);transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+[data-reveal="lines"][data-in]>span>span{transform:none}
+[data-reveal="lines"]>span:nth-child(2)>span{transition-delay:.1s}
+[data-stagger]>*{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+[data-stagger][data-in]>*{opacity:1;transform:none}
+[data-stagger][data-in]>*:nth-child(2){transition-delay:.1s}[data-stagger][data-in]>*:nth-child(3){transition-delay:.2s}[data-stagger][data-in]>*:nth-child(4){transition-delay:.3s}
+[data-tile]{transition:background .3s,color .3s,transform .4s cubic-bezier(.22,.61,.36,1)}
+@media (hover:hover) and (pointer:fine){[data-tile]:hover{background:#111318!important;color:#fff!important;transform:translateY(-4px)}[data-tile]:hover [data-sub]{color:#c9ccd3!important}[data-tile]:hover [data-k]{color:#d5273a!important}}
+@media (max-width:980px){[data-cols2]{grid-template-columns:1fr!important}[data-sticky]{position:static!important}}
+@media (max-width:720px){[data-stack-m]{flex-direction:column!important;align-items:flex-start!important}}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}[data-reveal],[data-reveal]>span>span,[data-stagger]>*{opacity:1!important;transform:none!important}}
+</style>
+</helmet>
+<dc-import name="RRHeader" solid="{{ true }}" hint-size="100%,100%" data-rr-header-mount style="position:fixed;top:0;left:0;right:0;height:0;z-index:90;pointer-events:none"></dc-import>
+
+<section data-screen-label="Contact header" style="background:#f4f5f6;padding:150px clamp(20px,5.5vw,80px) clamp(40px,5vw,64px)">
+  <nav aria-label="Breadcrumb" style="display:flex;gap:10px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6f747e;margin-bottom:28px"><a href="Red%20Rocket%20Home.dc.html" style="color:#6f747e;text-decoration:none" style-hover="color:#111318">Home</a><span aria-hidden="true">/</span><span style="color:#111318">Contact</span></nav>
+  <div data-cols2 style="display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,5vw,80px);align-items:end">
+    <h1 data-reveal="lines" style="margin:0;font-size:clamp(2.4rem,1.2rem + 4vw,5.2rem);font-weight:800;letter-spacing:-.03em;line-height:.98"><span><span>Buying, selling or</span></span><span><span>renting in Logan?</span></span></h1>
+    <div style="display:grid;gap:8px">
+      <a href="tel:+61733404200" style="color:#111318;text-decoration:none;font-size:clamp(1.6rem,1.2rem + 1.6vw,2.6rem);font-weight:800;letter-spacing:-.02em;line-height:1" style-hover="color:#d5273a">07 3340 4200</a>
+      <div style="font-size:15px;color:#474b54;line-height:1.5">67 Springwood Road, Springwood QLD 4127<br>Mon–Fri 9:00am–5:00pm · Sat by appointment <span style="font:500 10px ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#6f747e">hours to confirm</span></div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Who to contact" style="background:#f4f5f6;padding:0 clamp(20px,5.5vw,80px) clamp(48px,6vw,80px)">
+  <div data-stagger style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+    <sc-for list="{{ channels }}" as="c" hint-placeholder-count="4">
+      <a data-tile href="{{ c.href }}" style="display:grid;gap:8px;align-content:start;padding:24px;border-radius:20px;background:#fff;border:1px solid rgba(17,19,24,.08);color:#111318;text-decoration:none">
+        <div data-k style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#d5273a">{{ c.k }}</div>
+        <div style="font-size:18px;font-weight:800;letter-spacing:-.01em;word-break:break-word">{{ c.v }}</div>
+        <div data-sub style="font-size:13px;color:#6f747e;line-height:1.5">{{ c.sub }}</div>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="Form and map" style="background:#fff;padding:clamp(72px,9vw,128px) clamp(20px,5.5vw,80px)">
+  <div data-cols2 style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,96px);align-items:start">
+    <div style="display:grid;gap:28px">
+      <div style="display:grid;gap:14px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#d5273a">Send a message</div>
+        <h2 data-reveal="lines" style="margin:0;font-size:clamp(1.8rem,1.1rem + 2.2vw,3rem);font-weight:800;letter-spacing:-.025em;line-height:1.04"><span><span>Tell us what you need.</span></span></h2>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#474b54;max-width:50ch">Pick a topic so it lands with the right person. We reply within one business day.</p>
+      </div>
+      <sc-if value="{{ idle }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submit }}" style="display:grid;gap:14px">
+          <div role="radiogroup" aria-label="Topic" style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ topics }}" as="t" hint-placeholder-count="5"><button type="button" role="radio" aria-checked="{{ t.on }}" onClick="{{ t.onClick }}" style="height:44px;padding:0 16px;border-radius:100px;border:1px solid rgba(17,19,24,.16);cursor:pointer;font:700 13px 'Red Hat Display',system-ui,sans-serif;transition:background .3s,color .3s;background: {{ t.bg }};color: {{ t.fg }}">{{ t.label }}</button></sc-for>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px">
+            <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6f747e">Full name<input name="name" required autocomplete="name" style="height:52px;border:1px solid #d6d9df;border-radius:12px;padding:0 16px;font:500 15px 'Red Hat Display',system-ui,sans-serif;color:#111318;outline:none" style-focus="border-color:#111318"></label>
+            <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6f747e">Phone<input name="phone" type="tel" autocomplete="tel" style="height:52px;border:1px solid #d6d9df;border-radius:12px;padding:0 16px;font:500 15px 'Red Hat Display',system-ui,sans-serif;color:#111318;outline:none" style-focus="border-color:#111318"></label>
+          </div>
+          <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6f747e">Email<input name="email" type="email" required autocomplete="email" style="height:52px;border:1px solid #d6d9df;border-radius:12px;padding:0 16px;font:500 15px 'Red Hat Display',system-ui,sans-serif;color:#111318;outline:none" style-focus="border-color:#111318"></label>
+          <label style="display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6f747e">Message<textarea name="message" required rows="5" placeholder="{{ placeholder }}" style="border:1px solid #d6d9df;border-radius:12px;padding:12px 16px;font:500 15px/1.5 'Red Hat Display',system-ui,sans-serif;color:#111318;outline:none;resize:vertical" style-focus="border-color:#111318"></textarea></label>
+          <label style="display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.5;color:#474b54"><input type="checkbox" required style="margin-top:3px;accent-color:#d5273a;width:18px;height:18px;flex:none">I agree to be contacted and have read the <a href="https://redrocketrealty.com.au/privacy-policy/" target="_blank" rel="noopener" style="color:#111318;font-weight:700">Privacy Policy</a>.</label>
+          <button type="submit" style="height:56px;padding:0 28px;border-radius:100px;border:0;background:#d5273a;color:#fff;cursor:pointer;font:700 14px 'Red Hat Display',system-ui,sans-serif;justify-self:start;transition:background .3s" style-hover="background:#b81e2f">Send message</button>
+        </form>
+      </sc-if>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;gap:16px;padding:32px;border-radius:24px;background:#f4f5f6;align-content:start">
+          <div style="width:52px;height:52px;border-radius:50%;background:#d5273a;color:#fff;display:grid;place-items:center;font-size:20px;font-weight:800">✓</div>
+          <div style="font-size:22px;font-weight:800;letter-spacing:-.01em">Message sent.</div>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:#474b54">Thanks, {{ name }}. Your {{ topicLower }} enquiry is with {{ owner }}.</p>
+          <button type="button" onClick="{{ reset }}" style="height:44px;padding:0 18px;border-radius:100px;border:1px solid rgba(17,19,24,.2);background:transparent;color:#111318;cursor:pointer;font:700 13px 'Red Hat Display',system-ui,sans-serif;justify-self:start">Send another</button>
+        </div>
+      </sc-if>
+    </div>
+    <div data-sticky style="position:sticky;top:120px;display:grid;gap:16px">
+      <div data-reveal style="position:relative;aspect-ratio:4/3;border-radius:20px;overflow:hidden;background:#dcdfe4">
+        <iframe title="Map · 67 Springwood Road, Springwood" src="https://www.openstreetmap.org/export/embed.html?bbox=153.1245%2C-27.6195%2C153.1425%2C-27.6075&amp;layer=mapnik&amp;marker=-27.6135%2C153.1335" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(1) contrast(1.05)"></iframe>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=67+Springwood+Road+Springwood+QLD+4127" target="_blank" rel="noopener" style="position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:100px;background:#111318;color:#fff;text-decoration:none;font-size:13px;font-weight:700" style-hover="background:#d5273a">Get directions →</a>
+      </div>
+      <div data-reveal style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:24px;border-radius:20px;background:#f4f5f6">
+        <div style="display:grid;gap:4px"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6f747e">Office</div><div style="font-size:15px;font-weight:700;line-height:1.45">67 Springwood Road<br>Springwood QLD 4127</div></div>
+        <div style="display:grid;gap:4px"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6f747e">Parking</div><div style="font-size:15px;font-weight:700;line-height:1.45">On site and street parking <span style="font:500 10px ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#6f747e">to confirm</span></div></div>
+        <div style="display:grid;gap:4px"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6f747e">Follow</div><div style="display:flex;gap:8px"><a href="https://www.facebook.com/RedRocketRealty/" target="_blank" rel="noopener" aria-label="Facebook" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(17,19,24,.2);color:#111318;text-decoration:none;display:grid;place-items:center;font-size:12px;font-weight:800" style-hover="background:#111318;color:#fff">f</a><a href="https://www.instagram.com/redrocketrealty/" target="_blank" rel="noopener" aria-label="Instagram" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(17,19,24,.2);color:#111318;text-decoration:none;display:grid;place-items:center;font-size:12px;font-weight:800" style-hover="background:#111318;color:#fff">ig</a><a href="https://au.linkedin.com/company/red-rocket-realty" target="_blank" rel="noopener" aria-label="LinkedIn" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(17,19,24,.2);color:#111318;text-decoration:none;display:grid;place-items:center;font-size:12px;font-weight:800" style-hover="background:#111318;color:#fff">in</a></div></div>
+        <div style="display:grid;gap:4px"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6f747e">Reviews</div><a href="https://www.ratemyagent.com.au/real-estate-agency/red-rocket-realty-an168/sales/reviews" target="_blank" rel="noopener" style="font-size:15px;font-weight:700;color:#111318;text-decoration:none" style-hover="color:#d5273a">4.9 ★ · 485 on RateMyAgent ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<dc-import name="RRFooter" hint-size="100%,900px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { topic: 'Selling', sent: false, name: '' };
+  componentDidMount() {
+    const q = new URLSearchParams(window.location.search); if (q.get('topic')) this.setState({ topic: q.get('topic') });
+    this.io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.setAttribute('data-in', '1'); this.io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px', threshold: 0.02 });
+    this.scan = () => document.querySelectorAll('[data-reveal]:not([data-obs]),[data-stagger]:not([data-obs])').forEach(el => { el.setAttribute('data-obs', '1'); this.io.observe(el); });
+    this.scan();
+    this.revealFallback = () => document.querySelectorAll('[data-reveal]:not([data-in]),[data-stagger]:not([data-in])').forEach(el => { const r = el.getBoundingClientRect(); if (r.top < window.innerHeight * 0.96 && r.bottom > 0) el.setAttribute('data-in', '1'); });
+    window.addEventListener('scroll', this.revealFallback, { passive: true }); window.addEventListener('resize', this.revealFallback);
+    this.fbTimer = setInterval(this.revealFallback, 600);
+    this.mo = new MutationObserver(() => { clearTimeout(this.st); this.st = setTimeout(this.scan, 120); });
+    this.mo.observe(document.body, { childList: true, subtree: true });
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this.revealFallback); window.removeEventListener('resize', this.revealFallback); clearInterval(this.fbTimer); if (this.io) this.io.disconnect(); if (this.mo) this.mo.disconnect(); }
+  renderVals() {
+    const s = this.state;
+    const owners = { Selling: 'the sales team', Buying: 'the sales team', Renting: 'the leasing team', 'Property management': 'the property management team', Maintenance: 'your property manager', Other: 'reception' };
+    const channels = [
+      { k: 'Sales', v: 'sales@redrocketrealty.com.au', sub: 'Buying, selling, appraisals and offers.', href: 'mailto:sales@redrocketrealty.com.au' },
+      { k: 'Leasing', v: '0439 752 326', sub: 'Bhavani Vakity · inspections and applications.', href: 'tel:+61439752326' },
+      { k: 'Inspections', v: 'inspections@redrocketrealty.com.au', sub: 'Open homes, private viewings, routine inspections.', href: 'mailto:inspections@redrocketrealty.com.au' },
+      { k: 'Maintenance', v: 'Log a request', sub: 'Tenants: report repairs online, 24 hours.', href: 'Red%20Rocket%20Rent.dc.html#maintenance' },
+    ];
+    const topics = Object.keys(owners).map(t => ({ label: t, on: s.topic === t, bg: s.topic === t ? '#111318' : '#fff', fg: s.topic === t ? '#fff' : '#111318', onClick: () => this.setState({ topic: t }) }));
+    const ph = { Selling: 'e.g. Thinking of selling our 4-bed in Rochedale South next year.', Buying: 'e.g. Looking for a 3-bed house in Underwood or Springwood under $900k.', Renting: 'e.g. Can I arrange a private inspection for the Shailer Park rental?', 'Property management': 'e.g. Considering changing agents for my Woodridge unit.', Maintenance: 'e.g. Hot water system not heating at ...', Other: 'How can we help?' };
+    return {
+      channels, topics, placeholder: ph[s.topic] || '', idle: !s.sent, sent: s.sent, name: s.name, topicLower: s.topic.toLowerCase(), owner: owners[s.topic],
+      submit: e => { e.preventDefault(); this.setState({ sent: true, name: (new FormData(e.target).get('name') || 'there').toString().split(' ')[0] }); },
+      reset: () => this.setState({ sent: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

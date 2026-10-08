@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800;900&family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
+<style>
+@media (max-width:720px){[data-rr-footer-end]{padding-bottom:96px!important}}
+[data-ft-word]{transform:translateY(34%);transition:transform 1.4s cubic-bezier(.22,.61,.36,1)}
+[data-ft-word][data-in]{transform:translateY(12%)}
+@media (max-width:760px){[data-ft-band]{grid-template-columns:1fr!important}[data-ft-legal]{flex-direction:column!important;align-items:flex-start!important}}
+@media (prefers-reduced-motion:reduce){[data-ft-word]{transition:none;transform:translateY(12%)}}
+</style>
+</helmet>
+<footer style="background:#111318;color:#fff;font-family:'Red Hat Display',system-ui,sans-serif;position:relative;overflow:hidden">
+  <div data-ft-band style="display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:end;padding:clamp(72px,9vw,128px) clamp(20px,5.5vw,80px) clamp(48px,6vw,80px);border-bottom:1px solid rgba(255,255,255,.1)">
+    <div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#d5273a;margin-bottom:18px">Logan City and surrounding areas</div>
+      <h2 style="margin:0;font-size:clamp(2.2rem,1.2rem + 3.6vw,4.6rem);font-weight:800;letter-spacing:-.025em;line-height:1;text-wrap:balance;max-width:14ch">Buying, selling or renting in Logan? Contact us now!</h2>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start">
+      <a href="Red%20Rocket%20Contact.dc.html" style="display:inline-flex;align-items:center;gap:14px;height:60px;padding:0 10px 0 28px;border-radius:100px;background:#fff;color:#111318;text-decoration:none;font-size:15px;font-weight:700;transition:background .3s,color .3s" style-hover="background:#d5273a;color:#fff"><span>Contact us</span><span aria-hidden="true" style="width:40px;height:40px;border-radius:50%;background:#d5273a;color:#fff;display:grid;place-items:center">→</span></a>
+      <a href="tel:+61733404200" style="display:inline-flex;align-items:center;height:60px;padding:0 28px;border-radius:100px;border:1px solid rgba(255,255,255,.26);color:#fff;text-decoration:none;font-size:15px;font-weight:700;transition:border-color .3s" style-hover="border-color:#fff">Call 07 3340 4200</a>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:40px 32px;padding:clamp(48px,6vw,80px) clamp(20px,5.5vw,80px)">
+    <div style="grid-column:span 1;display:grid;gap:20px;align-content:start;min-width:0">
+      <a href="Red%20Rocket%20Home.dc.html" aria-label="Red Rocket Realty home" style="display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none">
+        <img src="{{ logoSrc }}" alt="Red Rocket Realty" style="width:auto;display:block;height: {{ logoH }}">
+      </a>
+      <p style="margin:0;color:#c9ccd3;font-size:15px;line-height:1.55;max-width:30ch">Committed to the property needs of Logan residents. The local experts you can rely on and trust.</p>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8a8f99;margin-top:8px">Springwood | Underwood Real Estate</div>
+    </div>
+    <nav aria-label="Buy" style="display:grid;gap:10px;align-content:start">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8a8f99;margin-bottom:6px">Buy</div>
+      <a href="Red%20Rocket%20Listings.dc.html?mode=buy" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Properties for sale</a>
+      <a href="Red%20Rocket%20Listings.dc.html?mode=land" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Land for sale</a>
+      <a href="Red%20Rocket%20Open%20Homes.dc.html" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Open homes</a>
+      <a href="Red%20Rocket%20Guides.dc.html?guide=buyer" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Buyer guide</a>
+      <a href="Red%20Rocket%20Guides.dc.html?guide=buyer#offer" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Make an offer</a>
+      <a href="Red%20Rocket%20Listings.dc.html?mode=buy#alerts" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Property alerts</a>
+    </nav>
+    <nav aria-label="Sell and rent" style="display:grid;gap:10px;align-content:start">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8a8f99;margin-bottom:6px">Sell</div>
+      <a href="Red%20Rocket%20Sell.dc.html" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Sell with Red Rocket</a>
+      <a href="Red%20Rocket%20Appraisal.dc.html" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Request an appraisal</a>
+      <a href="Red%20Rocket%20Listings.dc.html?mode=sold" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Recently sold</a>
+      <a href="Red%20Rocket%20Guides.dc.html?guide=seller" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Seller guide</a>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8a8f99;margin:18px 0 6px">Rent</div>
+      <a href="Red%20Rocket%20Listings.dc.html?mode=rent" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Properties for rent</a>
+      <a href="Red%20Rocket%20Rent.dc.html#apply" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Apply for a property</a>
+      <a href="Red%20Rocket%20Rent.dc.html#maintenance" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Maintenance request</a>
+    </nav>
+    <nav aria-label="About" style="display:grid;gap:10px;align-content:start">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8a8f99;margin-bottom:6px">Property management</div>
+      <a href="Red%20Rocket%20Property%20Management.dc.html" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">For landlords</a>
+      <a href="Red%20Rocket%20Property%20Management.dc.html#rental-appraisal" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Rental appraisal</a>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8a8f99;margin:18px 0 6px">About</div>
+      <a href="Red%20Rocket%20About.dc.html" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Our story</a>
+      <a href="Red%20Rocket%20Team.dc.html" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Our team</a>
+      <a href="Red%20Rocket%20About.dc.html#reviews" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">Reviews</a>
+    </nav>
+    <div style="display:grid;gap:10px;align-content:start;min-width:0">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8a8f99;margin-bottom:6px">Office</div>
+      <div style="color:#fff;font-size:15px;font-weight:700;line-height:1.5">67 Springwood Road<br>Springwood QLD 4127</div>
+      <a href="tel:+61733404200" style="color:#fff;text-decoration:none;font-size:15px;font-weight:700" style-hover="color:#d5273a">07 3340 4200</a>
+      <a href="mailto:sales@redrocketrealty.com.au" style="color:#c9ccd3;text-decoration:none;font-size:14px;word-break:break-all" style-hover="color:#fff">sales@redrocketrealty.com.au</a>
+      <a href="mailto:inspections@redrocketrealty.com.au" style="color:#c9ccd3;text-decoration:none;font-size:14px;word-break:break-all" style-hover="color:#fff">inspections@redrocketrealty.com.au</a>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8a8f99;margin:18px 0 6px">Property alerts</div>
+      <form onSubmit="{{ noop }}" style="display:flex;align-items:center;height:52px;border-radius:100px;border:1px solid rgba(255,255,255,.22);padding:0 6px 0 18px;gap:8px">
+        <label for="ft-alert" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email for property alerts</label>
+        <input id="ft-alert" type="email" placeholder="Email address" style="flex:1;min-width:0;background:transparent;border:0;color:#fff;font:500 14px 'Red Hat Display',system-ui,sans-serif;outline:none">
+        <button type="submit" aria-label="Subscribe" style="width:40px;height:40px;border-radius:50%;border:0;background:#d5273a;color:#fff;cursor:pointer;display:grid;place-items:center;font-size:16px;transition:background .3s" style-hover="background:#b81e2f">→</button>
+      </form>
+    </div>
+  </div>
+  <div data-ft-legal data-rr-footer-end style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:24px clamp(20px,5.5vw,80px) 28px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:#8a8f99;position:relative;z-index:1">
+    <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:center">
+      <span>© 2026 Red Rocket Realty. All rights reserved.</span>
+      <a href="https://redrocketrealty.com.au/privacy-policy/" target="_blank" rel="noopener" style="color:#c9ccd3;text-decoration:none;font-weight:700" style-hover="color:#fff">Privacy Policy</a>
+      <a href="https://redrocketrealty.com.au/terms-of-use/" target="_blank" rel="noopener" style="color:#c9ccd3;text-decoration:none;font-weight:700" style-hover="color:#fff">Terms of Use</a>
+    </div>
+    <div style="display:flex;gap:8px">
+      <a href="https://www.facebook.com/RedRocketRealty/" target="_blank" rel="noopener" aria-label="Facebook" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.22);color:#fff;text-decoration:none;display:grid;place-items:center;font-size:12px;font-weight:800;transition:border-color .3s" style-hover="border-color:#fff">f</a>
+      <a href="https://www.instagram.com/redrocketrealty/" target="_blank" rel="noopener" aria-label="Instagram" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.22);color:#fff;text-decoration:none;display:grid;place-items:center;font-size:12px;font-weight:800;transition:border-color .3s" style-hover="border-color:#fff">ig</a>
+      <a href="https://au.linkedin.com/company/red-rocket-realty" target="_blank" rel="noopener" aria-label="LinkedIn" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.22);color:#fff;text-decoration:none;display:grid;place-items:center;font-size:12px;font-weight:800;transition:border-color .3s" style-hover="border-color:#fff">in</a>
+    </div>
+  </div>
+  <div aria-hidden="true" style="height:clamp(90px,15vw,240px);overflow:hidden;position:relative;margin-top:-10px">
+    <div data-ft-word data-reveal="word" style="position:absolute;left:clamp(20px,5.5vw,80px);right:0;bottom:0;font-size:clamp(5rem,17.5vw,21rem);font-weight:900;letter-spacing:-.04em;line-height:.78;color:rgba(255,255,255,.07);white-space:nowrap">RED ROCKET</div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { logo: null };
+  componentDidMount() { import('./rr-data.js').then(m => { this.setState({ logo: m.getLogo() }); this.onLogo = () => this.setState({ logo: m.getLogo() }); window.addEventListener('rr-logo-change', this.onLogo); window.addEventListener('storage', this.onLogo); }).catch(() => {}); }
+  componentWillUnmount() { window.removeEventListener('rr-logo-change', this.onLogo); window.removeEventListener('storage', this.onLogo); }
+  renderVals() { const l = this.state.logo || { dark: 'brand/logo2-horizontal-dark.png?v=5', footerH: 64 }; return { noop: (e) => { e.preventDefault(); }, logoSrc: l.dark, logoH: l.footerH + 'px' }; }
+}
+</script>
+</body>
+</html>

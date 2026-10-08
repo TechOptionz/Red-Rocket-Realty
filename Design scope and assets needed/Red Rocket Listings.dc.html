@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#f4f5f6;color:#111318;font-family:'Red Hat Display',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#d5273a}a:hover{color:#b81e2f}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #d5273a;outline-offset:3px}
+select option{color:#111318}
+[data-reveal]{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1)}
+[data-reveal][data-in]{opacity:1;transform:none}
+[data-reveal="lines"]{opacity:1;transform:none;transition:none}
+[data-reveal="lines"]>span{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+[data-reveal="lines"]>span>span{display:block;transform:translateY(112%);transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+[data-reveal="lines"][data-in]>span>span{transform:none}
+[data-zoom]{transition:transform .7s cubic-bezier(.22,.61,.36,1)}
+[data-arrow]{transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+@media (hover:hover) and (pointer:fine){[data-card]:hover [data-zoom]{transform:scale(1.06)}[data-card]:hover [data-arrow]{transform:translateX(5px)}}
+@media (max-width:980px){[data-sticky]{position:static!important}}
+@media (max-width:720px){[data-stack-m]{flex-direction:column!important;align-items:stretch!important}[data-filters] [data-field]{border-right:0!important;border-bottom:1px solid #e3e5e9}[data-hide-m]{display:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}[data-reveal],[data-reveal]>span>span{opacity:1!important;transform:none!important}}
+</style>
+</helmet>
+<dc-import name="RRHeader" solid="{{ true }}" hint-size="100%,100%" data-rr-header-mount style="position:fixed;top:0;left:0;right:0;height:0;z-index:90;pointer-events:none"></dc-import>
+
+<section data-screen-label="Listings header" style="background:#f4f5f6;padding:150px clamp(20px,5.5vw,80px) 0">
+  <nav aria-label="Breadcrumb" style="display:flex;gap:10px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6f747e;margin-bottom:28px"><a href="Red%20Rocket%20Home.dc.html" style="color:#6f747e;text-decoration:none" style-hover="color:#111318">Home</a><span aria-hidden="true">/</span><span style="color:#111318">{{ modeKicker }}</span></nav>
+  <div data-stack-m style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+    <div style="display:grid;gap:16px">
+      <h1 data-reveal="lines" style="margin:0;font-size:clamp(2.4rem,1.2rem + 4vw,5.2rem);font-weight:800;letter-spacing:-.03em;line-height:.98"><span><span>{{ pageTitle }}</span></span></h1>
+      <div style="font-size:16px;color:#474b54;font-weight:500"><span style="font-weight:800;color:#111318">{{ count }}</span> {{ countNoun }} · Logan City and surrounding areas</div>
+    </div>
+    <div role="tablist" aria-label="Listing type" style="display:flex;gap:4px;background:#fff;border-radius:100px;padding:4px;border:1px solid rgba(17,19,24,.1)">
+      <sc-for list="{{ modes }}" as="m" hint-placeholder-count="4">
+        <button type="button" role="tab" onClick="{{ m.onClick }}" style="height:44px;padding:0 18px;border-radius:100px;border:0;cursor:pointer;font:700 12px 'Red Hat Display',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;transition:background .3s,color .3s;background: {{ m.bg }};color: {{ m.fg }}">{{ m.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+  <form data-filters onSubmit="{{ applyFilters }}" style="margin-top:40px;display:flex;flex-wrap:wrap;align-items:stretch;background:#fff;border-radius:22px;padding:6px;border:1px solid rgba(17,19,24,.08);box-shadow:0 20px 60px -40px rgba(17,19,24,.3)">
+    <label data-field style="flex:1 1 160px;padding:8px 16px;border-right:1px solid #e3e5e9;display:grid;gap:2px;min-width:0"><span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6f747e">Suburb</span>
+      <select value="{{ suburb }}" onChange="{{ setSuburb }}" style="appearance:none;-webkit-appearance:none;border:0;background:transparent;font:700 15px 'Red Hat Display',system-ui,sans-serif;color:#111318;width:100%;outline:none;cursor:pointer;padding:0"><option value="">Any suburb</option><sc-for list="{{ suburbOptions }}" as="o" hint-placeholder-count="0"><option value="{{ o }}">{{ o }}</option></sc-for></select></label>
+    <label data-field style="flex:1 1 140px;padding:8px 16px;border-right:1px solid #e3e5e9;display:grid;gap:2px;min-width:0"><span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6f747e">Property type</span>
+      <select value="{{ ptype }}" onChange="{{ setPtype }}" style="appearance:none;-webkit-appearance:none;border:0;background:transparent;font:700 15px 'Red Hat Display',system-ui,sans-serif;color:#111318;width:100%;outline:none;cursor:pointer;padding:0"><option value="">Any type</option><sc-for list="{{ typeOptions }}" as="o" hint-placeholder-count="0"><option value="{{ o }}">{{ o }}</option></sc-for></select></label>
+    <label data-field style="flex:1 1 120px;padding:8px 16px;border-right:1px solid #e3e5e9;display:grid;gap:2px;min-width:0"><span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6f747e">{{ priceFromLabel }}</span>
+      <select value="{{ pfrom }}" onChange="{{ setPfrom }}" style="appearance:none;-webkit-appearance:none;border:0;background:transparent;font:700 15px 'Red Hat Display',system-ui,sans-serif;color:#111318;width:100%;outline:none;cursor:pointer;padding:0"><option value="">Any</option><sc-for list="{{ priceOptions }}" as="o" hint-placeholder-count="0"><option value="{{ o.v }}">{{ o.label }}</option></sc-for></select></label>
+    <label data-field style="flex:1 1 120px;padding:8px 16px;border-right:1px solid #e3e5e9;display:grid;gap:2px;min-width:0"><span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6f747e">{{ priceToLabel }}</span>
+      <select value="{{ pto }}" onChange="{{ setPto }}" style="appearance:none;-webkit-appearance:none;border:0;background:transparent;font:700 15px 'Red Hat Display',system-ui,sans-serif;color:#111318;width:100%;outline:none;cursor:pointer;padding:0"><option value="">Any</option><sc-for list="{{ priceOptions }}" as="o" hint-placeholder-count="0"><option value="{{ o.v }}">{{ o.label }}</option></sc-for></select></label>
+    <label data-field style="flex:1 1 110px;padding:8px 16px;border-right:1px solid #e3e5e9;display:grid;gap:2px;min-width:0"><span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6f747e">Beds min</span>
+      <select value="{{ bmin }}" onChange="{{ setBmin }}" style="appearance:none;-webkit-appearance:none;border:0;background:transparent;font:700 15px 'Red Hat Display',system-ui,sans-serif;color:#111318;width:100%;outline:none;cursor:pointer;padding:0"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option></select></label>
+    <label data-field style="flex:1 1 110px;padding:8px 16px;border-right:1px solid #e3e5e9;display:grid;gap:2px;min-width:0"><span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6f747e">Beds max</span>
+      <select value="{{ bmax }}" onChange="{{ setBmax }}" style="appearance:none;-webkit-appearance:none;border:0;background:transparent;font:700 15px 'Red Hat Display',system-ui,sans-serif;color:#111318;width:100%;outline:none;cursor:pointer;padding:0"><option value="">Any</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+    <label data-field style="flex:1 1 110px;padding:8px 16px;display:grid;gap:2px;min-width:0"><span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6f747e">Bathrooms</span>
+      <select value="{{ baths }}" onChange="{{ setBaths }}" style="appearance:none;-webkit-appearance:none;border:0;background:transparent;font:700 15px 'Red Hat Display',system-ui,sans-serif;color:#111318;width:100%;outline:none;cursor:pointer;padding:0"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option></select></label>
+    <div style="flex:1 1 100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:12px 10px 6px 16px;border-top:1px solid #e3e5e9;margin-top:6px">
+      <div style="display:flex;flex-wrap:wrap;gap:20px;font-size:13px;font-weight:700;color:#474b54">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" style="accent-color:#d5273a;width:16px;height:16px">Air conditioning</label>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" style="accent-color:#d5273a;width:16px;height:16px">Pool</label>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" style="accent-color:#d5273a;width:16px;height:16px">Security</label>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button type="button" onClick="{{ clearFilters }}" style="height:44px;padding:0 16px;border-radius:100px;border:0;background:transparent;color:#6f747e;cursor:pointer;font:700 13px 'Red Hat Display',system-ui,sans-serif" style-hover="color:#111318">Clear</button>
+        <button type="submit" style="height:48px;padding:0 24px;border-radius:100px;border:0;background:#d5273a;color:#fff;cursor:pointer;font:700 14px 'Red Hat Display',system-ui,sans-serif;transition:background .3s" style-hover="background:#b81e2f">Search</button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<section data-screen-label="Results" style="background:#f4f5f6;padding:40px clamp(20px,5.5vw,80px) clamp(72px,9vw,128px)">
+  <div data-stack-m style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:24px;border-bottom:1px solid rgba(17,19,24,.12);margin-bottom:40px">
+    <div style="font-size:14px;color:#6f747e;font-weight:500">Showing <span style="color:#111318;font-weight:800">{{ shown }}</span> of {{ count }} · newest first unless sorted · search is shareable from the page address</div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <label style="display:flex;align-items:center;gap:10px;height:44px;padding:0 16px;border-radius:100px;border:1px solid rgba(17,19,24,.16);font-size:13px;font-weight:700;color:#6f747e;background:#fff">Sort
+        <select value="{{ sort }}" onChange="{{ setSort }}" style="appearance:none;-webkit-appearance:none;border:0;background:transparent;font:700 13px 'Red Hat Display',system-ui,sans-serif;color:#111318;outline:none;cursor:pointer;padding:0">
+          <sc-for list="{{ sortOptions }}" as="o" hint-placeholder-count="2"><option value="{{ o.v }}">{{ o.label }}</option></sc-for>
+        </select></label>
+      <div data-hide-m role="group" aria-label="View" style="display:flex;gap:2px;background:#fff;border-radius:100px;padding:3px;border:1px solid rgba(17,19,24,.16)">
+        <button type="button" aria-label="Grid view" onClick="{{ setGrid }}" style="height:38px;padding:0 14px;border-radius:100px;border:0;cursor:pointer;font:700 12px 'Red Hat Display',system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;transition:background .3s,color .3s;background: {{ gridBg }};color: {{ gridFg }}">Grid</button>
+        <button type="button" aria-label="List view" onClick="{{ setList }}" style="height:38px;padding:0 14px;border-radius:100px;border:0;cursor:pointer;font:700 12px 'Red Hat Display',system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;transition:background .3s,color .3s;background: {{ listBg }};color: {{ listFg }}">List</button>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+    <div style="display:grid;gap:48px 32px;grid-template-columns: {{ gridCols }}">
+      <sc-for list="{{ results }}" as="p" hint-placeholder-count="6">
+        <a data-card data-reveal href="{{ p.href }}" style="display:flex;gap:20px;color:#111318;text-decoration:none;min-width:0;flex-direction: {{ cardDir }}">
+          <div style="position:relative;flex: {{ imgFlex }};aspect-ratio:3/2;border-radius:8px;overflow:hidden;background:#2b2f37;min-width:0">
+            <div data-zoom style="position:absolute;inset:0;background-color: {{ p.shade }};background-image: {{ p.bgImage }};background-size:cover;background-position:center;display:grid;place-items:center;text-align:center;font:500 11px/1.8 ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);padding:20px"><span>{{ p.imgTag }}</span><br><span>{{ p.img }}</span></div>
+            <sc-if value="{{ p.hasStatus }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:0;left:0;padding:9px 12px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:0 0 8px 0;background: {{ p.tagBg }};color: {{ p.tagFg }}">{{ p.status }}</span></sc-if>
+            <span data-arrow aria-hidden="true" style="position:absolute;right:14px;bottom:14px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.92);color:#111318;display:grid;place-items:center;font-size:16px">→</span>
+          </div>
+          <div style="display:grid;gap:4px;align-content:center;flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:800;letter-spacing:-.01em">{{ p.priceText }}</div>
+            <div style="font-size:16px;font-weight:500;color:#474b54">{{ p.address }}, {{ p.suburb }}</div>
+            <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6f747e;margin-top:4px">{{ p.specs }}</div>
+            <sc-if value="{{ p.hasMeta }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;font-weight:700;color:#d5273a;margin-top:2px">{{ p.meta }}</div></sc-if>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </sc-if>
+  <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:clamp(48px,8vw,96px) 0;display:grid;gap:20px;max-width:560px">
+      <div style="font-size:clamp(1.6rem,1.2rem + 1.6vw,2.6rem);font-weight:800;letter-spacing:-.02em;line-height:1.05">Nothing matches that search yet.</div>
+      <p style="margin:0;font-size:16px;line-height:1.55;color:#474b54">Widen the price range or suburb, or set a property alert and we'll email you when a matching listing launches.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px"><button type="button" onClick="{{ clearFilters }}" style="height:52px;padding:0 24px;border-radius:100px;border:0;background:#111318;color:#fff;cursor:pointer;font:700 14px 'Red Hat Display',system-ui,sans-serif" style-hover="background:#d5273a">Clear filters</button><a href="#alerts" style="display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:100px;border:1px solid rgba(17,19,24,.2);color:#111318;text-decoration:none;font-size:14px;font-weight:700" style-hover="border-color:#111318">Set a property alert</a></div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ canLoadMore }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;align-items:center;justify-content:center;gap:20px;margin-top:64px">
+      <button type="button" onClick="{{ loadMore }}" style="height:56px;padding:0 28px;border-radius:100px;border:0;background:#111318;color:#fff;cursor:pointer;font:700 14px 'Red Hat Display',system-ui,sans-serif;transition:background .3s" style-hover="background:#d5273a">Load more</button>
+      <div style="font-size:13px;font-weight:700;color:#6f747e">Page {{ page }} of {{ pages }}</div>
+    </div>
+  </sc-if>
+  <div style="margin-top:48px;font:500 11px/1.6 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#6f747e">Listing records read from redrocketrealty.com.au on 7 Oct 2026 · photos shown where the site publishes them · feature filters apply at feed level</div>
+</section>
+
+<section id="alerts" data-screen-label="Alerts band" style="scroll-margin-top:100px;background:#16181d;color:#fff;padding:clamp(56px,7vw,96px) clamp(20px,5.5vw,80px)">
+  <div data-stack-m style="display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
+    <div style="display:grid;gap:12px;max-width:640px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#d5273a">Property alerts</div>
+      <h2 style="margin:0;font-size:clamp(1.8rem,1rem + 2.4vw,3.2rem);font-weight:800;letter-spacing:-.025em;line-height:1.04">Want to be kept up to date with the latest listings?</h2>
+      <p style="margin:0;font-size:16px;line-height:1.55;color:#c9ccd3;max-width:50ch">Set your own alert preferences by suburb, bedrooms, bathrooms and price, and new listings land in your inbox first.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <a href="Red%20Rocket%20Contact.dc.html?topic=Buying" style="display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 8px 0 24px;border-radius:100px;background:#fff;color:#111318;text-decoration:none;font-size:14px;font-weight:700;transition:background .3s,color .3s" style-hover="background:#d5273a;color:#fff"><span>Subscribe now!</span><span aria-hidden="true" style="width:40px;height:40px;border-radius:50%;background:#d5273a;color:#fff;display:grid;place-items:center">→</span></a>
+      <a href="Red%20Rocket%20Appraisal.dc.html" style="display:inline-flex;align-items:center;height:56px;padding:0 24px;border-radius:100px;border:1px solid rgba(255,255,255,.26);color:#fff;text-decoration:none;font-size:14px;font-weight:700;transition:border-color .3s" style-hover="border-color:#fff">Request an appraisal</a>
+    </div>
+  </div>
+</section>
+
+<dc-import name="RRFooter" hint-size="100%,900px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { D: null, mode: 'buy', suburb: '', ptype: '', pfrom: '', pto: '', bmin: '', bmax: '', baths: '', sort: 'new', view: 'grid', limit: 6 };
+  componentDidMount() {
+    const q = new URLSearchParams(window.location.search);
+    const mode = ['buy', 'rent', 'land', 'sold'].includes(q.get('mode')) ? q.get('mode') : 'buy';
+    this.setState({ mode, suburb: q.get('suburb') || '', ptype: q.get('type') || '', pfrom: q.get('from') || '', pto: q.get('to') || '', bmin: q.get('beds') || '' });
+    import('./rr-data.js').then(m => this.setState({ D: m })).catch(e => console.warn('data', e));
+    this.io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.setAttribute('data-in', '1'); this.io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px', threshold: 0.02 });
+    this.scan = () => document.querySelectorAll('[data-reveal]:not([data-obs])').forEach(el => { el.setAttribute('data-obs', '1'); this.io.observe(el); });
+    this.scan();
+    this.revealFallback = () => document.querySelectorAll('[data-reveal]:not([data-in]),[data-stagger]:not([data-in])').forEach(el => { const r = el.getBoundingClientRect(); if (r.top < window.innerHeight * 0.96 && r.bottom > 0) el.setAttribute('data-in', '1'); });
+    window.addEventListener('scroll', this.revealFallback, { passive: true }); window.addEventListener('resize', this.revealFallback);
+    this.fbTimer = setInterval(this.revealFallback, 600);
+    this.mo = new MutationObserver(() => { clearTimeout(this.st); this.st = setTimeout(this.scan, 120); });
+    this.mo.observe(document.body, { childList: true, subtree: true });
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this.revealFallback); window.removeEventListener('resize', this.revealFallback); clearInterval(this.fbTimer); if (this.io) this.io.disconnect(); if (this.mo) this.mo.disconnect(); }
+  syncUrl() {
+    const s = this.state, q = new URLSearchParams({ mode: s.mode });
+    if (s.suburb) q.set('suburb', s.suburb); if (s.ptype) q.set('type', s.ptype); if (s.pfrom) q.set('from', s.pfrom); if (s.pto) q.set('to', s.pto); if (s.bmin) q.set('beds', s.bmin);
+    try { history.replaceState(null, '', '?' + q.toString()); } catch (e) {}
+  }
+  set(patch) { this.setState(Object.assign({ limit: 6 }, patch), () => this.syncUrl()); }
+  renderVals() {
+    const D = this.state.D, s = this.state, isRent = s.mode === 'rent';
+    const S = D ? D.SEARCH : null;
+    const titles = { buy: ['Buy', 'Properties for sale', 'properties for sale'], rent: ['Rent', 'Properties for rent', 'properties for rent'], land: ['Buy', 'Land for sale', 'blocks and packages'], sold: ['Sell', 'Recently sold', 'properties sold'] };
+    const source = D ? ({ buy: D.SALE, rent: D.RENT, land: D.LAND, sold: D.SOLD })[s.mode] : [];
+    const pf = Number(s.pfrom) || 0, pt = Number(s.pto) || Infinity;
+    let list = source.filter(p => (!s.suburb || p.suburb === s.suburb) && (!s.ptype || p.type === s.ptype)
+      && (!s.bmin || p.beds >= Number(s.bmin)) && (!s.bmax || p.beds <= Number(s.bmax)) && (!s.baths || p.baths >= Number(s.baths))
+      && (!isRent || (p.rent >= pf && p.rent <= pt)));
+    if (s.sort === 'old') list = list.slice().reverse();
+    if (s.sort === 'az') list = list.slice().sort((a, b) => a.suburb.localeCompare(b.suburb));
+    if (s.sort === 'za') list = list.slice().sort((a, b) => b.suburb.localeCompare(a.suburb));
+    if (s.sort === 'hi') list = list.slice().sort((a, b) => (b.rent || 0) - (a.rent || 0));
+    if (s.sort === 'lo') list = list.slice().sort((a, b) => (a.rent || 0) - (b.rent || 0));
+    const results = list.slice(0, s.limit).map(p => ({
+      ...D.decorate(p), href: 'Red%20Rocket%20Property.dc.html?id=' + p.id, specs: D.specs(p).join(' · '), hasStatus: !!p.status,
+      tagBg: p.status === 'Sold' ? '#d5273a' : '#fff', tagFg: p.status === 'Sold' ? '#fff' : '#d5273a',
+      priceText: isRent ? D.formatRent(p.rent) : p.price,
+      hasMeta: !!(p.inspection || p.available), meta: [p.available, p.inspection ? 'Inspection · ' + p.inspection : ''].filter(Boolean).join(' · '),
+    }));
+    const suburbOptions = S ? Array.from(new Set(source.map(p => p.suburb))).sort() : [];
+    const typeOptions = S ? Array.from(new Set(source.map(p => p.type).filter(Boolean))).sort() : [];
+    const modes = ['buy', 'rent', 'land', 'sold'].map(m => ({ label: m === 'buy' ? 'For sale' : m === 'rent' ? 'For rent' : m === 'land' ? 'Land' : 'Sold', bg: m === s.mode ? '#111318' : 'transparent', fg: m === s.mode ? '#fff' : '#111318', onClick: () => this.set({ mode: m, suburb: '', ptype: '', pfrom: '', pto: '' }) }));
+    const sortOptions = [{ v: 'new', label: 'Date · newest first' }, { v: 'old', label: 'Date · oldest first' }, { v: 'az', label: 'Suburb A–Z' }, { v: 'za', label: 'Suburb Z–A' }].concat(isRent ? [{ v: 'hi', label: 'Rent · high to low' }, { v: 'lo', label: 'Rent · low to high' }] : []);
+    const grid = s.view === 'grid';
+    return {
+      modeKicker: titles[s.mode][0], pageTitle: titles[s.mode][1], countNoun: titles[s.mode][2],
+      count: list.length, shown: Math.min(s.limit, list.length), modes, results,
+      hasResults: !D || list.length > 0, noResults: !!D && list.length === 0,
+      canLoadMore: list.length > s.limit, loadMore: () => this.setState({ limit: s.limit + 6 }),
+      page: Math.min(Math.ceil(s.limit / 6), Math.max(1, Math.ceil(list.length / 6))), pages: Math.max(1, Math.ceil(list.length / 6)),
+      suburb: s.suburb, ptype: s.ptype, pfrom: s.pfrom, pto: s.pto, bmin: s.bmin, bmax: s.bmax, baths: s.baths,
+      setSuburb: e => this.set({ suburb: e.target.value }), setPtype: e => this.set({ ptype: e.target.value }),
+      setPfrom: e => this.set({ pfrom: e.target.value }), setPto: e => this.set({ pto: e.target.value }),
+      setBmin: e => this.set({ bmin: e.target.value }), setBmax: e => this.set({ bmax: e.target.value }), setBaths: e => this.set({ baths: e.target.value }),
+      suburbOptions, typeOptions,
+      priceOptions: S ? (isRent ? S.rentPrices : S.buyPrices) : [],
+      priceFromLabel: isRent ? 'Rent from' : 'Price from', priceToLabel: isRent ? 'Rent to' : 'Price to',
+      applyFilters: e => { e.preventDefault(); this.syncUrl(); },
+      clearFilters: () => this.set({ suburb: '', ptype: '', pfrom: '', pto: '', bmin: '', bmax: '', baths: '' }),
+      sort: s.sort, sortOptions, setSort: e => this.setState({ sort: e.target.value }),
+      setGrid: () => this.setState({ view: 'grid' }), setList: () => this.setState({ view: 'list' }),
+      gridBg: grid ? '#111318' : 'transparent', gridFg: grid ? '#fff' : '#111318', listBg: grid ? 'transparent' : '#111318', listFg: grid ? '#111318' : '#fff',
+      gridCols: grid ? 'repeat(auto-fill,minmax(min(100%,320px),1fr))' : '1fr',
+      cardDir: grid ? 'column' : 'row', imgFlex: grid ? '0 0 auto' : '0 0 min(46%,520px)',
+    };
+  }
+}
+</script>
+</body>
+</html>

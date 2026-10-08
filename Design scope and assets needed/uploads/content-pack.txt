@@ -1,0 +1,2680 @@
+Red Rocket Realty — Master Content Pack
+Oct 7, 2026 · @Jawad
+How to read this pack
+This pack holds the content, functions and structure of the existing Red Rocket Realty website, separated from its visual design, for reuse in the redesign.
+Source of truth: the live site at redrocketrealty.com.au, read on the as-of date above. Each content group lists its source URL.
+Copy: headlines, labels, form fields and facts are recorded as published. Longer body copy, bios and testimonials are condensed into faithful briefs, not copied word for word; the source link beside each holds the exact wording.
+NEEDS VERIFICATION: the fact could not be confirmed on the live site or a linked public profile.
+Needs technical verification: a third-party system is visible but its vendor or configuration could not be confirmed from the page.
+Listings: individual properties are not copied, because they change. Only the data structure and functions are recorded.
+A. Business profile
+Red Rocket Realty is a Springwood agency covering sales, rentals and property management across Logan. Its founding year, award details and review count are inconsistent on the site and need client confirmation.
+Item
+What the site shows
+Status
+Source
+Business name
+Red Rocket Realty
+Verified
+Home
+Legal entity, ABN, licence number
+Not shown anywhere on the site
+NEEDS VERIFICATION
+—
+Site tagline (schema data)
+Springwood | Underwood Real Estate
+Verified
+Home page schema
+Description
+Committed to the property needs of Logan residents; positions itself as the leading agents in the area and the local experts people can rely on and trust
+Verified
+About
+Year established
+About page says "Since 1988". Advantage page says "over twenty years". Contact page says "over twenty five years"
+NEEDS VERIFICATION (three conflicting claims)
+About, Advantage, Contact
+Office address
+67 Springwood Road, Springwood QLD 4127
+Verified
+Contact
+Phone
+07 3340 4200
+Verified
+Contact
+General email
+sales@redrocketrealty.com.au
+Verified
+Contact
+Other shared emails
+info@ (marketing), inspections@ (rentals card), leasing@ (leasing officer)
+Verified
+Team, Rentals
+Opening hours
+Not displayed
+NEEDS VERIFICATION
+—
+Main market
+Logan City and surrounding areas
+Verified
+Contact
+Suburbs named in copy
+Springwood, Kingston, Marsden, Slacks Creek, Woodridge; Springwood and Underwood in metadata
+Verified
+About
+Awards claim
+"Award Winning Agency & Agent 2017-2026" with no award named
+NEEDS VERIFICATION (which awards, which years)
+Home
+Named awards
+Parnam Singh Heir: Agent of the Year 2017 and 2019 for Underwood (bio). RateMyAgent profile lists Agent of the Year 2017, 2019, 2021, 2022, 2023
+Verify on RateMyAgent before publishing
+Parnam profile, RateMyAgent
+Rating on site
+4.9 out of 5, based on 485 reviews (typed text, not a live feed)
+Out of date
+Home
+Rating on RateMyAgent
+4.9 stars, about 502 reviews on the as-of date
+Verify at build time
+RateMyAgent reviews
+Sales volume
+55 properties sold in the last 12 months, per RateMyAgent. Not stated on the site
+Verify at build time
+RateMyAgent
+Accreditations
+None displayed (no REIQ or similar marks)
+NEEDS VERIFICATION
+—
+Social media
+Facebook, Instagram, LinkedIn
+Verified
+Header and footer
+Property portal links
+None. The site does not link to realestate.com.au or Domain
+Verified absent
+—
+Finance partner
+Yellow Brick Road (Rick Thorn) on an unlinked Finance page that reads as old
+NEEDS VERIFICATION (still current?)
+Finance
+Web credit and copyright
+"Copyright © 2020 Red Rocket Realty"; web design by Mediamojo
+Verified, year stale
+Footer
+B. Brand story
+The brand story is a Logan-local, results-and-integrity positioning told in a playful rocket voice. Hard history is thin: one founding-year claim, and it conflicts with two others.
+SOURCE: About · The Red Rocket Advantage · Contact
+Factual statements
+The office is in Springwood, and the team helps people buy, sell and rent across Logan.
+The About page says the business has assisted clients "since 1988". NEEDS VERIFICATION: the Advantage page says "over twenty years" and the Contact page says "over twenty five years".
+The site names five example suburbs: Springwood, Kingston, Marsden, Slacks Creek and Woodridge.
+Leadership shown on the site: Parnam Singh Heir (Principal / Director) and Johann Castro (Director).
+A 2017 client story describes a no-upfront-marketing-cost, "no sale, no pay" arrangement. NEEDS VERIFICATION that this is still offered. Source: client story.
+Marketing statements (condensed)
+Theme
+What the site says
+Source heading
+Mission
+Committed to the property needs of Logan residents. Aims to stay the area's leading agents and trusted local experts. "We live and breathe Logan." Pairs thorough knowledge with personable service.
+Our mission
+Vision
+Help provide quality, affordable housing across Logan by listening to each client. Helping people buy, sell and rent should make the community larger and stronger, supporting local businesses and schools.
+Our vision
+Values line
+A results-focused team that provides property services with the highest level of integrity.
+About pull-quote
+Personalised care
+Every buyer, seller and renter is different, so service is tailored. The team looks after everything from paperwork to finance. Agents are locals, not just professionals.
+Committed to commitment
+Satisfaction promise
+Clients should be completely satisfied when they sign; the page points readers to Testimonials as proof.
+Committed to commitment
+Long-term relationships
+The agency says it does not believe in short-term clients, and cross-sells buying and renting to sellers and their families.
+Red Rocket Advantage
+The Red Rocket Advantage (unique selling proposition)
+This page is written for sellers and carries the headline "Blast off with Logan's leading real estate team!"
+Hands-on through the whole selling cycle: setting the right price, completing forms, negotiating terms with buyers, and guidance on title insurance.
+Directly to Your Door: local knowledge of pricing, market trends and promotion, used to connect sellers with buyers faster.
+Increase Your Property Value: varied sales techniques plus presentation advice so the home looks its best on inspection day and achieves the maximum price.
+Closing call to action: call 07 3340 4200 or email sales@redrocketrealty.com.au.
+Brand voice
+The copy leans on space puns: "Blast off", "launching off", "Don't call Houston", "mission control", and "sales results that are out of this world" (Selling page meta description). Decide during the rewrite whether a premium design keeps this voice.
+C. Contact information
+One office, one main phone line and one general email are published. Opening hours and after-hours contacts are not.
+SOURCE: Contact · Our Team · Rentals
+Item
+Detail
+Business name
+Red Rocket Realty
+Address
+67 Springwood Road, Springwood QLD 4127
+Phone
+07 3340 4200 (click-to-call in header, footer and contact page)
+General and sales email
+sales@redrocketrealty.com.au
+Rentals and inspections email
+inspections@redrocketrealty.com.au (contact card on all rental listings)
+Leasing email
+leasing@redrocketrealty.com.au
+Marketing and info email
+info@redrocketrealty.com.au
+Office hours
+Not displayed. NEEDS VERIFICATION
+Map
+Google Map with a custom red rocket pin on the office address, zoom 14, greyscale style
+Social media
+Facebook · Instagram · LinkedIn
+Emergency and maintenance
+Tenants log repairs through a Tapi chat on the Maintenance page, which offers an "Emergency" option. No emergency phone number or tradesperson list is published. NEEDS VERIFICATION
+After-hours viewings
+One rental listing says after-hours viewings are available by appointment through the rentals team on 3340 4200
+Contact page copy (condensed)
+Heading: Contact us
+Sub-heading: Speak with our friendly team of local experts today!
+Body: the agency handles buying, selling and renting in Logan City and surrounding areas, has looked after local residents for "over twenty five years" (NEEDS VERIFICATION), and promises to work hard for the best result whatever the client's goal.
+Form: Name (first, last), Email, Phone, Message. Details in section P.
+Department contacts
+The site has no department directory. Departments can only be inferred from team roles and shared mailboxes; individual mobiles and emails are in section K.
+Department
+Published route
+Sales
+sales@redrocketrealty.com.au, or each agent's mobile
+Rentals and inspections
+inspections@redrocketrealty.com.au, 07 3340 4200
+Leasing
+leasing@redrocketrealty.com.au, 0439 752 326
+Property management
+Individual property managers only (section K)
+Maintenance
+Tapi chat on the Maintenance page
+D. Current information architecture
+The live site has seven top-level menu items and 22 standing pages, plus listing, team-profile, suburb and blog templates. Two pages (Finance, Unsubscribe) are live but not in any menu.
+SOURCE: main menu on Home · page sitemap · sitemap index
+Main menu
+HOME → /
+BUYING (label only, no landing page)
+Property → /property/
+Land → /land/
+Open Homes → /open-homes/
+Tips For Buyers → /tips-for-buyers/
+Expression of interest → /expression-of-interest/
+SELLING → /selling/
+Just Sold → /sold/
+Tips For Sellers → /tips-for-sellers/
+Request an appraisal → /property-valuation/
+RENTING (label only, no landing page)
+For Rent → /rental/
+Rental Application Form → PDF download
+Maintenance → /maintenance/
+BLOG → /blog/
+ABOUT → /about/
+Our Team → /our-team/
+The Red Rocket Advantage → /the-red-rocket-advantage/
+Testimonials → /testimonials/
+CONTACT → /contact/
+Utility bar and footer
+Utility bar: Facebook, Instagram, LinkedIn icons; "Email us" → /contact/; "Call us on 07 3340 4200".
+Footer quick links: Property for sale, Land for sale, Just sold, For rent.
+Footer legal: Privacy → /privacy-policy/; Terms of Use → /terms-of-use/.
+Pages reached only from buttons or not linked at all
+Page
+URL
+How it is reached
+Subscribe (listing alerts)
+/subscribe/
+"Subscribe now!" button on Home, About, Selling
+Unsubscribe
+/unsubscribe/
+Not linked; used from alert emails
+Finance
+/finance/
+Not linked anywhere. Orphan page
+Staff directory archive
+/directory/
+Not linked; duplicate of Our Team
+Team profile
+/directory/{name}/
+From Our Team and listing agent cards (19 profiles)
+Suburb listing archive
+/suburb/{suburb}/
+Not linked; 21 auto-generated archives, listings only
+Feature archive
+/feature/{feature}/
+Not linked; 2 archives (pet friendly, gated estate)
+Blog categories
+/category/blog/, /category/news/
+From blog post bylines
+Listing detail
+/property/{address}/, /rental/{address}/, /land/{address}/
+From listing cards. Sold listings stay under /property/
+Gaps in the current structure
+No Property Management page and no landlord entry point in the menu.
+No Buy or Rent landing pages; both menu items are labels.
+The Selling page holds two buttons and no body copy.
+The Maintenance form sits under Renting, and the rental application is a PDF, not a page.
+E. Homepage content
+The homepage carries thirteen content blocks: an appraisal-led hero, a ratings strip, property search, three service prompts, latest listings, an agency intro, reviews, news, a contact band and the footer.
+SOURCE: https://redrocketrealty.com.au/
+#
+Purpose
+Content
+Call to action
+01
+Utility bar
+Social icons; "Email us"; "Call us on 07 3340 4200"
+Email → Contact page; phone → click-to-call
+02
+Hero
+Headline: "The leading real estate agents dedicated to results". Supporting line: "The local experts that you can rely on and trust."
+Single field "Property address" (required, address autocomplete) with button "What's my home worth?"
+03
+Trust strip
+"Award Winning Agency & Agent 2017-2026"; five stars; "4.9 out of 5"; "Based on 485 reviews"; "Rate My Agent"
+None. Text is static and already behind the live RateMyAgent count
+04
+Property search
+Label "Find your home". Fields: Suburb, House Category, Price From, Price To, Bedrooms Min, Bedrooms Max, Bathrooms; tick boxes Air Conditioning, Pool, Security
+"Search"
+05
+Buyer prompt
+"Interested in Buying?" Use the simple search form to find a property; filter by suburb, category, price, features and more
+"Start searching now!" → /property/
+06
+Appraisal prompt
+"Request an Appraisal". How much is your home worth? Find out its value in today's market
+"Sell your home today!" → /property-valuation/
+07
+Alerts prompt
+"Recieve Email Alerts" (typo on site). Stay up to date with information and listings; set your own alert preferences
+"Subscribe now!" → /subscribe/
+08
+Latest properties
+Four listing cards per page across five pages, newest first, with New and Home Open labels
+"View more" → /property/
+09
+Agency introduction
+Heading "About Red Rocket Realty". Committed to the property needs of Logan residents; aims to remain the leading agents and trusted local experts; "We live and breathe Logan"; combines knowledge with personable service to guide each client
+"About us" → /about/; "Meet the team" → /our-team/
+10
+Reviews
+RateMyAgent "Verified Reviews" widget
+Link to the agency's RateMyAgent reviews page
+11
+Latest news
+Three most recent blog posts with image, excerpt and date. All three date from 2017
+"View more" → /blog/
+12
+Contact band
+"Buying, selling or renting in Logan? Contact us now!" (appears on every page)
+"Contact" → /contact/
+13
+Footer
+See section S
+—
+Notes for the redesign:
+The hero's main action is the appraisal lead, not property search. Keep an appraisal path above the fold.
+Fix the "Recieve" typo and replace the typed rating with a live or regularly updated figure.
+The news block surfaces nine-year-old posts on the homepage; see section R.
+F. Buy content
+Buyer content is six services and one six-tip guide. There is no Buy landing page and no buying-process copy beyond the tips.
+Buyer services
+Service
+URL
+What it offers
+Supporting copy
+Primary action
+Form or function
+Properties for sale
+/property/
+Current houses, units and townhouses, 12 per page
+None on the page
+Open a listing; "Enquire Now"
+Search, sort, list/grid view, enquiry form
+Land for sale
+/land/
+Vacant blocks and house-and-land packages (3 listed)
+None
+Open a listing; "Enquire Now"
+Enquiry form
+Open homes
+/open-homes/
+"Current Open Homes": listings with upcoming inspection times
+None
+Click a time to add it to a calendar
+Calendar (.ics) download per inspection
+Tips for buyers
+/tips-for-buyers/
+Six buying tips
+See guide below
+Contact band only
+None
+Expression of interest
+/expression-of-interest/
+Online written offer on a property
+Sidebar prompt on listings: "Interested? Submit an expression of interest."
+"Submit"
+Offer form with typed signatures (section P)
+Listing alerts
+/subscribe/
+Email alerts matched to suburb, bedrooms, bathrooms and price
+"Want to be kept up to date with the latest information and listings?"
+"Join"
+Alert subscription with account password
+Buyer guide content (condensed from the six tips)
+SOURCE: https://redrocketrealty.com.au/tips-for-buyers/
+Decide how much you want to spend. Start from comfortable weekly repayments. Ask a bank how much you can borrow and what repayments would be, so you are qualified before you look. Over-stretching can force an early sale at a loss.
+The deposit. Banks generally look for 10% to 20%, with about 5% as genuine personal savings. A 20% deposit usually avoids lenders mortgage insurance. Lenders also assess savings pattern and job security. Family may help make up the balance.
+Choose your suburbs. Pick two or three; more makes price comparison confusing. Weigh price range, schools, shops, public transport and distance from family.
+Purchase price. Check you are paying fair market value: buy recent sales data or ask the agent for comparable sales. A fair-priced home can beat a "bargain" that needs costly renovation. Make a reasonable offer and allow for finance, building and pest inspections and settlement timing.
+Use a building and pest inspector. Arrange an inspection when you sign. Use a registered inspector and attend the last half hour to go through the report. NEEDS VERIFICATION: the tip cites the "QBSA" and a "gold card"; the Queensland regulator is now the QBCC, so this wording is out of date.
+Use a solicitor. They protect your interests, explain the contract and run searches such as title, council and main roads.
+Buyer topics checklist
+Topic
+On the current site?
+Budget and finance
+Yes: tips 1 and 2. Finance partner page exists but is unlinked and unverified (section A)
+Property research and price checking
+Yes: tips 3 and 4
+Inspections
+Building and pest only (tip 5). No guidance on attending open homes
+Expressions of interest and offers
+Form only; no explanation of the offer process
+Open homes
+Listing page only
+Step-by-step buying process
+Not present. Would be new content
+First-home buyer information
+Not present, apart from old blog posts
+Buyer calls to action in use
+"Start searching now!" · "Find your home" · "Enquire Now" · "Interested? Submit an expression of interest. Click Here" · "Subscribe now!" · "View more"
+G. Sell content
+The Selling page itself has no body copy, only two buttons. All usable seller content lives on three other pages and in four 2017 client stories.
+Seller services
+Service
+URL
+What it offers
+Supporting copy
+Primary action
+Form or function
+Selling (landing)
+/selling/
+Nothing beyond two prompts: Request an Appraisal and Receive Email Alerts
+Meta description only: "sales results that are out of this world"; Logan real estate specialists
+"Sell your home today!" → appraisal
+None
+Request an appraisal
+/property-valuation/
+Free value estimate request for selling or leasing
+"How much is my property worth?" · "Connecting you with your area expert."
+"Submit"
+Seven-step form (section J)
+Just sold
+/sold/
+Sold listings with sale prices, 10 per page over 4 pages
+Heading "Just Sold"
+"Sell your home today!" → appraisal
+Listing archive
+Tips for sellers
+/tips-for-sellers/
+Five selling tips
+See below
+Contact band only
+None
+The Red Rocket Advantage
+/the-red-rocket-advantage/
+Why sell with Red Rocket
+See section B
+Call 07 3340 4200 or email sales@
+None
+Auctioneer
+Richard Falwasser profile
+One team member holds the title "Real Estate Agent & Auctioneer". Auction is not described as a service anywhere
+—
+—
+NEEDS VERIFICATION that auctions are offered
+Why sell with Red Rocket (condensed)
+SOURCE: https://redrocketrealty.com.au/the-red-rocket-advantage/
+The team walks through the selling cycle with the owner at every step.
+Help covers pricing, paperwork, negotiating terms and title-insurance guidance.
+Agents are locals who know Logan pricing, market trends and promotion.
+Presentation advice and varied techniques aim for the maximum price.
+The relationship continues after the sale: help finding the next home, or a rental for family members.
+Seller tips (condensed)
+SOURCE: https://redrocketrealty.com.au/tips-for-sellers/
+Be sure the price is right (pricing). Overpricing scares buyers off. Research local sales: what sold, for how much and how long it took, to find true market value.
+Book an inspection (preparation). An early inspection shows likely repairs, so the seller chooses who does the work and negotiates the cost.
+Cleaning for cash (presentation). Touch up paint, tidy gardens, fix cracked windows, polish and scrub. A little work lifts the price.
+Premium promotion (marketing). Use several channels for fast exposure: high-resolution photos inside and out, professional signage, open homes and printed brochures.
+Bring out the best in your property (presentation). Accentuate unique features and create a feel visitors remember. The seller is selling a dream, not just a property.
+Proof points from client stories (2017, condensed)
+Story
+Claim made by the client
+Source
+Colin, Underwood
+Sold within a week for nearly $20,000 over asking; valued local knowledge and a non-pushy price discussion
+Absolutely Blown Away
+Peter and Denise, Underwood
+Listed at $479,000, sold at $487,000; liked the speed, the marketing quality and paying nothing upfront
+Talks the Talk, And Walks the Walk
+Gary, Underwood
+Found private treaty far less stressful than a previous auction; kept updated throughout a hard sale
+Selling by Auction… Never Again
+These are nine years old and quote 2017 prices. Treat as archive material unless the clients re-approve.
+Topic coverage
+Topic
+On the current site?
+Why sell with Red Rocket
+Yes, Advantage page
+Seller process, step by step
+Not present. Only implied in the Advantage copy
+Seller tips
+Yes, five tips
+Marketing information
+One tip only. No marketing packages, portals or fees described
+Presentation advice
+Yes, tips 3 and 5
+Pricing advice
+Yes, tip 1
+Negotiation
+Mentioned as a skill in bios and reviews; no dedicated copy
+Selling strategy and method of sale
+Not present
+Appraisal
+Yes, form only
+Suggested future Sell page content structure
+Why sell with Red Rocket (Advantage copy, rewritten)
+Results: live rating, recent sold listings
+How the sale works (new copy needed)
+Seller tips (existing five)
+Meet the sales team
+Appraisal form
+Seller calls to action in use
+"What's my home worth?" · "Request an Appraisal" · "Sell your home today!" · "Take off with our team – call 07 3340 4200 or email us today!"
+H. Rent content
+Tenant content is functional, with no written guidance: rental listings, a downloadable application form, a maintenance chat and email alerts. There are no tenant FAQs or resources.
+Tenant services
+Service
+URL
+What it offers
+Supporting copy
+Primary action
+Form or system
+Properties for rent
+/rental/
+Current rentals (about a dozen on the as-of date) with weekly rent, availability date and inspection times
+None on the page
+Open a listing; "Enquire Now"
+Search (Rent tab), sort, enquiry form
+Rental application
+PDF download
+Queensland RTA "Rental application (Form 22)", 8 pages, with the Red Rocket logo
+None. Menu label "Rental Application Form"
+Download, complete by hand, return to the office
+PDF only. No online application system
+Maintenance request
+/maintenance/
+Chat-style repair request
+Chat greeting explains it will help log a request, links Tapi's terms, and offers "Emergency" or "Continue"
+"Continue" or "Emergency"
+Tapi embedded request bot
+Rental listing alerts
+/subscribe/
+Email alerts with a rental price range
+Shared with buyers
+"Join"
+Alert subscription
+Application process as the site presents it
+Tenant finds a listing and reads inspection times on the card or listing page.
+Tenant attends the inspection. Times can be saved to a calendar; there is no online inspection booking.
+Tenant downloads Form 22 from the menu and submits it to the office. The site does not say how (email, in person). NEEDS VERIFICATION.
+Questions go to the listing's "Enquire Now" form, to inspections@redrocketrealty.com.au, or to 07 3340 4200.
+One listing adds that after-hours viewings are available by appointment through the rentals team.
+Tenant contacts
+Rentals contact card on every rental listing: "Red Rocket Realty Rentals", 07 3340 4200, inspections@redrocketrealty.com.au.
+Leasing Officer: Bhavani Vakity, 0439 752 326, leasing@redrocketrealty.com.au.
+What does not exist
+Tenant FAQs, moving-in or vacating guides, bond or rent-payment information.
+An online application or inspection-booking system.
+An emergency repairs phone list.
+Housekeeping for the listing feed
+Rent is typed inconsistently by listing: "$600 PER WEEK", "$720 pw", "$800 Weekly", "$620.00". The redesign should format rent from the numeric value.
+Older application PDFs are still public in the media library (2020 and 2021 versions, and a plain Form 22). Remove them at migration so only one form is live.
+I. Property management content
+The current site has no property management page and almost no landlord copy. Property management is the largest team on the site (ten of nineteen people) but is described only through staff bios, a leasing option in the appraisal form and one 2017 client story.
+What exists
+Content
+Detail
+Source
+Landlord entry point
+The appraisal form's first question offers "Leasing your home", then asks rental property type and bedrooms
+/property-valuation/
+Service statement
+One line on the unlinked Finance page says the agency offers property management for clients who invest in property
+/finance/
+Maintenance management
+Tenants lodge repairs through Tapi. How owners approve or track work is not described
+/maintenance/
+Team
+Two Senior Property Managers, four Property Managers, one Property Management staff member, a Leasing Officer and two Inspections Officers
+/our-team/
+Client story (2017)
+A landlord who lets her home for six months each year says the agency found tenants when another agent could not
+Flexible Property Management
+Landlord-relevant points that can be evidenced (condensed)
+From the 2017 client story. These are a client's words, not a published service list.
+Tenant selection: tenants are vetted closely, and the owner is asked to approve the tenant.
+Entry condition: staff complete a full inventory with detailed notes and photographs.
+Owner communication: the owner is involved at each step; issues are followed up and fixed without argument.
+Flexibility: short or unusual lease arrangements are accommodated.
+From staff bios (section K):
+Teresa Stewart: 20-plus years in the industry, an investor herself, national-network award for service in 2024.
+Frances Fernandez: MBA, 16 years as a housing finance cooperative CEO, works across sales and property management.
+Alexandra Fernandez: progressed from receptionist to leasing officer to property manager.
+Karen Cane: 12-plus years in real estate, former property manager, now inspections.
+Not on the site (do not invent)
+Topic requested
+Status
+Property management service description
+Missing
+Benefits and fees
+Missing
+Management process (onboarding, leasing, rent collection, arrears)
+Missing
+Routine inspection schedule and reporting
+Missing. Only job titles show that inspections officers exist
+Owner portal or statements
+Missing. NEEDS VERIFICATION whether one is used
+Landlord calls to action
+Only "Leasing your home" inside the appraisal form
+Number of properties under management
+Not stated
+A Property Management page will need new copy supplied or approved by the agency.
+J. Appraisal content
+The appraisal path is a one-field teaser in the homepage hero and a seven-step form on its own page. It serves both sellers and landlords and uses Google address autocomplete.
+SOURCE: https://redrocketrealty.com.au/property-valuation/ · hero form on Home
+Element
+Content
+Page title
+Property Valuation
+Headline
+How much is my property worth?
+Supporting copy
+Connecting you with your area expert.
+Other copy
+None. No explanation of what the appraisal includes, who conducts it, or timing
+Buttons
+"Next", "Previous", "Submit"
+Contact alternatives on the page
+Header phone and the contact band only
+Privacy or disclaimer text
+None on the form. The only notice is a hidden anti-spam field. Link the privacy policy in the redesign
+Address lookup
+Yes. Google Places autocomplete on the Property Address field
+Spam protection
+Honeypot field. No visible reCAPTCHA on this form
+Form steps
+Every field is required except the checkbox and Additional Message.
+Step
+Question
+Options or fields
+1
+Property Type
+Selling your home · Leasing your home
+2 (selling)
+What type of property are you looking to sell?
+House · Unit · Land · Other
+2 (leasing)
+What type of property are you looking to lease?
+House · Apartment · Unit · Other
+3
+Number of bedrooms?
+1 · 2 · 3 · 4+
+4
+Your expected price range
+Below $400K · $400K to $600K · $600K to $900K · Above $900K
+5
+How soon do you want to sell?
+Immediately · Within 3 to 6 months · Within 6 to 12 months · More than 12 months
+6
+What best describes your property? (hint: tenanted, owner occupied, vacant)
+Free-text description
+7
+Your details
+Property Address (autocomplete) · checkbox "The address above is also my home address" · Home Address (street, city, state, postcode, country) · Name (first, last) · Email · Phone · Additional Message (optional)
+Steps shown depend on the answer to step 1. The exact branching (for example whether price range and timing show for leasing) is set by form logic. Needs technical verification before rebuilding.
+Homepage hero teaser
+One field: Property address (required, autocomplete).
+Button: "What's my home worth?"
+Where the address goes after submit was not tested, to avoid sending a false lead. Needs technical verification.
+Issues to fix in the rebuild
+The price bands top out at "Above $900K", while recent sold prices on the site run from $657,000 to $1,500,000. The bands are stale.
+Home Address uses a generic international address block with a country list.
+The page has no H1 and no meta description.
+K. Team
+Nineteen people are listed: 2 directors, 5 sales, 7 property management, 1 leasing, 2 inspections, 1 administration and 1 marketing. Nine have a written biography; ten have contact details only.
+SOURCE: https://redrocketrealty.com.au/our-team/ and each linked profile. The count matches the site's staff directory sitemap. Everyone shares the office phone 07 3340 4200, and all emails end in @redrocketrealty.com.au.
+Directory
+Name
+Role
+Category
+Mobile
+Email
+Photo
+Parnam Singh Heir
+Principal / Director
+Directors
+0434 289 285
+parnam@
+photo
+Johann Castro
+Director
+Directors
+0459 895 039
+johann@
+photo
+Richard Falwasser
+Real Estate Agent & Auctioneer
+Sales
+0412 009 944
+richard@
+photo
+Tony Fernandez
+Sales Agent
+Sales
+0416 271 832
+tony@
+photo
+Dhaval Nainani
+Sales Consultant
+Sales
+0410 201 720
+sales1@
+photo
+Denis Kozinets
+Sales Consultant
+Sales
+0430 556 933
+sales3@
+photo
+Happy Gill
+Sales Consultant
+Sales
+0420 805 911
+happygill@
+photo
+Frances Fernandez
+Senior Property Manager
+Property Management
+0448 657 601
+pm7@
+photo
+Teresa Stewart
+Senior Property Manager
+Property Management
+0448 635 639
+pm5@
+photo
+Alexandra Fernandez
+Property Manager
+Property Management
+0448 754 580
+pm6@
+photo
+Yuki Xiang
+Property Manager
+Property Management
+0423 399 577
+pm3@
+photo
+Satyan Jagannathan
+Property Manager
+Property Management
+0478 886 790
+pm2@
+photo
+Sophie Wang
+Property Manager
+Property Management
+0418 638 663
+admin1@
+photo
+Desley Thiedecke
+Property Management
+Property Management
+Office line only
+desleyt@
+photo
+Bhavani Vakity
+Leasing Officer
+Leasing
+0439 752 326
+leasing@
+photo
+Dharmesh Thakor
+Inspections Officer
+Inspections
+0487 225 749
+dharmesh@
+photo
+Karen Cane
+Inspections Officer
+Inspections
+Not shown
+inspections1@
+photo
+Joy Wong
+Sales Admin
+Administration
+0468 819 862
+sales4@
+photo
+Tanveer Singh
+Marketing Executive
+Marketing
+Office line only
+info@
+Placeholder silhouette only
+Biographies (condensed; full wording on each profile page)
+Person
+Biography in brief
+Specialties
+Experience
+Awards
+Languages
+Parnam Singh Heir
+A committed selling principal who wants clients for life; enthusiastic, persistent, personally attentive. Lives in Underwood. Profile carries ten client testimonials
+Sales, negotiation, Underwood
+Not stated
+Agent of the Year 2017 and 2019 for Underwood (awarding body not named on the site)
+Not stated
+Johann Castro
+Results-driven; "what he says is what he does". Treats a sale as helping people into their next stage of life. Brings energy, straightforward advice and local expertise
+Selling, buying, development
+Not stated
+None stated
+Not stated
+Richard Falwasser
+Career began in 1988. Direct, professional communicator; personal slogan "Your choice … my commitment."
+Residential sales, auctions
+Since 1988
+First National: No. 1 residential salesperson in Queensland 2003, 2009, 2010, 2013; No. 1 salesperson in Brisbane for 8 years; Diamond Award every year since 2006; Chairman's Award 2007
+Not stated
+Tony Fernandez
+Former principal who led First National Rochedale & Mt Gravatt for a decade; earlier multi-million-dollar sales recognition at LJ Hooker Marsden. Now focused only on selling. Wishart resident for 25 years
+Sales in Wishart, Rochedale, Mt Gravatt and surrounds; negotiation
+25-plus years at principal licensee level
+Sales recognition (unspecified)
+Not stated
+Happy Gill
+Background in the Queensland Police Service; brings integrity, discipline and people skills
+Buyers and sellers
+Not stated
+None stated
+"Fluent in multiple languages" (languages not named)
+Frances Fernandez
+MBA; 16-plus years as CEO of Australian housing finance cooperatives; proprietor of First National Rochedale and Mount Gravatt 2015–2025. Works across sales and property management. Warm, strong communicator
+Sales, property management, negotiation, marketing
+Real estate, finance and executive leadership
+Business Development Manager of the Year (Qld); "The Elite" Real Estate Award; record sale prices across Logan (claim)
+Not stated
+Teresa Stewart
+Two decades with First National Rochedale, including 22 years in operations and office management. Calm, organised, meticulous. An investor herself
+Property management, landlord relations
+20-plus years
+First National Opus Award 2024 (one per state); multiple Elite Investor Relations awards
+Not stated
+Alexandra Fernandez
+Started at 15 as a Saturday receptionist; finished school in 2023; progressed through receptionist, leasing officer and assistant property manager
+Property management, owner and tenant care
+Since about age 15
+None stated
+Not stated
+Karen Cane
+Former property manager with sales administration and reception experience. Discreet, organised, team-minded
+Inspections, client service
+12-plus years
+None stated
+Not stated
+No biography is published for Dhaval Nainani, Denis Kozinets, Yuki Xiang, Satyan Jagannathan, Sophie Wang, Desley Thiedecke, Bhavani Vakity, Dharmesh Thakor, Joy Wong or Tanveer Singh.
+Items to confirm with the agency
+Frances Fernandez's bio has a broken sentence ("in 2024 was awarded and she consistently set…"); an award name is missing.
+One of her listings quotes a different mobile (0416 278 127) from her profile.
+Tanveer Singh and Desley Thiedecke show the office line under "Mobile".
+Yuki Xiang's and Sophie Wang's emails are generic mailboxes (pm3@, admin1@).
+RateMyAgent lists four sales agents with ratings: Parnam Singh Heir, Richard Falwasser, Dhaval Nainani and Johann Castro.
+The media library still holds photos of people not on the team page. Use only the nineteen above.
+Profile page structure to preserve
+Photo, name, role, mobile, office phone, email, social icons, biography, optional testimonials, and the person's current and sold listings. Each profile also shows an open WordPress comment form, which should be dropped.
+L. Reviews and social proof
+RateMyAgent is the only review platform in use. The site shows a typed "4.9 out of 5, based on 485 reviews", while the live RateMyAgent profile showed 4.9 from about 502 reviews on the as-of date.
+Where social proof appears
+Location
+What is shown
+Source
+Homepage hero
+Award line, five stars, 4.9 out of 5, 485 reviews, "Rate My Agent"
+Home
+Homepage, lower
+RateMyAgent "Verified Reviews" widget linking to the agency's reviews
+Home
+Testimonials page
+13 short reviews, each labelled Buyer Review or Vendor Review with the property address; one is signed by named clients
+/testimonials/
+Parnam Singh Heir profile
+10 longer, named testimonials
+Profile
+Blog
+4 video client stories from 2017 (3 sellers, 1 landlord), hosted on Wistia
+/blog/page/2/
+About page
+Text pointer to the Testimonials page
+/about/
+Platform details
+Item
+Detail
+Platform
+RateMyAgent
+Agency profile
+ratemyagent.com.au/real-estate-agency/red-rocket-realty-an168
+Reviews page linked from the site
+…/sales/reviews
+Rating displayed on site
+4.9 out of 5
+Review count displayed on site
+485
+Live profile on the as-of date
+4.9 stars, about 502 reviews; agent-level ratings for four sales agents. Verify at build time
+Google Reviews
+Not used or linked on the site
+Call to action to leave a review
+None
+Representative testimonials (paraphrased; wording on the source page)
+Reviewer
+Type
+Agent
+Gist
+Source
+Buyer, Underwood
+Buyer
+Parnam
+Knows the market, helpful, helped reach the right price
+Testimonials
+Vendor, Rochedale South
+Seller
+Johann
+Polite, honest, always available to answer questions
+Testimonials
+Vendor, Rochedale South
+Seller
+Parnam
+Strong negotiator and communicator; delighted with the result
+Testimonials
+Vendor, Underwood (three properties)
+Seller
+Parnam
+Listed in a slow period; all three went unconditional in one week
+Testimonials
+Vendor, Underwood
+Seller
+Parnam
+Achieved a record price for the area
+Testimonials
+Buyer, Woodridge
+Buyer
+Parnam
+Honest; made buying simple and helped through to the end
+Testimonials
+Vincent & Michelle Faucon
+Seller
+Agency
+Kept informed regularly; trust and recommend the agency
+Testimonials
+Harpreet Singh
+Seller
+Parnam
+Unsold for six months with another agent, then sold within four weeks
+Profile
+Karina
+First-home buyer
+Parnam
+Always reachable, showed the home on weekends, organised repairs with the owner
+Profile
+Jan
+Landlord
+Agency
+Tenants found when another agent could not; careful vetting and inventory
+Client story
+Recurring themes
+Theme
+Strength of evidence
+Selling results: speed and price above expectation
+Strong; the most common theme
+Negotiation
+Strong
+Communication and availability
+Strong
+Professionalism and honesty
+Strong
+Local market knowledge, especially Underwood
+Moderate
+Customer service and going the extra mile
+Moderate
+Property management
+Weak; a single 2017 story
+Responsiveness of the wider team
+Weak; reviews centre on two agents
+Almost every on-site review names Parnam Singh Heir or Johann Castro, and most concern Underwood and Rochedale South. Newer team members and the property management team have no on-site reviews.
+Notes for the redesign
+Pull rating and count from RateMyAgent, or update them on a schedule.
+The Testimonials page shows full street addresses beside reviews. Confirm with the agency whether to keep them.
+One profile testimonial contains a swear word; edit or drop it.
+M. Local areas
+The copy claims Logan as the market, but the listings concentrate in Rochedale South, with Underwood, Kuraby, Woodridge and Springwood next. The site has no suburb profiles or local-area writing.
+The site never says it services any suburb exclusively.
+Tier
+Areas
+Evidence
+PRIMARY MARKET
+Logan City and surrounding areas
+Contact and About copy; contact band on every page
+CORE SUBURBS
+Rochedale South, Underwood, Springwood, Woodridge
+Office is in Springwood. Site tagline is "Springwood | Underwood Real Estate". Postcode 4123 (Rochedale South) accounts for 24 of about 53 sale and sold listing pages and 4 of 12 rentals. Underwood dominates the testimonials
+SECONDARY SUBURBS
+Kuraby, Slacks Creek, Logan Central, Shailer Park, Marsden, Kingston, Browns Plains, Park Ridge, Beenleigh, Belivah, Bahrs Scrub, Yarrabilba
+Current or recent listings, or named in About copy (Kingston, Marsden, Slacks Creek). Kingston appears in copy but has no current listing
+BROADER REGION
+Wishart, Eight Mile Plains, Runcorn, Coopers Plains, Moorooka (Brisbane south); Redland Bay (Redlands); Riverview and Redbank Plains (Ipswich)
+Single listings, plus Tony Fernandez's bio naming Wishart, Rochedale and Mt Gravatt
+Sources used
+Source
+What it shows
+About page copy
+Springwood, Kingston, Marsden, Slacks Creek, Woodridge
+Home and Sold meta descriptions
+Springwood, Underwood
+Sale search suburb list
+Bahrs Scrub, Beenleigh, Belivah, Browns Plains, Kuraby, Marsden, Moorooka, Park Ridge, Redland Bay, Riverview, Rochedale South, Runcorn, Shailer Park, Springwood, Underwood, Woodridge
+Rent search suburb list
+Coopers Plains, Logan Central, Rochedale South, Shailer Park, Slacks Creek, Underwood, Woodridge
+Suburb sitemap
+21 suburb archives: the lists above plus Eight Mile Plains and Yarrabilba
+RateMyAgent profile
+Underwood, Rochedale South, Springwood, Kingston, Marsden, Slacks Creek, Woodridge
+2013 blog post
+Kingston, Logan Central, Shailer Park, Slacks Creek, Loganholme, Springwood
+Notes
+Search suburb lists are generated from whatever is listed that week, so they change. Do not treat them as a service-area statement.
+The suburb archive pages (/suburb/springwood/ and similar) contain listings only, with no description, statistics or imagery.
+Local-area messaging that can be reused: agents are locals; "We live and breathe Logan"; knowledge of local pricing and trends.
+A listing description praises Yarrabilba as a master-planned community. That is listing copy, not agency positioning.
+The service-area list for the new site should be confirmed by the agency. NEEDS VERIFICATION.
+N. Property listing data structure
+All listing types share one card and one detail template, fed from the agency's listing software into WordPress. The redesign must keep every field below; share buttons and similar properties do not exist today.
+SOURCE: /property/ · /rental/ · /land/ · /sold/ · /open-homes/ · sample details: sale, rental, land, sold
+Fields by listing type
+Field
+For sale
+Rent
+Land
+Sold
+Open homes list
+Main image
+Yes
+Yes
+Yes
+Yes
+Yes
+Photo gallery with thumbnails
+Yes (up to 25 seen)
+Yes
+Yes (often 1–2 diagrams)
+Yes
+—
+Address
+Yes; street can be hidden (suburb only)
+Yes
+Often suburb only
+Yes
+Yes
+Price text
+Free text: "Submit Offers!", "Contact Agent", "POA"
+Weekly rent, free text
+"Submit Offers!", "FOR SALE", "POA"
+"Sold $850,000"
+Same as listing
+Status label
+New, Home Open
+New, Home Open
+—
+Sold
+Home Open
+Bedrooms, bathrooms, parking
+Yes (icons)
+Yes
+Only for house-and-land
+Yes
+Yes
+Air-conditioning icon
+Yes
+Yes
+—
+Yes
+Yes
+Property type
+Yes (House, Unit, Townhouse)
+Yes
+Blank on land
+"House Sold"
+—
+Headline
+Yes
+Yes
+Yes
+Yes
+No
+Short excerpt
+Yes
+Yes
+Yes
+Yes
+No
+Full description
+Yes
+Yes
+Yes
+Yes
+—
+Listing ID
+Yes
+Yes
+Yes
+Yes
+—
+Features list
+Yes: type, beds, baths, parking, garage, land size, plus tags such as Dishwasher, Built In Robes, Deck, Courtyard, Shed
+Yes
+Land size
+Yes
+—
+Land size
+Yes
+Sometimes
+Yes
+Yes
+—
+Available-from date
+—
+Yes
+—
+—
+—
+Inspection times
+Yes, each downloadable to a calendar
+Yes
+—
+—
+Yes (the point of the page)
+Floor plan
+Button opens an image in a new window, where supplied
+Sometimes
+Sometimes
+Yes
+—
+Brochure
+Button opens a printable version
+Yes
+Yes
+Yes
+—
+Map
+Google Map on the address, zoom 17
+Yes
+Yes
+Yes
+—
+Agent
+One or two agent cards: photo, role, mobile, office phone, email, social, recent listings
+Shared "Red Rocket Realty Rentals" card
+Agent card or generic agency card
+Agent cards
+—
+Enquiry form
+"Enquire Now": name, email, phone, comments, property
+Same
+Same
+Same
+—
+Listing-alert signup
+On every detail page
+Yes
+Yes
+Yes
+—
+Expression-of-interest prompt
+Sidebar link
+Shown, though it is a purchase form
+Yes
+Shown, though not relevant
+—
+Video
+None found on sampled listings
+None
+None
+None
+—
+Similar properties
+Not present
+Not present
+Not present
+Not present
+—
+Share options
+Not present
+Not present
+Not present
+Not present
+—
+Listing index behaviour
+Behaviour
+Current implementation
+Sorting
+Price high to low · Price low to high · Date newest first · Date oldest first · Status current first · Status sold/leased first · Suburb A–Z · Suburb Z–A · Title
+View
+List and grid toggle
+Pagination
+Numbered pages ("Page 1 of 2"). No load-more. 12 per page for sale, 10 for sold, 4 on the homepage
+Default order
+Newest first
+Sidebar
+Agent card, expression-of-interest prompt, Buy/Rent search, enquiry form
+Sold
+Separate /sold/ index with sale prices; sold listings keep their /property/ URL and full detail page
+Open homes
+Single list titled "Current Open Homes", sale listings only on the as-of date; rental inspections show only on rental cards
+Land
+Separate /land/ index and URL base
+Suburb and feature archives
+Auto-generated at /suburb/{name}/ and /feature/{name}/
+Detail page content order
+Address as the page heading, price text, bed/bath/parking icons
+Gallery with thumbnails; Floor Plan and Brochure buttons
+Property Details: address, price, availability date for rentals, inspection times
+Description: headline, type and suburb, listing ID, body
+Property Features
+Map
+Listing-alert signup
+Agent box with About and Recent Listings tabs
+Sidebar: agent card, expression-of-interest prompt, search, Enquire Now form
+Data-quality notes
+Price and rent are free text, so formats vary by listing.
+Listing photos carry a Red Rocket watermark in the corner.
+Sale listing IDs are long system codes; rental IDs are short numbers. Sales and rentals may come from two feeds. Needs technical verification.
+Listing pages show a "No Comments" heading from the blog template. Drop it.
+O. Property search functionality
+Search is a seven-dropdown, three-checkbox filter with Buy and Rent tabs. It has no keyword field, no land or sold option, and no map search.
+SOURCE: "Find your home" on Home · sidebar search on /property/ and every listing page
+Where search appears
+Location
+Tabs
+Notes
+Homepage, under the hero ("Find your home")
+Buy only
+Searches current sale listings
+Sidebar on listing indexes, listing details, team profiles
+Buy · Rent
+Same fields; the Rent tab swaps price steps and suburb list
+Filters
+Filter
+Type
+Buy options
+Rent options
+Suburb
+Dropdown, single choice
+Any, plus suburbs that currently have listings (16 on the as-of date)
+Any, plus 7 suburbs on the as-of date
+House Category
+Dropdown
+Any · Unit · House · Townhouse
+Any · House · Townhouse (only types currently listed)
+Price From
+Dropdown
+Any; $50,000 to $1,000,000 in $50,000 steps; then $1.25M to $3M in $250,000 steps; $4M; $5M; $10M
+Any; $50 to $1,000 in $50 steps; $1,100 to $2,000 in $100 steps; $2,500 to $5,000 in $500 steps (weekly)
+Price To
+Dropdown
+Same steps
+Same steps
+Bedrooms Min
+Dropdown
+Any · 1+ to 10+
+Same
+Bedrooms Max
+Dropdown
+Any · 1+ to 10+
+Same
+Bathrooms
+Dropdown
+Any · 1+ · 2+ · 3+
+Same
+Air Conditioning
+Checkbox
+Yes
+Yes
+Pool
+Checkbox
+Yes
+Yes
+Security
+Checkbox
+Yes
+Yes
+Search
+Button
+"Search"
+"Search"
+Not available today
+Keyword or address search.
+Land, sold or open-home filters inside search (each has its own page instead).
+Multiple-suburb selection, parking filter, land-size filter.
+Map view and saved searches. Email alerts cover the saved-search need.
+Results behaviour
+Results open as a standard listing index with the sort dropdown, list/grid toggle and numbered pagination described in section N. Search values are passed in the page address, so results can be bookmarked and shared.
+What the redesign must retain
+Buy and Rent modes with separate price scales (sale price versus weekly rent).
+Suburb, property type, price range, bedroom range and bathroom filters.
+Suburb and type options generated from live listings, so empty choices never appear.
+The three feature filters, or an agreed replacement set.
+Sorting and list/grid view on results.
+Shareable result addresses.
+Search available on the homepage and beside listings.
+Reasonable additions that reuse existing data: a Land option, a Sold option and multi-suburb selection.
+P. Forms inventory
+The site has eight working forms, one unintended comment form, one embedded third-party request tool and three non-form actions. Five of the forms run on Gravity Forms; none shows where submissions are delivered, so recipients must be confirmed before rebuilding.
+No form was submitted during this review. Required fields are those marked with an asterisk or flagged required in the page.
+Form
+Page
+Purpose
+Fields
+Required
+Button
+Destination or action
+Hero appraisal teaser
+Home
+Start an appraisal from an address
+Property Address (autocomplete)
+Property Address
+"What's my home worth?"
+Gravity Forms (form 5). What happens after submit needs technical verification
+Property valuation
+/property-valuation/
+Appraisal lead for selling or leasing
+Seven steps; see section J
+All except checkbox and Additional Message
+"Next" / "Submit"
+Gravity Forms (form 3). Recipient needs technical verification
+Contact
+/contact/
+General enquiry
+First name, Last name, Email, Phone, Message
+First name, Last name, Email, Message
+"Submit"
+Gravity Forms (form 1). Google reCAPTCHA is loaded on this page. Recipient needs technical verification
+Enquire Now (property and agent enquiry)
+Sidebar of every listing index, listing detail, team profile and suburb archive
+Enquiry about a listing or to the agency
+Full Name, Email, Phone, Comments, Property
+Full Name, Email, Comments
+"Send"
+Gravity Forms (form 2). Whether "Property" is auto-filled and whether the listing agent is notified need technical verification
+Expression of interest
+/expression-of-interest/
+Written offer on a property
+See breakdown below
+Nearly all
+"Submit"
+Gravity Forms (form 7) with signature add-on. Recipient needs technical verification
+Listing alerts: subscribe
+/subscribe/ and every listing detail page
+Email alerts for new listings
+Email (then "Continue"), Password, First Name, Last Name, Mobile, Suburb (long list), Bedrooms, Bathrooms, Rental Price min and max, Sale Price min and max, Subscribe checkbox
+None marked
+"Continue" then "Join"
+Listing-alerts add-on of the listing plugin; creates a subscriber account
+Listing alerts: unsubscribe
+/unsubscribe/
+Stop alerts
+Email
+Email
+"Submit"
+Same add-on
+Property search
+Home and all listing sidebars
+Filter listings
+See section O
+None
+"Search"
+Loads a filtered results page
+Maintenance request
+/maintenance/
+Tenant repair request
+Chat conversation; choices "Emergency" or "Continue"
+Set by Tapi
+In-chat
+Tapi embedded request bot tied to the agency's Tapi account
+Rental application
+Menu link to a PDF
+Tenancy application
+RTA Form 22, 8 pages, completed offline
+Per the form
+Download
+No online submission. Return method not stated
+Add inspection to calendar
+Listing cards and detail pages
+Save an inspection time
+—
+—
+Click the inspection time
+Downloads a calendar file
+Call and email links
+Site-wide
+Direct contact
+—
+—
+"Call us on 07 3340 4200", "Click here to email", agent email icons
+Phone dialler or email app
+Comment form (unintended)
+Team profile pages and blog posts
+WordPress comments
+Comment, Name, Email, Website, remember-me checkbox
+Comment, Name, Email
+"Submit"
+WordPress comments. Zero comments site-wide. Drop
+Expression of interest: field breakdown
+Group
+Fields
+Buyer details
+How many buyers? (One · Two); Buyer 1 legal name (first, middle, last), phone, email, current address (street, suburb, state, postcode); the same set for Buyer 2
+Purchase address
+Proposed purchase address (street, suburb, state, postcode)
+Offer details
+Price; Deposit; Finance required? (Yes · No); if yes, days (14 · 21); Pre-approved for finance? (Yes · No); Selling your current property first? (Yes · No); Build and Pest? (Yes · No); if yes, days (7 · 14); Settlement (30 · 45 · 60 days · Other)
+Acknowledgments (three tick boxes)
+There may be multiple offers and the buyer submits a best offer; there may be no chance to offer again; if accepted, the buyer will sign a contract and pay the deposit to Red Rocket Realty's trust account by the agreed date
+Signatures
+Buyer 1 typed signature; Buyer 2 typed signature; Date (dd/mm/yyyy)
+The acknowledgment wording is legal in nature. Carry it over exactly from the live form and have the agency approve it.
+Gaps
+No form links to the privacy policy or carries a consent statement.
+There is no dedicated landlord enquiry form; landlords use the appraisal form's leasing path.
+There is no online tenancy application.
+Q. External integrations
+Twelve integrations are confirmed from the page code. The upstream CRM that supplies listings is the main unknown.
+Integration
+Evidence on the site
+Role
+Confidence
+WordPress with the Bridge theme and a Mediamojo child theme; WPBakery page builder
+Theme and builder files; generator tag
+Current platform
+Confirmed
+Easy Property Listings plugin, with carousel, listing templates, staff directory and listing alerts add-ons
+Plugin files on every page
+Listings, search, agent profiles, email alerts
+Confirmed
+Listing feed / CRM
+Floor-plan images load from a lockedoncloud.com address, which points to LockedOn. Sale and rental listing IDs use different formats
+Supplies listings to the website
+Needs technical verification
+Gravity Forms, with signature and geolocation add-ons
+Form markup and plugin files
+Contact, enquiry, appraisal, expression of interest
+Confirmed
+Google Maps and Places
+Maps script; address autocomplete; map on contact and listing pages
+Maps and address lookup
+Confirmed. API key ownership needs technical verification
+Google reCAPTCHA
+Loaded on the contact page
+Spam protection
+Confirmed on Contact only
+RateMyAgent
+Review widget script and profile link on the homepage
+Reviews
+Confirmed. The headline rating is typed text, not fed by the widget
+Tapi
+Embedded request bot on the Maintenance page
+Tenant maintenance requests
+Confirmed
+Wistia
+Video embeds in four 2017 blog stories
+Video hosting
+Confirmed
+Google Analytics
+A Universal Analytics ID (UA- prefix) in the page code
+Analytics
+Confirmed present. Universal Analytics stopped processing data in 2023, so tracking is likely not working
+Yoast SEO
+Markup comments, sitemaps, schema
+Titles, sitemaps, structured data
+Confirmed
+Google Fonts
+Font stylesheet
+Typography
+Confirmed
+Facebook, Instagram, LinkedIn
+Outbound links only; no feeds or pixels found
+Social profiles
+Confirmed as links only
+realestate.com.au and Domain
+No links, badges or feeds on the site
+Portals
+Not present on the site. Whether listings syndicate to portals from the CRM needs technical verification
+Google Reviews / Business Profile
+No link or widget
+Reviews
+Not present
+Rental application system (for example an online application platform)
+None. PDF form only
+Tenancy applications
+Not present
+Owner or tenant portal
+None linked
+Property management
+Not present. Needs technical verification
+Email marketing platform
+None visible; alerts are sent by the listing plugin
+Newsletters
+Needs technical verification
+Yellow Brick Road
+Text and a contact on the unlinked Finance page
+Finance referral
+Needs verification that the partnership is current
+Migration implications
+The listing feed is the critical dependency. Identify the CRM and its export format before choosing how the new site ingests listings.
+Existing alert subscribers live in the WordPress database and need exporting if alerts continue.
+The Tapi embed and the RateMyAgent widget are copy-and-paste snippets tied to the agency's accounts and can move as they are.
+Replace the retired analytics tag.
+R. Blog and resources
+The blog is inactive: 26 posts, the newest dated 10 December 2017. Do not make it a feature of the redesign; salvage six evergreen pieces and four client stories.
+SOURCE: /blog/ · post sitemap
+Period
+Posts
+Type
+November 2013
+1
+Blog launch announcement
+March 2014
+8
+Syndicated advice articles credited "Source: Best Practice" or a property journal
+April to August 2017
+4
+Client video stories (three sellers, one landlord)
+August to December 2017
+13
+Short national market-news digests and one investment-myths article
+Recommendation by post
+Post
+Date
+Recommendation
+Reason
+Giving Your Property a Head Start
+Mar 2014
+UPDATE
+Evergreen seller advice on the first weeks of marketing. Syndicated source: confirm reuse rights or rewrite
+Light Sells Houses
+Mar 2014
+UPDATE
+Evergreen presentation advice. Same rights check
+Things to Consider When Buying an Apartment
+Mar 2014
+UPDATE
+Evergreen buyer advice. Same rights check
+A–Z of Property Terms for Home Buyers
+Mar 2014
+UPDATE
+Useful glossary idea, but only N–Z is present and the text contains injected spam. Rebuild from scratch
+Getting Into the Market – Buying With Friends
+Mar 2014
+UPDATE
+Evergreen topic; text contains injected spam. Rewrite
+The 5 Big Myths of Property Investment
+Dec 2017
+UPDATE
+Investor-oriented, mostly evergreen; refresh examples
+The Median Price Investment Strategy
+Mar 2014
+ARCHIVE
+Investment-strategy opinion; dated and syndicated
+New Year Brings Out Buyers
+Mar 2014
+ARCHIVE
+Thin seasonal piece
+The Power of Crowdfunding
+Mar 2014
+ARCHIVE
+Off-topic
+Latest real estate news beamed in from mission control
+Nov 2013
+ARCHIVE
+Launch notice only
+Absolutely Blown Away
+Apr 2017
+KEEP as a testimonial, not a blog post
+Seller video story. Re-confirm client consent; 2017 prices
+Talks the Talk, And Walks the Walk
+Apr 2017
+KEEP as a testimonial
+Seller video story
+Flexible Property Management
+Jun 2017
+KEEP as a testimonial
+The only landlord proof on the site
+Selling by Auction… Never Again
+Aug 2017
+KEEP as a testimonial, with care
+Seller video story. Its anti-auction message conflicts with now having an auctioneer on the team
+12 market-news digests (Rates on I/O Loans to Fall, House Demand to Outstrip Supply, Rentvesting Gains Popularity, Mortgage Strain Better Than 5yrs Ago, Worker Move To Cheaper Cities Tipped, Concessions Boost FHBs, APRA Curbs Unfair Say Banks, Crane Count Hits Record High, Migration Drives City Markets, Confidence in Property Sector Up, Investor Lending Rebounds, Long-term Price Rises Lead World)
+Aug–Oct 2017
+ARCHIVE
+Clearly outdated 2017 statistics and policy news, mostly about Sydney, Melbourne and Victoria
+Issues found
+Two 2014 posts contain injected pharmaceutical spam phrases in the body text. This points to a past site compromise; have the site checked and do not migrate those posts as they are.
+The March 2014 articles are syndicated from a third party. Reuse rights are unknown. NEEDS VERIFICATION.
+Posts show "0 Comments" and "0 Likes" counters, which underline the inactivity.
+The three most recent 2017 posts are promoted on the homepage and in every page footer.
+If archived posts are removed, redirect their addresses to the new resources or blog index.
+S. Footer content
+The footer has four columns, a legal line and social icons, and is identical on every page.
+SOURCE: footer of https://redrocketrealty.com.au/
+Block
+Content
+Red Rocket Realty
+Short description: committed to the property needs of Logan residents; focused on remaining the leading agents in the area and the local experts people can rely on and trust
+Latest News
+Three most recent blog posts with dates (all 2017)
+Quick Links
+Property for sale → /property/ · Land for sale → /land/ · Just sold → /sold/ · For rent → /rental/
+Contact
+67 Springwood Road, Springwood QLD, 4127 · 07 3340 4200 · "Click here to email" → Contact page
+Legal
+Privacy → /privacy-policy/ · Terms of Use → /terms-of-use/
+Copyright
+"Copyright © 2020 Red Rocket Realty. All Rights Reserved." · "Web Design by Mediamojo."
+Icons
+Email (to Contact page), Facebook, Instagram, LinkedIn
+Band above the footer
+"Buying, selling or renting in Logan? Contact us now!" with a Contact button
+Legal pages (summary)
+Page
+Covers
+Note
+Privacy Policy
+Six short sections: collection of data, use of data, cookies, changes, no guarantees, contact
+Generic template dated 2020. It does not mention the Australian Privacy Principles, the third parties in section Q, or how offer and tenancy data are handled. Have the agency's adviser review it
+Terms of Use
+Website material, links to other sites, limitation of liability, copyright
+Generic template dated 2020
+Missing from the footer
+Licence or ABN details and opening hours (not on the site at all).
+Links to Appraisal, Maintenance, Rental Application, Team and Testimonials.
+A current copyright year.
+T. SEO information
+Only five pages have a meta description, and several key pages have no H1. Record the addresses below for redirects; the existing metadata is not worth copying.
+SOURCE: page head and headings of each URL listed, read on the as-of date.
+Page
+URL slug
+Page title
+H1
+Main H2s
+Meta description
+Home
+/
+Home - Red Rocket Realty
+The leading real estate agents dedicated to results
+About Red Rocket Realty
+Red Rocket Realty is committed to the property needs. Want to sell the property located in springwood and underwood? Are you looking for buying and selling.
+Buy
+/property/
+Properties - Red Rocket Realty
+None
+None
+None
+Land
+/land/
+Land - Red Rocket Realty
+None
+None
+None
+Open homes
+/open-homes/
+Open Homes - Red Rocket Realty
+Open Homes
+None
+None
+Sell
+/selling/
+Sell Your Property - Red Rocket Realty
+Selling
+None
+Red Rocket Realty – sales results that are out of this world! The sale prices we generate are out of this world! Our team of Logan real estate specialists will work
+Sold
+/sold/
+Properties recently sold - Red Rocket Realty
+Sold
+None
+redrocketrealty.com.au has always kept a track of good selling properties. These properties tell their own story. Underwood and Springwood location.
+Appraisal
+/property-valuation/
+Property Valuation - Red Rocket Realty
+None
+How much is my property worth? (plus one H2 per form step)
+None
+Rent
+/rental/
+Rentals - Red Rocket Realty
+None
+None
+None
+Property management
+No page exists
+—
+—
+—
+—
+Maintenance
+/maintenance/
+Maintenance - Red Rocket Realty
+Maintenance
+None
+None
+About
+/about/
+About - Red Rocket Realty
+About
+Our mission · Our vision · Committed to commitment
+None
+Advantage
+/the-red-rocket-advantage/
+The Red Rocket Advantage - Red Rocket Realty
+The Red Rocket Advantage
+Blast off with Logan's leading real estate team!
+None
+Team
+/our-team/
+Meet The Team - Red Rocket Realty
+Our Team
+None
+Red Rocket Realty, Springwood Parnam Singh Heir is part of the team at Red Rocket Realty located at 67 Springwood Road, Springwood QLD.
+Team profile
+/directory/{name}/
+{Name} - Red Rocket Realty
+None
+None
+None
+Testimonials
+/testimonials/
+Testimonials - Red Rocket Realty
+Testimonials
+None
+None
+Contact
+/contact/
+Contact us - Red Rocket Realty
+Contact us
+Follow us:
+Red Rocket Realty looks after the buying, selling and renting of properties in Logan City and surrounding areas. We have been taking care of local residents.
+Tips for buyers
+/tips-for-buyers/
+Tips For Buyers - Red Rocket Realty
+Tips For Buyers
+None (tips are H4)
+None
+Tips for sellers
+/tips-for-sellers/
+Tips For Sellers - Red Rocket Realty
+Tips For Sellers
+None (tips are H4)
+None
+Expression of interest
+/expression-of-interest/
+Expression of interest - Red Rocket Realty
+Expression of interest
+None
+None
+Blog
+/blog/
+Blog - Red Rocket Realty
+Blog
+Post titles
+None
+Listing detail
+/property/{address}/, /rental/{address}/, /land/{address}/
+{Full address} - Red Rocket Realty
+Full address
+Listing headline
+None; the main photo is set as the social-share image
+Technical notes for migration
+Structured data present: Organization (name, logo, three social profiles), WebSite, WebPage and breadcrumbs. There is no local-business or real-estate-agent schema with address, phone or hours.
+XML sitemaps exist for pages, posts, sale listings, land, rentals, team profiles, suburbs and features, and also for about 880 media attachment pages, which add thin indexable pages.
+Thin or duplicate indexable pages: /directory/ (duplicates Our Team), 21 /suburb/ archives, 2 /feature/ archives, /finance/, /unsubscribe/.
+Listing addresses change as stock turns over. Plan a rule for expired listings (keep sold pages, redirect withdrawn ones).
+Sold listings stay at their /property/ address, which preserves any links they have earned.
+Suggested redirects if slugs change: /property-valuation/ → new appraisal page; /our-team/ and /directory/{name}/ → new team pages; /the-red-rocket-advantage/ → About or Sell; /tips-for-buyers/ and /tips-for-sellers/ → new guides; blog posts per section R.
+U. Content quality audit
+The functions are worth keeping almost unchanged; most written copy needs a rewrite, and four pages need content that does not exist yet.
+Verdict
+Content
+Why
+KEEP AS-IS
+Contact details: address, phone, emails, social links
+Verified and consistent
+KEEP AS-IS
+Team directory: 19 names, roles, mobiles, emails
+Current; photos added as recently as mid-2026
+KEEP AS-IS
+Listing data, search filters, sorting, inspection calendar links
+Core function
+KEEP AS-IS
+Appraisal form questions and expression-of-interest fields and acknowledgments
+Working lead and offer paths; update price bands only
+KEEP AS-IS
+Tapi maintenance embed and RateMyAgent widget
+Account-level tools
+KEEP AS-IS
+Rental application Form 22 PDF
+Statutory form; check it is the current RTA version
+KEEP BUT REWRITE
+About copy: mission, vision, "Committed to commitment"
+Sound themes, dated wording, conflicting year claims
+KEEP BUT REWRITE
+The Red Rocket Advantage
+The only "why sell with us" copy; heavy on puns
+KEEP BUT REWRITE
+Tips for buyers (6) and tips for sellers (5)
+Useful structure; grammar issues and one outdated regulator reference
+KEEP BUT REWRITE
+Team biographies (9)
+Good substance, uneven length; one broken sentence
+KEEP BUT REWRITE
+Homepage hero and prompt copy
+Clear intent; one typo; stale rating
+KEEP BUT REWRITE
+Contact page introduction
+Fine, but repeats the unverified years claim
+KEEP BUT REWRITE
+Privacy Policy and Terms of Use
+Generic 2020 templates; need professional review
+MERGE WITH ANOTHER PAGE
+Selling + Advantage + Tips for sellers + Just sold
+One strong Sell page instead of an empty landing page and three satellites
+MERGE WITH ANOTHER PAGE
+Tips for buyers + expression of interest explanation + open homes guidance
+One Buyer Guide
+MERGE WITH ANOTHER PAGE
+Testimonials page + profile testimonials + four client stories
+One Reviews page led by the live RateMyAgent rating
+MERGE WITH ANOTHER PAGE
+Subscribe and Unsubscribe
+One alerts page; unsubscribe by email link
+MERGE WITH ANOTHER PAGE
+/directory/ archive into Our Team
+Duplicate
+OUTDATED
+Typed "4.9 out of 5, 485 reviews"
+Behind the live figure
+OUTDATED
+"Copyright © 2020"
+Stale
+OUTDATED
+12 market-news posts from 2017; 2013 launch post
+Old statistics and news
+OUTDATED
+Finance page (Yellow Brick Road, "two years ago")
+Unlinked; partnership unverified
+OUTDATED
+Appraisal price bands (top band "Above $900K")
+Below current sale prices
+OUTDATED
+"QBSA" reference in buyer tip 5
+Regulator has been renamed
+OUTDATED
+Analytics tag
+Retired product
+LOW VALUE
+Comment forms and "0 Comments / 0 Likes" counters
+Unused
+LOW VALUE
+Suburb and feature archive pages as they stand
+Listings only, no content
+LOW VALUE
+Media attachment pages
+Thin pages
+LOW VALUE
+2014 syndicated posts on off-topic subjects (crowdfunding, median-price strategy, new-year buyers)
+Not specific to the agency
+LOW VALUE
+Stock photos of handshakes, keys and coin houses
+Generic
+MISSING / SHOULD BE CREATED LATER
+Property Management page
+Largest team, no page
+MISSING / SHOULD BE CREATED LATER
+Sell page body copy and a selling-process outline
+Landing page is empty
+MISSING / SHOULD BE CREATED LATER
+Tenant information: how to apply, inspections, repairs, contacts
+Only a PDF and a chat exist
+MISSING / SHOULD BE CREATED LATER
+Verified business facts: founding year, licence, hours, named awards
+Needed for About, footer and schema
+MISSING / SHOULD BE CREATED LATER
+Bios for ten team members; a photo for one
+Blank profiles
+MISSING / SHOULD BE CREATED LATER
+Consent and privacy wording on forms
+None today
+Not recommended as new pages: individual suburb profiles and a relaunched blog. The agency has no content for either, and the brief is to be conservative. Revisit only if the agency commits to supplying material.
+V. Recommended content architecture
+The same content fits seven top-level items. The one new page with no existing copy is Property Management; the Sell, Buy and Rent landing pages are assembled from existing material.
+This reorganises content only. It says nothing about layout or visual design.
+HOME
+Appraisal prompt, search, latest listings, agency introduction, live reviews, contact band
+BUY
+Properties for sale (existing /property/)
+Land for sale (existing /land/)
+Open homes (existing /open-homes/)
+Buyer guide (from Tips For Buyers; explains expressions of interest and inspections)
+Make an offer (existing expression-of-interest form)
+Property alerts (existing subscribe form)
+SELL
+Sell with Red Rocket (new landing page built from The Red Rocket Advantage)
+Request an appraisal (existing /property-valuation/ form, selling path)
+Recently sold (existing /sold/)
+Seller guide (from Tips For Sellers plus the two evergreen seller posts)
+RENT
+Properties for rent (existing /rental/)
+Apply for a property (Form 22 download with return instructions)
+Maintenance request (existing Tapi tool)
+Tenant information (new, short: inspections, applying, repairs, contacts)
+PROPERTY MANAGEMENT (new page; copy to be supplied)
+Service overview and the property management team
+Rental appraisal (existing form, leasing path)
+Landlord story (2017 client story, if re-approved)
+ABOUT
+Our story (About copy; verified history)
+Our team, with a profile page per person
+Reviews (RateMyAgent rating, testimonials, client video stories)
+Resources (only the evergreen articles kept from the blog)
+CONTACT
+Office details, map, contact form, department contacts
+Footer and utility
+Privacy Policy, Terms of Use, social links, phone, appraisal link, maintenance link
+Where each current page goes
+Current page
+New home
+Home
+Home
+Property, Land, Open Homes
+Buy
+Tips For Buyers
+Buy → Buyer guide
+Expression of interest
+Buy → Make an offer; still linked from every sale listing
+Selling, The Red Rocket Advantage
+Sell → Sell with Red Rocket
+Just Sold
+Sell → Recently sold
+Tips For Sellers
+Sell → Seller guide
+Request an appraisal
+Sell → Request an appraisal; also Property Management → Rental appraisal
+For Rent
+Rent
+Rental Application Form (PDF)
+Rent → Apply for a property
+Maintenance
+Rent → Maintenance request
+About
+About → Our story
+Our Team, staff profiles
+About → Our team
+Testimonials, client stories
+About → Reviews
+Blog
+About → Resources (evergreen only); remainder archived
+Subscribe, Unsubscribe
+Buy → Property alerts
+Contact
+Contact
+Privacy Policy, Terms of Use
+Footer
+Finance
+Remove unless the partnership is confirmed
+/directory/, suburb and feature archives
+Remove or redirect
+The current menu splits About's "Advantage" from Selling even though it is seller copy, and hides appraisal one level down. The structure above puts each audience's content and actions under one heading: buyers, sellers, tenants, landlords.
+W. Content and functionality that must not be lost
+Twenty-six items must survive the redesign. Tick each off at build review.
+Listings and search
+☐ Live listing feed for sale, rent, land and sold, with every field in section N
+☐ Sold archive with sale prices, and sold listings kept at their existing addresses
+☐ Open homes list and inspection times on listings, each downloadable to a calendar
+☐ Buy and Rent search with suburb, type, price range, bedroom range, bathrooms and feature filters
+☐ Sorting, list/grid view and shareable search results
+☐ Floor plan and brochure buttons on listings
+☐ Map on each listing
+☐ Agent card (or rentals card) on every listing, with phone and email
+☐ "Rental available from" date on rental listings
+Lead and conversion paths
+☐ Appraisal path from the homepage hero (address field with autocomplete)
+☐ Full appraisal form with both selling and leasing paths
+☐ "Enquire Now" form on every listing and team profile
+☐ Expression-of-interest offer form, including the three acknowledgments and typed signatures
+☐ Listing email alerts: subscribe, preferences, unsubscribe, and the existing subscriber list
+☐ Contact form, click-to-call phone and email links site-wide
+☐ "Contact us" band on every page
+Tenants and landlords
+☐ Tapi maintenance request tool, including its emergency option
+☐ Rental application form download
+☐ Rentals contact details (inspections@ and leasing@)
+Trust and people
+☐ All 19 team members with role, mobile, email, photo and profile page; listings shown on agent profiles
+☐ RateMyAgent rating, review widget and profile link
+☐ Award statement, once the agency confirms its wording
+☐ Testimonials and the four client video stories (subject to consent)
+Business and technical
+☐ Office address, phone, map with pin, and three social profiles
+☐ Privacy Policy and Terms of Use pages
+☐ Redirects from every current address in sections D and T, and working analytics
+Open questions for the agency
+☐ Which year was the business established?
+☐ Which awards and years sit behind "Award Winning Agency & Agent 2017-2026"?
+☐ What are the office hours and the after-hours emergency repair process?
+☐ Which CRM supplies listings, and does it also feed the portals?
+☐ Where should each form's submissions be delivered?
+☐ Is the Yellow Brick Road finance referral still current?
+☐ Are auctions offered as a method of sale?
+☐ What is the agreed service-area suburb list?
+☐ Do the 2017 video-story clients still consent to being featured?
+X. Image and media assets
+The reusable assets are the logo files, 18 team headshots and the listing photography. The site has no office, signage, group or Logan-area photography, and its hero and page-banner images are generic stock.
+Every link below is the file's real address on the live site, checked on the as-of date. Sizes are pixel dimensions read from the files. Sources searched: all standing pages, sampled listings, and the site's public media library (991 files, of which 71 are not listing photos).
+X-A. Brand assets
+Asset
+Type
+File
+Source page
+Size
+Background and current use
+Recommended use
+Primary logo (rocket + "RED ROCKET REALTY")
+PNG
+logo-red-rocket-realty-nav.png
+Header, every page
+506×200
+White artwork on a solid red rectangle; used in the red header
+Reference only. Too small for retina and has no transparency
+Square logo
+PNG
+logo-red-rocket-realty-sq.png
+Media library
+500×500
+White on red square
+Social share image or app icon
+Email/banner strip logo
+PNG
+header-red-rocket-realty.png
+Media library (likely email header)
+1000×99
+Small white logo on a red strip
+Email templates only
+Favicon (rocket mark)
+PNG
+favicon-red-rocket-realty.png
+Browser tab, every page
+150×150
+White rocket on red square
+Favicon; redraw as vector for sharper sizes
+Map pin
+PNG
+pin-red-rocket-realty.png
+Contact map
+77×95
+Red pin with white rocket, transparent
+Map markers
+Listing icons
+SVG
+icon-bed.svg · icon-bath.svg · icon-car.svg
+Listing cards
+Vector
+Bed, bath and car glyphs
+Replace with the new design's icon set
+Listing photo watermark
+Baked into photos
+—
+Listing photos
+—
+White rocket logo, bottom-right corner
+Not extractable
+Not available on the site: a vector (SVG or EPS) logo, a white-on-transparent logo, a dark or single-colour logo, or brand guidelines. NEW ASSET REQUIRED: request original logo artwork from the agency.
+X-B. Hero and feature images
+File
+Source page
+What it shows
+Orientation
+Size
+Quality
+Potential use
+bg-hero.jpg
+Home hero; appraisal page
+Darkened living room with grey sofa and red chair; looks like stock or a render
+Landscape
+1920×1022
+Medium
+CTA background at most. Not a premium hero
+bg-title.jpg
+Title banner on every inner page
+Brisbane's Story Bridge at night, lit red
+Landscape, very wide
+1920×425
+Medium
+Other. It shows Brisbane city, not Logan
+handshake.jpg
+About, Advantage, blog
+Stock handshake in front of a house
+Landscape
+1100×733
+Low to medium
+Replace
+real-estate.jpg
+About
+Stock image of a suited person holding keys
+Landscape
+1100×733
+Low to medium
+Replace
+No existing image is strong enough for a premium homepage hero. The best candidates are listing photographs (X-E), which are temporary by nature.
+X-C. Team photos
+All are square head-and-shoulders portraits. Backgrounds are mixed: about half white or grey studio, half outdoor greenery, so the set is not visually consistent.
+Name
+Role
+Photo file
+Size
+Quality
+Crop and background
+Parnam Singh Heir
+Principal / Director
+parnam-singh-heir.jpg
+300×300
+Low (small)
+Square, white studio
+Johann Castro
+Director
+johann-castro-e1588648915671.jpg
+600×600
+Medium
+Square, white studio, tight crop
+Richard Falwasser
+Real Estate Agent & Auctioneer
+Richard-Falwasser.jpg
+600×600
+Medium
+Square, white studio
+Tony Fernandez
+Sales Agent
+Tony-Fernandez.jpg
+600×600
+Medium
+Square, white studio
+Dhaval Nainani
+Sales Consultant
+Dhaval_rea.jpg
+600×600
+Medium
+Square, light studio
+Denis Kozinets
+Sales Consultant
+Denis-Kozinets.jpg
+600×600
+Medium
+Square, white studio
+Happy Gill
+Sales Consultant
+Happy-Gill.jpg
+600×600
+Medium
+Square, grey studio
+Frances Fernandez
+Senior Property Manager
+Frances-Fernandez.jpg
+600×600
+Medium
+Square, white studio
+Teresa Stewart
+Senior Property Manager
+Teresa-Stewart.jpg
+600×600
+Medium
+Square, outdoor
+Alexandra Fernandez
+Property Manager
+Alexandra-Fernandez.jpg
+600×600
+Medium
+Square, outdoor
+Yuki Xiang
+Property Manager
+Yuki-REA-e1782826164158.jpg
+600×600
+Medium
+Square, outdoor
+Satyan Jagannathan
+Property Manager
+satyan-phtoo-website.jpg
+600×600
+Medium
+Square, plain wall
+Sophie Wang
+Property Manager
+Sophie-web.jpg
+600×600
+Medium
+Square, outdoor
+Desley Thiedecke
+Property Management
+Untitled-design.jpg
+600×600
+Medium
+Square, white studio
+Bhavani Vakity
+Leasing Officer
+Bhavani-REA-e1782825650608.jpg
+600×600
+Medium
+Square, outdoor
+Dharmesh Thakor
+Inspections Officer
+dharmesh-crop-2.jpg
+600×600
+Medium
+Square, outdoor
+Karen Cane
+Inspections Officer
+Karen-Cane.jpg
+600×600
+Medium
+Square, outdoor
+Joy Wong
+Sales Admin
+Joy-Wong.jpg
+600×600
+Medium
+Square, outdoor
+Tanveer Singh
+Marketing Executive
+default-profile-image.jpg
+640×640
+Placeholder
+Grey silhouette. NEW IMAGE REQUIRED
+At 600 pixels square these suit cards and small profile headers only. A premium team section with large portraits needs the original photo files or a reshoot.
+X-D. Office and business photos
+None found. There is no office exterior or interior, signage, team group shot, staff-at-work, event or community photograph anywhere on the site or in its media library. NEW IMAGE REQUIRED.
+X-E. Property imagery
+TEMPORARY LISTING IMAGES — should eventually be supplied dynamically from the property listing feed. Use as development placeholders only. Most carry a Red Rocket watermark in the bottom-right corner, and each belongs to a specific vendor's property.
+Property
+File
+Source page
+Image type
+Size
+Quality
+Placeholder use
+89 Passerine Drive, Rochedale South (sold)
+…QLD-4123.jpg
+Listing
+Exterior: two-storey home, front lawn
+2000×1333
+High
+Hero, listing card
+89 Passerine Drive
+…-17.jpg
+Same
+Exterior: pool and rear of house
+2000×1333
+High
+Hero, lifestyle panel
+89 Passerine Drive
+…-18.jpg
+Same
+Exterior: deck and courtyard seating
+2000×1333
+High
+Gallery
+4 Boskenne Street, Rochedale South (for sale)
+…QLD-4123.jpg
+Listing
+Exterior: lowset home, lawn, blue sky
+2000×1500
+High
+Listing card
+12 Rio Court, Underwood (sold)
+…-20.jpg
+Listing
+Exterior: lowset brick home and driveway
+2000×1333
+High
+Listing card, sold card
+7 Lilygreen Court, Springwood (sold)
+…QLD-4127.jpg
+Listing
+Exterior: two-storey brick home
+2000×1333
+High
+Listing card, sold card
+7 Lilygreen Court
+…-14.jpg
+Same
+Exterior: rear lawn and house
+2000×1333
+High
+Gallery
+48 Macmillan Loop, Belivah (for sale)
+…QLD-4207.png
+Listing
+Exterior: modern facade, dark garage door
+1344×896
+Medium (smaller file)
+Listing card
+42 Lime Street, Redland Bay (for sale)
+…QLD-4165.png
+Listing
+Exterior: twilight front with garden lighting; no visible watermark
+1536×1024
+High
+Hero, sell-page banner
+48 Macmillan Loop
+…-4.jpg
+Listing above
+Interior: kitchen, timber and white cabinetry
+1328×896
+Medium to high
+Interior panel
+48 Macmillan Loop
+…-3.jpg
+Same
+Interior: kitchen island
+1328×896
+Medium to high
+Interior panel
+48 Macmillan Loop
+…-2.png
+Same
+Interior: open-plan living and dining
+1328×896
+Medium to high
+Interior panel
+48 Macmillan Loop
+…-12.png
+Same
+Interior: styled bedroom
+1344×896
+Medium to high
+Gallery
+48 Macmillan Loop
+…-7.png
+Same
+Interior: bathroom, double vanity
+1344×896
+Medium to high
+Gallery
+89 Passerine Drive
+…-6.jpg
+Listing above
+Interior: white kitchen with island
+2000×1333
+High
+Interior panel
+89 Passerine Drive
+…-16.jpg
+Same
+Interior/outdoor: covered timber deck lounge
+2000×1333
+High
+Lifestyle panel
+12 Rio Court
+…-5-1.jpg
+Listing above
+Interior: lived-in lounge room
+2000×1333
+Medium
+Gallery
+12 Rio Court
+…-6-1.jpg
+Same
+Interior: kitchen
+2000×1333
+Medium
+Gallery
+42 Lime Street
+…-8.png
+Listing above
+Interior: styled bedroom
+1536×1024
+High
+Gallery
+42 Lime Street
+…-5.jpg
+Same
+Interior: bathroom
+2000×1333
+Medium
+Gallery
+89 Passerine Drive
+…-22.jpg
+Listing above
+Aerial of Rochedale South with location labels
+2000×1500
+High, but annotated
+Land or area placeholder
+89 Passerine Drive
+…-20.jpg
+Same
+Aerial with lot outline and land size
+2000×1500
+High, but annotated
+Land placeholder
+9 Fels Close, Eight Mile Plains (land)
+…QLD-4113.jpeg
+Listing
+Aerial with lot outline
+1288×832
+Medium
+Land card
+Warringa Circuit, Yarrabilba (land)
+…QLD-4207.png
+Listing
+Graphic: green lot diagram with dimensions
+1536×1024
+Medium (graphic, not a photo)
+Land card
+Several newer listing images (48 Macmillan Loop, 42 Lime Street) look virtually staged or digitally enhanced. Check with the agency before using them outside the listing itself.
+X-F. Location and suburb imagery
+File
+What it shows
+Size
+Note
+bg-title.jpg
+Story Bridge, Brisbane, at night
+1920×425
+Brisbane CBD, not Logan
+brisbane-river.jpg
+Brisbane River, Story Bridge and city skyline by day
+1000×667
+Blog stock image; Brisbane CBD, not Logan
+The site has no photography of Springwood, Rochedale South, Underwood, Logan, local parks, streets or lifestyle. The only local views are annotated aerials inside individual listings.
+New location photography or licensed stock imagery will be required for the redesigned area sections.
+X-G. Review and award graphics
+Name
+File
+Source page
+What it represents
+Preserve?
+Five red stars
+ratemyagent-reviews-red.png
+Home hero
+Site-made star row beside the typed rating, 153×23
+Concept yes, file no. Too small; redraw as vector
+Five green stars
+ratemyagent-reviews.png
+Media library
+Alternate star row, 153×23
+No
+Single stars
+ratemyagent-star-red.png · ratemyagent-star.png
+Home hero, media library
+19×17 star icons
+No; use an icon
+RateMyAgent logo
+rma-duo-logo.png
+Home reviews widget
+RateMyAgent's own logo, served from their site, 164×40
+Yes, through the official widget and RateMyAgent's brand rules
+No award badges, agency award logos, certification marks or partner logos exist on the site. The award claim is text only. If the agency holds RateMyAgent award badges, obtain the official files from RateMyAgent.
+X-H. Blog and content images
+Blog images are generic stock at about 1,000 pixels wide with unknown licences. None is strong enough for premium guides.
+File
+Shows
+Size
+Possible use
+hanging-art.jpg
+Couple hanging a picture in a bright room
+1000×667
+Tenant or buyer guide, small sizes only
+brisbane-river.jpg
+Brisbane River and skyline
+1000×667
+Regional context, small sizes only
+home-for-sale.jpg
+"Home for sale" sign outside an American-style house
+1000×600
+Do not reuse
+house-prices.jpg
+Model house among gold dollar signs
+1000×599
+Do not reuse
+real-estate-news.jpg
+Keys on a "Real Estate" newspaper
+1000×572
+Do not reuse
+Seven further blog images (investor, housing graphs, cranes, travelling, city construction, piggy bank, scales) are the same kind of stock and were not catalogued.
+X-I. Video
+The only video on the site is four client stories from 2017, hosted on Wistia. There is no hero video, and no property, agent or promotional video was found on the pages and listings sampled. No YouTube or Vimeo embeds exist. The agency's Facebook and Instagram feeds were not reviewed.
+Title
+Source page
+Wistia media ID
+Cover image
+Possible use
+Absolutely Blown Away (Colin, seller)
+Post
+c7rdd9ynl9
+colin.jpg
+Reviews page, Sell page
+Talks the Talk, And Walks the Walk (Peter and Denise, sellers)
+Post
+tgje1dxz2o
+peter-and-denise.jpg
+Reviews page, Sell page
+Flexible Property Management (Jan, landlord)
+Post
+qka11ldw5c
+jill.jpg
+Property Management page
+Selling by Auction… Never Again (Gary, seller)
+Post
+mbw4bt25cd
+selling-by-auction.jpg
+Reviews page, with care
+Each post's code references https://fast.wistia.com/embed/medias/{media ID}. The address carries a .jsonp suffix in the code. The videos were not played, so length and quality are unverified.
+The media library also holds eight more "Watch my story" cover images with no published post, for example john.jpg and FRANZ-SOLD-IN-3-DAYS.jpg. The agency may hold more client videos than the site shows. NEEDS VERIFICATION.
+X-J. Image quality audit
+Group
+Assets
+Work needed
+REUSE
+Listing photography at 2000 pixels wide (via the feed); map pin; rocket mark as a concept
+None for listings. Redraw the mark as vector
+POSSIBLY REUSE
+17 team headshots at 600×600
+Consistent crop and background treatment; originals needed for large display
+POSSIBLY REUSE
+Logo PNGs
+Vector original or redraw; transparent and reversed versions
+POSSIBLY REUSE
+Four Wistia client videos and their covers
+Client consent; covers show "Watch my story" overlays and need replacing
+POSSIBLY REUSE
+bg-hero.jpg
+Only as a darkened background; licence check
+POSSIBLY REUSE
+48 Macmillan Loop and 42 Lime Street images
+Smaller files; confirm virtual staging
+REPLACE
+Parnam Singh Heir's headshot (300×300) and Tanveer Singh's placeholder
+New photos
+REPLACE
+handshake.jpg, real-estate.jpg and all blog stock
+Generic and low resolution
+REPLACE
+bg-title.jpg (Story Bridge)
+Wrong location for a Logan agency; extreme crop
+REPLACE
+Star-rating PNGs
+Tiny bitmaps
+REPLACE
+Photos of former staff still in the media library
+Do not migrate
+X-K. Final media library
+Only assets worth carrying into the build are listed.
+Category
+Asset
+URL
+Source page
+Quality
+Recommended use
+Brand
+Primary logo
+logo-red-rocket-realty-nav.png
+Header
+Low (506×200)
+Reference for redraw
+Brand
+Square logo
+logo-red-rocket-realty-sq.png
+Media library
+Medium
+Social share image
+Brand
+Favicon
+favicon-red-rocket-realty.png
+Site-wide
+Medium
+Favicon
+Brand
+Map pin
+pin-red-rocket-realty.png
+Contact
+Medium
+Map marker
+Hero
+Twilight exterior, 42 Lime Street
+…QLD-4165.png
+Listing
+High
+Temporary hero
+Hero
+Front exterior, 89 Passerine Drive
+…QLD-4123.jpg
+Listing
+High
+Temporary hero
+Hero
+Pool, 89 Passerine Drive
+…-17.jpg
+Listing
+High
+Temporary lifestyle panel
+Hero
+Dark living room
+bg-hero.jpg
+Home
+Medium
+CTA background
+Property
+Exterior set (9 images)
+See X-E
+Listings
+High
+Listing-card placeholders
+Property
+Interior set (11 images)
+See X-E
+Listings
+Medium to high
+Section placeholders
+Property
+Aerial and land set (4 images)
+See X-E
+Listings
+Medium to high
+Land placeholders
+Team
+18 headshots
+See X-C
+Our Team
+Medium
+Team cards
+Reviews
+RateMyAgent logo
+rma-duo-logo.png
+Home
+Medium
+Via official widget
+Video
+Four client stories
+See X-I
+Blog
+Unverified
+Reviews, Sell, Property Management
+Documents
+Rental application Form 22
+15052025153558-0001.pdf
+Renting menu
+Scanned PDF
+Tenant download; replace with a clean copy
+BEST ASSETS FOR THE NEW WEBSITE
+Seven of the ten slots can be filled only with temporary listing photos or not at all.
+#
+Section
+Strongest existing asset
+Verdict
+1
+Homepage hero
+42 Lime Street twilight exterior or 89 Passerine Drive front
+Temporary only. NEW IMAGE REQUIRED for launch
+2
+About section
+None suitable. No office, team-group or signage photo
+NEW IMAGE REQUIRED
+3
+Buy section
+89 Passerine Drive pool or 48 Macmillan Loop living room
+Temporary listing image
+4
+Sell section
+89 Passerine Drive front with its sold result; client video covers as support
+Temporary listing image
+5
+Rent section
+48 Macmillan Loop kitchen
+Temporary listing image
+6
+Property Management
+None suitable. Senior property manager headshots can support
+NEW IMAGE REQUIRED
+7
+Team section
+18 headshots in X-C
+Usable at card size. New photos for Parnam Singh Heir and Tanveer Singh; a group photo is NEW IMAGE REQUIRED
+8
+Local Areas
+None. Only Brisbane-city stock and annotated listing aerials
+NEW IMAGE REQUIRED
+9
+Appraisal CTA
+bg-hero.jpg as a dark background, or a twilight exterior
+Usable short term
+10
+Footer / Contact
+Map pin and logo
+Usable. Office photo is NEW IMAGE REQUIRED
