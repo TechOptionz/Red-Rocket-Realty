@@ -273,13 +273,10 @@ export const PHOTOS = {
 // Logo registry: the client picks one from the header dropdown; the choice is stored in localStorage('rr-logo') and applied site-wide.
 // To add a logo: drop the files in brand/ and add an entry here (dark = for charcoal header/footer, light = for white backgrounds).
 export const LOGOS: Logo[] = [
-  { id: 'rocket-house', label: 'Rocket House', dark: '/brand/logo2-horizontal-dark.png?v=5', light: '/brand/logo2-horizontal.png?v=5', stackedDark: '/brand/logo2-stacked-dark.png', emblemDark: '/brand/logo2-emblem-dark.png', headerH: 60, footerH: 72 },
+  { id: 'rocket-tower', label: 'Rocket Tower', dark: '/brand/logo7-horizontal-dark.png', light: '/brand/logo7-horizontal.png', stackedDark: '/brand/logo7-horizontal-dark.png', emblemDark: '/brand/logo7-emblem.png', headerH: 56, footerH: 68 },
   { id: 'rocket-flight', label: 'Rocket Flight', dark: '/brand/logo3-horizontal-dark.png?v=5', light: '/brand/logo3-horizontal.png?v=5', stackedDark: '/brand/logo3-horizontal-dark.png?v=5', emblemDark: '/brand/logo3-emblem-dark.png?v=2', headerH: 52, footerH: 62 },
   { id: 'rocket-tile', label: 'Rocket Tile', dark: '/brand/logo4-horizontal-dark.png', light: '/brand/logo4-horizontal.png', stackedDark: '/brand/logo4-horizontal-dark.png', emblemDark: '/brand/logo3-emblem-white.png', headerH: 50, footerH: 60 },
-  { id: 'launch-ring', label: 'Launch Ring', dark: '/brand/logo5-horizontal-dark.png', light: '/brand/logo5-horizontal.png', stackedDark: '/brand/logo5-horizontal-dark.png', emblemDark: '/brand/logo3-emblem-dark.png?v=4', headerH: 52, footerH: 62 },
-  { id: 'lift-off', label: 'Lift-off Wordmark', dark: '/brand/logo6-horizontal-dark.png', light: '/brand/logo6-horizontal.png', stackedDark: '/brand/logo6-horizontal-dark.png', emblemDark: '/brand/logo3-emblem-dark.png?v=4', headerH: 46, footerH: 54 },
-  { id: 'classic', label: 'Classic RR', dark: '/brand/logo-horizontal-dark.png?v=4', light: '/brand/logo-horizontal.png', stackedDark: '/brand/logo-stacked-dark.png?v=4', emblemDark: '/brand/logo-emblem-dark.png?v=4', headerH: 50, footerH: 58 },
 ];
-export const DEFAULT_LOGO = 'rocket-house';
+export const DEFAULT_LOGO = 'rocket-tower';
 export const getLogo = (): Logo => { let id = DEFAULT_LOGO; try { id = localStorage.getItem('rr-logo') || DEFAULT_LOGO; } catch (e) {} return LOGOS.find(l => l.id === id) || LOGOS[0]; };
 export const setLogo = (id: string) => { try { localStorage.setItem('rr-logo', id); } catch (e) {} window.dispatchEvent(new CustomEvent('rr-logo-change', { detail: id })); };

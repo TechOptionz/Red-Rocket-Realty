@@ -1,12 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useLogo } from "@/lib/useLogo";
 
 /**
  * Site-wide "back to top" button (desktop and phone). Fixed to the bottom-right corner, it fades in once the page has
  * been scrolled past roughly one viewport and scrolls smoothly back to the top. Hidden while the mobile menu locks the page.
+ * The icon is the chosen logo's rocket emblem, used as a CSS mask filled with currentColor (brand red, no circle). It idles with
+ * a slow float, lifts with an exhaust flame on hover, and plays a short launch animation when clicked before scrolling up.
  */
 export default function BackToTop() {
   const [show, setShow] = useState(false);
+  const [launch, setLaunch] = useState(false);
+  const { logo } = useLogo();
+  const rocket = "url(" + (logo.emblemDark || logo.dark) + ")";
 
   useEffect(() => {
     let raf = 0;
@@ -30,11 +36,18 @@ export default function BackToTop() {
   const toTop = () => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    if (reduce) return;
+    setLaunch(true);
+    window.setTimeout(() => setLaunch(false), 750);
   };
 
   return (
-    <button type="button" className="totop" data-show={show ? "1" : "0"} aria-label="Back to top" title="Back to top" tabIndex={show ? 0 : -1} onClick={toTop}>
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5" /><path d="m5 12 7-7 7 7" /></svg>
+    <button type="button" className="totop" data-show={show ? "1" : "0"} data-launch={launch ? "1" : "0"} aria-label="Back to top" title="Back to top" tabIndex={show ? 0 : -1} onClick={toTop}>
+      <span className="totop__ship" aria-hidden="true">
+        <span className="totop__flame" />
+        <span className="totop__rocket" style={{ WebkitMaskImage: rocket, maskImage: rocket }} />
+      </span>
+      <span className="totop__label" aria-hidden="true">Top</span>
     </button>
   );
 }
