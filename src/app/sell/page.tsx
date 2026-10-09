@@ -25,7 +25,7 @@ export default function SellPage() {
       <Header />
       <main>
         <section className="hero" style={{ minHeight: "88svh" }}>
-          <div className="bsr__bg" aria-hidden="true"><Photo src={PHOTOS.heroPoster} sizes="100vw" priority quality={70} /></div>
+          <div className="bsr__bg" aria-hidden="true"><Photo src={PHOTOS.heroPoster} sizes="100vw" priority quality={75} /></div>
           <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.1) 40%,rgba(15,17,20,.95) 100%)" }} />
           <div style={{ position: "relative", width: "100%", padding: "170px var(--pad-x) clamp(56px,7vw,96px)", display: "grid", gap: 24 }}>
             <Crumb tone="light" items={[["Sell"]]} />

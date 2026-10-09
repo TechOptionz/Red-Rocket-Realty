@@ -214,7 +214,7 @@ export default function Header({ solid = false }: { solid?: boolean }) {
                 {NAV_CARDS.map((n, i) => (
                   <div className="mcard" key={n.label} style={{ transitionDelay: panel ? 0.04 + i * 0.045 + "s" : "0s" }}>
                     <Link href={n.href} className="mcard__media" tabIndex={-1} aria-hidden="true" onClick={closeAll}>
-                      <span className="mcard__photo">{cardsOn ? <Photo src={n.photo} sizes="(max-width: 1400px) 22vw, 300px" quality={65} /> : null}</span>
+                      <span className="mcard__photo">{cardsOn ? <Photo src={n.photo} sizes="(max-width: 1400px) 22vw, 300px" quality={70} /> : null}</span>
                     </Link>
                     <div className="mcard__body">
                       <Link href={n.href} className="mcard__title" onClick={closeAll}>{n.label}</Link>
@@ -286,7 +286,7 @@ export default function Header({ solid = false }: { solid?: boolean }) {
 
             {featured ? (
               <Link href={propHref(featured)} className="mnav__feat" onClick={closeAll} data-mmi style={{ transitionDelay: menuOpen ? ".32s" : "0s" }}>
-                <span className="mnav__feat-img">{mobileOn ? <Photo src={featured.photo!} sizes="112px" quality={65} /> : null}</span>
+                <span className="mnav__feat-img">{mobileOn ? <Photo src={featured.photo!} sizes="112px" quality={70} /> : null}</span>
                 <span className="mnav__feat-body">
                   <span className="mnav__feat-k">Featured · {featured.status || "For sale"}</span>
                   <span className="mnav__feat-t">{featured.address}, {featured.suburb}</span>

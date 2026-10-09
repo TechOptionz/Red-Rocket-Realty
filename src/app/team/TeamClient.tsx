@@ -36,7 +36,7 @@ export default function TeamClient() {
   return (
     <main>
       <section className="hero hero--page" style={{ minHeight: "80svh" }}>
-        <div className="bsr__bg" aria-hidden="true"><Photo src={PHOTOS.hero.team} sizes="100vw" priority quality={70} /></div>
+        <div className="bsr__bg" aria-hidden="true"><Photo src={PHOTOS.hero.team} sizes="100vw" priority quality={75} /></div>
         <div className="hero__shade" aria-hidden="true" />
         <div className="hero__body">
           <Crumb tone="light" items={[["About", PAGES.about], ["Our team"]]} />

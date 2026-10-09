@@ -25,7 +25,7 @@ export default function AppraisalClient() {
     <main className="section--dark">
       <section className="ap">
         <div className="ap__side">
-          <div aria-hidden="true" style={{ position: "absolute", inset: 0 }}><Photo src={PHOTOS.hero.appraisal} sizes="(max-width: 980px) 100vw, 50vw" priority quality={70} /></div>
+          <div aria-hidden="true" style={{ position: "absolute", inset: 0 }}><Photo src={PHOTOS.hero.appraisal} sizes="(max-width: 980px) 100vw, 50vw" priority quality={75} /></div>
           <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(15,17,20,.5) 0%,rgba(15,17,20,.2) 40%,rgba(15,17,20,.96) 100%)" }} />
           <div className="ap__side-body">
             <div className="kicker kicker--photo">Free market appraisal</div>

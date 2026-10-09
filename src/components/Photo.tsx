@@ -20,7 +20,7 @@ type Props = {
  * Rendered through next/image so each slot gets a correctly sized AVIF/WebP from the optimizer,
  * lazy-loads below the fold and never ships the 2000px original to a 300px card.
  */
-export default function Photo({ src, sizes, alt = "", priority, position, quality = 75, className, style }: Props) {
+export default function Photo({ src, sizes, alt = "", priority, position, quality = 80, className, style }: Props) {
   return (
     <Image
       src={src}

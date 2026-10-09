@@ -40,7 +40,7 @@ export default function PMClient() {
             </div>
           </div>
           <div data-reveal="clip" className="pm-hero__img">
-            <div style={{ position: "absolute", inset: 0 }}><Photo src={PHOTOS.hero.pm} sizes="(max-width: 980px) 100vw, 50vw" priority quality={70} /></div>
+            <div style={{ position: "absolute", inset: 0 }}><Photo src={PHOTOS.hero.pm} sizes="(max-width: 980px) 100vw, 50vw" priority quality={75} /></div>
             <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg,rgba(22,24,29,.6) 0%,rgba(22,24,29,0) 40%)" }} />
           </div>
         </div>

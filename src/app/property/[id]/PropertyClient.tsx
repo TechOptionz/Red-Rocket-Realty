@@ -65,7 +65,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
         {photos.length ? (
           <div className={"gallery" + (thumbs.length === 0 ? " gallery--solo" : thumbs.length < 3 ? " gallery--col" : thumbs.length === 3 ? " gallery--three" : "")} style={thumbs.length > 0 && thumbs.length < 3 ? { ["--thumb-rows" as string]: thumbs.length } : undefined}>
             <button type="button" data-reveal="clip" onClick={() => setLb(0)} aria-label={"Open photo 1 of " + photos.length} className="gallery__main">
-              <div data-zoom className="card__img" style={{ backgroundColor: p.shade, padding: 0 }}><Photo src={photos[0]} alt={p.address + ", " + p.suburb} sizes={thumbs.length ? "(max-width: 980px) 100vw, 60vw" : "100vw"} priority quality={80} /></div>
+              <div data-zoom className="card__img" style={{ backgroundColor: p.shade, padding: 0 }}><Photo src={photos[0]} alt={p.address + ", " + p.suburb} sizes={thumbs.length ? "(max-width: 980px) 100vw, 60vw" : "100vw"} priority quality={85} /></div>
               {p.status ? <span className={"tag" + (isSold ? " tag--sold" : "")} style={{ padding: "10px 14px", letterSpacing: ".14em" }}>{p.status}</span> : null}
               {photos.length > 1 ? <span className="gallery__all"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 5h16v14H4zM4 15l5-5 4 4 3-3 4 4M15 9h.01" /></svg>Show all {photos.length} photos</span> : null}
             </button>
@@ -75,7 +75,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
                   const idx = k + 1, isLast = k === thumbs.length - 1, extra = photos.length - 1 - thumbs.length;
                   return (
                     <button key={src} type="button" onClick={() => setLb(idx)} aria-label={"Open photo " + (idx + 1) + " of " + photos.length} className="gallery__thumb">
-                      <div data-zoom><Photo src={src} sizes="(max-width: 980px) 25vw, 20vw" quality={70} /></div>
+                      <div data-zoom><Photo src={src} sizes="(max-width: 980px) 25vw, 20vw" quality={75} /></div>
                       {isLast && extra > 0 ? <div className="gallery__more"><b>+{extra}</b><span>View all photos</span></div> : null}
                     </button>
                   );
@@ -166,7 +166,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
                 <div style={{ display: "grid", gap: 16 }}>
                   {p.floorplans.map((src, i) => (
                     <a key={src} href={src} target="_blank" rel="noopener" className="floorplan" aria-label={"Open floor plan " + (i + 1) + " full size"}>
-                      <Image src={src} alt={"Floor plan " + (p.floorplans!.length > 1 ? i + 1 : "") + " for " + p.address + ", " + p.suburb} width={(FLOORPLAN_DIMS[src] || [1600, 1200])[0]} height={(FLOORPLAN_DIMS[src] || [1600, 1200])[1]} sizes="(max-width: 980px) 100vw, 60vw" quality={80} style={{ width: "100%", height: "auto" }} />
+                      <Image src={src} alt={"Floor plan " + (p.floorplans!.length > 1 ? i + 1 : "") + " for " + p.address + ", " + p.suburb} width={(FLOORPLAN_DIMS[src] || [1600, 1200])[0]} height={(FLOORPLAN_DIMS[src] || [1600, 1200])[1]} sizes="(max-width: 980px) 100vw, 60vw" quality={85} style={{ width: "100%", height: "auto" }} />
                     </a>
                   ))}
                   <p className="small">Click a plan to open it full size.</p>
