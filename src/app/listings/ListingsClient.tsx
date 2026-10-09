@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { LAND, PAGES, PHOTOS, RENT, SALE, SEARCH, SOLD, type Listing } from "@/data/rr-data";
@@ -9,6 +9,7 @@ import Lines from "@/components/Lines";
 import Photo from "@/components/Photo";
 
 type Mode = "buy" | "rent" | "land" | "sold";
+const MODES: Mode[] = ["buy", "rent", "land", "sold"];
 const TITLES: Record<Mode, [string, string, string]> = {
   buy: ["Buy", "Properties for sale", "properties for sale"],
   rent: ["Rent", "Properties for rent", "properties for rent"],
@@ -17,51 +18,75 @@ const TITLES: Record<Mode, [string, string, string]> = {
 };
 const SOURCE: Record<Mode, Listing[]> = { buy: SALE, rent: RENT, land: LAND, sold: SOLD };
 const PAGE = 6;
+const SORTS: [string, string][] = [["new", "Newest"], ["old", "Oldest"], ["hi", "Price · high to low"], ["lo", "Price · low to high"], ["az", "Suburb A–Z"]];
+
+/** Disclosed figure for a listing: weekly rent, or the dollar amount in a price string ("Offers Over $1,200,000", "Sold $945,000"). Undisclosed ("Contact Agent", "Sold") → null. */
+function figure(p: Listing, isRent: boolean): number | null {
+  if (isRent) return p.rent || null;
+  const m = (p.price || "").replace(/,/g, "").match(/\$\s?(\d+(?:\.\d+)?)\s*(k|m)?/i);
+  if (!m) return null;
+  const n = parseFloat(m[1]);
+  const unit = (m[2] || "").toLowerCase();
+  return unit === "m" ? n * 1_000_000 : unit === "k" ? n * 1000 : n;
+}
 
 export default function ListingsClient() {
   const sp = useSearchParams();
   const qMode = sp.get("mode");
-  const [mode, setMode] = useState<Mode>((["buy", "rent", "land", "sold"] as Mode[]).includes(qMode as Mode) ? (qMode as Mode) : "buy");
+  const [mode, setMode] = useState<Mode>(MODES.includes(qMode as Mode) ? (qMode as Mode) : "buy");
   const [suburb, setSuburb] = useState(sp.get("suburb") || "");
   const [ptype, setPtype] = useState(sp.get("type") || "");
   const [pfrom, setPfrom] = useState(sp.get("from") || "");
   const [pto, setPto] = useState(sp.get("to") || "");
-  const [bmin, setBmin] = useState(sp.get("beds") || "");
-  const [bmax, setBmax] = useState("");
-  const [baths, setBaths] = useState("");
+  const [beds, setBeds] = useState(sp.get("beds") || "");
+  const [baths, setBaths] = useState(sp.get("baths") || "");
   const [sort, setSort] = useState("new");
   const [view, setView] = useState<"grid" | "list">("grid");
   const [limit, setLimit] = useState(PAGE);
+  const resultsRef = useRef<HTMLElement>(null);
 
-  // keep the address bar shareable
+  // Mirror the search in the address bar so a search can be bookmarked or shared.
   useEffect(() => {
     const q = new URLSearchParams({ mode });
     if (suburb) q.set("suburb", suburb);
     if (ptype) q.set("type", ptype);
     if (pfrom) q.set("from", pfrom);
     if (pto) q.set("to", pto);
-    if (bmin) q.set("beds", bmin);
+    if (beds) q.set("beds", beds);
+    if (baths) q.set("baths", baths);
     try { history.replaceState(null, "", "?" + q.toString() + window.location.hash); } catch {}
-  }, [mode, suburb, ptype, pfrom, pto, bmin]);
-  useEffect(() => setLimit(PAGE), [mode, suburb, ptype, pfrom, pto, bmin, bmax, baths]);
+  }, [mode, suburb, ptype, pfrom, pto, beds, baths]);
+  useEffect(() => setLimit(PAGE), [mode, suburb, ptype, pfrom, pto, beds, baths, sort]);
 
   const isRent = mode === "rent";
   const source = SOURCE[mode];
   const pf = Number(pfrom) || 0, pt = Number(pto) || Infinity;
-  let list = source.filter((p) => (!suburb || p.suburb === suburb) && (!ptype || p.type === ptype) && (!bmin || p.beds >= Number(bmin)) && (!bmax || p.beds <= Number(bmax)) && (!baths || p.baths >= Number(baths)) && (!isRent || ((p.rent || 0) >= pf && (p.rent || 0) <= pt)));
-  if (sort === "old") list = list.slice().reverse();
-  if (sort === "az") list = list.slice().sort((a, b) => a.suburb.localeCompare(b.suburb));
-  if (sort === "za") list = list.slice().sort((a, b) => b.suburb.localeCompare(a.suburb));
-  if (sort === "hi") list = list.slice().sort((a, b) => (b.rent || 0) - (a.rent || 0));
-  if (sort === "lo") list = list.slice().sort((a, b) => (a.rent || 0) - (b.rent || 0));
+  // Price limits apply to listings with a disclosed figure; "Contact Agent" style listings stay in the results.
+  const inRange = (p: Listing) => { const f = figure(p, isRent); return f === null || (f >= pf && f <= pt); };
+  const list = source
+    .filter((p) => (!suburb || p.suburb === suburb) && (!ptype || p.type === ptype) && (!beds || p.beds >= Number(beds)) && (!baths || p.baths >= Number(baths)) && inRange(p))
+    .map((p, i) => ({ p, i, f: figure(p, isRent) }))
+    .sort((a, b) => {
+      if (sort === "old") return b.i - a.i;
+      if (sort === "az") return a.p.suburb.localeCompare(b.p.suburb) || a.i - b.i;
+      if (sort === "hi" || sort === "lo") {
+        if (a.f === null || b.f === null) return (a.f === null ? 1 : 0) - (b.f === null ? 1 : 0) || a.i - b.i; // undisclosed prices last
+        return (sort === "hi" ? b.f - a.f : a.f - b.f) || a.i - b.i;
+      }
+      return a.i - b.i;
+    })
+    .map((x) => x.p);
   const results = list.slice(0, limit);
   const suburbs = Array.from(new Set(source.map((p) => p.suburb))).sort();
   const types = Array.from(new Set(source.map((p) => p.type).filter(Boolean) as string[])).sort();
   const prices = isRent ? SEARCH.rentPrices : SEARCH.buyPrices;
-  const sortOptions = [["new", "Date · newest first"], ["old", "Date · oldest first"], ["az", "Suburb A–Z"], ["za", "Suburb Z–A"]].concat(isRent ? [["hi", "Rent · high to low"], ["lo", "Rent · low to high"]] : []);
+  const showType = types.length > 1;
+  const showPrice = mode !== "land";
   const pages = Math.max(1, Math.ceil(list.length / PAGE));
-  const clear = () => { setSuburb(""); setPtype(""); setPfrom(""); setPto(""); setBmin(""); setBmax(""); setBaths(""); };
-  const switchMode = (m: Mode) => { setMode(m); setSuburb(""); setPtype(""); setPfrom(""); setPto(""); };
+  const active = Boolean(suburb || ptype || pfrom || pto || beds || baths);
+  const clear = () => { setSuburb(""); setPtype(""); setPfrom(""); setPto(""); setBeds(""); setBaths(""); };
+  const switchMode = (m: Mode) => { setMode(m); clear(); };
+  const goToResults = () => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   const [kicker, title, noun] = TITLES[mode];
 
   return (
@@ -77,8 +102,8 @@ export default function ListingsClient() {
             <div className="hero__meta" style={{ fontSize: 16 }}><b>{list.length}</b> {noun} · Logan City and surrounding areas</div>
           </div>
           <div role="tablist" aria-label="Listing type" className="seg">
-            {(["buy", "rent", "land", "sold"] as Mode[]).map((m) => (
-              <button key={m} type="button" role="tab" className="seg__btn" data-on={m === mode ? "1" : "0"} onClick={() => switchMode(m)}>{m === "buy" ? "For sale" : m === "rent" ? "For rent" : m === "land" ? "Land" : "Sold"}</button>
+            {MODES.map((m) => (
+              <button key={m} type="button" role="tab" aria-selected={m === mode} className="seg__btn" data-on={m === mode ? "1" : "0"} onClick={() => switchMode(m)}>{m === "buy" ? "For sale" : m === "rent" ? "For rent" : m === "land" ? "Land" : "Sold"}</button>
             ))}
           </div>
         </div>
@@ -86,36 +111,30 @@ export default function ListingsClient() {
       </section>
 
       <section className="hero-bar">
-        <form className="search-bar filters filters--overlap" onSubmit={(e) => e.preventDefault()}>
-          <label className="search-field search-field--sm" style={{ flexBasis: 160 }}><span>Suburb</span><select value={suburb} onChange={(e) => setSuburb(e.target.value)}><option value="">Any suburb</option>{suburbs.map((o) => <option key={o} value={o}>{o}</option>)}</select></label>
-          <label className="search-field search-field--sm" style={{ flexBasis: 140 }}><span>Property type</span><select value={ptype} onChange={(e) => setPtype(e.target.value)}><option value="">Any type</option>{types.map((o) => <option key={o} value={o}>{o}</option>)}</select></label>
-          <label className="search-field search-field--sm" style={{ flexBasis: 120 }}><span>{isRent ? "Rent from" : "Price from"}</span><select value={pfrom} onChange={(e) => setPfrom(e.target.value)}><option value="">Any</option>{prices.map((o) => <option key={o.v} value={o.v}>{o.label}</option>)}</select></label>
-          <label className="search-field search-field--sm" style={{ flexBasis: 120 }}><span>{isRent ? "Rent to" : "Price to"}</span><select value={pto} onChange={(e) => setPto(e.target.value)}><option value="">Any</option>{prices.map((o) => <option key={o.v} value={o.v}>{o.label}</option>)}</select></label>
-          <label className="search-field search-field--sm" style={{ flexBasis: 110 }}><span>Beds min</span><select value={bmin} onChange={(e) => setBmin(e.target.value)}><option value="">Any</option>{["1", "2", "3", "4", "5"].map((b) => <option key={b} value={b}>{b}+</option>)}</select></label>
-          <label className="search-field search-field--sm" style={{ flexBasis: 110 }}><span>Beds max</span><select value={bmax} onChange={(e) => setBmax(e.target.value)}><option value="">Any</option>{["1", "2", "3", "4", "5"].map((b) => <option key={b} value={b}>{b}</option>)}</select></label>
+        <form className="search-bar filters filters--overlap" aria-label="Search listings" onSubmit={(e) => { e.preventDefault(); goToResults(); }}>
+          <label className="search-field search-field--sm" style={{ flexBasis: 170 }}><span>Suburb</span><select value={suburb} onChange={(e) => setSuburb(e.target.value)}><option value="">Any suburb</option>{suburbs.map((o) => <option key={o} value={o}>{o}</option>)}</select></label>
+          {showType && <label className="search-field search-field--sm" style={{ flexBasis: 150 }}><span>Property type</span><select value={ptype} onChange={(e) => setPtype(e.target.value)}><option value="">Any type</option>{types.map((o) => <option key={o} value={o}>{o}</option>)}</select></label>}
+          {showPrice && <label className="search-field search-field--sm" style={{ flexBasis: 130 }}><span>{isRent ? "Rent from" : "Price from"}</span><select value={pfrom} onChange={(e) => setPfrom(e.target.value)}><option value="">Any</option>{prices.map((o) => <option key={o.v} value={o.v}>{o.label}</option>)}</select></label>}
+          {showPrice && <label className="search-field search-field--sm" style={{ flexBasis: 130 }}><span>{isRent ? "Rent to" : "Price to"}</span><select value={pto} onChange={(e) => setPto(e.target.value)}><option value="">Any</option>{prices.map((o) => <option key={o.v} value={o.v}>{o.label}</option>)}</select></label>}
+          <label className="search-field search-field--sm" style={{ flexBasis: 110 }}><span>Bedrooms</span><select value={beds} onChange={(e) => setBeds(e.target.value)}><option value="">Any</option>{["1", "2", "3", "4", "5"].map((b) => <option key={b} value={b}>{b}+</option>)}</select></label>
           <label className="search-field search-field--sm" style={{ flexBasis: 110 }}><span>Bathrooms</span><select value={baths} onChange={(e) => setBaths(e.target.value)}><option value="">Any</option>{["1", "2", "3"].map((b) => <option key={b} value={b}>{b}+</option>)}</select></label>
           <div className="filters__foot">
-            <div className="filters__checks">
-              <label><input type="checkbox" />Air conditioning</label>
-              <label><input type="checkbox" />Pool</label>
-              <label><input type="checkbox" />Security</label>
-            </div>
-            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-              <button type="button" className="pill pill--link pill--sm" onClick={clear}>Clear</button>
-              <button type="submit" className="pill pill--red" style={{ height: 48 }}>Search</button>
-            </div>
+            {active && <button type="button" className="pill pill--link pill--sm" onClick={clear}>Clear all</button>}
+            <button type="submit" className="pill pill--red" style={{ height: 48 }}>Search</button>
           </div>
         </form>
       </section>
 
-      <section className="section--bg" style={{ padding: "40px var(--pad-x) var(--sec-y)" }}>
+      <section ref={resultsRef} className="section--bg" style={{ padding: "40px var(--pad-x) var(--sec-y)", scrollMarginTop: 96 }}>
         <div className="results-bar">
-          <div style={{ fontSize: 14, color: "var(--grey)", fontWeight: 500 }}>Showing <b style={{ color: "var(--ink)", fontWeight: 800 }}>{Math.min(limit, list.length)}</b> of {list.length} · newest first unless sorted · search is shareable from the page address</div>
+          <div style={{ fontSize: 14, color: "var(--grey)", fontWeight: 500 }} aria-live="polite">
+            {list.length === 0 ? "No properties match" : <>Showing <b style={{ color: "var(--ink)", fontWeight: 800 }}>{Math.min(limit, list.length)}</b> of <b style={{ color: "var(--ink)", fontWeight: 800 }}>{list.length}</b> {list.length === 1 ? "property" : "properties"}</>}
+          </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
-            <label className="sort">Sort<select value={sort} onChange={(e) => setSort(e.target.value)}>{sortOptions.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select></label>
+            <label className="sort">Sort<select value={sort} onChange={(e) => setSort(e.target.value)}>{SORTS.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select></label>
             <div role="group" aria-label="View" className="seg seg--sm hide-m" style={{ padding: 3, gap: 2 }}>
-              <button type="button" aria-label="Grid view" className="seg__btn" data-on={view === "grid" ? "1" : "0"} onClick={() => setView("grid")}>Grid</button>
-              <button type="button" aria-label="List view" className="seg__btn" data-on={view === "list" ? "1" : "0"} onClick={() => setView("list")}>List</button>
+              <button type="button" aria-label="Grid view" aria-pressed={view === "grid"} className="seg__btn" data-on={view === "grid" ? "1" : "0"} onClick={() => setView("grid")}>Grid</button>
+              <button type="button" aria-label="List view" aria-pressed={view === "list"} className="seg__btn" data-on={view === "list" ? "1" : "0"} onClick={() => setView("list")}>List</button>
             </div>
           </div>
         </div>
@@ -136,7 +155,6 @@ export default function ListingsClient() {
             <div style={{ fontSize: 13, fontWeight: 700, color: "var(--grey)" }}>Page {Math.min(Math.ceil(limit / PAGE), pages)} of {pages}</div>
           </div>
         )}
-        <div className="mono-note" style={{ marginTop: 48 }}>Listing records read from redrocketrealty.com.au on 7 Oct 2026 · photos shown where the site publishes them · feature filters apply at feed level</div>
       </section>
 
       <section id="alerts" className="alerts-band">

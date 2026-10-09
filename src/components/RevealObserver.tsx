@@ -26,9 +26,12 @@ export default function RevealObserver() {
       { rootMargin: "0px 0px -6% 0px", threshold: 0.02 },
     );
     let driftEls: HTMLElement[] = [];
+    // Tracked in memory rather than with a data attribute: an attribute stamped before a Suspense boundary hydrates triggers a hydration mismatch.
+    const observed = new WeakSet<Element>();
     const scan = () => {
-      document.querySelectorAll("[data-reveal]:not([data-obs]),[data-stagger]:not([data-obs])").forEach((el) => {
-        el.setAttribute("data-obs", "1");
+      document.querySelectorAll("[data-reveal],[data-stagger]").forEach((el) => {
+        if (observed.has(el)) return;
+        observed.add(el);
         io.observe(el);
       });
       driftEls = Array.from(document.querySelectorAll<HTMLElement>("[data-drift]"));
