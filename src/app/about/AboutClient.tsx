@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { ADVANTAGE, CONTACT, PAGES, PHOTOS, TESTIMONIALS } from "@/data/rr-data";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import Photo from "@/components/Photo";
+import useScrollFill from "@/lib/useScrollFill";
 
 const TEXT = "Every buyer, seller, landlord and tenant is different, so the service is tailored. From our office in Springwood we pair thorough local knowledge with personable service, and we look after everything from the paperwork to the finance.";
 const MILESTONES = [
@@ -16,26 +17,9 @@ const MILESTONES = [
 const KINDS = ["All", "Sellers", "Buyers", "Landlords"];
 
 export default function AboutClient() {
-  const stmt = useRef<HTMLElement>(null);
-  const [fill, setFill] = useState(0);
+  const stmt = useRef<HTMLParagraphElement>(null);
+  const fill = useScrollFill(stmt);
   const [filter, setFilter] = useState("All");
-  useEffect(() => {
-    let raf = 0;
-    const measure = () => {
-      raf = 0;
-      const el = stmt.current;
-      if (!el) return;
-      const vh = window.innerHeight;
-      const r = el.getBoundingClientRect();
-      const p = Math.max(0, Math.min(1, (vh * 0.92 - r.top) / (r.height * 0.55 + vh * 0.3)));
-      setFill(Math.round(p * 100));
-    };
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(measure); };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    measure();
-    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
-  }, []);
   const words = TEXT.split(" ");
   const on = Math.round((words.length * fill) / 100);
   const match = (who: string) => filter === "All" || (filter === "Sellers" && /Vendor/.test(who)) || (filter === "Buyers" && /buyer/i.test(who)) || (filter === "Landlords" && /Landlord/.test(who));
@@ -54,8 +38,8 @@ export default function AboutClient() {
         </div>
       </section>
 
-      <section ref={stmt} className="section section--white">
-        <p className="words">{words.map((w, i) => (<span key={i} className="word" data-on={i < on ? "1" : "0"}>{w}&nbsp;</span>))}</p>
+      <section className="section section--white">
+        <p ref={stmt} className="words">{words.map((w, i) => (<span key={i} className="word" data-on={i < on ? "1" : "0"}>{w}&nbsp;</span>))}</p>
       </section>
 
       <section className="section section--dark">

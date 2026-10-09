@@ -1,30 +1,14 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import useScrollFill from "@/lib/useScrollFill";
 
 /** Oversized outlined statement that fills with solid ink as it scrolls into view. */
 export default function Statement() {
-  const ref = useRef<HTMLElement>(null);
-  const [fill, setFill] = useState(0);
-  useEffect(() => {
-    let raf = 0;
-    const measure = () => {
-      raf = 0;
-      const el = ref.current;
-      if (!el) return;
-      const vh = window.innerHeight;
-      const r = el.getBoundingClientRect();
-      const p = Math.max(0, Math.min(1, (vh * 0.92 - r.top) / (r.height * 0.55 + vh * 0.3)));
-      setFill(Math.round(p * 100));
-    };
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(measure); };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    measure();
-    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
-  }, []);
+  const ref = useRef<HTMLDivElement>(null);
+  const fill = useScrollFill(ref);
   return (
-    <section ref={ref} className="statement">
-      <div className="statement__wrap">
+    <section className="statement">
+      <div ref={ref} className="statement__wrap">
         <div className="statement__ghost" aria-hidden="true">We live<br />and breathe<br />Logan.</div>
         <div className="statement__fill" style={{ clipPath: `inset(0 ${100 - fill}% 0 0)` }}>
           <span>We live<br />and breathe<br />Logan.</span>
