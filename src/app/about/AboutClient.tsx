@@ -49,7 +49,7 @@ export default function AboutClient() {
         <div className="hero__body">
           <Crumb tone="light" items={[["About"]]} />
           <div className="kicker kicker--photo">Our story</div>
-          <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Logan locals,", <>for over <span style={{ color: "var(--red)" }}>25 years.</span></>]} />
+          <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Logan locals,", <>for over <span style={{ color: "var(--brand-red)" }}>25 years.</span></>]} />
           <p className="hero__sub">Red Rocket Realty is committed to the property needs of Logan residents. We are focused on maintaining our position as the leading real estate agents in the area and the local experts that people can rely on and trust.</p>
         </div>
       </section>

@@ -61,7 +61,7 @@ export default function Intro() {
         <Image className="intro__emblem" src={logo.emblemDark || logo.dark} alt="" {...logoSize(logo.emblemDark || logo.dark, 120)} priority />
         <div className="intro__word" aria-hidden="true">
           <span><span style={{ animationDelay: ".55s" }}>Red Rocket</span></span>
-          <span><span style={{ animationDelay: ".68s", color: "var(--red)" }}>Realty</span></span>
+          <span><span style={{ animationDelay: ".68s", color: "var(--brand-red)" }}>Realty</span></span>
         </div>
         <div className="intro__kick">Springwood · Logan · Since the 2000s</div>
       </div>

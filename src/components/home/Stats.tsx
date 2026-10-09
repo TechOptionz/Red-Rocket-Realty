@@ -27,12 +27,12 @@ export default function Stats() {
     return () => { io.disconnect(); cancelAnimationFrame(raf); };
   }, []);
   return (
-    <section ref={ref} className="section section--white">
+    <section ref={ref} className="section section--red">
       <div className="kicker" style={{ marginBottom: 40 }}>Trusted across Logan</div>
       <div className="stats">
         <div className="stat"><div className="stat__n">{v[0].toFixed(1)}</div><div className="stat__k">RateMyAgent rating</div></div>
         <div className="stat"><div className="stat__n">{Math.round(v[1])}</div><div className="stat__k">Verified reviews</div></div>
-        <div className="stat"><div className="stat__n">{Math.round(v[2])}<span style={{ color: "var(--red)" }}>+</span></div><div className="stat__k">Years serving Logan</div></div>
+        <div className="stat"><div className="stat__n">{Math.round(v[2])}+</div><div className="stat__k">Years serving Logan</div></div>
         <div className="stat"><div className="stat__n">{Math.round(v[3])}</div><div className="stat__k">Local team members</div></div>
       </div>
       <div className="mono-note" style={{ marginTop: 48 }}>Rating and review count as published on the current site · replace with live RateMyAgent feed · years claim to be confirmed by the agency</div>

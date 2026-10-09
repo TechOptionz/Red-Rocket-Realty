@@ -43,7 +43,7 @@ export default function GuidesClient() {
         <div className="stack-m" style={{ flexWrap: "wrap", gap: 32, alignItems: "flex-end" }}>
           <div style={{ display: "grid", gap: 20, maxWidth: 900 }}>
             <div className="kicker kicker--photo">Guides</div>
-            <Lines key={guide} as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={b ? ["Buying a home", <>in Logan, <span style={{ color: "var(--red)" }}>step by step.</span></>] : ["Selling your home", <>for the <span style={{ color: "var(--red)" }}>best price.</span></>]} />
+            <Lines key={guide} as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={b ? ["Buying a home", <>in Logan, <span style={{ color: "var(--brand-red)" }}>step by step.</span></>] : ["Selling your home", <>for the <span style={{ color: "var(--brand-red)" }}>best price.</span></>]} />
             <p className="hero__sub">{b ? "Six things to settle before you make an offer, from the deposit to the inspection, written by the people who sell here every week." : "Five things that move the price, from research and repairs to presentation and promotion."}</p>
           </div>
           <div role="tablist" aria-label="Guide" className="seg">

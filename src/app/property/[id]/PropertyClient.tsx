@@ -213,11 +213,11 @@ export default function PropertyClient({ p }: { p: Listing }) {
               <div style={{ display: "grid", gap: 2, minWidth: 0 }}>
                 <div style={{ fontSize: 17, fontWeight: 800, letterSpacing: "-.01em" }}>{agent.name}</div>
                 <div style={{ fontSize: 13, color: "var(--grey)" }}>{agent.role}</div>
-                <a href={agent.tel} style={{ fontSize: 14, fontWeight: 700, color: "var(--red)", textDecoration: "none", marginTop: 4 }}>{agent.mobile}</a>
+                <a href={agent.tel} style={{ fontSize: 14, fontWeight: 700, color: "var(--brand-red)", textDecoration: "none", marginTop: 4 }}>{agent.mobile}</a>
                 <a href={"mailto:" + agent.email} style={{ fontSize: 13, color: "var(--grey-2)", textDecoration: "none", wordBreak: "break-all" }}>{agent.email}</a>
               </div>
             </div>
-            <Link href={suburbHref + "#alerts"} className="enquire__alert"><span>Get alerts for new listings in {p.suburb}</span><span aria-hidden="true" style={{ color: "var(--red)" }}>→</span></Link>
+            <Link href={suburbHref + "#alerts"} className="enquire__alert"><span>Get alerts for new listings in {p.suburb}</span><span aria-hidden="true" style={{ color: "var(--brand-red)" }}>→</span></Link>
           </aside>
         </div>
       </section>

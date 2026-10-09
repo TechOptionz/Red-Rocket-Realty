@@ -42,7 +42,7 @@ export default function TeamClient() {
           <Crumb tone="light" items={[["About", PAGES.about], ["Our team"]]} />
           <div className="stack-m" style={{ flexWrap: "wrap", gap: 32, alignItems: "flex-end" }}>
             <div style={{ display: "grid", gap: 20, maxWidth: 900 }}>
-              <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Nineteen locals.", <><span style={{ color: "var(--red)" }}>One</span> team.</>]} />
+              <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Nineteen locals.", <><span style={{ color: "var(--brand-red)" }}>One</span> team.</>]} />
               <p className="hero__sub">Directors, sales agents, property managers, leasing and inspections, all working from 67 Springwood Road. Pick a department or browse everyone.</p>
             </div>
             <a href={CONTACT.phoneHref} className="pill pill--white pill--arrow" style={{ flex: "none" }}><span>{CONTACT.phone}</span><span className="pill__arrow" aria-hidden="true">→</span></a>

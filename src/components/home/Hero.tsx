@@ -77,7 +77,7 @@ export default function Hero({ onAppraise }: { onAppraise: (address: string) => 
           <div className="hero__kick"><span aria-hidden="true" />Springwood · Logan City and surrounding areas</div>
           <h1 className="display-xl">
             <span><span>Dedicated to results</span></span>
-            <span><span>that are <span style={{ color: "var(--red)", display: "inline" }}>out of this world.</span></span></span>
+            <span><span>that are <span style={{ color: "var(--brand-red)", display: "inline" }}>out of this world.</span></span></span>
           </h1>
           <p className="hero__lead">The local experts Logan can rely on and trust. Buying, selling and renting across Logan for over 25 years.</p>
         </div>

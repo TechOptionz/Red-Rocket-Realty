@@ -28,7 +28,7 @@ export default function SellPage() {
           <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.1) 40%,rgba(15,17,20,.95) 100%)" }} />
           <div style={{ position: "relative", width: "100%", padding: "170px var(--pad-x) clamp(56px,7vw,96px)", display: "grid", gap: 24 }}>
             <Crumb tone="light" items={[["Sell"]]} />
-            <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96, maxWidth: "14ch" }} lines={["Sell your home", <>with Logan&apos;s <span style={{ color: "var(--red)" }}>local experts.</span></>]} />
+            <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96, maxWidth: "14ch" }} lines={["Sell your home", <>with Logan&apos;s <span style={{ color: "var(--brand-red)" }}>local experts.</span></>]} />
             <div className="stack-m" style={{ flexWrap: "wrap", gap: 32 }}>
               <p style={{ fontSize: "clamp(17px,1.4vw,21px)", lineHeight: 1.5, color: "var(--grey-light)", maxWidth: "52ch" }}>A hands-on sale from the first appraisal to settlement day: the right price, the right buyers, and a team that stays in touch the whole way.</p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
@@ -42,7 +42,7 @@ export default function SellPage() {
         <section className="section--ink" style={{ borderTop: "1px solid rgba(255,255,255,.08)" }}>
           <div data-stagger className="proof px">
             <div data-glow><div className="proof__n">$1.5M</div><div className="proof__k">Highest recent sale · 89 Passerine Drive, Rochedale South</div></div>
-            <div data-glow><div className="proof__n">4.9<span style={{ color: "var(--red)" }}>★</span></div><div className="proof__k">RateMyAgent rating across {CONTACT.reviews} reviews</div></div>
+            <div data-glow><div className="proof__n">4.9<span style={{ color: "var(--brand-red)" }}>★</span></div><div className="proof__k">RateMyAgent rating across {CONTACT.reviews} reviews</div></div>
             <div data-glow><div className="proof__n">2017 · 2019</div><div className="proof__k">Agent of the Year, Underwood</div></div>
             <div data-glow><div className="proof__n">25+ yrs</div><div className="proof__k">Selling across Logan City <span className="mono-note mono-note--light" style={{ fontSize: 10 }}>· confirm</span></div></div>
           </div>
@@ -90,14 +90,14 @@ export default function SellPage() {
           </div>
         </section>
 
-        <section className="section section--red">
+        <section className="section section--bg">
           <div className="cta-band">
             <div style={{ display: "grid", gap: 14, maxWidth: 720 }}>
-              <div className="kicker kicker--white">Free appraisal</div>
+              <div className="kicker">Free appraisal</div>
               <Lines className="display-md" style={{ fontSize: "clamp(2.2rem,1.2rem + 3.4vw,4.4rem)", lineHeight: 1 }} lines={["How much is your", "home worth today?"]} />
-              <p style={{ fontSize: 17, lineHeight: 1.55, maxWidth: "52ch" }}>Tell us about the property and a local agent will be in touch within one business day with a market appraisal. No obligation.</p>
+              <p className="lead" style={{ fontSize: 17, lineHeight: 1.55, maxWidth: "52ch" }}>Tell us about the property and a local agent will be in touch within one business day with a market appraisal. No obligation.</p>
             </div>
-            <Link href={PAGES.appraisal} className="pill pill--dark pill--lg pill--arrow pill--red pill--dark-arrow" style={{ background: "var(--ink)", fontSize: 16, height: 64 }}><span>Start my appraisal</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
+            <Link href={PAGES.appraisal} className="pill pill--red pill--lg pill--arrow" style={{ fontSize: 16, height: 64 }}><span>Start my appraisal</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
           </div>
         </section>
       </main>

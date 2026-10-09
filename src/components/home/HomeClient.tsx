@@ -123,7 +123,7 @@ export default function HomeClient() {
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10, flex: "none" }}>
             <Link data-mag href={PAGES.listings + "?mode=sold"} className="pill pill--ghost-light">View all sold</Link>
-            <a href="#appraisal" className="pill pill--white">Sell your home today!</a>
+            <a href="#appraisal" className="pill pill--red">Sell your home today!</a>
           </div>
         </div>
         <div className="sold-grid">

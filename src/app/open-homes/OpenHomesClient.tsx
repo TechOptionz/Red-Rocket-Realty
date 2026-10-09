@@ -34,7 +34,7 @@ export default function OpenHomesClient() {
         <Crumb tone="light" items={[["Buy", PAGES.listings + "?mode=buy"], ["Open homes"]]} />
         <div className="stack-m" style={{ flexWrap: "wrap", gap: 32, alignItems: "flex-end" }}>
           <div style={{ display: "grid", gap: 20, maxWidth: 900 }}>
-            <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Open homes", <><span style={{ color: "var(--red)" }}>this week.</span></>]} />
+            <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Open homes", <><span style={{ color: "var(--brand-red)" }}>this week.</span></>]} />
             <p className="hero__sub">Every published inspection for sales and rentals, grouped by day. Add one to your calendar or plan a route for Saturday.</p>
           </div>
           <div role="tablist" aria-label="Listing type" className="seg">
@@ -61,7 +61,7 @@ export default function OpenHomesClient() {
                 <Link key={i.p.id} href={propHref(i.p)} className="oh-row" style={{ animationDelay: Math.min(k, 6) * 0.06 + "s" }}>
                   <div className="oh-row__thumb"><div data-zoom className="card__img" style={{ backgroundColor: i.p.shade, backgroundImage: i.p.photo ? undefined : dec.bgImage }}>{i.p.photo ? <Photo src={i.p.photo} sizes="(max-width: 720px) 100vw, 180px" /> : null}</div>{i.p.status ? <span className="tag" style={{ padding: "6px 10px", fontSize: 10 }}>{i.p.status}</span> : null}</div>
                   <div style={{ display: "grid", gap: 4, minWidth: 0 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}><span className="oh-row__time">{i.time}</span><span className="oh-row__kind" style={{ background: i.isRent ? "var(--ink)" : "var(--red)" }}>{i.isRent ? "For rent" : "For sale"}</span></div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}><span className="oh-row__time">{i.time}</span><span className="oh-row__kind" style={{ background: i.isRent ? "var(--ink)" : "var(--brand-red)" }}>{i.isRent ? "For rent" : "For sale"}</span></div>
                     <div style={{ fontSize: 16, fontWeight: 700 }}>{i.p.address}, {i.p.suburb}</div>
                     <div className="card__specs" style={{ marginTop: 0 }}>{specs(i.p).join(" · ")} · {i.isRent ? formatRent(i.p.rent!) : i.p.price}</div>
                   </div>

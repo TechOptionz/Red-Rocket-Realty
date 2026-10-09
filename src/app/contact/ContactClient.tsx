@@ -32,7 +32,7 @@ export default function ContactClient() {
         <div className="hero__body">
           <Crumb tone="light" items={[["Contact"]]} />
           <div className="stack-m" style={{ flexWrap: "wrap", gap: 32, alignItems: "flex-end" }}>
-            <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Buying, selling or", <>renting in <span style={{ color: "var(--red)" }}>Logan?</span></>]} />
+            <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Buying, selling or", <>renting in <span style={{ color: "var(--brand-red)" }}>Logan?</span></>]} />
             <div style={{ display: "grid", gap: 8 }}>
               <a href={CONTACT.phoneHref} style={{ color: "#fff", textDecoration: "none", fontSize: "clamp(1.6rem,1.2rem + 1.6vw,2.6rem)", fontWeight: 800, letterSpacing: "-.02em", lineHeight: 1 }}>{CONTACT.phone}</a>
               <div className="hero__meta">67 Springwood Road, Springwood QLD 4127<br />Mon–Fri 9:00am–5:00pm · Sat by appointment <span className="mono-note mono-note--light" style={{ fontSize: 10 }}>hours to confirm</span></div>

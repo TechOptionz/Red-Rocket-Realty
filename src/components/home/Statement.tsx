@@ -27,7 +27,7 @@ export default function Statement() {
       <div className="statement__wrap">
         <div className="statement__ghost" aria-hidden="true">We live<br />and breathe<br />Logan.</div>
         <div className="statement__fill" style={{ clipPath: `inset(0 ${100 - fill}% 0 0)` }}>
-          <span>We live<br />and breathe<br /><span style={{ color: "var(--red)" }}>Logan.</span></span>
+          <span>We live<br />and breathe<br />Logan.</span>
         </div>
       </div>
       <div className="statement__foot">

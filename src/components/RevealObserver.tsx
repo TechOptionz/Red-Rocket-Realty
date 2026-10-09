@@ -15,10 +15,14 @@ export default function RevealObserver() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // React attaches a __reactFiber$ expando to every node it has hydrated. Nodes inside a Suspense boundary that has not
+    // hydrated yet have none, and stamping data-in on them makes React report a hydration mismatch when it gets there.
+    // Those elements are left for the fallback pass, which runs again within 600ms.
+    const hydrated = (el: Element) => Object.keys(el).some((k) => k.startsWith("__reactFiber$"));
     const io = new IntersectionObserver(
       (es) =>
         es.forEach((e) => {
-          if (e.isIntersecting) {
+          if (e.isIntersecting && hydrated(e.target)) {
             e.target.setAttribute("data-in", "1");
             io.unobserve(e.target);
           }
@@ -39,6 +43,7 @@ export default function RevealObserver() {
     scan();
     const fallback = () =>
       document.querySelectorAll("[data-reveal]:not([data-in]),[data-stagger]:not([data-in])").forEach((el) => {
+        if (!hydrated(el)) return;
         const r = el.getBoundingClientRect();
         if (r.top < window.innerHeight * 0.96 && r.bottom > 0) el.setAttribute("data-in", "1");
       });
