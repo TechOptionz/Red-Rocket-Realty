@@ -4,6 +4,7 @@ import "./globals.css";
 import "./home.css";
 import "./pages.css";
 import RevealObserver from "@/components/RevealObserver";
+import BackToTop from "@/components/BackToTop";
 
 const rhd = Red_Hat_Display({ subsets: ["latin"], weight: ["400", "500", "700", "800", "900"], variable: "--font-rhd", display: "swap" });
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <RevealObserver />
         {children}
+        <BackToTop />
       </body>
     </html>
   );

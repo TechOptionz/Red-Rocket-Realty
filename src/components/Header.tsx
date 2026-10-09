@@ -194,6 +194,9 @@ export default function Header({ solid = false }: { solid?: boolean }) {
                 <span>Request an appraisal</span>
                 <span className="pill__arrow" aria-hidden="true">→</span>
               </Link>
+              <a href={CONTACT.phoneHref} className="hdr__icon hdr__call" aria-label={"Call " + CONTACT.phone} title={"Call " + CONTACT.phone}>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z" /></svg>
+              </a>
               <button ref={menuBtn} type="button" className="menu-btn" data-open={isOpen ? "1" : "0"} aria-label={isOpen ? "Close menu" : "Open menu"} aria-expanded={isOpen} aria-controls={desktop ? "mega-panel" : "mobile-menu"} aria-haspopup="dialog" onClick={toggleMenuButton}>
                 <span className="menu-btn__label" aria-hidden="true">
                   <span>Menu</span>
@@ -314,10 +317,6 @@ export default function Header({ solid = false }: { solid?: boolean }) {
         </div>
       </div>
 
-      <div className="mbar" data-hidden={menuOpen || pathname === PAGES.appraisal ? "1" : "0"}>
-        <a href={CONTACT.phoneHref} className="mbar__call">Call {CONTACT.phone}</a>
-        <Link href={PAGES.appraisal} className="mbar__appraise">Free appraisal</Link>
-      </div>
     </>
   );
 }
