@@ -10,6 +10,7 @@ import Image from "next/image";
 import Photo from "@/components/Photo";
 import { FLOORPLAN_DIMS } from "@/data/floorplan-dims";
 import Lightbox from "@/components/Lightbox";
+import PropertyMap from "@/components/PropertyMap";
 
 const STRIPE = "repeating-linear-gradient(135deg,rgba(255,255,255,.022) 0 12px,transparent 12px 24px)";
 
@@ -44,6 +45,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
   const sourceNote = p.desc ? "Listing copy, features, ID, inspection and agent read from redrocketrealty.com.au on 7 Oct 2026" : "Sample listing · headline, description, features, ID and inspections come from the feed";
   const all = [...SALE, ...LAND, ...SOLD, ...RENT];
   const similar = all.filter((x) => x.id !== p.id && (isRent ? !!x.rent : !x.rent && x.status !== "Sold")).slice(0, 4);
+  const hasMap = !!p.map && p.map !== "none";
   const brochureHref = p.brochure ? "https://redrocketrealty.com.au?epl_br_action=generate&id=" + p.brochure : "#overview";
 
   const share = () => {
@@ -175,7 +177,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
             </div>
             <div id="location" data-reveal className="prop-block">
               <div className="kicker">Location</div>
-              <div className="placeholder placeholder--stripe" style={{ aspectRatio: "16/8" }}><span>[MAP · zoom 17 · rocket pin]</span><br /><span>{p.address}, {p.suburb}</span></div>
+              {hasMap ? <PropertyMap p={p} /> : <p style={{ margin: 0, fontSize: 15, color: "var(--grey-2)" }}>{p.address}, {p.suburb}{p.postcode ? " QLD " + p.postcode : ""}</p>}
               <Link href={suburbHref} className="text-link">More properties in {p.suburb} <span data-arrow className="text-link__ring" aria-hidden="true">→</span></Link>
             </div>
             {isSale && (

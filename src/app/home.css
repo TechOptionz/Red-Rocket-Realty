@@ -231,3 +231,9 @@ html[data-intro-on] .hero__content *, html[data-intro-on] .hero__bg { animation-
 @media (max-width: 980px) { .areas__grid > div:first-child { padding-right: 0 !important; } }
 /* Statement block: the 3rem floor clipped "and breathe" on 320px screens. */
 @media (max-width: 480px) { .statement__wrap { font-size: clamp(2.4rem, 11.6vw, 13.5rem); } }
+
+/* ---------- Property page: location map ---------- */
+.prop-map { aspect-ratio: 16/9; border-radius: 8px; }
+.prop-map iframe { filter: none; }
+.prop-map__actions { position: absolute; left: 16px; bottom: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+@media (max-width: 640px) { .prop-map { aspect-ratio: 4/3; } }
