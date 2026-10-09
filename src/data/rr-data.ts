@@ -272,6 +272,8 @@ export const PHOTOS = {
   // Section / hero imagery (full-size originals, chosen for clarity at full-bleed sizes)
   parkwayFacade: "/photos/uploads/2026/08/24-Parkway-Street-Kuraby-Qld-4112-1.jpg", parfreyTwilight: "/photos/uploads/2026/06/51-Parfrey-Road-Rochedale-South-QLD-4123-1.jpg", parfreyKitchen: "/photos/uploads/2026/06/51-Parfrey-Road-Rochedale-South-QLD-4123-12.jpg", parfreyDeck: "/photos/uploads/2026/06/51-Parfrey-Road-Rochedale-South-QLD-4123-21.jpg",
   hunterFacade: "/photos/uploads/2026/10/8-Hunter-Street-Woodridge-QLD-4114.jpg", hunterLiving: "/photos/uploads/2026/10/8-Hunter-Street-Woodridge-QLD-4114-5.png", hunterLounge: "/photos/uploads/2026/10/8-Hunter-Street-Woodridge-QLD-4114-2.jpg", hunterKitchen: "/photos/uploads/2026/10/8-Hunter-Street-Woodridge-QLD-4114-3.jpg", barbarallaFacade: "/photos/uploads/2026/09/9-93-Barbaralla-Drive-Springwood-QLD-4127-1.jpg",
+  // Office exterior: 67 Springwood Road (home About section, Contact hero).
+  office: "/photos/office/springwood-office.jpg",
   // Page hero photos: optimised 2000px JPEG copies (public/photos/hero) of the best listing shots. Keep heroPoster for Sell and the home page.
   hero: { about: '/photos/hero/about.jpg', contact: '/photos/hero/contact.jpg', team: '/photos/hero/team.jpg', guides: '/photos/hero/guides.jpg', listings: '/photos/hero/listings.jpg', openHomes: '/photos/hero/open-homes.jpg', rent: '/photos/hero/rent.jpg', pm: '/photos/hero/property-management.jpg', appraisal: '/photos/hero/appraisal.jpg' },
 };

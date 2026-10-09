@@ -53,8 +53,8 @@ export default function HomeClient() {
             </div>
           </div>
           <div data-reveal="clip" className="about__img">
-            <div data-drift="0.06" className="drift-bg"><Photo src={PHOTOS.parfreyDeck} sizes="(max-width: 980px) 100vw, 50vw" /></div>
-            <div className="img-note">Temporary · replace with office or team photo</div>
+            <div className="photo-full"><Photo src={PHOTOS.office} alt="Red Rocket Realty office at 67 Springwood Road, Springwood" sizes="(max-width: 980px) 100vw, 50vw" /></div>
+            <div className="img-note">Our office · 67 Springwood Road, Springwood</div>
           </div>
         </div>
       </section>
