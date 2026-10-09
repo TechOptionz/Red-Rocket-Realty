@@ -6,7 +6,7 @@ import { NAV, NAV_TOP, NAV_CARDS, CONTACT, PAGES, SALE, propHref } from "@/data/
 import { useLogo } from "@/lib/useLogo";
 import { SocialLinks } from "@/components/SocialIcons";
 import Image from "next/image";
-import { logoSize } from "@/data/brand-dims";
+import { logoRatio, logoSize } from "@/data/brand-dims";
 import Photo from "@/components/Photo";
 
 const DESKTOP = "(min-width: 1181px)";
@@ -160,7 +160,7 @@ export default function Header({ solid = false }: { solid?: boolean }) {
           <header className="hdr" data-solid={isSolid ? "1" : "0"} data-menu={menuOpen ? "1" : "0"} data-panel={panel ? "1" : "0"}>
             <div className="hdr__logo" data-logo-wrap>
               <Link href={PAGES.home} aria-label="Red Rocket Realty home" onClick={closeAll}>
-                <Image src={logo.dark} alt="Red Rocket Realty" {...logoSize(logo.dark, logo.headerH)} priority style={{ height: logo.headerH, width: "auto" }} />
+                <Image src={logo.dark} alt="Red Rocket Realty" {...logoSize(logo.dark, logo.headerH)} priority style={{ height: logo.headerH, width: "auto", ...logoRatio(logo.dark, logo.headerH) }} />
               </Link>
               <button type="button" className="logo-pick" aria-label="Choose logo" aria-expanded={logoOpen} title="Choose logo (client preview)" onClick={(e) => { e.stopPropagation(); setLogoOpen((o) => !o); }}>
                 <span aria-hidden="true" />
@@ -170,7 +170,7 @@ export default function Header({ solid = false }: { solid?: boolean }) {
                   <div className="logo-menu__head">Choose logo</div>
                   {logos.map((l) => (
                     <button key={l.id} type="button" role="option" aria-selected={l.id === logo.id} className="logo-menu__opt" onClick={() => { setLogo(l.id); setLogoOpen(false); }}>
-                      <span className="logo-menu__thumb"><Image src={l.dark} alt="" {...logoSize(l.dark, 32)} style={{ width: "auto", height: "auto" }} /></span>
+                      <span className="logo-menu__thumb"><Image src={l.dark} alt="" {...logoSize(l.dark, 32)} style={{ width: "auto", height: "auto", ...logoRatio(l.dark, 32) }} /></span>
                       <span>{l.label}</span>
                       <span className="logo-menu__radio" aria-hidden="true"><span /></span>
                     </button>

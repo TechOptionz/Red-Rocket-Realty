@@ -5,3 +5,9 @@ export const logoSize = (src: string, h: number): { width: number; height: numbe
   const d = BRAND_DIMS[src.split("?")[0]];
   return d ? { width: Math.round((h * d[0]) / d[1]), height: h } : { width: Math.round(h * 3.6), height: h };
 };
+/** CSS aspect-ratio matching logoSize's rounded width/height attributes. The optimizer resizes to a slightly different ratio, so
+ * without this the rendered width can land 1px off the attribute and next/image logs a dev warning. */
+export const logoRatio = (src: string, h: number): { aspectRatio: string } => {
+  const s = logoSize(src, h);
+  return { aspectRatio: s.width + " / " + s.height };
+};

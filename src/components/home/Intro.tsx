@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLogo } from "@/lib/useLogo";
 import Image from "next/image";
-import { logoSize } from "@/data/brand-dims";
+import { logoRatio, logoSize } from "@/data/brand-dims";
 
 /** Entry sequence: plays once per session, skippable, skipped under reduced motion or when deep-linked to an anchor. Add ?intro=1 to force it. */
 export default function Intro() {
@@ -58,7 +58,7 @@ export default function Intro() {
     <div className="intro" data-leaving={leaving ? "1" : "0"} role="status" aria-label="Loading Red Rocket Realty" onClick={end}>
       <div className="intro__line" aria-hidden="true"><span /></div>
       <div style={{ position: "relative", display: "grid", justifyItems: "center", gap: 28, padding: "0 20px", textAlign: "center" }}>
-        <Image className="intro__emblem" src={logo.emblemDark || logo.dark} alt="" {...logoSize(logo.emblemDark || logo.dark, 120)} priority />
+        <Image className="intro__emblem" src={logo.emblemDark || logo.dark} alt="" {...logoSize(logo.emblemDark || logo.dark, 120)} style={logoRatio(logo.emblemDark || logo.dark, 120)} priority />
         <div className="intro__word" aria-hidden="true">
           <span><span style={{ animationDelay: ".55s" }}>Red Rocket</span></span>
           <span><span style={{ animationDelay: ".68s", color: "var(--brand-red)" }}>Realty</span></span>
