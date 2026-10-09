@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ADVANTAGE, CONTACT, PAGES, PHOTOS, STORIES, TESTIMONIALS } from "@/data/rr-data";
+import { ADVANTAGE, CONTACT, PAGES, PHOTOS, TESTIMONIALS } from "@/data/rr-data";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import Photo from "@/components/Photo";
@@ -14,7 +14,6 @@ const MILESTONES = [
   { year: "Today", title: "19 people, 485 reviews, 4.9 stars", body: "Sales, property management, leasing and inspections under one roof." },
 ];
 const KINDS = ["All", "Sellers", "Buyers", "Landlords"];
-const COVERS = [PHOTOS.boskLiving, PHOTOS.hunterLiving, PHOTOS.limeLiving, PHOTOS.parfreyDeck];
 
 export default function AboutClient() {
   const stmt = useRef<HTMLElement>(null);
@@ -107,25 +106,6 @@ export default function AboutClient() {
             ))}
             <div className="mono-note" style={{ borderTop: "1px solid var(--line)", paddingTop: 20 }}>Paraphrased from the Testimonials page and RateMyAgent · publish verbatim wording with client permission</div>
           </div>
-        </div>
-      </section>
-
-      <section className="section section--bg">
-        <div className="sec-head">
-          <div className="sec-head__text"><div className="kicker">Client stories</div><Lines className="h2" lines={["In their words."]} /></div>
-          <p className="small" style={{ maxWidth: "40ch" }}>Four client videos filmed in 2017. Consent to be re-confirmed before publishing.</p>
-        </div>
-        <div data-stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(min(100%,280px),1fr))", gap: 24 }}>
-          {STORIES.map((v, i) => (
-            <a key={v.wistia} data-card href={"https://fast.wistia.net/embed/iframe/" + v.wistia} target="_blank" rel="noopener" className="card">
-              <div className="story__media">
-                <div data-zoom style={{ position: "absolute", inset: 0 }}><Photo src={COVERS[i]} sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" /></div>
-                <div className="story__shade" aria-hidden="true" />
-                <div className="story__play"><span data-arrow aria-hidden="true">▶</span></div>
-              </div>
-              <div style={{ display: "grid", gap: 4 }}><div style={{ fontSize: 17, fontWeight: 800, letterSpacing: "-.01em" }}>{v.title}</div><div style={{ fontSize: 13, color: "var(--grey)", fontWeight: 500 }}>{v.who}</div><p style={{ marginTop: 4, fontSize: 14, lineHeight: 1.5, color: "var(--grey-2)" }}>{v.gist}</p></div>
-            </a>
-          ))}
         </div>
       </section>
 

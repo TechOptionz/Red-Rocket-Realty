@@ -141,11 +141,6 @@
   .step-card:hover .step-card__n { background: var(--red); }
   .step-card:hover p { color: var(--ink); }
 }
-.story__media { position: relative; aspect-ratio: 16/10; border-radius: 8px; overflow: hidden; background: var(--ink-2); }
-.story__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .55)); }
-.story__play { position: absolute; inset: 0; display: grid; place-items: center; }
-.story__play span { width: 56px; height: 56px; border-radius: 50%; background: #fff; color: var(--red); display: grid; place-items: center; font-size: 18px; padding-left: 4px; }
-.story__note { position: absolute; left: 14px; bottom: 12px; font: 500 10px/1.6 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: rgba(255, 255, 255, .55); }
 
 /* ---------- Appraisal ---------- */
 .ap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 100svh; }

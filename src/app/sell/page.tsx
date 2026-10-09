@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import PropertyCard from "@/components/PropertyCard";
-import { ADVANTAGE, CONTACT, PAGES, PHOTOS, SOLD, STORIES } from "@/data/rr-data";
+import { ADVANTAGE, CONTACT, PAGES, PHOTOS, SOLD } from "@/data/rr-data";
 import Photo from "@/components/Photo";
 
 export const metadata: Metadata = { title: "Sell your home", description: "A hands-on sale from the first appraisal to settlement day with Logan's local experts." };
@@ -17,7 +17,6 @@ const STEPS: [string, string][] = [
   ["Negotiate", "Every offer is presented in writing. We negotiate price and terms with your goals in mind."],
   ["Settle", "Contract to settlement handled with your solicitor. Then we help you find what comes next."],
 ];
-const COVERS = [PHOTOS.boskLiving, PHOTOS.hunterLiving, PHOTOS.limeLiving, PHOTOS.parfreyDeck];
 
 export default function SellPage() {
   return (
@@ -88,23 +87,6 @@ export default function SellPage() {
           <div className="strip">
             {SOLD.slice(0, 8).map((p) => <PropertyCard key={p.id} p={p} light ratio="4/3" width="min(380px,80vw)" specsCount={3} priceOverride={(p.price || "").replace("Sold ", "")} />)}
             <div className="strip-end" aria-hidden="true" />
-          </div>
-        </section>
-
-        <section className="section section--white">
-          <div style={{ display: "grid", gap: 16, marginBottom: 48, maxWidth: 720 }}><div className="kicker">Client stories</div><Lines className="h2" lines={["Sellers on selling", "with Red Rocket."]} /></div>
-          <div data-stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,280px),1fr))", gap: 24 }}>
-            {STORIES.map((v, i) => (
-              <a key={v.wistia} data-card href={"https://fast.wistia.net/embed/iframe/" + v.wistia} target="_blank" rel="noopener" className="card">
-                <div className="story__media">
-                  <div data-zoom style={{ position: "absolute", inset: 0, backgroundColor: "#23262d" }}><Photo src={COVERS[i]} sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" /></div>
-                  <div className="story__shade" aria-hidden="true" />
-                  <div className="story__play"><span data-arrow aria-hidden="true">▶</span></div>
-                  <div className="story__note">Wistia · {v.wistia} · 2017 · re-confirm consent</div>
-                </div>
-                <div style={{ display: "grid", gap: 4 }}><div style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-.01em" }}>{v.title}</div><div style={{ fontSize: 13, fontWeight: 700, color: "var(--red)" }}>{v.who}</div><p className="small" style={{ marginTop: 4, fontSize: 14, lineHeight: 1.55, color: "var(--grey-2)" }}>{v.gist}</p></div>
-              </a>
-            ))}
           </div>
         </section>
 

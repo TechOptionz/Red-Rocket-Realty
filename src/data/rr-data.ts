@@ -211,14 +211,6 @@ export const TESTIMONIALS = [
   { text: 'Knows the market, helpful, and helped us reach the right price.', who: 'Buyer · Underwood', agent: 'Parnam Singh Heir' },
 ];
 
-// 2017 client video stories (Wistia). Re-confirm client consent before publishing.
-export const STORIES = [
-  { title: 'Absolutely Blown Away', who: 'Colin · Underwood · seller', gist: 'Sold within a week for nearly $20,000 over asking; valued local knowledge and a non-pushy price discussion.', wistia: 'c7rdd9ynl9' },
-  { title: 'Talks the Talk, And Walks the Walk', who: 'Peter and Denise · Underwood · sellers', gist: 'Listed at $479,000, sold at $487,000; liked the speed, the marketing quality and paying nothing upfront.', wistia: 'tgje1dxz2o' },
-  { title: 'Flexible Property Management', who: 'Jan · landlord', gist: 'Lets her home six months a year; tenants found when another agent could not.', wistia: 'qka11ldw5c' },
-  { title: 'Selling by Auction… Never Again', who: 'Gary · Underwood · seller', gist: 'Found private treaty far less stressful than a previous auction; kept updated throughout a hard sale.', wistia: 'mbw4bt25cd' },
-];
-
 export const AREAS = [
   { name: 'Springwood', line: 'Home of our office at 67 Springwood Road.' },
   { name: 'Rochedale South', line: 'Where most of our current and recent listings sit.' },
