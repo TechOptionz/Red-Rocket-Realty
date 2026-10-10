@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,7 +10,9 @@ export default function TeamPage() {
   return (
     <>
       <Header solid />
-      <TeamClient />
+      <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+        <TeamClient />
+      </Suspense>
       <Footer />
     </>
   );

@@ -66,7 +66,7 @@ export default function HomeClient() {
       <section className="bsr">
         {[
           { href: PAGES.listings + "?mode=buy", img: PHOTOS.parkwayFacade, pos: undefined as string | undefined, n: "01 · Interested in buying?", t: "Buy", p: "Houses, units, townhouses and land across Logan. Filter by suburb, type, price and features, or set an email alert and let the listings come to you.", cta: "Start searching now!" },
-          { href: PAGES.appraisal, img: PHOTOS.pool, n: "02 · Thinking of selling?", t: "Sell", p: "Hands-on from pricing to paperwork to negotiating with buyers. Local agents who know Logan values and how to present a home for its maximum price.", cta: "Sell your home today!" },
+          { href: PAGES.sell, img: PHOTOS.pool, n: "02 · Thinking of selling?", t: "Sell", p: "Hands-on from pricing to paperwork to negotiating with buyers. Local agents who know Logan values and how to present a home for its maximum price.", cta: "Sell your home today!" },
           { href: PAGES.listings + "?mode=rent", img: PHOTOS.limeLiving, pos: "center 68%", n: "03 · Looking for a rental?", t: "Rent", p: "Current rentals with weekly rent, availability and inspection times you can save to your calendar. After-hours viewings by appointment through our rentals team.", cta: "View properties for rent" },
         ].map((x) => (
           <Link key={x.t} href={x.href} className="bsr__panel">

@@ -30,22 +30,40 @@ function figure(p: Listing, isRent: boolean): number | null {
   return unit === "m" ? n * 1_000_000 : unit === "k" ? n * 1000 : n;
 }
 
+/** Search state from the URL. A suburb or type only applies when it exists in this mode's listings (case-insensitive), otherwise it is ignored rather than filtering to an empty page. */
+function fromParams(sp: { get(key: string): string | null }) {
+  const qMode = sp.get("mode");
+  const mode: Mode = MODES.includes(qMode as Mode) ? (qMode as Mode) : "buy";
+  const t = sp.get("type") || "";
+  return {
+    mode,
+    suburb: matchSuburb(mode, sp.get("suburb") || "") || "",
+    ptype: SOURCE[mode].some((p) => p.type === t) ? t : "",
+    pfrom: sp.get("from") || "", pto: sp.get("to") || "", beds: sp.get("beds") || "", baths: sp.get("baths") || "",
+  };
+}
+
 export default function ListingsClient() {
   const sp = useSearchParams();
-  const qMode = sp.get("mode");
-  const mode0: Mode = MODES.includes(qMode as Mode) ? (qMode as Mode) : "buy";
-  const [mode, setMode] = useState<Mode>(mode0);
-  // A suburb or type in the URL only applies when it exists in this mode's listings (case-insensitive), otherwise it is ignored rather than filtering to an empty page.
-  const [suburb, setSuburb] = useState(matchSuburb(mode0, sp.get("suburb") || "") || "");
-  const [ptype, setPtype] = useState(() => { const t = sp.get("type") || ""; return SOURCE[mode0].some((p) => p.type === t) ? t : ""; });
-  const [pfrom, setPfrom] = useState(sp.get("from") || "");
-  const [pto, setPto] = useState(sp.get("to") || "");
-  const [beds, setBeds] = useState(sp.get("beds") || "");
-  const [baths, setBaths] = useState(sp.get("baths") || "");
+  const initial = fromParams(sp);
+  const [mode, setMode] = useState<Mode>(initial.mode);
+  const [suburb, setSuburb] = useState(initial.suburb);
+  const [ptype, setPtype] = useState(initial.ptype);
+  const [pfrom, setPfrom] = useState(initial.pfrom);
+  const [pto, setPto] = useState(initial.pto);
+  const [beds, setBeds] = useState(initial.beds);
+  const [baths, setBaths] = useState(initial.baths);
   const [sort, setSort] = useState("new");
   const [view, setView] = useState<"grid" | "list">("grid");
   const [limit, setLimit] = useState(PAGE);
   const resultsRef = useRef<HTMLElement>(null);
+
+  // Links that only change the query string (header "For rent", footer "Recently sold", mega-menu suburb search) do not remount
+  // this component, so adopt the URL whenever it changes. Our own replaceState below produces the same values, so this is a no-op then.
+  useEffect(() => {
+    const q = fromParams(sp);
+    setMode(q.mode); setSuburb(q.suburb); setPtype(q.ptype); setPfrom(q.pfrom); setPto(q.pto); setBeds(q.beds); setBaths(q.baths);
+  }, [sp]);
 
   // Mirror the search in the address bar so a search can be bookmarked or shared.
   useEffect(() => {

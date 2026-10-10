@@ -118,7 +118,7 @@ export default function Hero({ onAppraise }: { onAppraise: (address: string) => 
                 </select>
               </label>
               <label className="search-field" style={{ flexBasis: 130 }}>
-                <span>Price to</span>
+                <span>{isRent ? "Rent to" : "Price to"}</span>
                 <select value={pto} onChange={(e) => setPto(e.target.value)}>
                   <option value="">Any</option>
                   {prices.map((o) => <option key={o.v} value={o.v}>{o.label}</option>)}

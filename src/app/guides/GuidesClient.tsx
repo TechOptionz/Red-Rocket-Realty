@@ -15,6 +15,18 @@ export default function GuidesClient() {
   const [sent, setSent] = useState(false);
   const [name, setName] = useState("");
 
+  // Footer/menu links such as "Seller guide" or "Make an offer" (?guide=buyer#offer) only change the query string, which does not
+  // remount this component: follow the URL, then scroll to the hash once the right guide's sections exist.
+  useEffect(() => {
+    const g = sp.get("guide") === "seller" ? "seller" : "buyer";
+    setGuide(g);
+    setActive("");
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    const raf = requestAnimationFrame(() => document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" }));
+    return () => cancelAnimationFrame(raf);
+  }, [sp]);
+
   useEffect(() => {
     const onScroll = () => {
       const arts = Array.from(document.querySelectorAll<HTMLElement>("article.tip"));

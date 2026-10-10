@@ -16,7 +16,7 @@ export default function BlogClient() {
   const [topic, setTopic] = useState("All");
   useEffect(() => {
     const t = params.get("topic");
-    if (t && TOPICS.includes(t)) setTopic(t);
+    setTopic(t && TOPICS.includes(t) ? t : "All");
   }, [params]);
   const posts = POSTS.filter((p) => topic === "All" || p.topic === topic);
   const [lead, ...rest] = posts;

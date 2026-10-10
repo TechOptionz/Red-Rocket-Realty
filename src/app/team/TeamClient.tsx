@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { AGENCY_AREAS, CONTACT, DEPTS, LAND, PAGES, PHOTOS, SALE, SOLD, TEAM, agentBlurb, agentHelp, agentHighlights, agentSocials, decorate, decorateAgent, propHref, telHref } from "@/data/rr-data";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
@@ -8,11 +9,15 @@ import { SocialIcon, SocialLinks } from "@/components/SocialIcons";
 import Photo from "@/components/Photo";
 
 export default function TeamClient() {
-  const [dept, setDept] = useState("All");
+  const sp = useSearchParams();
+  const dept0 = sp.get("dept");
+  const [dept, setDept] = useState(dept0 && DEPTS.includes(dept0) ? dept0 : "All");
   const [open, setOpen] = useState("");
+  // Menu links such as "Meet the leasing team" (?dept=Leasing) do not remount this component, so follow the URL when it changes.
   useEffect(() => {
-    try { const d = new URLSearchParams(window.location.search).get("dept"); if (d && DEPTS.includes(d)) setDept(d); } catch {}
-  }, []);
+    const d = sp.get("dept");
+    setDept(d && DEPTS.includes(d) ? d : "All");
+  }, [sp]);
 
   useEffect(() => {
     const id = decodeURIComponent((window.location.hash || "").slice(1));

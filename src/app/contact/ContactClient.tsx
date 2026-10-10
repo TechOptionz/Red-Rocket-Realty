@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { CONTACT, PAGES, PHOTOS } from "@/data/rr-data";
@@ -16,6 +16,10 @@ export default function ContactClient() {
   const sp = useSearchParams();
   const initial = sp.get("topic");
   const [topic, setTopic] = useState(initial && OWNERS[initial] ? initial : "Selling");
+  useEffect(() => {
+    const t = sp.get("topic");
+    if (t && OWNERS[t]) setTopic(t);
+  }, [sp]);
   const [sent, setSent] = useState(false);
   const [name, setName] = useState("");
   const channels = [
