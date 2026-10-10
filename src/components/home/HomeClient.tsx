@@ -11,6 +11,7 @@ import PMSection from "./PMSection";
 import Stats from "./Stats";
 import TeamStrip from "./TeamStrip";
 import Reviews from "./Reviews";
+import NewsSection from "./NewsSection";
 import AppraisalCta, { type ApprState } from "./AppraisalCta";
 import ContactSection from "./ContactSection";
 import Photo from "@/components/Photo";
@@ -182,6 +183,7 @@ export default function HomeClient() {
       <Stats />
       <TeamStrip />
       <Reviews />
+      <NewsSection />
       <AppraisalCta state={appr} setState={setAppr} />
       <ContactSection />
     </main>

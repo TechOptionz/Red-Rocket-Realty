@@ -618,7 +618,7 @@ a.mnav__muted:hover { color: #fff; }
   /* Text links get a taller hit area without moving anything. */
   .crumb a, .trust a, .ftr__legal a { padding: 10px 0; margin: -10px 0; }
   /* Inline links inside sentences (consent notes, agent cards, brand downloads) get the same treatment. */
-  .check a, .appr__body a, .enquire__card a, .enquire__agent a, .logo-grid figcaption a, .small a, .row__v a { display: inline-block; padding: 8px 0; margin: -8px 0; }
+  .check a, .appr__body a, .enquire__card a, .enquire__agent a, .small a, .row__v a { display: inline-block; padding: 8px 0; margin: -8px 0; }
   .ftr__col { gap: 2px; }
   .ftr__link, .ftr__mail { padding: 9px 0; width: max-content; max-width: 100%; }
   .ftr__k--gap { margin-top: 20px; }

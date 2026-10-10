@@ -1,25 +1,64 @@
-/* ---------- Home: intro sequence ---------- */
-@keyframes rrIntroLine { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes rrIntroPop { from { opacity: 0; transform: translateY(24px) scale(.94); } to { opacity: 1; transform: none; } }
-@keyframes rrIntroKick { from { opacity: 0; letter-spacing: .5em; } to { opacity: 1; letter-spacing: .22em; } }
-@keyframes rrIntroOut { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 0 100% 0); } }
-@keyframes rrIntroFadeOut { to { opacity: 0; } }
-.intro { position: fixed; inset: 0; z-index: 200; background: var(--ink-3); color: #fff; display: grid; place-items: center; overflow: hidden; }
-.intro[data-leaving="1"] { animation: rrIntroOut 1s var(--ease-inout) .05s both; }
-.intro[data-leaving="1"] > * { animation: rrIntroFadeOut .35s ease both; }
-.intro__line { position: absolute; left: var(--pad-x); right: var(--pad-x); top: 50%; height: 1px; background: rgba(255, 255, 255, .18); transform-origin: left; animation: rrIntroLine 1.1s var(--ease-inout) .1s both; }
-.intro__line > span { position: absolute; left: 0; top: -1px; height: 3px; width: 18%; background: var(--brand-red); transform-origin: left; animation: rrIntroLine .9s var(--ease-out) .5s both; }
-.intro__emblem { height: clamp(72px, 10vw, 120px); width: auto; animation: rrIntroPop 1s var(--ease-out) .35s both; }
-.intro__word { font-size: clamp(2.2rem, 1rem + 6vw, 6rem); font-weight: 900; letter-spacing: -.03em; line-height: .92; text-transform: uppercase; }
-.intro__word > span { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
-.intro__word > span > span { display: block; animation: rrRise .9s var(--ease-out) both; }
-.intro__kick { font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--grey-light); animation: rrIntroKick 1s var(--ease-out) .9s both; }
-.intro__count { font-variant-numeric: tabular-nums; font-size: clamp(2rem, 1.4rem + 2vw, 3.2rem); font-weight: 800; letter-spacing: -.03em; color: #fff; line-height: 1; animation: rrIntroPop .6s var(--ease-out) .2s both; }
-.intro__foot { position: absolute; left: var(--pad-x); bottom: clamp(24px, 4vw, 48px); display: flex; align-items: baseline; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--grey-3); }
-.intro__skip { position: absolute; right: var(--pad-x); bottom: clamp(24px, 4vw, 48px); height: 40px; padding: 0 18px; border-radius: 100px; border: 1px solid rgba(255, 255, 255, .26); background: transparent; color: #fff; cursor: pointer; font: 700 12px var(--font); letter-spacing: .12em; text-transform: uppercase; transition: border-color .3s; }
-.intro__skip:hover { border-color: #fff; }
-html[data-intro-on] body { overflow: hidden; }
-html[data-intro-on] .hero__content *, html[data-intro-on] .hero__bg { animation-play-state: paused !important; }
+/* ---------- Home: intro sequence ----------
+   Phases (data-phase on .intro): boot = dark panel only, in the server HTML so nothing flashes before hydration;
+   play = the rocket launches in on an exhaust trail and settles into a hover while the lockup (laid out like the
+   horizontal logo) and footer come in; out = the rocket lifts off, the text fades and the dark curtain follows it up.
+   Play animations stay applied during out (fill: both) so nothing snaps back. Everything animates opacity/transform only.
+   Hero entrances are paused while html[data-intro-on="1"]. */
+@keyframes rrIntroIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes rrIntroGlow { from { opacity: 0; transform: translate(-50%, -50%) scale(.7); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+@keyframes rrIntroFade { to { opacity: 0; transform: translateY(-14px); } }
+@keyframes rrIntroDim { to { opacity: 0; } }
+@keyframes rrIntroLift { to { transform: translate3d(0, -100%, 0); } }
+@keyframes rrIntroRule { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes rrIntroLaunchIn { from { transform: translateY(150%) scale(.94); } to { transform: none; } }
+@keyframes rrIntroHover { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes rrIntroTrailIn { 0% { transform: scaleY(1.3); opacity: .95; } 60% { opacity: .55; } 100% { transform: scaleY(.1); opacity: 0; } }
+@keyframes rrIntroLaunchOut { to { transform: translate3d(0, -130vh, 0); } }
+@keyframes rrIntroTrailOut { 0% { transform: scaleY(.1); opacity: 0; } 30% { opacity: 1; } 100% { transform: scaleY(3.2); opacity: .7; } }
+.intro { position: fixed; inset: 0; z-index: 200; color: #fff; display: grid; place-items: center; overflow: hidden; overscroll-behavior: contain; touch-action: none; }
+html:not([data-intro-on]) .intro { display: none; }
+.intro__panel { position: absolute; inset: 0; background: var(--ink-3); will-change: transform; }
+.intro__panel::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 6px; background: var(--brand-red); }
+.intro__glow { position: absolute; left: 50%; top: 50%; width: min(110vw, 960px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(var(--brand-red-rgb), .16) 0%, rgba(var(--brand-red-rgb), 0) 62%); transform: translate(-50%, -50%); pointer-events: none; }
+.intro__body { position: relative; display: grid; justify-items: center; gap: clamp(28px, 4vw, 44px); padding: 0 20px; text-align: center; }
+.intro__lockup { --eh: clamp(72px, 9vw, 120px); display: flex; align-items: center; gap: calc(var(--eh) * .36); }
+.intro__rocket { position: relative; flex: none; }
+.intro__rocket[data-ready="0"] { opacity: 0; }
+.intro__emblem { display: block; height: var(--eh); width: auto; }
+.intro__trail { position: absolute; left: 50%; top: 94%; width: calc(var(--eh) * .12); height: calc(var(--eh) * 1.1); margin-left: calc(var(--eh) * -.06); border-radius: 100px; background: linear-gradient(180deg, rgba(var(--brand-red-rgb), .95), rgba(var(--brand-red-rgb), 0)); filter: blur(2px); transform-origin: top; transform: scaleY(.1); opacity: 0; }
+.intro__text { display: grid; gap: calc(var(--eh) * .15); text-align: left; text-transform: uppercase; }
+.intro__name { font-size: calc(var(--eh) * .5); font-weight: 800; letter-spacing: -.01em; line-height: 1; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+.intro__name > span { display: block; transform: translateY(112%); }
+.intro__sub { display: flex; align-items: center; gap: calc(var(--eh) * .22); font-size: calc(var(--eh) * .17); font-weight: 700; letter-spacing: .42em; line-height: 1; color: var(--grey-4); }
+.intro__sub > i { flex: 1; min-width: calc(var(--eh) * 1.3); height: 2px; background: var(--brand-red); transform-origin: left; transform: scaleX(0); }
+.intro__kick { font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--grey-3); }
+.intro__foot { position: absolute; left: var(--pad-x); bottom: clamp(24px, 4vw, 48px); display: flex; align-items: baseline; gap: 12px; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--grey-3); }
+.intro__count { font-variant-numeric: tabular-nums; font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.4rem); font-weight: 800; letter-spacing: -.03em; color: #fff; line-height: 1; }
+.intro__skip { position: absolute; right: var(--pad-x); bottom: clamp(24px, 4vw, 48px); height: 40px; padding: 0 18px; border-radius: 100px; border: 1px solid rgba(255, 255, 255, .26); background: transparent; color: #fff; cursor: pointer; font: 700 12px var(--font); letter-spacing: .12em; text-transform: uppercase; transition: border-color .3s, background .3s; }
+.intro__skip:hover { border-color: #fff; background: rgba(255, 255, 255, .08); }
+.intro__bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255, 255, 255, .1); }
+.intro__bar > span { position: absolute; inset: 0; background: var(--brand-red); transform-origin: left; transform: scaleX(0); }
+/* boot: only the panel */
+.intro[data-phase="boot"] .intro__rocket, .intro[data-phase="boot"] .intro__sub > span, .intro[data-phase="boot"] .intro__kick, .intro[data-phase="boot"] .intro__foot, .intro[data-phase="boot"] .intro__skip, .intro[data-phase="boot"] .intro__glow { opacity: 0; }
+/* play (kept through out) */
+.intro:not([data-phase="boot"]) .intro__glow { animation: rrIntroGlow 1.8s var(--ease-out) .15s both; }
+.intro:not([data-phase="boot"]) .intro__rocket[data-ready="1"] { animation: rrIntroLaunchIn 1.15s var(--ease-out) both, rrIntroHover 3.4s ease-in-out 1.15s infinite; }
+.intro:not([data-phase="boot"]) .intro__rocket[data-ready="1"] .intro__trail { animation: rrIntroTrailIn 1.15s var(--ease-out) both; }
+.intro:not([data-phase="boot"]) .intro__name > span { animation: rrRise .9s var(--ease-out) .4s both; }
+.intro:not([data-phase="boot"]) .intro__sub > span { animation: rrIntroIn .8s var(--ease-out) .6s both; }
+.intro:not([data-phase="boot"]) .intro__sub > i { animation: rrIntroRule 1s var(--ease-inout) .65s both; }
+.intro:not([data-phase="boot"]) .intro__kick { animation: rrIntroIn .8s var(--ease-out) .9s both; }
+.intro:not([data-phase="boot"]) .intro__foot, .intro:not([data-phase="boot"]) .intro__skip { animation: rrIntroIn .8s var(--ease-out) .7s both; }
+/* out: rocket lifts off first, curtain follows */
+.intro[data-phase="out"] { pointer-events: none; }
+/* Selectors carry the lockup class so they outrank the play-phase rocket rules above. */
+.intro[data-phase="out"] .intro__lockup .intro__rocket[data-ready="1"] { animation: rrIntroLaunchOut .8s cubic-bezier(.55, 0, 1, .45) both; }
+.intro[data-phase="out"] .intro__lockup .intro__rocket[data-ready="1"] .intro__trail { animation: rrIntroTrailOut .8s cubic-bezier(.55, 0, 1, .45) both; }
+.intro[data-phase="out"] .intro__text, .intro[data-phase="out"] .intro__kick, .intro[data-phase="out"] .intro__bar { animation: rrIntroFade .4s var(--ease-out) .1s both; }
+.intro[data-phase="out"] .intro__foot, .intro[data-phase="out"] .intro__skip { animation: rrIntroIn .8s var(--ease-out) .7s both, rrIntroFade .4s var(--ease-out) .1s both; }
+.intro[data-phase="out"] .intro__glow { animation: rrIntroGlow 1.8s var(--ease-out) .15s both, rrIntroDim .5s ease both; }
+.intro[data-phase="out"] .intro__panel { animation: rrIntroLift .85s var(--ease-inout) .3s both; }
+html[data-intro-on="1"] .hero__content *, html[data-intro-on="1"] .hero__bg { animation-play-state: paused !important; }
 @media (prefers-reduced-motion: reduce) { .intro { display: none; } }
 
 /* ---------- Hero ---------- */
@@ -222,6 +261,42 @@ html[data-intro-on] .hero__content *, html[data-intro-on] .hero__bg { animation-
 .quote-nav { display: flex; align-items: center; gap: 20px; padding-top: 28px; border-top: 1px solid var(--line); }
 .quote-prog { flex: 1; height: 2px; background: var(--line); position: relative; overflow: hidden; border-radius: 2px; }
 .quote-prog > div { position: absolute; left: 0; top: 0; bottom: 0; background: var(--brand-red); transition: width .4s var(--ease-out); }
+
+/* ---------- Latest news ---------- */
+/* Newest post large on the left; the next four as rows with square thumbnails (the live site's list), staggering in. */
+.news__grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 80px); align-items: start; }
+.news__meta { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--grey); }
+.news__meta i { width: 4px; height: 4px; border-radius: 50%; background: var(--brand-red); }
+.news-feat { display: grid; gap: 28px; color: var(--ink); text-decoration: none; }
+.news-feat:hover { color: var(--ink); }
+.news-feat__media { position: relative; aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden; background: #dcdfe4; }
+.news-feat__img { position: absolute; inset: 0; }
+.news-feat__body { display: grid; gap: 16px; max-width: 56ch; }
+.news-feat__title { font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.6rem); font-weight: 800; letter-spacing: -.025em; line-height: 1.08; transition: color .3s; }
+.news-feat__ex { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.news-list { display: grid; }
+.news-row { display: grid; grid-template-columns: 120px 1fr auto; gap: 24px; align-items: center; padding: 24px 0; border-top: 1px solid rgba(17, 19, 24, .14); color: var(--ink); text-decoration: none; }
+.news-row:last-child { border-bottom: 1px solid rgba(17, 19, 24, .14); }
+.news-row:hover { color: var(--ink); }
+.news-row__thumb { position: relative; width: 120px; aspect-ratio: 1; border-radius: 8px; overflow: hidden; background: #dcdfe4; }
+.news-row__text { display: grid; gap: 8px; min-width: 0; }
+.news-row__title { font-size: clamp(1.05rem, .95rem + .5vw, 1.35rem); font-weight: 800; letter-spacing: -.015em; line-height: 1.2; transition: color .3s; }
+.news-row__ex { font-size: 14px; line-height: 1.5; color: var(--grey); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.news-row__arrow { flex: none; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(17, 19, 24, .2); display: grid; place-items: center; font-size: 18px; }
+@media (hover: hover) and (pointer: fine) {
+  .news-feat:hover [data-zoom], .news-row:hover [data-zoom] { transform: scale(1.06); }
+  .news-feat:hover .news-feat__title, .news-row:hover .news-row__title { color: var(--brand-red); }
+  .news-feat:hover .text-link { color: var(--brand-red); }
+  .news-feat:hover [data-arrow] { transform: translateX(4px); border-color: var(--brand-red); }
+  .news-row:hover .news-row__arrow { transform: translateX(4px); background: var(--ink); border-color: var(--ink); color: #fff; }
+}
+@media (max-width: 980px) { .news__grid { grid-template-columns: 1fr; } }
+@media (max-width: 720px) {
+  .news-row { grid-template-columns: 88px 1fr; gap: 16px; padding: 20px 0; }
+  .news-row__thumb { width: 88px; }
+  .news-row__arrow { display: none; }
+  .news-row__ex { display: none; }
+}
 
 /* ---------- Appraisal CTA ---------- */
 .appr { position: relative; background: var(--ink-3); color: #fff; overflow: hidden; min-height: 92vh; display: grid; align-items: center; }

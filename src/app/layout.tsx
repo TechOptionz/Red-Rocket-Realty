@@ -19,7 +19,9 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, view
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-AU" className={rhd.variable}>
+    // suppressHydrationWarning: the home intro's inline boot script sets data-intro-on on <html> before React hydrates
+    // (so the panel covers the page from the first paint). It only silences attribute diffs on this one element.
+    <html lang="en-AU" className={rhd.variable} suppressHydrationWarning>
       <body>
         <RevealObserver />
         {children}

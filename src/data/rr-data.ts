@@ -33,7 +33,7 @@ export const CONTACT = {
 
 export const PAGES = {
   home: "/", listings: "/listings", property: "/property", sell: "/sell", appraisal: "/appraisal", rent: "/rent",
-  pm: "/property-management", about: "/about", team: "/team", contact: "/contact", guides: "/guides", openHomes: "/open-homes",
+  pm: "/property-management", about: "/about", team: "/team", contact: "/contact", guides: "/guides", openHomes: "/open-homes", blog: "/blog",
 };
 const P = PAGES;
 
@@ -49,7 +49,7 @@ export const NAV = [
   { label: 'Property Management', href: P.pm, top: true, photo: '/photos/hero/property-management.jpg', items: [
     ['Why Red Rocket manages', P.pm], ['Free rental appraisal', P.pm + '#rental-appraisal'], ['Meet the PM team', P.team + '?dept=Property%20Management']] },
   { label: 'About', href: P.about, top: true, photo: '/photos/hero/about.jpg', items: [
-    ['Our story', P.about], ['Our team', P.team], ['Reviews', P.about + '#reviews'], ['Guides', P.guides], ['Brand', '/brand']] },
+    ['Our story', P.about], ['Our team', P.team], ['Reviews', P.about + '#reviews'], ['Latest news', P.blog], ['Guides', P.guides]] },
   { label: 'Contact', href: P.contact, top: true, photo: '', items: [
     ['Contact us', P.contact], ['Email the office', 'mailto:' + CONTACT.email], ['Call ' + CONTACT.phone, CONTACT.phoneHref]] },
 ];
@@ -210,6 +210,45 @@ export const TESTIMONIALS = [
   { text: 'Kept informed regularly. We trust and recommend the agency.', who: 'Vendors · Vincent & Michelle Faucon', agent: 'Red Rocket Realty' },
   { text: 'Knows the market, helpful, and helped us reach the right price.', who: 'Buyer · Underwood', agent: 'Parnam Singh Heir' },
 ];
+
+// Latest news. Mirrors the "Latest News" block on redrocketrealty.com.au: the live blog is WordPress and its newest post is from
+// Dec 2017. Every post has its own page at /blog/<slug> (article copy lives in rr-posts.ts); liveUrl is the original WordPress
+// post. Replace with a CMS/feed before launch. Featured images are local copies of the live uploads; excerpts are condensed from
+// the live posts and `topic` is an editorial label added here.
+export const BLOG = { url: 'https://redrocketrealty.com.au/blog/', label: 'Latest news' };
+export type Post = { slug: string; title: string; date: string; topic: string; excerpt: string; photo: string; href: string; liveUrl: string; position?: string };
+const POST = (slug: string, title: string, date: string, topic: string, excerpt: string, photo: string, position?: string): Post =>
+  ({ slug, title, date, topic, excerpt, photo: U + photo, href: P.blog + '/' + slug, liveUrl: 'https://redrocketrealty.com.au/' + slug + '/', position });
+export const POSTS: Post[] = [
+  POST('the-5-big-myths-of-property-investment', 'The 5 big myths of property investment', '2017-12-10', 'Investing',
+    'From "you have to buy in a big capital city" to timing the market, we quickly explain the five biggest myths and why areas with diversified economies and long-term growth potential deserve a closer look.', '2020/04/handshake.jpg'),
+  POST('long-term-price-rises-lead-world', 'Long-term price rises lead world', '2017-10-23', 'Market',
+    'Research from the Bank for International Settlements finds the rise in Australian house prices since the early 1960s is the most sustained property market upswing anywhere in the world.', '2020/05/housing-graphs.jpg'),
+  POST('investor-lending-rebounds', 'Investor lending rebounds', '2017-10-23', 'Finance',
+    'Investor mortgage lending rose 4.3% in August, well ahead of the 0.9% rise in owner-occupier loans and the largest monthly increase since APRA capped interest-only lending.', '2020/05/investor.jpg'),
+  POST('confidence-in-property-sector-up', 'Confidence in property sector up', '2017-10-23', 'Market',
+    'The ANZ/Property Council survey for the December quarter puts industry confidence at a four-year high, with more optimism about capital growth across the key markets.', '2020/05/crane-construction.jpg'),
+  POST('migration-drives-city-markets', 'Migration drives city markets', '2017-10-06', 'Market',
+    'Sydney and Melbourne are outperforming expectations as migrants move to the two cities, with thousands of new units about to reach the market.', '2020/05/travelling.jpg'),
+  POST('crane-count-hits-record-high', 'Crane count hits record high', '2017-10-06', 'Development',
+    'The Rider Levett Bucknall index counts a record 685 cranes nationally, including 116 across Brisbane and the Gold Coast.', '2017/10/city-construction.jpg'),
+  POST('apra-curbs-unfair-say-banks', 'APRA curbs unfair, say banks', '2017-10-01', 'Finance',
+    'Second-tier lenders including Suncorp, Bank of Queensland and ME want APRA to revisit lending restrictions they say entrench the big four and limit competition.', '2017/10/piggybank-locked.jpg'),
+  POST('concessions-boost-fhbs', 'Concessions boost first-home buyers', '2017-10-01', 'Buying',
+    'First-home buyers using stamp duty concessions have doubled since they were introduced on 1 July, with strong uptake in regional centres.', '2017/08/house-prices.jpg'),
+  POST('worker-move-to-cheaper-cities-tipped', 'Worker move to cheaper cities tipped', '2017-10-01', 'Market',
+    "Macquarie's chief economist suggests the two-speed property market could push workers out of Sydney and Melbourne toward cheaper cities such as Brisbane.", '2017/10/brisbane-river.jpg'),
+  POST('mortgage-strain-better-than-5yrs-ago', 'Mortgage strain better than five years ago', '2017-10-01', 'Finance',
+    'Low interest rates mean households need a smaller share of income to service debt than in 2011. In Brisbane an 80% LVR mortgage takes 30% of income, down from 40%.', '2017/10/scales.jpg'),
+  POST('rentvesting-gains-popularity', 'Rentvesting gains popularity', '2017-08-31', 'Investing',
+    'Research from State Custodians finds 74% of people think rentvesting is a good strategy for getting into the property market, with support across generations.', '2017/08/hanging-art.jpg'),
+  POST('house-demand-to-outstrip-supply', 'House demand to outstrip supply', '2017-08-31', 'Market',
+    'A CEDA report predicts housing demand will outstrip supply in the major cities for the next 40 years, driven by population growth and limits on new housing.', '2017/08/home-for-sale.jpg'),
+];
+export const postBySlug = (slug: string) => POSTS.find(p => p.slug === slug);
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+/** "2017-12-10" -> "10 Dec 2017" (string maths, so server and client render the same text regardless of locale/timezone). */
+export const postDate = (iso: string) => { const [y, m, d] = iso.split('-'); return parseInt(d, 10) + ' ' + MONTHS[parseInt(m, 10) - 1] + ' ' + y; };
 
 export const AREAS = [
   { name: 'Springwood', line: 'Home of our office at 67 Springwood Road.' },

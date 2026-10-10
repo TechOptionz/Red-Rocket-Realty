@@ -71,6 +71,7 @@ export default function Footer() {
           <Link href={PAGES.about} className="ftr__link">Our story</Link>
           <Link href={PAGES.team} className="ftr__link">Our team</Link>
           <Link href={PAGES.about + "#reviews"} className="ftr__link">Reviews</Link>
+          <Link href={PAGES.blog} className="ftr__link">Latest news</Link>
         </nav>
         <div className="ftr__col">
           <div className="ftr__k">Office</div>
