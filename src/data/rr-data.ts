@@ -345,6 +345,8 @@ export const PHOTOS = {
   hunterFacade: "/photos/uploads/2026/10/8-Hunter-Street-Woodridge-QLD-4114.jpg", hunterLiving: "/photos/uploads/2026/10/8-Hunter-Street-Woodridge-QLD-4114-5.png", hunterLounge: "/photos/uploads/2026/10/8-Hunter-Street-Woodridge-QLD-4114-2.jpg", hunterKitchen: "/photos/uploads/2026/10/8-Hunter-Street-Woodridge-QLD-4114-3.jpg", barbarallaFacade: "/photos/uploads/2026/09/9-93-Barbaralla-Drive-Springwood-QLD-4127-1.jpg",
   // Office exterior: 67 Springwood Road (home About section, Contact hero).
   office: "/photos/office/springwood-office.jpg",
+  // More office shots (800×450 16:9 crops of the Chase Commercial listing photos, cropped above the agency watermark) and the team outside the office (2000px).
+  officeElevated: "/photos/office/elevated.jpg", officeFront: "/photos/office/frontage.jpg", officeSign: "/photos/office/pylon-sign.jpg", officeTeam: "/photos/office/team-outside.jpg",
   // Page hero photos: optimised 2000px JPEG copies (public/photos/hero) of the best listing shots. Keep heroPoster for Sell and the home page.
   hero: { about: '/photos/hero/about.jpg', contact: '/photos/hero/contact.jpg', team: '/photos/hero/team.jpg', guides: '/photos/hero/guides.jpg', listings: '/photos/hero/listings.jpg', openHomes: '/photos/hero/open-homes.jpg', rent: '/photos/hero/rent.jpg', pm: '/photos/hero/property-management.jpg', appraisal: '/photos/hero/appraisal.jpg' },
 };

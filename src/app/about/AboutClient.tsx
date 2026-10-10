@@ -15,6 +15,11 @@ const MILESTONES = [
   { year: "Today", title: "19 people, 485 reviews, 4.9 stars", body: "Sales, property management, leasing and inspections under one roof." },
 ];
 const KINDS = ["All", "Sellers", "Buyers", "Landlords"];
+const OFFICE = [
+  { src: PHOTOS.officeFront, alt: "Front of the Red Rocket Realty office at 67 Springwood Road", cap: "67 Springwood Road" },
+  { src: PHOTOS.officeElevated, alt: "Red Rocket Realty office and car park from above", cap: "On-site parking" },
+  { src: PHOTOS.officeSign, alt: "Red Rocket Realty pylon sign in front of the office", cap: "The red rocket out front" },
+];
 
 export default function AboutClient() {
   const stmt = useRef<HTMLParagraphElement>(null);
@@ -67,6 +72,15 @@ export default function AboutClient() {
           ))}
         </div>
         <p data-reveal className="mono-note" style={{ marginTop: 32 }}>Dates from the content pack and the current site · founding year and the &quot;over 25 years&quot; claim to be confirmed by the agency</p>
+      </section>
+
+      <section className="section section--white">
+        <div className="office-head"><div style={{ display: "grid", gap: 18, maxWidth: 720 }}><div className="kicker">Our office</div><Lines className="h2" lines={["Look for the red", "rocket on Springwood Road."]} /></div><p data-reveal className="lead" style={{ maxWidth: "40ch" }}>67 Springwood Road, with on-site parking out the front. Drop in Monday to Friday, or call ahead on {CONTACT.phone}.</p></div>
+        <div data-stagger className="office-grid">
+          {OFFICE.map((o) => (
+            <figure key={o.src} className="office-grid__fig"><Photo src={o.src} alt={o.alt} sizes="(max-width: 720px) 100vw, 33vw" /><figcaption className="img-note">{o.cap}</figcaption></figure>
+          ))}
+        </div>
       </section>
 
       <section id="reviews" className="section section--white" style={{ scrollMarginTop: 100 }}>

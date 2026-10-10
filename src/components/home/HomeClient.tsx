@@ -54,7 +54,7 @@ export default function HomeClient() {
             </div>
           </div>
           <div data-reveal="clip" className="about__img">
-            <div className="photo-full"><Photo src={PHOTOS.office} alt="Red Rocket Realty office at 67 Springwood Road, Springwood" sizes="(max-width: 980px) 100vw, 50vw" /></div>
+            <div className="photo-full"><Photo src={PHOTOS.officeSign} alt="Red Rocket Realty office and pylon sign at 67 Springwood Road, Springwood" sizes="(max-width: 980px) 100vw, 50vw" /></div>
             <div className="img-note">Our office · 67 Springwood Road, Springwood</div>
           </div>
         </div>
