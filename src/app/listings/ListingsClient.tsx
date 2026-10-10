@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { LAND, PAGES, PHOTOS, RENT, SALE, SEARCH, SOLD, type Listing } from "@/data/rr-data";
+import { LAND, PAGES, PHOTOS, RENT, SALE, SEARCH, SOLD, matchSuburb, type Listing } from "@/data/rr-data";
 import PropertyCard from "@/components/PropertyCard";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
@@ -33,9 +33,11 @@ function figure(p: Listing, isRent: boolean): number | null {
 export default function ListingsClient() {
   const sp = useSearchParams();
   const qMode = sp.get("mode");
-  const [mode, setMode] = useState<Mode>(MODES.includes(qMode as Mode) ? (qMode as Mode) : "buy");
-  const [suburb, setSuburb] = useState(sp.get("suburb") || "");
-  const [ptype, setPtype] = useState(sp.get("type") || "");
+  const mode0: Mode = MODES.includes(qMode as Mode) ? (qMode as Mode) : "buy";
+  const [mode, setMode] = useState<Mode>(mode0);
+  // A suburb or type in the URL only applies when it exists in this mode's listings (case-insensitive), otherwise it is ignored rather than filtering to an empty page.
+  const [suburb, setSuburb] = useState(matchSuburb(mode0, sp.get("suburb") || "") || "");
+  const [ptype, setPtype] = useState(() => { const t = sp.get("type") || ""; return SOURCE[mode0].some((p) => p.type === t) ? t : ""; });
   const [pfrom, setPfrom] = useState(sp.get("from") || "");
   const [pto, setPto] = useState(sp.get("to") || "");
   const [beds, setBeds] = useState(sp.get("beds") || "");

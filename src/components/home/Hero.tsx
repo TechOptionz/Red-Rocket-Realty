@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { PAGES, PHOTOS, SEARCH } from "@/data/rr-data";
+import { PAGES, PHOTOS, SEARCH, suburbsFor, typesFor } from "@/data/rr-data";
 import Photo from "@/components/Photo";
 
 type Mode = "buy" | "rent" | "sell";
@@ -64,8 +64,9 @@ export default function Hero({ onAppraise }: { onAppraise: (address: string) => 
     const t = document.getElementById("appraisal");
     if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY, behavior: "smooth" });
   };
-  const suburbs = isRent ? SEARCH.rentSuburbs : SEARCH.buySuburbs;
-  const types = isRent ? SEARCH.rentTypes : SEARCH.buyTypes;
+  // Only suburbs and property types that currently have a listing in this mode, so every search lands on results.
+  const suburbs = suburbsFor(isRent ? "rent" : "buy");
+  const types = typesFor(isRent ? "rent" : "buy");
   const prices = isRent ? SEARCH.rentPrices : SEARCH.buyPrices;
 
   return (

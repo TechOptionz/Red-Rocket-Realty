@@ -1,13 +1,14 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { NAV, NAV_TOP, NAV_CARDS, CONTACT, PAGES, SALE, propHref } from "@/data/rr-data";
+import { usePathname, useRouter } from "next/navigation";
+import { NAV, NAV_TOP, NAV_COLS, NAV_SEARCH_MODES, SEARCH_MODE_NOUN, HOURS, CONTACT, PAGES, SALE, POSTS, postDate, specs, propHref, suburbCounts, matchSuburb, type SearchMode } from "@/data/rr-data";
 import { useLogo } from "@/lib/useLogo";
 import { SocialLinks } from "@/components/SocialIcons";
 import Image from "next/image";
 import { logoRatio, logoSize } from "@/data/brand-dims";
 import Photo from "@/components/Photo";
+import MenuCarousel, { type CarouselSlide } from "@/components/MenuCarousel";
 
 const DESKTOP = "(min-width: 1181px)";
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -15,7 +16,8 @@ const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 /**
  * Site header.
- * Desktop (≥1181px): floating bar with plain primary links; the Menu button drops a panel of photo cards under the bar.
+ * Desktop (≥1181px): floating bar with plain primary links; the Menu button drops a full mega menu under the bar (quick property
+ * search, one link column per group, a feature rail with the featured listing and latest news, and an office strip).
  * Tablet/phone (≤1180px): the Menu button opens a purpose-built panel (full-screen on phones, right-hand drawer on
  * tablets) with accordion sections, one featured listing, the appraisal CTA and contact details.
  */
@@ -24,6 +26,12 @@ export default function Header({ solid = false }: { solid?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false); // mobile panel (≤1180px)
   const [panel, setPanel] = useState(false); // desktop card panel, opened by the Menu button (≥1181px)
   const [cardsOn, setCardsOn] = useState(false); // mount the panel photos only once the panel has been opened
+  const [qMode, setQMode] = useState<SearchMode>("buy"); // mega menu quick search
+  const [qSuburb, setQSuburb] = useState("");
+  const [qOpen, setQOpen] = useState(false); // suburb suggestions open
+  const [qIdx, setQIdx] = useState(-1); // keyboard-highlighted suggestion
+  const [qMiss, setQMiss] = useState(false); // submitted text that matches no suburb with listings
+  const qInput = useRef<HTMLInputElement>(null);
   const [mobileOn, setMobileOn] = useState(false); // mount the mobile panel's photo only once it has been opened
   const [logoOpen, setLogoOpen] = useState(false);
   const [desktop, setDesktop] = useState(true);
@@ -31,11 +39,18 @@ export default function Header({ solid = false }: { solid?: boolean }) {
   const [loc, setLoc] = useState(""); // pathname + search + hash, read when the mobile panel opens (drives active states)
   const { logo, logos, setLogo } = useLogo();
   const pathname = usePathname();
+  const router = useRouter();
   const wrap = useRef<HTMLDivElement>(null);
   const menuBtn = useRef<HTMLButtonElement>(null);
   const mobilePanel = useRef<HTMLDivElement>(null);
   const firstBtn = useRef<HTMLButtonElement>(null);
   const featured = SALE.find((p) => p.photo);
+  // Feature rail carousels (desktop mega menu): up to four photographed listings and the four latest posts.
+  const featSlides: CarouselSlide[] = SALE.filter((p) => p.photo).slice(0, 4).map((p) => ({
+    key: p.id, href: propHref(p), photo: p.photo!, badge: p.status || "For sale", title: p.address + ", " + p.suburb,
+    meta: [p.price, p.type !== "Land" ? specs(p).join(" · ") : p.land ? p.land + " land" : ""].filter(Boolean).join(" · "),
+  }));
+  const newsSlides: CarouselSlide[] = POSTS.slice(0, 4).map((p) => ({ key: p.slug, href: p.href, photo: p.photo, position: p.position, badge: p.topic, title: p.title, meta: postDate(p.date) }));
 
   const closeAll = useCallback(() => {
     setPanel(false);
@@ -150,6 +165,43 @@ export default function Header({ solid = false }: { solid?: boolean }) {
     }
   };
 
+  // Quick search: only suburbs that currently have a listing in the selected tab are offered, so a search never lands on an empty page.
+  const qAll = suburbCounts(qMode);
+  const qText = qSuburb.trim().toLowerCase();
+  const qHits = qText ? qAll.filter((s) => s.name.toLowerCase().includes(qText)) : qAll;
+  const qNoun = SEARCH_MODE_NOUN[qMode];
+  const goQuick = (suburb?: string) => {
+    const q = new URLSearchParams({ mode: qMode });
+    if (suburb) q.set("suburb", suburb);
+    setQOpen(false);
+    setQIdx(-1);
+    setQMiss(false);
+    closeAll();
+    router.push(PAGES.listings + "?" + q.toString());
+  };
+  const submitQuick = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!qText) return goQuick();
+    const hit = (qIdx >= 0 && qHits[qIdx]?.name) || matchSuburb(qMode, qSuburb);
+    if (hit) return goQuick(hit);
+    setQMiss(true);
+    setQOpen(true);
+    qInput.current?.focus();
+  };
+  const pickMode = (m: SearchMode) => { setQMode(m); setQIdx(-1); setQMiss(false); };
+  const onQKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      if (!qHits.length) return;
+      setQOpen(true);
+      setQIdx((i) => (e.key === "ArrowDown" ? (i + 1) % qHits.length : (i - 1 + qHits.length) % qHits.length));
+    } else if (e.key === "Escape" && qOpen) {
+      e.stopPropagation();
+      setQOpen(false);
+      setQIdx(-1);
+    }
+  };
+
   const isOpen = menuOpen || panel;
   const isSolid = solid || scrolled || isOpen;
 
@@ -207,27 +259,98 @@ export default function Header({ solid = false }: { solid?: boolean }) {
             </div>
           </header>
 
-          {/* Desktop mega panel (Menu button): one photo card per group. */}
+          {/* Desktop mega menu (Menu button): quick search, one link column per group, feature rail and office strip. */}
+          <div className="mpanel__veil" data-open={panel ? "1" : "0"} aria-hidden="true" onClick={() => setPanel(false)} />
           <div id="mega-panel" className="mpanel" data-open={panel ? "1" : "0"} aria-hidden={!panel}>
             <div className="mpanel__box">
-              <div className="mpanel__grid">
-                {NAV_CARDS.map((n, i) => (
-                  <div className="mcard" key={n.label} style={{ transitionDelay: panel ? 0.04 + i * 0.045 + "s" : "0s" }}>
-                    <Link href={n.href} className="mcard__media" tabIndex={-1} aria-hidden="true" onClick={closeAll}>
-                      <span className="mcard__photo">{cardsOn ? <Photo src={n.photo} sizes="(max-width: 1400px) 22vw, 300px" quality={70} /> : null}</span>
+              <form className="mpanel__search" role="search" aria-label="Quick property search" onSubmit={submitQuick}>
+                <div className="mpanel__tabs" role="tablist" aria-label="Search type">
+                  {NAV_SEARCH_MODES.map(([m, label]) => (
+                    <button key={m} type="button" role="tab" aria-selected={qMode === m} className="mpanel__tab" data-on={qMode === m ? "1" : "0"} onClick={() => pickMode(m)}>{label}</button>
+                  ))}
+                </div>
+                <div className="mpanel__combo" onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) { setQOpen(false); setQIdx(-1); } }}>
+                  <label className="mpanel__field" data-miss={qMiss ? "1" : "0"}>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+                    <input ref={qInput} type="text" name="suburb" autoComplete="off" value={qSuburb} onChange={(e) => { setQSuburb(e.target.value); setQOpen(true); setQIdx(-1); setQMiss(false); }} onFocus={() => setQOpen(true)} onKeyDown={onQKey}
+                      placeholder={"Search by suburb, e.g. " + (qAll[0]?.name || "Springwood")} aria-label="Suburb" role="combobox" aria-expanded={qOpen} aria-controls="mega-suburbs" aria-autocomplete="list" aria-activedescendant={qIdx >= 0 ? "mega-suburb-" + qIdx : undefined} />
+                    {qSuburb && <button type="button" className="mpanel__clear" aria-label="Clear suburb" onClick={() => { setQSuburb(""); setQIdx(-1); setQMiss(false); qInput.current?.focus(); }}>&times;</button>}
+                  </label>
+                  <div id="mega-suburbs" className="mpanel__sugg" data-open={qOpen ? "1" : "0"} role="listbox" aria-label={"Suburbs with properties " + qNoun} onMouseDown={(e) => e.preventDefault()}>
+                    {qHits.length ? qHits.map((s, i) => (
+                      <button key={s.name} id={"mega-suburb-" + i} type="button" role="option" aria-selected={qIdx === i} data-on={qIdx === i ? "1" : "0"} onClick={() => goQuick(s.name)}>
+                        <span>{s.name}</span>
+                        <span>{s.count} {qNoun}</span>
+                      </button>
+                    )) : (
+                      <p className="mpanel__sugg-none" role="status">No properties {qNoun} in &ldquo;{qSuburb.trim()}&rdquo; right now. Try one of the suburbs below, or search all {qAll.length} suburbs with properties {qNoun}.</p>
+                    )}
+                  </div>
+                </div>
+                <button type="submit" className="mpanel__go">
+                  <span>Search</span>
+                  <span aria-hidden="true">→</span>
+                </button>
+                <div className="mpanel__chips">
+                  <span>{qMode === "sold" ? "Recently sold in" : "Available in"}</span>
+                  {qAll.slice(0, 9).map((s) => (
+                    <Link key={s.name} href={PAGES.listings + "?mode=" + qMode + "&suburb=" + encodeURIComponent(s.name)} className="mpanel__chip" onClick={closeAll}>{s.name}<small>{s.count}</small></Link>
+                  ))}
+                  <Link href={PAGES.listings + "?mode=" + qMode} className="mpanel__chip mpanel__chip--all" onClick={closeAll}>All {qNoun}</Link>
+                </div>
+              </form>
+
+              <div className="mpanel__cols">
+                {NAV_COLS.map((n, i) => (
+                  <div className="mcol" key={n.label} style={{ transitionDelay: panel ? 0.04 + i * 0.04 + "s" : "0s" }}>
+                    <Link href={n.href} className="mcol__title" onClick={closeAll}>
+                      {n.label}
+                      <span aria-hidden="true">→</span>
                     </Link>
-                    <div className="mcard__body">
-                      <Link href={n.href} className="mcard__title" onClick={closeAll}>{n.label}</Link>
-                      <span className="mcard__dash" aria-hidden="true" />
-                      <ul className="mcard__list">
-                        {n.items.map(([label, href]) => (
-                          <li key={label}><Link href={href} className="mcard__link" onClick={closeAll}>{label}</Link></li>
-                        ))}
-                      </ul>
-                      <Link href={n.href} className="mcard__go" aria-label={"Go to " + n.label} onClick={closeAll}>→</Link>
-                    </div>
+                    <p className="mcol__blurb">{n.blurb}</p>
+                    <ul className="mcol__list">
+                      {n.items.map(([label, href, note]) => {
+                        const ext = /^(mailto|tel):/.test(href);
+                        const inner = <>{label}{note ? <span className="mcol__note">{note}</span> : null}</>;
+                        return (
+                          <li key={label}>
+                            {ext
+                              ? <a href={href} className="mcol__link" onClick={closeAll}>{inner}</a>
+                              : <Link href={href} className="mcol__link" onClick={closeAll}>{inner}</Link>}
+                          </li>
+                        );
+                      })}
+                    </ul>
                   </div>
                 ))}
+
+                <aside className="mrail" aria-label="Featured" style={{ transitionDelay: panel ? ".26s" : "0s" }}>
+                  <MenuCarousel label="Featured properties" slides={featSlides} viewAll="View all" viewAllHref={PAGES.listings + "?mode=buy"} every={6000} active={panel} mountPhotos={cardsOn} onNavigate={closeAll} />
+                  <MenuCarousel label="Latest news" slides={newsSlides} viewAll="View all" viewAllHref={PAGES.blog} every={5000} active={panel} mountPhotos={cardsOn} onNavigate={closeAll} />
+                </aside>
+              </div>
+
+              <div className="mpanel__foot">
+                <div className="mpanel__office">
+                  <a href={CONTACT.phoneHref} className="mpanel__tel">{CONTACT.phone}</a>
+                  <div className="mpanel__addr">
+                    <a href={"mailto:" + CONTACT.email}>{CONTACT.email}</a>
+                    <span>{CONTACT.address}</span>
+                    <span>{HOURS}</span>
+                  </div>
+                </div>
+                <div className="mpanel__actions">
+                  <SocialLinks variant="dark" size="sm" owner="Red Rocket Realty" links={[
+                    { kind: "facebook", href: CONTACT.facebook, label: "Facebook" },
+                    { kind: "instagram", href: CONTACT.instagram, label: "Instagram" },
+                    { kind: "linkedin", href: CONTACT.linkedin, label: "LinkedIn" },
+                  ]} />
+                  <Link href={PAGES.pm + "#rental-appraisal"} className="pill pill--ghost-light pill--sm" onClick={closeAll}>Free rental appraisal</Link>
+                  <Link href={PAGES.appraisal} className="pill pill--red pill--sm pill--arrow" onClick={closeAll}>
+                    <span>Request an appraisal</span>
+                    <span className="pill__arrow" aria-hidden="true">→</span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

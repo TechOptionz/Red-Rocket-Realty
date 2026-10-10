@@ -66,23 +66,23 @@ export default function TeamClient() {
             return (
               <article key={dept + t.slug} data-card id={t.slug} className="card team-card" style={{ animationDelay: Math.min(i, 8) * 0.05 + "s" }}>
                 <a href={"#" + t.slug} onClick={(e) => { e.preventDefault(); show(t.slug); }} className="team-card__link" aria-label={"Open profile: " + t.name}>
-                  <div className="card__media team-card__media">
-                    <div data-zoom className="card__img card__img--top" style={{ backgroundColor: "#d6d9df", backgroundImage: t.photo ? undefined : a.bgImage, color: "var(--grey)", padding: 16 }}>{t.photo ? <Photo src={t.photo} sizes="(max-width: 720px) 66vw, 280px" position="center top" /> : null}{a.imgTag ? (<><span>{a.imgTag}</span><br /><span>{a.imgLabel}</span></>) : null}</div>
-                    <span data-arrow className="card__arrow card__arrow--fill" aria-hidden="true" style={{ right: 12, bottom: 12 }}>→</span>
+                  <div className="team-card__media">
+                    <div data-zoom className="card__img card__img--top" style={{ backgroundColor: "#d6d9df", backgroundImage: t.photo ? undefined : a.bgImage, color: "var(--grey)", padding: 16 }}>{t.photo ? <Photo src={t.photo} sizes="(max-width: 720px) 50vw, 300px" position="center top" /> : null}{a.imgTag ? (<><span>{a.imgTag}</span><br /><span>{a.imgLabel}</span></>) : null}</div>
+                    <span className="team-card__dept"><i aria-hidden="true" />{t.dept}</span>
+                    <div className="team-card__cap">
+                      <div className="team-card__name">{t.name}</div>
+                      <div className="team-card__role">{t.role}</div>
+                    </div>
+                    <span data-arrow className="card__arrow card__arrow--fill team-card__arrow" aria-hidden="true">→</span>
                   </div>
-                  <div className="team-card__body">
-                    <div className="team-card__dept">{t.dept}</div>
-                    <div className="team-card__name">{t.name}</div>
-                    <div className="team-card__role">{t.role}</div>
-                    {t.tagline ? <p className="team-card__tag">{t.tagline}</p> : null}
-                  </div>
+                  {t.tagline ? <p className="team-card__tag">{t.tagline}</p> : null}
                 </a>
                 <div className="team-card__foot">
-                  <div className="team-card__foot-top">
-                    <a href={telHref(t.mobile)} className="team-card__phone"><SocialIcon kind="phone" size={13} /><span>{t.mobile}</span>{office ? <span className="team-card__phone-note">office</span> : null}</a>
+                  <a href={telHref(t.mobile)} className="team-card__phone"><SocialIcon kind="phone" size={14} /><span>{t.mobile}</span>{office ? <span className="team-card__phone-note">office</span> : null}</a>
+                  <div className="team-card__actions">
+                    <a href={"mailto:" + t.email} className="social-btn" aria-label={"Email " + t.name} title={t.email}><SocialIcon kind="email" size={15} /></a>
                     <SocialLinks links={agentSocials(t)} owner={t.name} size="sm" />
                   </div>
-                  <a href={"mailto:" + t.email} className="team-card__email"><SocialIcon kind="email" size={13} /><span>{t.email}</span></a>
                 </div>
               </article>
             );
@@ -151,10 +151,12 @@ export default function TeamClient() {
                   <div className="kicker kicker--muted">Current and recent listings</div>
                   <div className="sheet__listings">
                     {listings.map((p) => (
-                      <Link key={p.id} data-card href={propHref(p)} className="card" style={{ gap: 8 }}>
+                      <Link key={p.id} data-card href={propHref(p)} className="card">
                         <div className="card__media" style={{ aspectRatio: "3/2" }}><div data-zoom className="card__img" style={{ backgroundImage: p.photo ? undefined : decorate(p).bgImage }}>{p.photo ? <Photo src={p.photo} sizes="200px" /> : null}</div></div>
-                        <div style={{ fontSize: 14, fontWeight: 800 }}>{p.address}</div>
-                        <div style={{ fontSize: 12, color: "var(--grey)", fontWeight: 700, textTransform: "uppercase", letterSpacing: ".08em" }}>{p.suburb} · {p.price}</div>
+                        <div className="card__body" style={{ padding: "14px 16px 16px", gap: 6 }}>
+                          <div style={{ fontSize: 14, fontWeight: 800, lineHeight: 1.25 }}>{p.address}</div>
+                          <div style={{ fontSize: 11.5, color: "var(--grey)", fontWeight: 700, textTransform: "uppercase", letterSpacing: ".08em" }}>{p.suburb} · {p.price}</div>
+                        </div>
                       </Link>
                     ))}
                   </div>

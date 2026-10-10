@@ -37,24 +37,39 @@ export const PAGES = {
 };
 const P = PAGES;
 
-// Top bar links. Groups with a `photo` get a card in the hover mega panel; `top: false` would hide a group from the bar.
-export const NAV = [
-  { label: 'Buy', href: P.listings + '?mode=buy', top: true, photo: '/photos/uploads/2026/08/24-Parkway-Street-Kuraby-Qld-4112-1.jpg', items: [
-    ['Properties for sale', P.listings + '?mode=buy'], ['Land for sale', P.listings + '?mode=land'], ['Open homes', P.openHomes],
-    ['Buyer guide', P.guides + '?guide=buyer'], ['Make an offer', P.guides + '?guide=buyer#offer'], ['Property alerts', P.listings + '?mode=buy#alerts']] },
-  { label: 'Sell', href: P.sell, top: true, photo: '/photos/uploads/2026/09/89-Passerine-Drive-Rochedale-South-QLD-4123-17.jpg', items: [
-    ['Sell with Red Rocket', P.sell], ['Request an appraisal', P.appraisal], ['Recently sold', P.listings + '?mode=sold'], ['Seller guide', P.guides + '?guide=seller'], ['The Red Rocket Advantage', P.sell + '#advantage']] },
-  { label: 'Rent', href: P.rent, top: true, photo: '/photos/uploads/2026/10/42-Lime-Street-Redland-Bay-QLD-4165-1.jpg', items: [
-    ['Properties for rent', P.listings + '?mode=rent'], ['Apply for a property', P.rent + '#apply'], ['Maintenance request', P.rent + '#maintenance'], ['Tenant information', P.rent + '#tenants']] },
-  { label: 'Property Management', href: P.pm, top: true, photo: '/photos/hero/property-management.jpg', items: [
-    ['Why Red Rocket manages', P.pm], ['Free rental appraisal', P.pm + '#rental-appraisal'], ['Meet the PM team', P.team + '?dept=Property%20Management']] },
-  { label: 'About', href: P.about, top: true, photo: '/photos/hero/about.jpg', items: [
-    ['Our story', P.about], ['Our team', P.team], ['Reviews', P.about + '#reviews'], ['Latest news', P.blog], ['Guides', P.guides]] },
-  { label: 'Contact', href: P.contact, top: true, photo: '', items: [
+// Site navigation. One group per column of the desktop mega menu (opened by the Menu button) and per accordion section of the
+// tablet/phone menu. `top` puts the group in the desktop bar; `blurb` is the one-line intro under the column heading; `photo`
+// is reserved for group imagery. Every href below lands on a real route, in-page anchor or supported query param.
+export type NavItem = [label: string, href: string, note?: string];
+export type NavGroup = { label: string; href: string; top: boolean; photo: string; blurb: string; items: NavItem[] };
+export const NAV: NavGroup[] = [
+  { label: 'Buy', href: P.listings + '?mode=buy', top: true, blurb: 'Find your next home across Logan and Brisbane’s south.', photo: '/photos/uploads/2026/08/24-Parkway-Street-Kuraby-Qld-4112-1.jpg', items: [
+    ['Properties for sale', P.listings + '?mode=buy'], ['Houses for sale', P.listings + '?mode=buy&type=House'], ['Units & townhouses', P.listings + '?mode=buy&type=Townhouse'],
+    ['Land for sale', P.listings + '?mode=land'], ['Open homes', P.openHomes, 'This week'], ['Recently sold', P.listings + '?mode=sold'],
+    ['Property alerts', P.listings + '?mode=buy#alerts'], ['Buyer guide', P.guides + '?guide=buyer'], ['Make an offer', P.guides + '?guide=buyer#offer']] },
+  { label: 'Sell', href: P.sell, top: true, blurb: 'Local experts, premium marketing and a record of strong results.', photo: '/photos/uploads/2026/09/89-Passerine-Drive-Rochedale-South-QLD-4123-17.jpg', items: [
+    ['Sell with Red Rocket', P.sell], ['Request an appraisal', P.appraisal, 'Free'], ['The Red Rocket Advantage', P.sell + '#advantage'],
+    ['Recently sold', P.listings + '?mode=sold'], ['Seller guide', P.guides + '?guide=seller'], ['Market news', P.blog + '?topic=Market'],
+    ['Meet the sales team', P.team + '?dept=Sales'], ['Selling enquiry', P.contact + '?topic=Selling']] },
+  { label: 'Rent', href: P.rent, top: true, blurb: 'Quality rentals, quick applications and responsive support for tenants.', photo: '/photos/uploads/2026/10/42-Lime-Street-Redland-Bay-QLD-4165-1.jpg', items: [
+    ['Properties for rent', P.listings + '?mode=rent'], ['Houses for rent', P.listings + '?mode=rent&type=House'], ['Apply for a property', P.rent + '#apply'],
+    ['Tenant information', P.rent + '#tenants'], ['Maintenance request', P.rent + '#maintenance', '24/7'], ['Meet the leasing team', P.team + '?dept=Leasing'],
+    ['Renting enquiry', P.contact + '?topic=Renting'], ['Call leasing ' + CONTACT.leasingPhone, 'tel:+61439752326']] },
+  { label: 'Property Management', href: P.pm, top: true, blurb: 'Hands-on management that protects your investment and your time.', photo: '/photos/hero/property-management.jpg', items: [
+    ['Why Red Rocket manages', P.pm], ['Free rental appraisal', P.pm + '#rental-appraisal', 'Free'], ['Switch to Red Rocket', P.contact + '?topic=Property%20management'],
+    ['Meet the PM team', P.team + '?dept=Property%20Management'], ['Investor insights', P.blog + '?topic=Investing'], ['Finance & lending news', P.blog + '?topic=Finance'],
+    ['Routine inspections', P.team + '?dept=Inspections'], ['Email leasing', 'mailto:' + CONTACT.leasing]] },
+  { label: 'About', href: P.about, top: true, blurb: 'Logan locals for over 25 years, built on clients for life.', photo: '/photos/hero/about.jpg', items: [
+    ['Our story', P.about], ['Our team', P.team], ['Directors', P.team + '?dept=Directors'], ['Reviews', P.about + '#reviews', CONTACT.rating + ' ★'],
+    ['Latest news', P.blog], ['Buyer & seller guides', P.guides], ['Our office', P.contact], ['Careers & enquiries', P.contact + '?topic=Other']] },
+  { label: 'Contact', href: P.contact, top: true, blurb: 'Talk to the team at 67 Springwood Road.', photo: '', items: [
     ['Contact us', P.contact], ['Email the office', 'mailto:' + CONTACT.email], ['Call ' + CONTACT.phone, CONTACT.phoneHref]] },
 ];
 export const NAV_TOP = NAV.filter(n => n.top);
-export const NAV_CARDS = NAV.filter(n => n.photo);
+// Desktop mega menu: link columns (Contact lives in the panel footer instead), suburb shortcuts and the quick-search tabs.
+export const NAV_COLS = NAV.filter(n => n.label !== 'Contact');
+export const NAV_SEARCH_MODES: [SearchMode, string][] = [['buy', 'Buy'], ['rent', 'Rent'], ['sold', 'Sold']];
+export const HOURS = 'Mon–Fri 9:00am–5:00pm · Sat by appointment';
 
 const S = (i: number) => ['#2b2f37', '#343941', '#262a31', '#3a3f48', '#2f333b', '#41464f'][i % 6];
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -135,6 +150,31 @@ export const RENT: Listing[] = [
   { id: 'r11', brochure: 102116, liveUrl: 'https://redrocketrealty.com.au/rental/35-elm-avenue-woodridge-qld-4114/', map: 'pin', address: "35 Elm Avenue", suburb: "Woodridge", postcode: '4114', rent: 500, type: 'House', beds: 3, baths: 1, cars: 1, status: '', available: 'Available now', shade: S(4), img: '', inspection: '', agent: 'Bhavani Vakity', photo: "/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114.jpg", photos: ["/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-13.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-12.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-11.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-10.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-9.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-8.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-7.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-6.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-5.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-4.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-3.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-2.jpg","/photos/uploads/2026/10/35-Elm-Avenue-WOODRIDGE-QLD-4114-1.jpg"], rentNote: 'Weekly rent to confirm from the rentals feed' },
 ];
 
+export type SearchMode = 'buy' | 'rent' | 'sold' | 'land';
+export const LISTINGS_BY_MODE: Record<SearchMode, Listing[]> = { buy: SALE, rent: RENT, sold: SOLD, land: LAND };
+export const SEARCH_MODE_NOUN: Record<SearchMode, string> = { buy: 'for sale', rent: 'for rent', sold: 'sold', land: 'for sale' };
+/** Suburbs that currently have at least one listing in a mode, busiest first then A–Z, so a search can only ever point at an area with results. */
+export const suburbCounts = (mode: SearchMode): { name: string; count: number }[] => {
+  const m = new Map<string, number>();
+  for (const p of LISTINGS_BY_MODE[mode]) if (p.suburb) m.set(p.suburb, (m.get(p.suburb) || 0) + 1);
+  return Array.from(m, ([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+};
+/** Same suburbs, A–Z, for select menus. */
+export const suburbsFor = (mode: SearchMode) => suburbCounts(mode).map(s => s.name).sort((a, b) => a.localeCompare(b));
+/** Property types that currently have a listing in a mode. */
+export const typesFor = (mode: SearchMode) => Array.from(new Set(LISTINGS_BY_MODE[mode].map(p => p.type).filter((t): t is string => Boolean(t) && t !== 'Land'))).sort();
+/** Resolve free text to a suburb with listings in a mode: exact (case-insensitive) first, else the busiest suburb whose name contains the text. */
+export const matchSuburb = (mode: SearchMode, text: string): string | null => {
+  const t = text.trim().toLowerCase();
+  if (!t) return null;
+  const all = suburbCounts(mode);
+  const exact = all.find(s => s.name.toLowerCase() === t);
+  if (exact) return exact.name;
+  const starts = all.find(s => s.name.toLowerCase().startsWith(t));
+  if (starts) return starts.name;
+  const within = all.find(s => s.name.toLowerCase().includes(t));
+  return within ? within.name : null;
+};
 export const formatRent = (n: number) => '$' + n.toLocaleString('en-AU') + ' per week';
 export const specs = (p: Listing): string[] => p.type === 'Land' ? [p.land + ' land'] : [p.beds + ' bed', p.baths + ' bath', p.cars + ' car'].concat(p.type ? [p.type] : []);
 export const propHref = (p: Listing) => P.property + "/" + p.id;

@@ -98,9 +98,9 @@ export default function PMClient() {
           {pmTeam.map((t) => {
             const a = decorateAgent(t);
             return (
-              <Link key={t.slug} data-card href={a.teamHref} className="card" style={{ width: "min(240px,66vw)", gap: 12 }}>
+              <Link key={t.slug} data-card href={a.teamHref} className="card" style={{ width: "min(240px,66vw)" }}>
                 <div className="card__media" style={{ aspectRatio: "3/4", background: "#d6d9df" }}><div data-zoom className="card__img card__img--top" style={{ backgroundImage: t.photo ? undefined : a.bgImage }}>{t.photo ? <Photo src={t.photo} sizes="(max-width: 720px) 66vw, 240px" position="center top" /> : null}</div></div>
-                <div style={{ display: "grid", gap: 2 }}><div style={{ fontSize: 16, fontWeight: 800, letterSpacing: "-.01em" }}>{t.name}</div><div style={{ fontSize: 13, color: "var(--grey)" }}>{t.role}</div></div>
+                <div className="card__body" style={{ gap: 2 }}><div style={{ fontSize: 16, fontWeight: 800, letterSpacing: "-.01em" }}>{t.name}</div><div style={{ fontSize: 13, color: "var(--grey)" }}>{t.role}</div></div>
               </Link>
             );
           })}
