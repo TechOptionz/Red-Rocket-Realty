@@ -6,6 +6,9 @@ import Photo from "@/components/Photo";
 
 type Mode = "buy" | "rent" | "sell";
 
+// One merged, seamlessly looping reel (built from the raw clips by scripts/build-hero-video.mjs).
+const HERO_VIDEO = { webm: "/videos/hero.webm", mp4: "/videos/hero.mp4", poster: "/videos/hero-poster.jpg" };
+
 export default function Hero({ onAppraise }: { onAppraise: (address: string) => void }) {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("buy");
@@ -14,8 +17,30 @@ export default function Hero({ onAppraise }: { onAppraise: (address: string) => 
   const [pfrom, setPfrom] = useState("");
   const [pto, setPto] = useState("");
   const [beds, setBeds] = useState("");
+  const [videoReady, setVideoReady] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const bg = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
+
+  // Only run the reel while the hero is on screen; reduced-motion users get the still poster (see home.css).
+  useEffect(() => {
+    const el = heroRef.current;
+    const v = videoRef.current;
+    if (!el || !v || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Autoplay usually starts before React hydrates, so the playing/canplaythrough events below have already fired.
+    // Read the element's state now instead of waiting for events that will not come again.
+    if (v.readyState >= 2) setVideoReady(true);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) v.play().catch(() => {});
+        else v.pause();
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     let raf = 0;
@@ -25,9 +50,12 @@ export default function Hero({ onAppraise }: { onAppraise: (address: string) => 
       const y = window.scrollY || 0;
       if (bg.current && y < vh * 1.2) bg.current.style.transform = "translate3d(0," + (y * 0.28).toFixed(1) + "px,0) scale(" + (1 + (Math.min(y, vh) / vh) * 0.04).toFixed(3) + ")";
       if (content.current && y < vh * 1.2 && window.innerWidth > 720) {
-        const p = Math.min(1, y / (vh * 0.6));
-        content.current.style.transform = "translate3d(0," + (-p * vh * 0.12).toFixed(1) + "px,0)";
-        content.current.style.opacity = (1 - p).toFixed(3);
+        // Drift gently while scrolling, but hold full opacity until the
+        // content is actually leaving the viewport, then fade it out fast.
+        const drift = Math.min(1, y / vh);
+        const fade = Math.min(1, Math.max(0, (y - vh * 0.55) / (vh * 0.4)));
+        content.current.style.transform = "translate3d(0," + (-drift * vh * 0.08).toFixed(1) + "px,0)";
+        content.current.style.opacity = (1 - fade * fade).toFixed(3);
       }
     };
     const onScroll = () => {
@@ -70,8 +98,29 @@ export default function Hero({ onAppraise }: { onAppraise: (address: string) => 
   const prices = isRent ? SEARCH.rentPrices : SEARCH.buyPrices;
 
   return (
-    <section className="hero">
-      <div ref={bg} className="hero__bg" aria-hidden="true"><Photo src={PHOTOS.pool} sizes="100vw" priority quality={75} /></div>
+    <section ref={heroRef} className="hero">
+      <div ref={bg} className="hero__bg" aria-hidden="true">
+        <video
+          ref={videoRef}
+          className="hero__video"
+          data-ready={videoReady ? "1" : "0"}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={HERO_VIDEO.poster}
+          onPlaying={() => setVideoReady(true)}
+          onCanPlayThrough={() => setVideoReady(true)}
+          onTimeUpdate={() => setVideoReady(true)}
+        >
+          <source src={HERO_VIDEO.webm} type="video/webm" />
+          <source src={HERO_VIDEO.mp4} type="video/mp4" />
+        </video>
+        <div className="hero__poster" data-hidden={videoReady ? "1" : "0"}>
+          <Photo src={HERO_VIDEO.poster} sizes="100vw" priority quality={80} />
+        </div>
+      </div>
       <div className="hero__shade" aria-hidden="true" />
       <div ref={content} className="hero__content">
         <div style={{ display: "grid", gap: 22, maxWidth: 1100 }}>

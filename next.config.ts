@@ -15,13 +15,14 @@ const nextConfig: NextConfig = {
     qualities: [70, 75, 80, 85],
     minimumCacheTTL: 60 * 60 * 24 * 30,
     // Local sources may carry a cache-busting query (the brand marks use ?v=N); Next 16 will require this to be explicit.
-    localPatterns: [{ pathname: "/brand/**" }, { pathname: "/photos/**" }],
+    localPatterns: [{ pathname: "/brand/**" }, { pathname: "/photos/**" }, { pathname: "/videos/**" }],
   },
   async headers() {
     return [
-      // Photos and brand marks are content-stable files; let browsers and CDNs keep them for a year.
+      // Photos, brand marks, and videos are content-stable files; let browsers and CDNs keep them for a year.
       { source: "/photos/:path*", headers: [{ key: "Cache-Control", value: `public, max-age=${YEAR}, immutable` }] },
       { source: "/brand/:path*", headers: [{ key: "Cache-Control", value: `public, max-age=${YEAR}, immutable` }] },
+      { source: "/videos/:path*", headers: [{ key: "Cache-Control", value: `public, max-age=${YEAR}, immutable` }] },
     ];
   },
 };
