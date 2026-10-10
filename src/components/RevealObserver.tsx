@@ -45,7 +45,10 @@ export default function RevealObserver() {
       document.querySelectorAll("[data-reveal]:not([data-in]),[data-stagger]:not([data-in])").forEach((el) => {
         if (!hydrated(el)) return;
         const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight * 0.96 && r.bottom > 0) el.setAttribute("data-in", "1");
+        // At the very end of the page nothing can scroll further, so anything in view counts (the footer wordmark sits in the
+        // bottom 6% on short phone viewports and would otherwise never reveal).
+        const atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+        if (r.bottom > 0 && r.top < window.innerHeight * (atEnd ? 1 : 0.96)) el.setAttribute("data-in", "1");
       });
     let fbRaf = 0;
     const fallbackSoon = () => {

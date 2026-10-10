@@ -38,8 +38,8 @@ export default function HomeClient() {
         <div data-reveal className="trust">
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}><span className="stars" aria-hidden="true" style={{ fontSize: 16 }}>★★★★★</span><span>{CONTACT.rating} out of 5</span><span style={{ color: "var(--grey)", fontWeight: 500 }}>Based on {CONTACT.reviews} reviews</span></div>
           <a href={CONTACT.rma} target="_blank" rel="noopener">RateMyAgent <span aria-hidden="true">↗</span></a>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}><span>Award Winning Agency &amp; Agent 2017–2026</span><span className="mono-tag">confirm wording</span></div>
-          <div style={{ marginLeft: "auto", color: "var(--grey)", fontWeight: 500 }}>Logan City and surrounding areas · since the 1990s<span className="mono-tag" style={{ marginLeft: 8 }}>25+ yrs · verify</span></div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}><span>Award Winning Agency &amp; Agent 2017–2026</span></div>
+          <div style={{ marginLeft: "auto", color: "var(--grey)", fontWeight: 500 }}>Logan City and surrounding areas · since the 1990s</div>
         </div>
         <div className="about__grid">
           <div className="about__text">
@@ -144,7 +144,6 @@ export default function HomeClient() {
             );
           })}
         </div>
-        <div className="mono-note mono-note--light" style={{ paddingTop: 28 }}>Sale prices shown from the feed (&quot;Sold $—&quot;) · sold listings keep their existing addresses</div>
       </section>
 
       {/* Explore Logan */}
@@ -163,7 +162,7 @@ export default function HomeClient() {
                 </Link>
               ))}
             </div>
-            <p data-reveal className="small" style={{ fontSize: 15, lineHeight: 1.55, maxWidth: "44ch" }}>Also active in Kingston, Marsden, Slacks Creek, Kuraby, Shailer Park and Logan Central. Service area list to be confirmed by the agency.</p>
+            <p data-reveal className="small" style={{ fontSize: 15, lineHeight: 1.55, maxWidth: "44ch" }}>Also active in Kingston, Marsden, Slacks Creek, Kuraby, Shailer Park and Logan Central.</p>
           </div>
           <div data-reveal="clip" className="areas__bleed">
             <div style={{ position: "absolute", inset: 0 }}>

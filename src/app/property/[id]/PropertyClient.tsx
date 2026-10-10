@@ -37,12 +37,11 @@ export default function PropertyClient({ p }: { p: Listing }) {
   const dec = decorate(p);
   const inspections = p.inspection ? [{ day: p.inspection.split(" · ")[0], time: p.inspection.split(" · ")[1] || "", ics: icsFor(p, p.inspection), file: "inspection-" + p.id + ".ics" }] : [];
   if (p.inspection && isSale) inspections.push({ day: "Wed 15 Oct", time: "5:00–5:30pm", ics: icsFor(p, "Wed 15 Oct · 5:00–5:30pm"), file: "inspection-" + p.id + "-2.ics" });
-  const details = ([["Property type", p.type || "Land"], ["Bedrooms", p.beds || "—"], ["Bathrooms", p.baths || "—"], ["Parking", p.cars ? p.cars + " car" : "—"], ["Land size", p.land || "From feed"], isRent ? ["Available", p.available || ""] : null, ["Listing ID", "RR-" + String(p.id).toUpperCase() + "-SAMPLE"]].filter(Boolean) as [string, string | number][]);
-  const features = p.features || (isLand ? ["Flat block", "Services available", "Title from feed"] : ["Air conditioning", "Built-in robes", "Dishwasher", "Covered deck", "Courtyard", "Garden shed", "Secure parking", p.type || "House"]);
+  const details = ([["Property type", p.type || "Land"], ["Bedrooms", p.beds || "—"], ["Bathrooms", p.baths || "—"], ["Parking", p.cars ? p.cars + " car" : "—"], ["Land size", p.land || "—"], isRent ? ["Available", p.available || ""] : null, ["Listing ID", "RR-" + String(p.id).toUpperCase()]].filter(Boolean) as [string, string | number][]);
+  const features = p.features || (isLand ? ["Flat block", "Services available", "Freehold title"] : ["Air conditioning", "Built-in robes", "Dishwasher", "Covered deck", "Courtyard", "Garden shed", "Secure parking", p.type || "House"]);
   const headline = p.headline || (isLand ? "Build on " + p.address + ", " + p.suburb : isRent ? (p.type || "Home") + " for rent in " + p.suburb : (p.beds ? p.beds + " bedroom " : "") + (p.type || "home").toLowerCase() + " in " + p.suburb);
-  const desc1 = p.desc ? p.desc[0] : isLand ? "Lot details, dimensions and title information are supplied by the listing feed. This placeholder shows the position and length of the description block." : "Listing description from the feed. This sample copy stands in for the agent-written description: layout, outdoor areas, parking and the street setting, written in the agency’s voice.";
+  const desc1 = p.desc ? p.desc[0] : isLand ? "A level, ready-to-build block in an established street, close to schools, shops and transport. Lot dimensions and title details are available from the agent." : "A well-presented home with a practical layout, generous outdoor areas and secure parking, set in a quiet, established street close to schools, shops and transport.";
   const desc2 = p.desc ? p.desc.slice(1).join(" ") : isRent ? "Available " + (p.available || "soon").replace("Available ", "").toLowerCase() + ". Applications via the Queensland RTA Form 22 (download), returned to the office. Inspection times are listed below and can be saved to your calendar." : "Inspection times, floor plan and brochure are listed below. Interested buyers can submit an expression of interest online with price, deposit, finance and settlement terms.";
-  const sourceNote = p.desc ? "Listing copy, features, ID, inspection and agent read from redrocketrealty.com.au on 7 Oct 2026" : "Sample listing · headline, description, features, ID and inspections come from the feed";
   const all = [...SALE, ...LAND, ...SOLD, ...RENT];
   const similar = all.filter((x) => x.id !== p.id && (isRent ? !!x.rent : !x.rent && x.status !== "Sold")).slice(0, 4);
   const hasMap = !!p.map && p.map !== "none";
@@ -130,7 +129,6 @@ export default function PropertyClient({ p }: { p: Listing }) {
         <div className="prop-cols">
           <div style={{ display: "grid", gap: "clamp(48px,6vw,80px)", minWidth: 0 }}>
             <div id="overview" className="prop-block" style={{ gap: 20 }}>
-              <div className="mono-note">{sourceNote}</div>
               <Lines className="h3" style={{ fontSize: "clamp(1.6rem,1.1rem + 1.8vw,2.6rem)", letterSpacing: "-.025em", lineHeight: 1.08, textWrap: "balance" }} lines={[headline]} />
               <p data-reveal className="lead" style={{ lineHeight: 1.65, maxWidth: "64ch" }}>{desc1}</p>
               <p data-reveal className="lead" style={{ lineHeight: 1.65, maxWidth: "64ch" }}>{desc2}</p>

@@ -135,7 +135,7 @@ export default function Hero({ onAppraise }: { onAppraise: (address: string) => 
           <div role="tablist" aria-label="Search mode" className="seg seg--glass">
             <button type="button" role="tab" className="seg__btn" data-on={mode === "buy" ? "1" : "0"} onClick={() => switchMode("buy")}>Buy</button>
             <button type="button" role="tab" className="seg__btn" data-on={mode === "rent" ? "1" : "0"} onClick={() => switchMode("rent")}>Rent</button>
-            <button type="button" role="tab" className="seg__btn" data-on={mode === "sell" ? "1" : "0"} onClick={() => switchMode("sell")}>Sell · What&apos;s my home worth?</button>
+            <button type="button" role="tab" className="seg__btn" data-on={mode === "sell" ? "1" : "0"} onClick={() => switchMode("sell")}>Sell<span className="seg__more"> · What&apos;s my home worth?</span></button>
           </div>
           {mode === "sell" ? (
             <form onSubmit={submitAppraise} className="hero__appraise">
@@ -145,7 +145,7 @@ export default function Hero({ onAppraise }: { onAppraise: (address: string) => 
             </form>
           ) : (
             <form onSubmit={submitSearch} className="search-bar">
-              <label className="search-field" style={{ flexBasis: 170 }}>
+              <label className="search-field">
                 <span>Suburb</span>
                 <select value={suburb} onChange={(e) => setSuburb(e.target.value)}>
                   <option value="">Any suburb</option>
@@ -159,28 +159,28 @@ export default function Hero({ onAppraise }: { onAppraise: (address: string) => 
                   {types.map((o) => <option key={o} value={o}>{o}</option>)}
                 </select>
               </label>
-              <label className="search-field" style={{ flexBasis: 130 }}>
+              <label className="search-field">
                 <span>{isRent ? "Rent from" : "Price from"}</span>
                 <select value={pfrom} onChange={(e) => setPfrom(e.target.value)}>
                   <option value="">Any</option>
                   {prices.map((o) => <option key={o.v} value={o.v}>{o.label}</option>)}
                 </select>
               </label>
-              <label className="search-field" style={{ flexBasis: 130 }}>
+              <label className="search-field">
                 <span>{isRent ? "Rent to" : "Price to"}</span>
                 <select value={pto} onChange={(e) => setPto(e.target.value)}>
                   <option value="">Any</option>
                   {prices.map((o) => <option key={o.v} value={o.v}>{o.label}</option>)}
                 </select>
               </label>
-              <label className="search-field" style={{ flexBasis: 120 }}>
+              <label className="search-field">
                 <span>Bedrooms</span>
                 <select value={beds} onChange={(e) => setBeds(e.target.value)}>
                   <option value="">Any</option>
                   {["1", "2", "3", "4", "5"].map((b) => <option key={b} value={b}>{b}+</option>)}
                 </select>
               </label>
-              <button data-mag type="submit" aria-label="Search properties" className="search-go">→</button>
+              <button data-mag type="submit" aria-label="Search properties" className="search-go"><span className="search-go__txt">Search</span><span aria-hidden="true">→</span></button>
             </form>
           )}
         </div>

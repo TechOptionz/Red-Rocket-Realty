@@ -35,7 +35,6 @@ export default function Stats() {
         <div className="stat"><div className="stat__n">{Math.round(v[2])}+</div><div className="stat__k">Years serving Logan</div></div>
         <div className="stat"><div className="stat__n">{Math.round(v[3])}</div><div className="stat__k">Local team members</div></div>
       </div>
-      <div className="mono-note" style={{ marginTop: 48 }}>Rating and review count as published on the current site · replace with live RateMyAgent feed · years claim to be confirmed by the agency</div>
     </section>
   );
 }

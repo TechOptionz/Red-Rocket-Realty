@@ -39,7 +39,7 @@ export default function ContactClient() {
             <Lines as="h1" className="display-xl" style={{ fontSize: "clamp(2.6rem,1.4rem + 5vw,6.4rem)", letterSpacing: "-.035em", lineHeight: .96 }} lines={["Buying, selling or", <>renting in <span style={{ color: "var(--brand-red)" }}>Logan?</span></>]} />
             <div style={{ display: "grid", gap: 8 }}>
               <a href={CONTACT.phoneHref} style={{ color: "#fff", textDecoration: "none", fontSize: "clamp(1.6rem,1.2rem + 1.6vw,2.6rem)", fontWeight: 800, letterSpacing: "-.02em", lineHeight: 1 }}>{CONTACT.phone}</a>
-              <div className="hero__meta">67 Springwood Road, Springwood QLD 4127<br />Mon–Fri 9:00am–5:00pm · Sat by appointment <span className="mono-note mono-note--light" style={{ fontSize: 10 }}>hours to confirm</span></div>
+              <div className="hero__meta">67 Springwood Road, Springwood QLD 4127<br />Mon–Fri 9:00am–5:00pm · Sat by appointment</div>
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@ export default function ContactClient() {
             </div>
             <div data-reveal className="contact-info">
               <div style={{ display: "grid", gap: 4 }}><div className="contact-info__k">Office</div><div className="contact-info__v">67 Springwood Road<br />Springwood QLD 4127</div></div>
-              <div style={{ display: "grid", gap: 4 }}><div className="contact-info__k">Parking</div><div className="contact-info__v">On site and street parking <span className="mono-note" style={{ fontSize: 10 }}>to confirm</span></div></div>
+              <div style={{ display: "grid", gap: 4 }}><div className="contact-info__k">Parking</div><div className="contact-info__v">On site and street parking</div></div>
               <div style={{ display: "grid", gap: 4 }}><div className="contact-info__k">Follow</div><div style={{ display: "flex", gap: 8 }}><a href={CONTACT.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook" className="social-dark"><SocialIcon kind="facebook" /></a><a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram" className="social-dark"><SocialIcon kind="instagram" /></a><a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn" className="social-dark"><SocialIcon kind="linkedin" /></a></div></div>
               <div style={{ display: "grid", gap: 4 }}><div className="contact-info__k">Reviews</div><a href={CONTACT.rma} target="_blank" rel="noopener" className="contact-info__v" style={{ color: "var(--ink)", textDecoration: "none" }}>4.9 ★ · 485 on RateMyAgent ↗</a></div>
             </div>

@@ -38,7 +38,7 @@ export default function AppraisalCta({ state, setState }: { state: ApprState; se
           <div className="appr__card" style={{ gap: 16 }}>
             <div className="kicker kicker--muted" style={{ letterSpacing: ".14em" }}>{state.kind} · {state.addr}</div>
             <div className="h4">Steps 2–7 continue on the appraisal page.</div>
-            <p className="body" style={{ fontSize: 15, lineHeight: 1.55 }}>Property type, bedrooms, expected price range, timing, a short description and your details. Price bands need updating before launch.</p>
+            <p className="body" style={{ fontSize: 15, lineHeight: 1.55 }}>Property type, bedrooms, expected price range, timing, a short description and your details.</p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center" }}>
               <Link href={PAGES.appraisal} className="pill pill--red pill--md">Continue</Link>
               <button type="button" className="pill pill--link pill--md" onClick={() => setState({ step: 0, addr: "", kind: "" })}>Start over</button>

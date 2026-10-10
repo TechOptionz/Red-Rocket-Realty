@@ -73,7 +73,7 @@ html[data-intro-on="1"] .hero__content *, html[data-intro-on="1"] .hero__bg { an
 .hero__poster[data-hidden="1"] { opacity: 0; }
 /* Home hero: keep the footage vibrant. Only a whisper of shade up top for the nav, clear through the middle, and a short dark foot for the headline and search bar. */
 .hero__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, .18) 0%, rgba(0, 0, 0, 0) 32%, rgba(15, 17, 20, .22) 62%, rgba(15, 17, 20, .80) 100%); pointer-events: none; }
-.hero__content { position: relative; width: 100%; padding: 150px var(--pad-x) clamp(36px, 5vw, 64px); display: grid; gap: clamp(24px, 3vw, 40px); will-change: transform, opacity; z-index: 1; }
+.hero__content { position: relative; width: 100%; padding: 150px var(--pad-x) clamp(36px, 5vw, 64px); display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(24px, 3vw, 40px); will-change: transform, opacity; z-index: 1; }
 @media (prefers-reduced-motion: reduce) { .hero__video { display: none; } .hero__poster { opacity: 1 !important; } }
 .hero__kick { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #fff; display: flex; align-items: center; gap: 12px; animation: rrFade .8s var(--ease-out) .15s both; }
 .hero__kick span { width: 28px; height: 2px; background: var(--brand-red); display: block; }
@@ -92,6 +92,10 @@ html[data-intro-on="1"] .hero__content *, html[data-intro-on="1"] .hero__bg { an
 .hero-bar { background: var(--bg); padding: 0 var(--pad-x); }
 @media (max-width: 720px) { .hero__body { padding-top: 140px; gap: 18px; } }
 .hero__search { animation: rrFade .9s var(--ease-out) .8s both; max-width: 1100px; background: rgba(255, 255, 255, .08); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, .16); border-radius: 28px; padding: 8px; }
+/* Desktop field widths (suburb, type, from, to, beds); the phone pass below pairs them up instead. */
+.hero__search .search-field:nth-of-type(1) { flex-basis: 170px; }
+.hero__search .search-field:nth-of-type(3), .hero__search .search-field:nth-of-type(4) { flex-basis: 130px; }
+.hero__search .search-field:nth-of-type(5) { flex-basis: 120px; }
 .hero__appraise { display: flex; align-items: center; gap: 8px; background: #fff; border-radius: 22px; padding: 6px 6px 6px 22px; color: var(--ink); }
 .hero__appraise input { flex: 1; min-width: 0; height: 52px; border: 0; background: transparent; font: 700 17px var(--font); color: var(--ink); outline: none; }
 .hero__appraise button { height: 52px; padding: 0 24px; border-radius: 100px; border: 0; background: var(--brand-red); color: #fff; cursor: pointer; font: 700 14px var(--font); white-space: nowrap; transition: background .3s; }
@@ -310,7 +314,8 @@ html[data-intro-on="1"] .hero__content *, html[data-intro-on="1"] .hero__bg { an
 /* ---------- Appraisal CTA ---------- */
 .appr { position: relative; background: var(--ink-3); color: #fff; overflow: hidden; min-height: 92vh; display: grid; align-items: center; }
 .appr__shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15, 17, 20, .92) 0%, rgba(15, 17, 20, .7) 55%, rgba(15, 17, 20, .3) 100%); }
-.appr__body { position: relative; padding: clamp(80px, 10vw, 140px) var(--pad-x); display: grid; gap: 32px; max-width: 1000px; }
+/* minmax(0, 1fr): the address form's min-content width must never widen the column past the screen (it did on phones). */
+.appr__body { position: relative; padding: clamp(80px, 10vw, 140px) var(--pad-x); display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; max-width: 1000px; }
 .appr__card { display: grid; gap: 20px; max-width: 720px; background: #fff; color: var(--ink); border-radius: 28px; padding: 28px; }
 
 /* ---------- Contact ---------- */
@@ -331,3 +336,31 @@ html[data-intro-on="1"] .hero__content *, html[data-intro-on="1"] .hero__bg { an
 .prop-map iframe { filter: none; }
 .prop-map__actions { position: absolute; left: 16px; bottom: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
 @media (max-width: 640px) { .prop-map { aspect-ratio: 4/3; } }
+
+/* ---------- Phone pass ---------- */
+@media (max-width: 720px) {
+  /* Bright footage (sunset frames) washed the headline out on phones: a heavier shade across the whole frame plus a soft text shadow. */
+  .hero__shade { background: linear-gradient(180deg, rgba(0, 0, 0, .46) 0%, rgba(0, 0, 0, .30) 28%, rgba(15, 17, 20, .52) 52%, rgba(15, 17, 20, .92) 100%); }
+  .hero__bg::after { background: radial-gradient(130% 90% at 50% 40%, rgba(15, 17, 20, .10) 30%, rgba(15, 17, 20, .50) 100%); }
+  .hero h1, .hero__kick, .hero__lead, .hero__body h1, .hero__sub, .hero__meta { text-shadow: 0 1px 2px rgba(0, 0, 0, .45), 0 4px 24px rgba(0, 0, 0, .45); }
+  .hero--page .hero__shade { background: linear-gradient(180deg, rgba(0, 0, 0, .50) 0%, rgba(0, 0, 0, .34) 35%, rgba(15, 17, 20, .96) 100%); }
+  /* The about panel overlaps the hero's foot; give the search bar room below so the panel never covers it. */
+  .hero__content { padding: 120px var(--pad-x) 72px; gap: 24px; }
+  .about { margin-top: -32px; border-radius: 28px 28px 0 0; }
+  /* Search bar: three equal tabs, fields in pairs and a full-width Search button. */
+  .hero__search { padding: 6px; border-radius: 24px; }
+  .seg--glass { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; padding: 2px 2px 6px; }
+  .seg--glass .seg__btn { padding: 6px 8px; min-height: 42px; white-space: nowrap; }
+  .seg__more { display: none; }
+  .hero__search .search-bar { padding: 4px 4px 6px; border-radius: 18px; }
+  .hero__search .search-field:nth-of-type(n) { flex: 1 1 calc(50% - 1px); padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  .hero__search .search-field:nth-of-type(odd) { border-right: 1px solid var(--line) !important; }
+  .hero__search .search-field:last-of-type { flex-basis: 100%; border-right: 0 !important; border-bottom: 0; }
+  .hero__search .search-go { flex: 1 1 100%; width: auto; height: 54px; border-radius: 100px; margin: 8px 2px 0; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font: 700 15px var(--font); }
+  .hero__search .search-go .search-go__txt { display: inline; }
+  .hero__search .search-go span[aria-hidden] { font-size: 20px; line-height: 1; }
+  .hero__appraise { flex-wrap: wrap; padding: 6px; border-radius: 18px; }
+  .hero__appraise input { flex: 1 1 100%; height: 50px; padding: 0 14px; }
+  .hero__appraise button { flex: 1 1 100%; }
+  .appr__body { padding-top: 72px; padding-bottom: 72px; }
+}

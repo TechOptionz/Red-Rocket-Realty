@@ -44,7 +44,7 @@ export default function SellPage() {
             <div data-glow><div className="proof__n">$1.5M</div><div className="proof__k">Highest recent sale · 89 Passerine Drive, Rochedale South</div></div>
             <div data-glow><div className="proof__n">4.9<span style={{ color: "var(--brand-red)" }}>★</span></div><div className="proof__k">RateMyAgent rating across {CONTACT.reviews} reviews</div></div>
             <div data-glow><div className="proof__n">2017 · 2019</div><div className="proof__k">Agent of the Year, Underwood</div></div>
-            <div data-glow><div className="proof__n">25+ yrs</div><div className="proof__k">Selling across Logan City <span className="mono-note mono-note--light" style={{ fontSize: 10 }}>· confirm</span></div></div>
+            <div data-glow><div className="proof__n">25+ yrs</div><div className="proof__k">Selling across Logan City</div></div>
           </div>
         </section>
 

@@ -35,7 +35,6 @@ export default function Reviews() {
           <blockquote className="quote" style={{ margin: 0, opacity: op, transform: `translateY(${shift})` }}>{cur.text}</blockquote>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap", transition: "opacity .25s ease", opacity: op }}>
             <div style={{ display: "grid", gap: 4 }}><div style={{ fontSize: 15, fontWeight: 800 }}>{cur.who}</div><div style={{ fontSize: 13, color: "var(--grey)" }}>with {cur.agent}</div></div>
-            <div className="mono-note">Paraphrased · publish verbatim</div>
           </div>
           <div className="quote-nav">
             <div style={{ display: "flex", gap: 8 }}>

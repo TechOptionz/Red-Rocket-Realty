@@ -71,7 +71,6 @@ export default function AboutClient() {
             <div key={m.year} data-glow="row"><div data-glow-n className="tl__year">{m.year}</div><div style={{ fontSize: 17, fontWeight: 800, letterSpacing: "-.01em" }}>{m.title}</div><p className="small" style={{ fontSize: 15, lineHeight: 1.55, color: "var(--grey-2)" }}>{m.body}</p></div>
           ))}
         </div>
-        <p data-reveal className="mono-note" style={{ marginTop: 32 }}>Dates from the content pack and the current site · founding year and the &quot;over 25 years&quot; claim to be confirmed by the agency</p>
       </section>
 
       <section className="section section--white">
@@ -102,7 +101,6 @@ export default function AboutClient() {
                 <footer>{r.who} · {r.agent}</footer>
               </blockquote>
             ))}
-            <div className="mono-note" style={{ borderTop: "1px solid var(--line)", paddingTop: 20 }}>Paraphrased from the Testimonials page and RateMyAgent · publish verbatim wording with client permission</div>
           </div>
         </div>
       </section>

@@ -112,7 +112,6 @@ export default function GuidesClient() {
                 <Link href={PAGES.appraisal} className="pill pill--white pill--arrow"><span>Request an appraisal</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
               </div>
             )}
-            <p className="mono-note">Guide text from the current Tips for Buyers and Tips for Sellers pages, lightly edited · deposit and LMI figures to be reviewed against current lender policy</p>
           </div>
         </div>
       </section>

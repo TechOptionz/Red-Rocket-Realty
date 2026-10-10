@@ -68,7 +68,6 @@ export default function BlogClient() {
           {rest.map((p, i) => <PostCard key={p.slug} post={p} delay={(i % 3) * 0.08} />)}
         </div>
 
-        <div className="mono-note" style={{ paddingTop: 32 }}>Content mirrors the live WordPress blog · newest post Dec 2017 · wire a CMS or feed and refresh content before launch</div>
       </section>
 
       <section className="section section--dark">

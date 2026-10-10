@@ -59,7 +59,6 @@ export default function NewsSection() {
         </div>
       </div>
 
-      <div className="mono-note" style={{ paddingTop: 28 }}>Content mirrors the live WordPress blog · newest article Dec 2017 · wire a CMS or feed and refresh content before launch</div>
     </section>
   );
 }

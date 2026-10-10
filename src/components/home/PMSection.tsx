@@ -38,7 +38,6 @@ export default function PMSection() {
             <a href="#appraisal" className="pill pill--red pill--arrow"><span>Request a rental appraisal</span><span className="pill__arrow" aria-hidden="true">→</span></a>
             <a href="tel:+61439752326" className="pill pill--ghost-light">Leasing · 0439 752 326</a>
           </div>
-          <div className="mono-note mono-note--light">Points 01–04 from a 2017 landlord story · re-approve with the client · full service description, fees and process copy to be supplied by the agency</div>
         </div>
       </div>
     </section>

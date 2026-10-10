@@ -80,7 +80,6 @@ export default function OpenHomesClient() {
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}><a href={CONTACT.phoneHref} className="pill pill--dark pill--md">Call {CONTACT.phone}</a><Link href={PAGES.listings + "?mode=buy#alerts"} className="pill pill--ghost pill--md">Set a property alert</Link></div>
           </div>
         )}
-        <p className="mono-note" style={{ marginTop: 40 }}>Sale inspection times read from redrocketrealty.com.au on 7 Oct 2026 · rental inspection times to confirm from the rentals feed</p>
       </section>
 
       <section className="section section--white">

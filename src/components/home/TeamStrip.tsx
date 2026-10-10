@@ -46,7 +46,6 @@ export default function TeamStrip() {
         })}
         <div className="strip-end" aria-hidden="true" />
       </div>
-      <div className="mono-note px" style={{ paddingTop: 28 }}>Existing 600 px headshots suit card size only · originals or a reshoot needed for large display · new photos for Parnam Singh Heir and Tanveer Singh</div>
     </section>
   );
 }

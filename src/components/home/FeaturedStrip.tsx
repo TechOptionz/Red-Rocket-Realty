@@ -82,7 +82,6 @@ export default function FeaturedStrip() {
         </div>
         <Link data-mag href={PAGES.listings + "?mode=buy"} className="pill pill--red pill--arrow"><span>View all for sale</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
       </div>
-      <div className="mono-note px" style={{ paddingTop: 28 }}>Sample data · cards are fed live from the listing feed (price text, status, inspection times, agent)</div>
     </section>
   );
 }

@@ -21,7 +21,6 @@ export default function ContactSection() {
             <div className="row"><span className="row__k">Sales</span><span className="row__v" style={{ wordBreak: "break-all" }}><a href={"mailto:" + CONTACT.email}>{CONTACT.email}</a></span></div>
             <div className="row"><span className="row__k">Rentals</span><span className="row__v" style={{ wordBreak: "break-all" }}><a href={"mailto:" + CONTACT.inspections}>{CONTACT.inspections}</a></span></div>
             <div className="row"><span className="row__k">Leasing</span><span className="row__v" style={{ wordBreak: "break-all" }}><a href={"mailto:" + CONTACT.leasing}>{CONTACT.leasing}</a><span style={{ color: "var(--grey)", fontWeight: 500 }}> · {CONTACT.leasingPhone}</span></span></div>
-            <div className="mono-note" style={{ paddingTop: 12 }}>Opening hours not published · confirm with the agency</div>
           </div>
           <div data-reveal="clip" className="map">
             <iframe title="Map · 67 Springwood Road, Springwood" src="https://www.openstreetmap.org/export/embed.html?bbox=153.1245%2C-27.6195%2C153.1425%2C-27.6075&layer=mapnik&marker=-27.6135%2C153.1335" loading="lazy" />

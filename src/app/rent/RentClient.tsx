@@ -55,7 +55,6 @@ export default function RentClient() {
           {RENT.map((p) => <PropertyCard key={p.id} p={p} width="min(380px,82vw)" showMeta addrFormat="suburb-type" />)}
           <div className="strip-end" aria-hidden="true" />
         </div>
-        <p className="mono-note px" style={{ marginTop: 32 }}>Rental addresses and photos from the live site · weekly rent, specs and inspection times to confirm from the rentals feed</p>
       </section>
 
       <section id="apply" className="section section--white" style={{ scrollMarginTop: 100 }}>
