@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Contact", description: "Buying, sell
 export default function ContactPage() {
   return (
     <>
-      <Header solid />
+      <Header />
       <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
         <ContactClient />
       </Suspense>

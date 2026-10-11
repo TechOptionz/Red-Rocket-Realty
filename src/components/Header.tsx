@@ -21,8 +21,7 @@ const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
  * Tablet/phone (≤1180px): the Menu button opens a purpose-built panel (full-screen on phones, right-hand drawer on
  * tablets) with accordion sections, one featured listing, the appraisal CTA and contact details.
  */
-export default function Header({ solid = false }: { solid?: boolean }) {
-  const [scrolled, setScrolled] = useState(false);
+export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false); // mobile panel (≤1180px)
   const [panel, setPanel] = useState(false); // desktop card panel, opened by the Menu button (≥1181px)
   const [cardsOn, setCardsOn] = useState(false); // mount the panel photos only once the panel has been opened
@@ -63,9 +62,6 @@ export default function Header({ solid = false }: { solid?: boolean }) {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setPanel(false);
@@ -93,7 +89,6 @@ export default function Header({ solid = false }: { solid?: boolean }) {
     onMq();
     mq.addEventListener("change", onMq);
     return () => {
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("keydown", onKey);
       document.removeEventListener("click", onDoc);
       mq.removeEventListener("change", onMq);
@@ -203,13 +198,12 @@ export default function Header({ solid = false }: { solid?: boolean }) {
   };
 
   const isOpen = menuOpen || panel;
-  const isSolid = solid || scrolled || isOpen;
 
   return (
     <>
       <div className="hdr-shell">
         <div ref={wrap} className="hdr-wrap" data-hdr-wrap onBlur={(e) => { if (!wrap.current?.contains(e.relatedTarget as Node | null)) setPanel(false); }}>
-          <header className="hdr" data-solid={isSolid ? "1" : "0"} data-menu={menuOpen ? "1" : "0"} data-panel={panel ? "1" : "0"}>
+          <header className="hdr" data-menu={menuOpen ? "1" : "0"} data-panel={panel ? "1" : "0"}>
             <div className="hdr__logo" data-logo-wrap>
               <Link href={PAGES.home} aria-label="Red Rocket Realty home" onClick={closeAll}>
                 <Image src={logo.dark} alt="Red Rocket Realty" {...logoSize(logo.dark, logo.headerH)} priority style={{ height: logo.headerH, width: "auto", ...logoRatio(logo.dark, logo.headerH) }} />
@@ -235,7 +229,7 @@ export default function Header({ solid = false }: { solid?: boolean }) {
             <nav className="nav" aria-label="Primary">
               {NAV_TOP.map((n) => (
                 <div className="nav__item" key={n.label}>
-                  <Link href={n.href} className="nav__link" onClick={closeAll}>{n.label}</Link>
+                  <Link href={n.href} className="nav__link" onClick={closeAll} aria-current={pathname === n.href.split(/[?#]/)[0] ? "page" : undefined}>{n.label}</Link>
                 </div>
               ))}
             </nav>

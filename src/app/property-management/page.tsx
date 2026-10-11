@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Property management", description: "
 export default function PMPage() {
   return (
     <>
-      <Header solid />
+      <Header />
       <PMClient />
       <Footer />
     </>

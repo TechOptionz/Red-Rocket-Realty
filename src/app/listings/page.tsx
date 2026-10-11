@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Properties for sale and rent", descr
 export default function ListingsPage() {
   return (
     <>
-      <Header solid />
+      <Header />
       <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
         <ListingsClient />
       </Suspense>

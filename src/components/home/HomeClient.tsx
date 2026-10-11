@@ -45,7 +45,7 @@ export default function HomeClient() {
           <div className="about__text">
             <div style={{ display: "grid", gap: 28 }}>
               <div className="kicker">About Red Rocket Realty</div>
-              <Lines className="display-md" lines={["Logan's leading agents,", "and the local experts", "you can rely on and trust."]} />
+              <Lines className="display-md" lines={["Logan's leading agents,", "the local experts you", "can rely on and trust."]} />
             </div>
             <p data-reveal className="lead" style={{ maxWidth: "52ch", transitionDelay: ".1s" }}>Red Rocket Realty is committed to the property needs of Logan residents. From our office in Springwood we help people buy, sell and rent across Springwood, Rochedale South, Underwood, Woodridge and beyond, pairing thorough local knowledge with personable service. Every buyer, seller and renter is different, so the service is tailored, and we look after everything from paperwork to finance.</p>
             <div data-reveal style={{ display: "flex", flexWrap: "wrap", gap: 10, transitionDelay: ".2s" }}>

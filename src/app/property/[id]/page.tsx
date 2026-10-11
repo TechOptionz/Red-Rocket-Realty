@@ -24,7 +24,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
   if (!p) notFound();
   return (
     <>
-      <Header solid />
+      <Header />
       <PropertyClient p={p} />
       <Footer />
     </>

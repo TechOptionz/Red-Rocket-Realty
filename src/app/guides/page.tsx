@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Buyer and seller guides", descriptio
 export default function GuidesPage() {
   return (
     <>
-      <Header solid />
+      <Header />
       <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
         <GuidesClient />
       </Suspense>

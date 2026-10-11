@@ -6,7 +6,7 @@ import { PAGES } from "@/data/rr-data";
 export default function NotFound() {
   return (
     <>
-      <Header solid />
+      <Header />
       <main className="section--bg" style={{ padding: "180px var(--pad-x) var(--sec-y)", minHeight: "70vh" }}>
         <div style={{ display: "grid", gap: 20, maxWidth: 560 }}>
           <div className="kicker">404</div>

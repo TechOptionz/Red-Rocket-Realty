@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Free market appraisal", description:
 export default function AppraisalPage() {
   return (
     <>
-      <Header solid />
+      <Header />
       <AppraisalClient />
       <Footer />
     </>

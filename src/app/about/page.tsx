@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "About", description: "Logan locals f
 export default function AboutPage() {
   return (
     <>
-      <Header solid />
+      <Header />
       <AboutClient />
       <Footer />
     </>

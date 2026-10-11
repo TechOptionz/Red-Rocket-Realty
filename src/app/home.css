@@ -112,7 +112,7 @@ html[data-intro-on="1"] .hero__content *, html[data-intro-on="1"] .hero__bg { an
 .trust a { color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
 .trust a:hover { color: var(--brand-red); }
 /* Image stretches to the text column so its top and bottom edges line up with the heading and paragraph. */
-.about__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: center; padding-top: clamp(56px, 7vw, 96px); }
+.about__grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: center; padding-top: clamp(56px, 7vw, 96px); }
 .about__text { display: grid; gap: 32px; align-content: center; }
 .about__img { width: 100%; height: auto; aspect-ratio: 3 / 2; border-radius: 8px; overflow: hidden; background: #dcdfe4; position: relative; }
 .about__img .photo-full { position: absolute; inset: 0; }

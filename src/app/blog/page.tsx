@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Latest news", description: "Market n
 export default function BlogPage() {
   return (
     <>
-      <Header solid />
+      <Header />
       <Suspense fallback={null}>
         <BlogClient />
       </Suspense>

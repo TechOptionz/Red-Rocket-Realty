@@ -23,7 +23,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   if (!p) notFound();
   return (
     <>
-      <Header solid />
+      <Header />
       <PostArticle post={p} body={POST_BODIES[p.slug] || []} />
       <Footer />
     </>

@@ -15,8 +15,8 @@
   --bg: #f4f5f6;
   --line: #e3e5e9;
   --line-2: #d6d9df;
-  --grey: #6f747e;
-  --grey-2: #474b54;
+  --grey: #5e636d;
+  --grey-2: #363a42;
   --grey-3: #8a8f99;
   --grey-light: #c9ccd3;
   --grey-4: #e4e6ea;
@@ -65,7 +65,7 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 
 .sticky { position: sticky; top: 120px; }
 .stack-m { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
 .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px; }
-.sec-head__text { display: grid; gap: 16px; max-width: 640px; }
+.sec-head__text { display: grid; gap: 16px; max-width: 760px; }
 .strip { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x proximity; padding: 0 var(--pad-x); scrollbar-width: none; }
 .strip::-webkit-scrollbar { display: none; }
 .strip > * { scroll-snap-align: start; flex: none; }
@@ -91,14 +91,14 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 
 .kicker--photo::before { content: ""; width: 22px; height: 2px; background: var(--brand-red); flex: none; }
 .display-xl { font-size: clamp(2.6rem, 1.1rem + 5.4vw, 6.4rem); font-weight: 800; letter-spacing: -.03em; line-height: .98; text-wrap: balance; }
 .display-lg { font-size: clamp(2.4rem, 1.2rem + 4vw, 5.2rem); font-weight: 800; letter-spacing: -.03em; line-height: .98; }
-.display-md { font-size: clamp(2.2rem, 1.2rem + 3.4vw, 4.6rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.02; text-wrap: balance; }
+.display-md { font-size: clamp(2.2rem, 1.2rem + 3vw, 4rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.04; text-wrap: balance; }
 .h2 { font-size: clamp(2rem, 1.1rem + 2.8vw, 3.75rem); font-weight: 800; letter-spacing: -.025em; line-height: 1.04; }
 .h2--sm { font-size: clamp(1.8rem, 1rem + 2.4vw, 3.2rem); font-weight: 800; letter-spacing: -.025em; line-height: 1.04; }
 .h3 { font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
 .h4 { font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem); font-weight: 800; letter-spacing: -.02em; }
-.lead { font-size: 17px; line-height: 1.6; color: var(--grey-2); }
+.lead { font-size: 18px; line-height: 1.65; color: var(--grey-2); }
 .lead--light { color: var(--grey-light); }
-.body { font-size: 16px; line-height: 1.6; color: var(--grey-2); }
+.body { font-size: 16px; line-height: 1.65; color: var(--grey-2); }
 .body--light { color: var(--grey-light); }
 .small { font-size: 14px; color: var(--grey); line-height: 1.5; }
 .mono-note { font: 500 11px/1.6 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); }
@@ -324,7 +324,7 @@ select.input { appearance: none; -webkit-appearance: none; cursor: pointer; }
 [data-reveal="clip"][data-in] > * { transform: none; }
 [data-reveal="lines"] { opacity: 1; transform: none; transition: none; }
 [data-reveal="lines"] > span { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
-[data-reveal="lines"] > span > span { display: block; transform: translateY(112%); transition: transform .9s var(--ease-out); }
+[data-reveal="lines"] > span > span { display: block; text-wrap: balance; transform: translateY(112%); transition: transform .9s var(--ease-out); }
 [data-reveal="lines"] > span:nth-child(2) > span { transition-delay: .1s; }
 [data-reveal="lines"] > span:nth-child(3) > span { transition-delay: .2s; }
 [data-reveal="lines"][data-in] > span > span { transform: none; }
@@ -374,8 +374,14 @@ select.input { appearance: none; -webkit-appearance: none; cursor: pointer; }
 /* ---------- Header ---------- */
 .hdr-shell { position: fixed; top: 16px; left: 16px; right: 16px; z-index: 90; pointer-events: none; }
 .hdr-shell > * { pointer-events: auto; }
-.hdr { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-width: 0; height: 76px; padding: 0 12px 0 26px; border-radius: 100px; border: 1px solid transparent; background: transparent; color: #fff; transition: background .35s ease, border-color .35s ease; }
-.hdr[data-solid="1"] { background: rgba(22, 24, 29, .84); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: rgba(255, 255, 255, .1); }
+/* Always dark glass, over heroes as well as page content, so the links never wash out on bright hero footage.
+   Glossy finish: a slightly lighter top edge, a hairline highlight along the top of the pill, a soft sheen across the upper half (::before) and a drop shadow that lifts it off the page. */
+.hdr { position: relative; isolation: isolate; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-width: 0; height: 76px; padding: 0 12px 0 26px; border-radius: 100px; border: 1px solid rgba(255, 255, 255, .14); color: #fff;
+  background: linear-gradient(180deg, rgba(40, 43, 50, .66) 0%, rgba(24, 26, 31, .62) 50%, rgba(16, 18, 22, .66) 100%);
+  backdrop-filter: blur(22px) saturate(150%); -webkit-backdrop-filter: blur(22px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), inset 0 -1px 0 rgba(0, 0, 0, .35), 0 14px 36px -14px rgba(0, 0, 0, .6), 0 2px 6px rgba(0, 0, 0, .18);
+  transition: background .35s ease, border-color .35s ease, box-shadow .35s ease; }
+.hdr::before { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(255, 255, 255, .11) 0%, rgba(255, 255, 255, .04) 38%, rgba(255, 255, 255, 0) 56%); transition: opacity .35s ease; }
 .hdr__logo { position: relative; display: flex; align-items: center; gap: 6px; flex: none; }
 .hdr__logo > a { display: flex; align-items: center; min-width: 0; color: inherit; text-decoration: none; }
 .hdr__logo img { width: auto; max-height: 62px; transition: opacity .3s; }
@@ -394,10 +400,15 @@ select.input { appearance: none; -webkit-appearance: none; cursor: pointer; }
 .logo-menu__note { padding: 8px 12px 2px; font: 500 10px/1.6 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); }
 .nav { display: flex; align-items: center; gap: 4px; margin: 0 auto; min-width: 0; }
 .nav__item { position: relative; }
-.nav__link { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
-.nav__link:hover { color: #fff; }
-.nav__item:hover > .nav__link::before { content: ""; position: absolute; inset: 2px 0; border-radius: 100px; background: rgba(255, 255, 255, .07); z-index: -1; }
-.nav__link { isolation: isolate; }
+/* Primary links: crisp white on the dark glass, a soft pill on hover, and a red underline marker on the current page. */
+.nav__link { position: relative; isolation: isolate; display: inline-flex; align-items: center; gap: 6px; padding: 11px 16px; border-radius: 100px; color: rgba(255, 255, 255, .94); text-decoration: none; font-size: 14.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; text-shadow: 0 1px 1px rgba(0, 0, 0, .35); transition: color .25s; }
+.nav__link::before { content: ""; position: absolute; inset: 2px 0; border-radius: 100px; background: rgba(255, 255, 255, 0); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0); z-index: -1; transition: background .25s, box-shadow .25s; }
+.nav__link:hover, .nav__link:focus-visible { color: #fff; }
+.nav__item:hover > .nav__link::before, .nav__link:focus-visible::before { background: rgba(255, 255, 255, .11); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12); }
+.nav__link:focus-visible { outline: 2px solid var(--brand-red); outline-offset: 2px; }
+.nav__link::after { content: ""; position: absolute; left: 16px; right: 16px; bottom: 4px; height: 2px; border-radius: 2px; background: var(--brand-red); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease-out); }
+.nav__link[aria-current="page"] { color: #fff; }
+.nav__link[aria-current="page"]::after { transform: scaleX(1); }
 /* ---------- Desktop mega menu (≥1181px) ----------
    Opened by the Menu button. A dimmed veil over the page, then a panel under the floating bar: quick property search with
    suburb shortcuts, one link column per group, a feature rail (featured listing + latest news) and a sticky office strip. */
@@ -514,23 +525,26 @@ select.input { appearance: none; -webkit-appearance: none; cursor: pointer; }
 @media (max-width: 1340px) { .mpanel__cols { grid-template-columns: repeat(5, minmax(0, 1fr)); } .mcol__title { font-size: 18px; white-space: nowrap; } .mcol__link { font-size: 15px; } .mcol__blurb { font-size: 13px; } .mrail { display: none; } .mpanel__box { padding: 20px 24px 0; border-radius: 26px; } .mpanel__foot { margin: 0 -24px; padding: 14px 24px; border-radius: 0 0 26px 26px; } .mpanel__addr span:last-child { display: none; } }
 @media (max-width: 1180px) { .mpanel, .mpanel__veil { display: none; } }
 .hdr__right { display: flex; align-items: center; gap: 8px; flex: none; }
-.hdr__phone { color: #fff; text-decoration: none; font-size: 14px; font-weight: 700; padding: 0 14px; white-space: nowrap; letter-spacing: .02em; }
-.hdr__phone:hover { color: #fff; }
-.hdr__icon { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .28); display: grid; place-items: center; color: #fff; text-decoration: none; transition: border-color .3s, background .3s; background: transparent; cursor: pointer; padding: 0; }
-.hdr__icon:hover { border-color: #fff; background: rgba(255, 255, 255, .08); color: #fff; }
+.hdr__phone { color: #fff; text-decoration: none; font-size: 15px; font-weight: 700; padding: 0 14px; white-space: nowrap; letter-spacing: .02em; font-variant-numeric: tabular-nums; text-shadow: 0 1px 1px rgba(0, 0, 0, .35); }
+.hdr__phone:hover { color: #fff; text-decoration: underline; text-underline-offset: 5px; text-decoration-color: var(--brand-red); text-decoration-thickness: 2px; }
+/* Round icon buttons and the Menu button read as buttons at rest: a faint glass fill plus a top highlight, brighter on hover. */
+.hdr__icon { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .22); display: grid; place-items: center; color: #fff; text-decoration: none; transition: border-color .3s, background .3s, box-shadow .3s; background: rgba(255, 255, 255, .07); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14); cursor: pointer; padding: 0; }
+.hdr__icon:hover { border-color: rgba(255, 255, 255, .6); background: rgba(255, 255, 255, .14); color: #fff; }
 /* Phone-only call button: sits beside Menu on small screens in place of the old floating bottom bar. */
 .hdr__call { display: none; transition: opacity .3s, border-color .3s, background .3s; }
 .hdr[data-menu="1"] .hdr__call { opacity: 0; pointer-events: none; }
-.hdr__cta { height: 48px; font-size: 14px; padding: 0 8px 0 22px; }
-.hdr__cta .pill__arrow { width: 34px; height: 34px; }
+/* Appraisal CTA: red pill with a glossy top edge and a soft red glow so it is the clear primary action in the bar. */
+.hdr__cta { height: 50px; font-size: 15px; padding: 0 8px 0 24px; background: linear-gradient(180deg, #e3344a 0%, var(--brand-red) 55%, #c2202f 100%); border-color: rgba(255, 255, 255, .12); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 8px 20px -8px rgba(213, 39, 58, .7); transition: background .3s, box-shadow .3s, transform .3s var(--ease-out); }
+.hdr__cta:hover { background: linear-gradient(180deg, #e94b5e 0%, #dc2d41 55%, #c2202f 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .26), 0 10px 24px -8px rgba(213, 39, 58, .85); transform: translateY(-1px); }
+.hdr__cta .pill__arrow { width: 36px; height: 36px; box-shadow: 0 1px 3px rgba(0, 0, 0, .25); }
 .burger { display: grid; gap: 6px; width: 18px; }
 .burger span { display: block; height: 2px; background: currentColor; transition: transform .35s var(--ease-out), opacity .25s; }
 /* "Menu" button (Ray White-style label + burger). Shown on every breakpoint; flips to "Close" + X when the mega menu is open. */
-.menu-btn { display: inline-flex; align-items: center; gap: 12px; height: 48px; padding: 0 18px 0 20px; border-radius: 100px; border: 1px solid rgba(255, 255, 255, .28); background: transparent; color: #fff; cursor: pointer; font: 700 13px/1 var(--font); letter-spacing: .1em; text-transform: uppercase; transition: border-color .3s, background .3s, color .3s; }
-.menu-btn:hover { border-color: #fff; background: rgba(255, 255, 255, .08); }
+.menu-btn { display: inline-flex; align-items: center; gap: 12px; height: 50px; padding: 0 20px 0 22px; border-radius: 100px; border: 1px solid rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .07); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14); color: #fff; cursor: pointer; font: 700 14px/1 var(--font); letter-spacing: .1em; text-transform: uppercase; text-shadow: 0 1px 1px rgba(0, 0, 0, .35); transition: border-color .3s, background .3s, color .3s, box-shadow .3s; }
+.menu-btn:hover { border-color: rgba(255, 255, 255, .6); background: rgba(255, 255, 255, .14); }
 .menu-btn:focus-visible { outline: 2px solid var(--brand-red); outline-offset: 3px; }
-.menu-btn[data-open="1"] { background: #fff; border-color: #fff; color: var(--ink); }
-.menu-btn__label { display: grid; height: 13px; overflow: hidden; text-align: left; }
+.menu-btn[data-open="1"] { background: #fff; border-color: #fff; color: var(--ink); text-shadow: none; box-shadow: 0 6px 16px -6px rgba(0, 0, 0, .4); }
+.menu-btn__label { display: grid; height: 14px; overflow: hidden; text-align: left; }
 .menu-btn__label span { grid-area: 1 / 1; transition: transform .4s var(--ease-out), opacity .3s; }
 .menu-btn__label span:last-child { transform: translateY(120%); opacity: 0; }
 .menu-btn[data-open="1"] .menu-btn__label span:first-child { transform: translateY(-120%); opacity: 0; }
@@ -538,7 +552,8 @@ select.input { appearance: none; -webkit-appearance: none; cursor: pointer; }
 .menu-btn[data-open="1"] .burger span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
 .menu-btn[data-open="1"] .burger span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
 /* While the menu is open the bar floats over the overlay: no pill background, primary links fade out. */
-.hdr[data-menu="1"] { background: transparent; border-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.hdr[data-menu="1"] { background: transparent; border-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; }
+.hdr[data-menu="1"]::before { opacity: 0; }
 .hdr[data-menu="1"] .nav, .hdr[data-menu="1"] .hdr__phone, .hdr[data-menu="1"] .hdr__cta { opacity: 0; pointer-events: none; }
 /* While the desktop mega menu is open the bar links, phone number and appraisal button hide too: the office strip at the bottom of the panel carries both. */
 .hdr[data-panel="1"] .nav, .hdr[data-panel="1"] .hdr__phone, .hdr[data-panel="1"] .hdr__cta { opacity: 0; pointer-events: none; visibility: hidden; transition: opacity .3s, visibility 0s .3s; }
@@ -631,8 +646,8 @@ a.mnav__muted:hover { color: #fff; }
 .mnav__social { margin-top: 6px; }
 .mnav .mnav__social .social-btn { width: 44px; height: 44px; }
 
-@media (max-width: 1440px) { .hdr__phone { display: none !important; } .nav__link { padding: 10px 11px; } }
-@media (max-width: 1380px) { .nav { gap: 0; } .nav__link { padding: 10px 9px; font-size: 12px; letter-spacing: .06em; } .hdr { padding-left: 18px; } .hdr__logo img { max-height: 48px; } .hdr__cta { padding: 0 6px; } .hdr__cta > span:first-child { display: none; } .hdr__cta .pill__arrow { width: 36px; height: 36px; background: transparent; color: #fff; } }
+@media (max-width: 1440px) { .hdr__phone { display: none !important; } .nav__link { padding: 11px 13px; } .nav__link::after { left: 13px; right: 13px; } }
+@media (max-width: 1380px) { .nav { gap: 0; } .nav__link { padding: 11px 10px; font-size: 13px; letter-spacing: .05em; } .nav__link::after { left: 10px; right: 10px; } .hdr { padding-left: 18px; } .hdr__logo img { max-height: 48px; } .hdr__cta { padding: 0 6px; } .hdr__cta > span:first-child { display: none; } .hdr__cta .pill__arrow { width: 36px; height: 36px; background: transparent; color: #fff; } }
 @media (max-width: 1180px) {
   /* Tablet bar: the links are gone, so the appraisal CTA gets its full label back. */
   .nav, .hdr__phone { display: none !important; }

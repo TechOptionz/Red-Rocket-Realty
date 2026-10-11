@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Our team", description: "Nineteen lo
 export default function TeamPage() {
   return (
     <>
-      <Header solid />
+      <Header />
       <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
         <TeamClient />
       </Suspense>

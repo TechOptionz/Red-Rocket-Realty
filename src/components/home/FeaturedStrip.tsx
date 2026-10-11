@@ -51,7 +51,7 @@ export default function FeaturedStrip() {
         <div className="sec-head__text" style={{ gap: 18 }}>
           <div className="kicker">Latest listings</div>
           <Lines className="h2" lines={["Fresh on the launch pad."]} />
-          <p data-reveal className="body" style={{ fontSize: 16, lineHeight: 1.55, maxWidth: "48ch" }}>Houses, units, townhouses and land across Logan, newest first. Open home times save straight to your calendar.</p>
+          <p data-reveal className="body" style={{ maxWidth: "52ch" }}>Houses, units, townhouses and land across Logan, newest first. Open home times save straight to your calendar.</p>
         </div>
       </div>
       <div ref={strip} className="acc-strip" onPointerDown={dragStart}>

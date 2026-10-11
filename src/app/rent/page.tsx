@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Rent", description: "Houses and town
 export default function RentPage() {
   return (
     <>
-      <Header solid />
+      <Header />
       <RentClient />
       <Footer />
     </>
