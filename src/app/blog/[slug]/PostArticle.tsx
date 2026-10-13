@@ -68,12 +68,12 @@ export default function PostArticle({ post: p, body }: { post: Post; body: Block
 
           <aside className="post__side">
             <div className="sticky" style={{ display: "grid", gap: 16 }}>
-              <div data-reveal className="post__card post__card--dark" style={{ transitionDelay: ".1s" }}>
+              <div data-reveal className="post__card post__card--red" style={{ transitionDelay: ".1s" }}>
                 <div className="kicker kicker--white">Talk to a local agent</div>
                 <div className="h3" style={{ fontSize: "clamp(1.3rem,1.1rem + .8vw,1.7rem)" }}>Wondering what this means for your home?</div>
-                <p style={{ fontSize: 15, lineHeight: 1.55, color: "var(--grey-light)" }}>Our Springwood team can talk you through local values, timing and what buyers are looking for right now.</p>
+                <p style={{ fontSize: 15, lineHeight: 1.55, color: "rgba(255,255,255,.88)" }}>Our Springwood team can talk you through local values, timing and what buyers are looking for right now.</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  <Link href={PAGES.appraisal} className="pill pill--red pill--sm pill--arrow"><span>Free appraisal</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
+                  <Link href={PAGES.appraisal} className="pill pill--white pill--sm pill--arrow"><span>Free appraisal</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
                   <a href={CONTACT.phoneHref} className="pill pill--ghost-light pill--sm">Call {CONTACT.phone}</a>
                 </div>
               </div>

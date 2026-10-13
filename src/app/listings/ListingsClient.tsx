@@ -182,11 +182,11 @@ export default function ListingsClient() {
           <div style={{ display: "grid", gap: 12, maxWidth: 640 }}>
             <div className="kicker">Property alerts</div>
             <h2 className="h2--sm">Want to be kept up to date with the latest listings?</h2>
-            <p className="body body--light" style={{ lineHeight: 1.55, maxWidth: "50ch" }}>Set your own alert preferences by suburb, bedrooms, bathrooms and price, and new listings land in your inbox first.</p>
+            <p className="body" style={{ lineHeight: 1.55, maxWidth: "50ch" }}>Set your own alert preferences by suburb, bedrooms, bathrooms and price, and new listings land in your inbox first.</p>
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-            <Link href={PAGES.contact + "?topic=Buying"} className="pill pill--white pill--arrow"><span>Subscribe now!</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
-            <Link href={PAGES.appraisal} className="pill pill--ghost-light">Request an appraisal</Link>
+            <Link href={PAGES.contact + "?topic=Buying"} className="pill pill--red pill--arrow"><span>Subscribe now!</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
+            <Link href={PAGES.appraisal} className="pill pill--ghost">Request an appraisal</Link>
           </div>
         </div>
       </section>

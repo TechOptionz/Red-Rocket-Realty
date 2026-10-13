@@ -177,9 +177,9 @@ export default function TeamClient() {
           <div style={{ display: "grid", gap: 12, maxWidth: 640 }}>
             <div className="kicker">Careers</div>
             <h2 className="h2--sm">Think you&apos;d fit in at mission control?</h2>
-            <p className="body body--light" style={{ lineHeight: 1.55, maxWidth: "50ch" }}>We&apos;re always interested in meeting sales agents and property managers who know Logan. Send a note to the directors.</p>
+            <p className="body" style={{ lineHeight: 1.55, maxWidth: "50ch" }}>We&apos;re always interested in meeting sales agents and property managers who know Logan. Send a note to the directors.</p>
           </div>
-          <a href="mailto:parnam@redrocketrealty.com.au?subject=Careers%20at%20Red%20Rocket%20Realty" className="pill pill--white pill--arrow"><span>Get in touch</span><span className="pill__arrow" aria-hidden="true">→</span></a>
+          <a href="mailto:parnam@redrocketrealty.com.au?subject=Careers%20at%20Red%20Rocket%20Realty" className="pill pill--red pill--arrow"><span>Get in touch</span><span className="pill__arrow" aria-hidden="true">→</span></a>
         </div>
       </section>
     </main>

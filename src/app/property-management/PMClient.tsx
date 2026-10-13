@@ -66,7 +66,7 @@ export default function PMClient() {
         </div>
       </section>
 
-      <section className="section section--dark">
+      <section className="section section--red">
         <div className="cols2" style={{ alignItems: "center" }}>
           <div style={{ display: "grid", gap: 22 }}>
             <div className="kicker">Rental yield</div>
@@ -83,8 +83,8 @@ export default function PMClient() {
               <div style={{ display: "grid", gap: 4 }}><div className="yield__k" style={{ fontSize: 12 }}>Annual rent</div><div style={{ fontSize: "clamp(1.3rem,1rem + 1vw,1.8rem)", fontWeight: 800, letterSpacing: "-.02em" }}>{money(annual)}</div></div>
               <div style={{ display: "grid", gap: 4 }}><div className="yield__k" style={{ fontSize: 12 }}>Monthly rent</div><div style={{ fontSize: "clamp(1.3rem,1rem + 1vw,1.8rem)", fontWeight: 800, letterSpacing: "-.02em" }}>{money(annual / 12)}</div></div>
             </div>
-            <a data-mag href="#rental-appraisal" className="pill pill--white" style={{ justifyContent: "center" }}>Get an accurate rental appraisal</a>
-            <div style={{ fontSize: 12, lineHeight: 1.5, color: "var(--grey-3)" }}>Gross yield excludes rates, insurance, maintenance, vacancy and management fees. For guidance only.</div>
+            <a data-mag href="#rental-appraisal" className="pill pill--red" style={{ justifyContent: "center" }}>Get an accurate rental appraisal</a>
+            <div style={{ fontSize: 12, lineHeight: 1.5, color: "var(--grey)" }}>Gross yield excludes rates, insurance, maintenance, vacancy and management fees. For guidance only.</div>
           </div>
         </div>
       </section>

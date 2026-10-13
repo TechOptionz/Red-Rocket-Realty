@@ -96,33 +96,33 @@ export default function RentClient() {
         </div>
       </section>
 
-      <section id="maintenance" className="section section--dark" style={{ scrollMarginTop: 100 }}>
+      <section id="maintenance" className="section section--white" style={{ scrollMarginTop: 100 }}>
         <div className="cols2" style={{ gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)" }}>
           <div style={{ display: "grid", gap: 22, minWidth: 0 }}>
             <div className="kicker">Maintenance request</div>
             <Lines className="h2" lines={["Something needs fixing?"]} />
-            <p data-reveal className="lead lead--light" style={{ maxWidth: "46ch" }}>Tell us what and where, add a photo if you can, and your property manager will arrange a tradesperson. For emergencies after hours (burst pipes, no power, gas leaks, flooding) call the office line and follow the prompts.</p>
+            <p data-reveal className="lead" style={{ maxWidth: "46ch" }}>Tell us what and where, add a photo if you can, and your property manager will arrange a tradesperson. For emergencies after hours (burst pipes, no power, gas leaks, flooding) call the office line and follow the prompts.</p>
             <a data-reveal href={CONTACT.phoneHref} className="phone-big"><span aria-hidden="true" />{CONTACT.phone}</a>
           </div>
           {!sent ? (
-            <form data-reveal className="dark-form" onSubmit={(e) => { e.preventDefault(); setName(String(new FormData(e.currentTarget).get("name") || "there").split(" ")[0]); setSent(true); }}>
+            <form data-reveal className="light-form light-form--tint" onSubmit={(e) => { e.preventDefault(); setName(String(new FormData(e.currentTarget).get("name") || "there").split(" ")[0]); setSent(true); }}>
               <div className="form-grid">
-                <label className="field field--dark">Your name<input name="name" required autoComplete="name" className="input input--dark" /></label>
-                <label className="field field--dark">Phone<input name="phone" type="tel" required autoComplete="tel" className="input input--dark" /></label>
+                <label className="field field--sm">Your name<input name="name" required autoComplete="name" className="input input--md" /></label>
+                <label className="field field--sm">Phone<input name="phone" type="tel" required autoComplete="tel" className="input input--md" /></label>
               </div>
-              <label className="field field--dark">Rental address<input name="address" required autoComplete="street-address" className="input input--dark" /></label>
+              <label className="field field--sm">Rental address<input name="address" required autoComplete="street-address" className="input input--md" /></label>
               <div className="form-grid">
-                <label className="field field--dark">Issue type<select name="type" className="input input--dark">{["Plumbing", "Electrical", "Appliance", "Doors, windows, locks", "Pests", "Garden or exterior", "Other"].map((o) => <option key={o}>{o}</option>)}</select></label>
-                <label className="field field--dark">Urgency<select name="urgency" className="input input--dark">{["Routine", "Soon · affects daily use", "Urgent · safety or damage risk"].map((o) => <option key={o}>{o}</option>)}</select></label>
+                <label className="field field--sm">Issue type<select name="type" className="input input--md">{["Plumbing", "Electrical", "Appliance", "Doors, windows, locks", "Pests", "Garden or exterior", "Other"].map((o) => <option key={o}>{o}</option>)}</select></label>
+                <label className="field field--sm">Urgency<select name="urgency" className="input input--md">{["Routine", "Soon · affects daily use", "Urgent · safety or damage risk"].map((o) => <option key={o}>{o}</option>)}</select></label>
               </div>
-              <label className="field field--dark">Describe the problem<textarea name="desc" required rows={4} placeholder="Where it is, what happens, when it started." className="input input--dark" /></label>
-              <label className="field field--dark">Photos <span className="opt">(optional)</span><input name="photos" type="file" accept="image/*" multiple style={{ font: "500 14px var(--font)", color: "var(--grey-light)", maxWidth: "100%", minWidth: 0 }} /></label>
-              <label className="check check--light"><input name="entry" type="checkbox" />A tradesperson may enter with the office key if I&apos;m not home (with the notice required by the RTA).</label>
+              <label className="field field--sm">Describe the problem<textarea name="desc" required rows={4} placeholder="Where it is, what happens, when it started." className="input input--md" /></label>
+              <label className="field field--sm">Photos <span className="opt">(optional)</span><input name="photos" type="file" accept="image/*" multiple style={{ font: "500 14px var(--font)", color: "var(--grey-2)", maxWidth: "100%", minWidth: 0 }} /></label>
+              <label className="check"><input name="entry" type="checkbox" />A tradesperson may enter with the office key if I&apos;m not home (with the notice required by the RTA).</label>
               <button type="submit" className="pill pill--red" style={{ justifyContent: "center" }}>Send maintenance request</button>
             </form>
           ) : (
-            <div className="dark-form" style={{ padding: "clamp(24px,3vw,40px)" }}>
-              <Success title="Request logged." light onReset={() => setSent(false)} resetLabel="Log another">Thanks, {name}. Your property manager will confirm a time with you, usually within one business day for routine items.</Success>
+            <div className="light-form light-form--tint" style={{ padding: "clamp(24px,3vw,40px)" }}>
+              <Success title="Request logged." onReset={() => setSent(false)} resetLabel="Log another">Thanks, {name}. Your property manager will confirm a time with you, usually within one business day for routine items.</Success>
             </div>
           )}
         </div>

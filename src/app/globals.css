@@ -60,7 +60,12 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 
 .section--ink { background: var(--ink-2); color: #fff; }
 .section--red { background: var(--brand-red); color: #fff; }
 .section--red .kicker:not([class*="kicker--"]), .section--red .lead, .section--red .body, .section--red .small { color: #fff; }
+.section--red .lead--light, .section--red .body--light { color: rgba(255, 255, 255, .9); }
 .section--red .mono-note { color: rgba(255, 255, 255, .92); }
+/* On red the eyebrow keeps the dash treatment, drawn in white. */
+.section--red .kicker:not([class*="kicker--"]) { display: flex; align-items: center; gap: 12px; }
+.section--red .kicker:not([class*="kicker--"])::before { content: ""; width: 22px; height: 2px; background: #fff; flex: none; }
+.section--red .rule { border-top-color: rgba(255, 255, 255, .22); }
 .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
 .sticky { position: sticky; top: 120px; }
 .stack-m { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
@@ -81,8 +86,8 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 
 /* ---------- Type ---------- */
 .kicker { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--brand-red-dark); }
 /* On charcoal surfaces small red text fails contrast, so the eyebrow goes white and the red moves into a dash. */
-.section--dark .kicker:not([class*="kicker--"]), .section--ink .kicker:not([class*="kicker--"]), .pm .kicker:not([class*="kicker--"]), .alerts-band .kicker:not([class*="kicker--"]), .offer .kicker:not([class*="kicker--"]), .ftr .kicker:not([class*="kicker--"]) { display: flex; align-items: center; gap: 12px; color: #fff; }
-.section--dark .kicker:not([class*="kicker--"])::before, .section--ink .kicker:not([class*="kicker--"])::before, .pm .kicker:not([class*="kicker--"])::before, .alerts-band .kicker:not([class*="kicker--"])::before, .offer .kicker:not([class*="kicker--"])::before, .ftr .kicker:not([class*="kicker--"])::before { content: ""; width: 22px; height: 2px; background: var(--brand-red); flex: none; }
+.section--dark .kicker:not([class*="kicker--"]), .section--ink .kicker:not([class*="kicker--"]), .pm .kicker:not([class*="kicker--"]), .ftr .kicker:not([class*="kicker--"]) { display: flex; align-items: center; gap: 12px; color: #fff; }
+.section--dark .kicker:not([class*="kicker--"])::before, .section--ink .kicker:not([class*="kicker--"])::before, .pm .kicker:not([class*="kicker--"])::before, .ftr .kicker:not([class*="kicker--"])::before { content: ""; width: 22px; height: 2px; background: var(--brand-red); flex: none; }
 .kicker--white { color: #fff; }
 .kicker--muted { color: var(--grey); }
 .kicker--light { color: var(--grey-light); }
@@ -231,6 +236,8 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 
 /* ---------- Forms ---------- */
 .field { display: grid; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
 .field--dark { color: var(--grey-light); gap: 6px; font-size: 11px; letter-spacing: .12em; }
+/* Same compact label as .field--dark, in grey for white and light-grey surfaces. */
+.field--sm { gap: 6px; font-size: 11px; letter-spacing: .12em; }
 .field .opt { font-weight: 500; text-transform: none; letter-spacing: 0; }
 .input { height: 56px; border: 1px solid var(--line); border-radius: 12px; padding: 0 16px; font: 500 16px var(--font); color: var(--ink); background: #fff; outline: none; transition: border-color .3s; width: 100%; }
 .input--md { height: 52px; font-size: 15px; border-color: var(--line-2); }
@@ -355,6 +362,7 @@ select.input { appearance: none; -webkit-appearance: none; cursor: pointer; }
 /* row: red line sweeps along the top rule */
 [data-glow="row"]::after { left: 0; right: 0; top: -1px; height: 2px; background: var(--brand-red); transform: scaleX(0); transform-origin: left; opacity: 1; }
 .section--dark [data-glow], .section--ink [data-glow], .pm [data-glow] { --glow: rgba(var(--brand-red-rgb), .22); --glow-line: rgba(255, 255, 255, .55); }
+.section--red [data-glow] { --glow: rgba(255, 255, 255, .16); --glow-line: rgba(255, 255, 255, .7); }
 [data-glow-n] { transition: transform .5s var(--ease-out), color .3s, background .3s; will-change: transform; }
 [data-glow-t] { transition: transform .5s var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
@@ -722,7 +730,8 @@ a.mnav__muted:hover { color: #fff; }
 /* ---------- Page header block ---------- */
 .page-head { background: var(--bg); padding: 150px var(--pad-x) 0; }
 .page-head--pad { padding-bottom: clamp(40px, 5vw, 64px); }
-.alerts-band { scroll-margin-top: 100px; background: var(--ink-2); color: #fff; padding: clamp(56px, 7vw, 96px) var(--pad-x); }
+/* Closing CTA band on Listings, Team and About. White, since the footer's red band follows it directly. */
+.alerts-band { scroll-margin-top: 100px; background: #fff; color: var(--ink); padding: clamp(56px, 7vw, 96px) var(--pad-x); border-top: 1px solid var(--line); }
 .cta-band { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
 
 /* ---------- Touch refinements (tablet / phone) ---------- */

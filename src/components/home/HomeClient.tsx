@@ -93,7 +93,7 @@ export default function HomeClient() {
       </section>
 
       {/* Advantage */}
-      <section className="section section--white">
+      <section className="section section--bg">
         <div className="cols2" style={{ gridTemplateColumns: "1fr 1.1fr" }}>
           <div className="sticky" style={{ display: "grid", gap: 24 }}>
             <div className="kicker">The Red Rocket Advantage</div>
@@ -116,14 +116,14 @@ export default function HomeClient() {
       </section>
 
       {/* Recently sold */}
-      <section className="section section--dark">
+      <section className="section section--white">
         <div className="sec-head" style={{ marginBottom: 48 }}>
           <div className="sec-head__text" style={{ gap: 18 }}>
             <div className="kicker">Just sold</div>
             <Lines className="h2" lines={["Results across Logan."]} />
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10, flex: "none" }}>
-            <Link data-mag href={PAGES.listings + "?mode=sold"} className="pill pill--ghost-light">View all sold</Link>
+            <Link data-mag href={PAGES.listings + "?mode=sold"} className="pill pill--ghost">View all sold</Link>
             <a href="#appraisal" className="pill pill--red">Sell your home today!</a>
           </div>
         </div>

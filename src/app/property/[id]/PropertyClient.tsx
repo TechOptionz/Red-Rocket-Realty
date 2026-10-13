@@ -57,8 +57,8 @@ export default function PropertyClient({ p }: { p: Listing }) {
 
   return (
     <main>
-      <section className="section--dark" style={{ padding: "130px var(--pad-x) 0" }}>
-        <nav aria-label="Breadcrumb" className="crumb crumb--dim" style={{ marginBottom: 24 }}>
+      <section className="section--bg" style={{ padding: "130px var(--pad-x) 0" }}>
+        <nav aria-label="Breadcrumb" className="crumb" style={{ marginBottom: 24 }}>
           <Link href={PAGES.home}>Home</Link><span aria-hidden="true">/</span><Link href={listHref}>{listLabel}</Link><span aria-hidden="true">/</span><Link href={suburbHref}>{p.suburb}</Link><span aria-hidden="true">/</span><span>{p.address}</span>
         </nav>
         {photos.length ? (
@@ -99,18 +99,18 @@ export default function PropertyClient({ p }: { p: Listing }) {
         <div className="prop-head">
           <div style={{ display: "grid", gap: 14, minWidth: 0 }}>
             <Lines as="h1" className="display-lg" style={{ fontSize: "clamp(2rem,1.2rem + 3vw,4rem)", lineHeight: 1 }} lines={[p.address]} />
-            <div style={{ fontSize: 16, color: "var(--grey-light)", fontWeight: 500 }}>{p.suburb} QLD · {p.type || "Land"}</div>
+            <div style={{ fontSize: 16, color: "var(--grey)", fontWeight: 500 }}>{p.suburb} QLD · {p.type || "Land"}</div>
             <div className="prop-specs">
               {specs(p).map((s) => (<span key={s} style={{ display: "inline-flex", alignItems: "center" }}><span>{s}</span><i aria-hidden="true">●</i></span>))}
-              <span style={{ color: "var(--grey-light)" }}>ID {p.listingId ? p.listingId.slice(0, 8).toUpperCase() : "RR-" + String(p.id).toUpperCase()}</span>
+              <span style={{ color: "var(--grey)" }}>ID {p.listingId ? p.listingId.slice(0, 8).toUpperCase() : "RR-" + String(p.id).toUpperCase()}</span>
             </div>
           </div>
           <div style={{ display: "grid", gap: 16, justifyItems: "end", flex: "none" }}>
             <div className="prop-price">{priceText}</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "flex-end" }}>
-              <a href="#floorplan" className="pill pill--ghost-light pill--sm">Floor plan</a>
-              <a href={brochureHref} target="_blank" rel="noopener" className="pill pill--ghost-light pill--sm">Brochure</a>
-              <button type="button" onClick={share} className="pill pill--ghost-light pill--sm">{shareLabel}</button>
+              <a href="#floorplan" className="pill pill--ghost pill--sm">Floor plan</a>
+              <a href={brochureHref} target="_blank" rel="noopener" className="pill pill--ghost pill--sm">Brochure</a>
+              <button type="button" onClick={share} className="pill pill--ghost pill--sm">{shareLabel}</button>
             </div>
           </div>
         </div>
@@ -119,8 +119,8 @@ export default function PropertyClient({ p }: { p: Listing }) {
             <a href="#overview">Overview</a><a href="#features">Features</a><a href="#inspections">Inspections</a><a href="#location">Location</a>
           </nav>
           <div style={{ display: "flex", gap: 8 }}>
-            <Link href={PAGES.guides + "?guide=buyer#offer"} className="pill pill--ghost-light pill--sm hide-m">Make an offer</Link>
-            <a href="#enquire" className="pill pill--white pill--sm" style={{ padding: "0 20px" }}>Enquire now</a>
+            <Link href={PAGES.guides + "?guide=buyer#offer"} className="pill pill--ghost pill--sm hide-m">Make an offer</Link>
+            <a href="#enquire" className="pill pill--red pill--sm" style={{ padding: "0 20px" }}>Enquire now</a>
           </div>
         </div>
       </section>

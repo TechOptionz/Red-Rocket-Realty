@@ -39,10 +39,10 @@ export default function SellPage() {
           </div>
         </section>
 
-        <section className="section--ink" style={{ borderTop: "1px solid rgba(255,255,255,.08)" }}>
+        <section className="section--red">
           <div data-stagger className="proof px">
             <div data-glow><div className="proof__n">$1.5M</div><div className="proof__k">Highest recent sale · 89 Passerine Drive, Rochedale South</div></div>
-            <div data-glow><div className="proof__n">4.9<span style={{ color: "var(--brand-red)" }}>★</span></div><div className="proof__k">RateMyAgent rating across {CONTACT.reviews} reviews</div></div>
+            <div data-glow><div className="proof__n">4.9<span style={{ color: "rgba(255,255,255,.85)" }}>★</span></div><div className="proof__k">RateMyAgent rating across {CONTACT.reviews} reviews</div></div>
             <div data-glow><div className="proof__n">2017 · 2019</div><div className="proof__k">Agent of the Year, Underwood</div></div>
             <div data-glow><div className="proof__n">25+ yrs</div><div className="proof__k">Selling across Logan City</div></div>
           </div>
@@ -79,13 +79,13 @@ export default function SellPage() {
           </div>
         </section>
 
-        <section className="section--dark" style={{ padding: "var(--sec-y) 0", overflow: "hidden" }}>
+        <section className="section--white" style={{ padding: "var(--sec-y) 0", overflow: "hidden" }}>
           <div className="sec-head px">
             <div className="sec-head__text"><div className="kicker">Just sold</div><Lines className="h2" lines={["Results that speak", "for themselves."]} /></div>
-            <Link href={PAGES.listings + "?mode=sold"} className="pill pill--white" style={{ flex: "none" }}>All sold properties</Link>
+            <Link href={PAGES.listings + "?mode=sold"} className="pill pill--dark" style={{ flex: "none" }}>All sold properties</Link>
           </div>
           <div className="strip">
-            {SOLD.slice(0, 8).map((p) => <PropertyCard key={p.id} p={p} light ratio="4/3" width="min(380px,80vw)" specsCount={3} priceOverride={(p.price || "").replace("Sold ", "")} />)}
+            {SOLD.slice(0, 8).map((p) => <PropertyCard key={p.id} p={p} ratio="4/3" width="min(380px,80vw)" specsCount={3} priceOverride={(p.price || "").replace("Sold ", "")} />)}
             <div className="strip-end" aria-hidden="true" />
           </div>
         </section>

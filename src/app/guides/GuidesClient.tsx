@@ -29,7 +29,7 @@ export default function GuidesClient() {
 
   useEffect(() => {
     const onScroll = () => {
-      const arts = Array.from(document.querySelectorAll<HTMLElement>("article.tip"));
+      const arts = Array.from(document.querySelectorAll<HTMLElement>("article.tip, article.offer"));
       let cur = "";
       arts.forEach((a) => { if (a.getBoundingClientRect().top < window.innerHeight * 0.45) cur = a.id; });
       if (!cur && arts[0]) cur = arts[0].id;
@@ -72,7 +72,7 @@ export default function GuidesClient() {
             <div className="kicker kicker--muted" style={{ letterSpacing: ".14em", padding: "0 0 12px" }}>On this page</div>
             {tips.map((t) => <a key={t.id} href={"#" + t.id} data-active={active === t.id ? "1" : "0"}>{t.n} &nbsp; {t.title}</a>)}
             <div className="rule" />
-            {b && <a href="#offer" style={{ borderTop: 0 }}>07 &nbsp; Make an offer</a>}
+            {b && <a href="#offer" data-active={active === "offer" ? "1" : "0"} style={{ borderTop: 0 }}>07 &nbsp; Make an offer</a>}
           </nav>
           <div style={{ display: "grid", gap: "clamp(40px,5vw,64px)", minWidth: 0, maxWidth: "100%", gridTemplateColumns: "minmax(0,1fr)" }}>
             {tips.map((t, i) => (
@@ -83,32 +83,32 @@ export default function GuidesClient() {
             ))}
             {b ? (
               <article id="offer" className="offer">
-                <div style={{ display: "grid", gap: 10 }}><div className="kicker">Expression of interest</div><h2 className="h3" style={{ fontSize: "clamp(1.6rem,1.1rem + 1.6vw,2.6rem)", letterSpacing: "-.025em", lineHeight: 1.08 }}>Ready to make an offer?</h2><p className="body body--light" style={{ maxWidth: "60ch" }}>Submit a written offer online with your price, deposit, finance and settlement terms. The listing agent presents it to the seller and comes back to you.</p></div>
+                <div style={{ display: "grid", gap: 10 }}><div className="kicker">Expression of interest</div><h2 className="h3" style={{ fontSize: "clamp(1.6rem,1.1rem + 1.6vw,2.6rem)", letterSpacing: "-.025em", lineHeight: 1.08 }}>Ready to make an offer?</h2><p className="body" style={{ maxWidth: "60ch" }}>Submit a written offer online with your price, deposit, finance and settlement terms. The listing agent presents it to the seller and comes back to you.</p></div>
                 {!sent ? (
                   <form style={{ display: "grid", gap: 12 }} onSubmit={(e) => { e.preventDefault(); setName(String(new FormData(e.currentTarget).get("name") || "there").split(" ")[0]); setSent(true); }}>
-                    <label className="field field--dark">Property<select name="property" required defaultValue="" className="input input--dark"><option value="">Choose a current listing</option>{listings.map((l) => <option key={l.id} value={l.id}>{l.address}, {l.suburb} · {l.price}</option>)}</select></label>
+                    <label className="field field--sm">Property<select name="property" required defaultValue="" className="input input--md"><option value="">Choose a current listing</option>{listings.map((l) => <option key={l.id} value={l.id}>{l.address}, {l.suburb} · {l.price}</option>)}</select></label>
                     <div className="form-grid" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,160px),1fr))" }}>
-                      <label className="field field--dark">Offer price<input name="price" required inputMode="numeric" placeholder="$" className="input input--dark" /></label>
-                      <label className="field field--dark">Deposit<input name="deposit" inputMode="numeric" placeholder="$" className="input input--dark" /></label>
-                      <label className="field field--dark">Finance<select name="finance" className="input input--dark"><option>Subject to finance · 14 days</option><option>Subject to finance · 21 days</option><option>Cash · unconditional</option></select></label>
-                      <label className="field field--dark">Settlement<select name="settlement" className="input input--dark"><option>30 days</option><option>45 days</option><option>60 days</option><option>Other · see notes</option></select></label>
+                      <label className="field field--sm">Offer price<input name="price" required inputMode="numeric" placeholder="$" className="input input--md" /></label>
+                      <label className="field field--sm">Deposit<input name="deposit" inputMode="numeric" placeholder="$" className="input input--md" /></label>
+                      <label className="field field--sm">Finance<select name="finance" className="input input--md"><option>Subject to finance · 14 days</option><option>Subject to finance · 21 days</option><option>Cash · unconditional</option></select></label>
+                      <label className="field field--sm">Settlement<select name="settlement" className="input input--md"><option>30 days</option><option>45 days</option><option>60 days</option><option>Other · see notes</option></select></label>
                     </div>
                     <div className="form-grid">
-                      <label className="field field--dark">Full name<input name="name" required autoComplete="name" className="input input--dark" /></label>
-                      <label className="field field--dark">Phone<input name="phone" type="tel" required autoComplete="tel" className="input input--dark" /></label>
-                      <label className="field field--dark">Email<input name="email" type="email" required autoComplete="email" className="input input--dark" /></label>
+                      <label className="field field--sm">Full name<input name="name" required autoComplete="name" className="input input--md" /></label>
+                      <label className="field field--sm">Phone<input name="phone" type="tel" required autoComplete="tel" className="input input--md" /></label>
+                      <label className="field field--sm">Email<input name="email" type="email" required autoComplete="email" className="input input--md" /></label>
                     </div>
-                    <label className="field field--dark">Conditions and notes <span className="opt">(optional)</span><textarea name="notes" rows={3} placeholder="Building and pest, inclusions, anything the seller should know." className="input input--dark" /></label>
-                    <label className="check check--light"><input type="checkbox" required />I understand this is an expression of interest, not a binding contract, and the agent will contact me to formalise the offer.</label>
+                    <label className="field field--sm">Conditions and notes <span className="opt">(optional)</span><textarea name="notes" rows={3} placeholder="Building and pest, inclusions, anything the seller should know." className="input input--md" /></label>
+                    <label className="check"><input type="checkbox" required />I understand this is an expression of interest, not a binding contract, and the agent will contact me to formalise the offer.</label>
                     <button type="submit" className="pill pill--red" style={{ justifySelf: "start", padding: "0 28px" }}>Submit expression of interest</button>
                   </form>
                 ) : (
-                  <Success title="Offer received." light onReset={() => setSent(false)} resetLabel="Submit another">Thanks, {name}. The listing agent will call you to confirm the details before presenting it to the seller.</Success>
+                  <Success title="Offer received." onReset={() => setSent(false)} resetLabel="Submit another">Thanks, {name}. The listing agent will call you to confirm the details before presenting it to the seller.</Success>
                 )}
               </article>
             ) : (
-              <div className="eoi" style={{ background: "var(--ink-2)", color: "#fff", borderRadius: 24 }}>
-                <div style={{ display: "grid", gap: 6 }}><div style={{ fontSize: 20, fontWeight: 800, letterSpacing: "-.01em" }}>Start with the price.</div><div style={{ fontSize: 14, color: "var(--grey-light)" }}>A free appraisal gives you a realistic range from recent comparable sales.</div></div>
+              <div className="eoi eoi--red" style={{ borderRadius: 24 }}>
+                <div style={{ display: "grid", gap: 6 }}><div style={{ fontSize: 20, fontWeight: 800, letterSpacing: "-.01em" }}>Start with the price.</div><div style={{ fontSize: 14, color: "rgba(255,255,255,.88)" }}>A free appraisal gives you a realistic range from recent comparable sales.</div></div>
                 <Link href={PAGES.appraisal} className="pill pill--white pill--arrow"><span>Request an appraisal</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
               </div>
             )}

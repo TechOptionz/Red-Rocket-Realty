@@ -70,7 +70,7 @@ export default function BlogClient() {
 
       </section>
 
-      <section className="section section--dark">
+      <section className="section section--white">
         <div className="sec-head" style={{ marginBottom: 0 }}>
           <div className="sec-head__text" style={{ gap: 18 }}>
             <div className="kicker">Thinking of selling?</div>
@@ -78,7 +78,7 @@ export default function BlogClient() {
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10, flex: "none" }}>
             <Link data-mag href={PAGES.appraisal} className="pill pill--red pill--arrow"><span>Request an appraisal</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
-            <a href={CONTACT.phoneHref} className="pill pill--ghost-light">Call {CONTACT.phone}</a>
+            <a href={CONTACT.phoneHref} className="pill pill--ghost">Call {CONTACT.phone}</a>
           </div>
         </div>
       </section>

@@ -82,7 +82,7 @@ export default function AboutClient() {
         </div>
       </section>
 
-      <section id="reviews" className="section section--white" style={{ scrollMarginTop: 100 }}>
+      <section id="reviews" className="section section--bg" style={{ scrollMarginTop: 100 }}>
         <div className="cols2" style={{ gridTemplateColumns: "1fr 1.4fr" }}>
           <div className="sticky" style={{ display: "grid", gap: 22 }}>
             <div className="kicker">Reviews</div>
@@ -109,8 +109,8 @@ export default function AboutClient() {
         <div className="cta-band">
           <div style={{ display: "grid", gap: 12, maxWidth: 640 }}><div className="kicker">Our team</div><h2 className="h2--sm">Meet the nineteen people behind the results.</h2></div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-            <Link href={PAGES.team} className="pill pill--white pill--arrow"><span>Meet the team</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
-            <Link href={PAGES.contact} className="pill pill--ghost-light">Contact us</Link>
+            <Link href={PAGES.team} className="pill pill--red pill--arrow"><span>Meet the team</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
+            <Link href={PAGES.contact} className="pill pill--ghost">Contact us</Link>
           </div>
         </div>
       </section>

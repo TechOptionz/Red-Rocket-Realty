@@ -188,7 +188,7 @@ html[data-intro-on="1"] .hero__content *, html[data-intro-on="1"] .hero__bg { an
 .statement__fill { position: absolute; inset: 0; padding: 0 var(--pad-x); color: #fff; transition: clip-path .12s linear; }
 .statement__foot { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding: clamp(40px, 6vw, 80px) var(--pad-x) clamp(48px, 6vw, 80px); }
 @keyframes rrMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.marquee { background: var(--ink); color: #fff; overflow: hidden; padding: 18px 0; border-top: 1px solid rgba(255, 255, 255, .08); }
+.marquee { background: var(--brand-red-dark); color: #fff; overflow: hidden; padding: 18px 0; border-top: 1px solid rgba(255, 255, 255, .16); }
 .marquee__track { display: flex; gap: 48px; width: max-content; white-space: nowrap; font-size: clamp(14px, 1.2vw, 18px); font-weight: 800; letter-spacing: .16em; text-transform: uppercase; animation: rrMarquee 38s linear infinite; }
 .marquee__track:hover { animation-play-state: paused; }
 
