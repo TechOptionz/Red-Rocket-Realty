@@ -255,7 +255,7 @@ export default function Header() {
 
           {/* Desktop mega menu (Menu button): quick search, one link column per group, feature rail and office strip. */}
           <div className="mpanel__veil" data-open={panel ? "1" : "0"} aria-hidden="true" onClick={() => setPanel(false)} />
-          <div id="mega-panel" className="mpanel" data-open={panel ? "1" : "0"} aria-hidden={!panel}>
+          <div id="mega-panel" className="mpanel" data-open={panel ? "1" : "0"} aria-hidden={!panel} inert={!panel}>
             <div className="mpanel__box">
               <form className="mpanel__search" role="search" aria-label="Quick property search" onSubmit={submitQuick}>
                 <div className="mpanel__tabs" role="tablist" aria-label="Search type">
