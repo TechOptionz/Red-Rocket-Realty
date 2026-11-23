@@ -12,7 +12,7 @@ export const LISTINGS_TAG = "listings";
 export const LISTINGS_REVALIDATE = 600;
 const MAX_SOLD = 150;
 
-export const supabaseConfigured = () => Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+export const supabaseConfigured = () => Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 type Row = {
   unique_id: string; short_id: string; slug: string; kind: string; status: string; mode: "buy" | "rent" | "sold";
@@ -78,7 +78,7 @@ const sortKey = (l: Listing) => (l.mode === "sold" ? l.soldDate || "" : l.listed
 
 const readAll = unstable_cache(
   async (): Promise<Listing[]> => {
-    const db = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, { auth: { persistSession: false } });
+    const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, { auth: { persistSession: false } });
     const { data, error } = await db.from("listings").select("*").eq("is_public", true).order("mod_time", { ascending: false }).limit(2000);
     if (error) throw new Error("listings: " + error.message);
     const all = (data as Row[]).map(toListing).sort((a, b) => sortKey(b).localeCompare(sortKey(a)));
