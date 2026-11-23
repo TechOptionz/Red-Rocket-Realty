@@ -800,3 +800,19 @@ a.mnav__muted:hover { color: #fff; }
   .menu-btn__label { display: none; }
   .menu-btn { padding: 0 14px; }
 }
+
+/* ── Listing flags (feed): Sold / Under contract / New / Inspection / Auction / Deposit taken / New home ── */
+.flags { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; }
+.flags--card { position: absolute; top: 14px; left: 14px; right: 14px; z-index: 1; flex-direction: column; pointer-events: none; }
+.flag { display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 12px; border-radius: 100px; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; line-height: 1; }
+.flag i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 3px rgba(255, 255, 255, .25); flex: none; }
+.flag svg { flex: none; opacity: .85; }
+.flag--red { background: var(--brand-red); color: #fff; box-shadow: 0 6px 18px -8px rgba(17, 19, 24, .5); }
+.flag--dark { background: rgba(17, 19, 24, .72); color: #fff; border: 1px solid rgba(255, 255, 255, .16); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); letter-spacing: .04em; text-transform: none; font-size: 12.5px; font-weight: 700; }
+.flag--white { background: rgba(255, 255, 255, .94); color: var(--ink); box-shadow: 0 6px 18px -10px rgba(17, 19, 24, .45); }
+.flags--inline .flag--dark { background: var(--ink); border-color: var(--ink); }
+.flags--inline .flag--white { background: #fff; border: 1px solid var(--line); box-shadow: none; }
+/* Photo count / floor plan / video markers, bottom-left of card photos */
+.card__media-meta { position: absolute; left: 14px; bottom: 14px; display: flex; gap: 6px; pointer-events: none; }
+.card__media-meta span { display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 9px; border-radius: 100px; background: rgba(17, 19, 24, .6); color: #fff; font-size: 12px; font-weight: 700; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.card__media-meta svg { width: 13px; height: 13px; }

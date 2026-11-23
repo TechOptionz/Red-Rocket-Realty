@@ -2,13 +2,15 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { AGENCY_AREAS, CONTACT, DEPTS, LAND, PAGES, PHOTOS, SALE, SOLD, TEAM, agentBlurb, agentHelp, agentHighlights, agentSocials, decorate, decorateAgent, propHref, telHref } from "@/data/rr-data";
+import { useListings } from "@/components/ListingsProvider";
+import { AGENCY_AREAS, CONTACT, DEPTS, PAGES, PHOTOS, TEAM, agentBlurb, agentHelp, agentHighlights, agentSocials, decorate, decorateAgent, propHref, telHref } from "@/data/rr-data";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import { SocialIcon, SocialLinks } from "@/components/SocialIcons";
 import Photo from "@/components/Photo";
 
 export default function TeamClient() {
+  const { SALE, LAND, SOLD } = useListings();
   const sp = useSearchParams();
   const dept0 = sp.get("dept");
   const [dept, setDept] = useState(dept0 && DEPTS.includes(dept0) ? dept0 : "All");

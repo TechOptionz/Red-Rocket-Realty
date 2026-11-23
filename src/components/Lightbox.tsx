@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { loaderFor } from "@/components/Photo";
 
 type Props = {
   photos: string[];
@@ -90,7 +91,7 @@ export default function Lightbox({ photos, index, title, subtitle, onClose, onIn
         <div className="lb__grid">
           {photos.map((src, k) => (
             <button key={src + k} type="button" className="lb__cell" data-on={k === i ? "1" : "0"} onClick={() => { onIndex(k); setView("slide"); }} aria-label={"Photo " + (k + 1)}>
-              <Image src={src} alt="" fill sizes="(max-width: 720px) 50vw, (max-width: 1200px) 33vw, 25vw" quality={70} style={{ objectFit: "cover" }} draggable={false} />
+              <Image loader={loaderFor(src)} src={src} alt="" fill sizes="(max-width: 720px) 50vw, (max-width: 1200px) 33vw, 25vw" quality={70} style={{ objectFit: "cover" }} draggable={false} />
               <span className="lb__cell-n">{k + 1}</span>
             </button>
           ))}
@@ -100,7 +101,7 @@ export default function Lightbox({ photos, index, title, subtitle, onClose, onIn
           <div className="lb__stage" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
             {slides.map((k) => (
               <div key={photos[k] + k} className="lb__slide" data-on={k === i ? "1" : "0"} aria-hidden={k !== i}>
-                <Image src={photos[k]} alt={k === i ? title + " – photo " + (k + 1) + " of " + n : ""} fill sizes="100vw" quality={85} priority={k === i} style={{ objectFit: "contain" }} draggable={false} />
+                <Image loader={loaderFor(photos[k])} src={photos[k]} alt={k === i ? title + " – photo " + (k + 1) + " of " + n : ""} fill sizes="100vw" quality={85} priority={k === i} style={{ objectFit: "contain" }} draggable={false} />
               </div>
             ))}
             {n > 1 ? (
@@ -114,7 +115,7 @@ export default function Lightbox({ photos, index, title, subtitle, onClose, onIn
             <div ref={stripRef} className="lb__strip" role="tablist" aria-label="Photo thumbnails">
               {photos.map((src, k) => (
                 <button key={src + k} type="button" role="tab" aria-selected={k === i} className="lb__thumb" data-on={k === i ? "1" : "0"} onClick={() => onIndex(k)} aria-label={"Photo " + (k + 1)}>
-                  <Image src={src} alt="" fill sizes="112px" quality={70} style={{ objectFit: "cover" }} draggable={false} />
+                  <Image loader={loaderFor(src)} src={src} alt="" fill sizes="112px" quality={70} style={{ objectFit: "cover" }} draggable={false} />
                 </button>
               ))}
             </div>

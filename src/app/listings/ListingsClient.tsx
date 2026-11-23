@@ -2,7 +2,9 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { LAND, PAGES, PHOTOS, RENT, SALE, SEARCH, SOLD, matchSuburb, type Listing } from "@/data/rr-data";
+import { PAGES, PHOTOS, SEARCH, type Listing } from "@/data/rr-data";
+import { useListings } from "@/components/ListingsProvider";
+import type { ListingIndex } from "@/lib/listings/model";
 import PropertyCard from "@/components/PropertyCard";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
@@ -16,12 +18,12 @@ const TITLES: Record<Mode, [string, string, string]> = {
   land: ["Buy", "Land for sale", "blocks and packages"],
   sold: ["Sell", "Recently sold", "properties sold"],
 };
-const SOURCE: Record<Mode, Listing[]> = { buy: SALE, rent: RENT, land: LAND, sold: SOLD };
 const PAGE = 6;
 const SORTS: [string, string][] = [["new", "Newest"], ["old", "Oldest"], ["hi", "Price · high to low"], ["lo", "Price · low to high"], ["az", "Suburb A–Z"]];
 
 /** Disclosed figure for a listing: weekly rent, or the dollar amount in a price string ("Offers Over $1,200,000", "Sold $945,000"). Undisclosed ("Contact Agent", "Sold") → null. */
 function figure(p: Listing, isRent: boolean): number | null {
+  if (p.mode) return p.priceValue ?? null; // feed: the disclosed figure, null when withheld
   if (isRent) return p.rent || null;
   const m = (p.price || "").replace(/,/g, "").match(/\$\s?(\d+(?:\.\d+)?)\s*(k|m)?/i);
   if (!m) return null;
@@ -31,21 +33,22 @@ function figure(p: Listing, isRent: boolean): number | null {
 }
 
 /** Search state from the URL. A suburb or type only applies when it exists in this mode's listings (case-insensitive), otherwise it is ignored rather than filtering to an empty page. */
-function fromParams(sp: { get(key: string): string | null }) {
+function fromParams(sp: { get(key: string): string | null }, idx: ListingIndex) {
   const qMode = sp.get("mode");
   const mode: Mode = MODES.includes(qMode as Mode) ? (qMode as Mode) : "buy";
   const t = sp.get("type") || "";
   return {
     mode,
-    suburb: matchSuburb(mode, sp.get("suburb") || "") || "",
-    ptype: SOURCE[mode].some((p) => p.type === t) ? t : "",
+    suburb: idx.matchSuburb(mode, sp.get("suburb") || "") || "",
+    ptype: idx.BY_MODE[mode].some((p) => p.type === t) ? t : "",
     pfrom: sp.get("from") || "", pto: sp.get("to") || "", beds: sp.get("beds") || "", baths: sp.get("baths") || "",
   };
 }
 
 export default function ListingsClient() {
   const sp = useSearchParams();
-  const initial = fromParams(sp);
+  const idx = useListings();
+  const initial = fromParams(sp, idx);
   const [mode, setMode] = useState<Mode>(initial.mode);
   const [suburb, setSuburb] = useState(initial.suburb);
   const [ptype, setPtype] = useState(initial.ptype);
@@ -61,8 +64,9 @@ export default function ListingsClient() {
   // Links that only change the query string (header "For rent", footer "Recently sold", mega-menu suburb search) do not remount
   // this component, so adopt the URL whenever it changes. Our own replaceState below produces the same values, so this is a no-op then.
   useEffect(() => {
-    const q = fromParams(sp);
+    const q = fromParams(sp, idx);
     setMode(q.mode); setSuburb(q.suburb); setPtype(q.ptype); setPfrom(q.pfrom); setPto(q.pto); setBeds(q.beds); setBaths(q.baths);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sp]);
 
   // Mirror the search in the address bar so a search can be bookmarked or shared.
@@ -79,7 +83,7 @@ export default function ListingsClient() {
   useEffect(() => setLimit(PAGE), [mode, suburb, ptype, pfrom, pto, beds, baths, sort]);
 
   const isRent = mode === "rent";
-  const source = SOURCE[mode];
+  const source = idx.BY_MODE[mode];
   const pf = Number(pfrom) || 0, pt = Number(pto) || Infinity;
   // Price limits apply to listings with a disclosed figure; "Contact Agent" style listings stay in the results.
   const inRange = (p: Listing) => { const f = figure(p, isRent); return f === null || (f >= pf && f <= pt); };

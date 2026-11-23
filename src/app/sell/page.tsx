@@ -5,7 +5,8 @@ import Footer from "@/components/Footer";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import PropertyCard from "@/components/PropertyCard";
-import { ADVANTAGE, CONTACT, PAGES, PHOTOS, SOLD } from "@/data/rr-data";
+import { ADVANTAGE, CONTACT, PAGES, PHOTOS } from "@/data/rr-data";
+import { getListings, toClientListing } from "@/lib/listings/server";
 import Photo from "@/components/Photo";
 
 export const metadata: Metadata = { title: "Sell your home", description: "A hands-on sale from the first appraisal to settlement day with Logan's local experts." };
@@ -18,7 +19,8 @@ const STEPS: [string, string][] = [
   ["Settle", "Contract to settlement handled with your solicitor. Then we help you find what comes next."],
 ];
 
-export default function SellPage() {
+export default async function SellPage() {
+  const SOLD = (await getListings()).filter((p) => p.mode === "sold" || (!p.mode && p.status === "Sold")).map(toClientListing);
   return (
     <>
       <Header />

@@ -1,8 +1,11 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { CONTACT, LAND, PAGES, PHOTOS, RENT, SALE, decorate, formatRent, propHref, specs } from "@/data/rr-data";
-import { icsEvent, icsFile } from "@/lib/ics";
+import { CONTACT, PAGES, PHOTOS, decorate, formatRent, isRental, propHref, specs } from "@/data/rr-data";
+import { icsEvent, icsFile, icsTimedEvent } from "@/lib/ics";
+import { useListings, useNow } from "@/components/ListingsProvider";
+import { fmtDay, fmtRange, fmtRelDay, upcomingInspections } from "@/lib/listings/flags";
+import ListingFlags from "@/components/ListingFlags";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import Photo from "@/components/Photo";
@@ -17,13 +20,19 @@ const TIPS: [string, string][] = [
 
 export default function OpenHomesClient() {
   const [mode, setMode] = useState<"all" | "buy" | "rent">("all");
+  const { SALE, LAND, RENT } = useListings();
+  const now = useNow();
   const src = [...(mode !== "rent" ? [...SALE, ...LAND] : []), ...(mode !== "buy" ? RENT : [])];
-  const items = src.filter((p) => p.inspection).map((p) => {
-    const [day, time] = p.inspection!.split(" · ");
-    return { p, day, time, isRent: !!p.rent, ev: icsEvent(p, p.inspection!) };
-  });
-  const dayKeys = Array.from(new Set(items.map((i) => i.day))).sort((a, b) => ORDER.indexOf(a) - ORDER.indexOf(b));
-  const days = dayKeys.map((day) => ({ day, items: items.filter((i) => i.day === day).sort((a, b) => a.time.localeCompare(b.time)) }));
+  // Feed listings: every inspection that hasn't finished, one row each. Static fallback: its single "Day · time" string.
+  type Item = { p: (typeof src)[number]; day: string; time: string; sort: string; isRent: boolean; ev: string };
+  const items: Item[] = src.flatMap((p): Item[] => {
+    if (p.mode) return upcomingInspections(p, now).map((i) => ({ p, day: fmtRelDay(i.start, now) === "Today" ? "Today · " + fmtDay(i.start) : fmtRelDay(i.start, now) === "Tomorrow" ? "Tomorrow · " + fmtDay(i.start) : fmtDay(i.start), time: fmtRange(i.start, i.end), sort: i.start, isRent: isRental(p), ev: icsTimedEvent(p, i.start, i.end, "Inspection", now) }));
+    if (!p.inspection) return [];
+    const [day, time] = p.inspection.split(" · ");
+    return [{ p, day, time, sort: String(ORDER.indexOf(day)).padStart(3, "0") + time, isRent: isRental(p), ev: icsEvent(p, p.inspection) }];
+  }).sort((a, b) => a.sort.localeCompare(b.sort));
+  const dayKeys = Array.from(new Set(items.map((i) => i.day)));
+  const days = dayKeys.map((day) => ({ day, items: items.filter((i) => i.day === day) }));
 
   return (
     <main>
@@ -58,18 +67,20 @@ export default function OpenHomesClient() {
             {d.items.map((i, k) => {
               const dec = decorate(i.p);
               return (
-                <Link key={i.p.id} href={propHref(i.p)} className="oh-row" style={{ animationDelay: Math.min(k, 6) * 0.06 + "s" }}>
-                  <div className="oh-row__thumb"><div data-zoom className="card__img" style={{ backgroundColor: i.p.shade, backgroundImage: i.p.photo ? undefined : dec.bgImage }}>{i.p.photo ? <Photo src={i.p.photo} sizes="(max-width: 720px) 100vw, 180px" /> : null}</div>{i.p.status ? <span className="tag" style={{ padding: "6px 10px", fontSize: 10 }}>{i.p.status}</span> : null}</div>
+                <div key={i.p.id + i.sort} className="oh-row" style={{ animationDelay: Math.min(k, 6) * 0.06 + "s" }}>
+                  <div className="oh-row__thumb"><div data-zoom className="card__img" style={{ backgroundColor: i.p.shade, backgroundImage: i.p.photo ? undefined : dec.bgImage }}>{i.p.photo ? <Photo src={i.p.photo} blur={i.p.images?.[0]?.blur} sizes="(max-width: 720px) 100vw, 180px" /> : null}</div>{!i.p.mode && i.p.status ? <span className="tag" style={{ padding: "6px 10px", fontSize: 10 }}>{i.p.status}</span> : null}</div>
                   <div style={{ display: "grid", gap: 4, minWidth: 0 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}><span className="oh-row__time">{i.time}</span><span className="oh-row__kind" style={{ background: i.isRent ? "var(--ink)" : "var(--brand-red)" }}>{i.isRent ? "For rent" : "For sale"}</span></div>
-                    <div style={{ fontSize: 16, fontWeight: 700 }}>{i.p.address}, {i.p.suburb}</div>
-                    <div className="card__specs" style={{ marginTop: 0 }}>{specs(i.p).join(" · ")} · {i.isRent ? formatRent(i.p.rent!) : i.p.price}</div>
+                    {/* The address link stretches over the whole row (::after); the calendar button sits above it. Nested <a> would be invalid. */}
+                    <Link href={propHref(i.p)} className="oh-row__link" style={{ fontSize: 16, fontWeight: 700 }}>{i.p.address}, {i.p.suburb}</Link>
+                    <div className="card__specs" style={{ marginTop: 0 }}>{specs(i.p).join(" · ")} · {i.p.mode ? i.p.price : i.isRent ? formatRent(i.p.rent!) : i.p.price}</div>
+                    {i.p.mode && (i.p.underOffer || i.p.depositTaken) ? <ListingFlags p={i.p} max={1} variant="inline" /> : null}
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <a href={icsFile([i.ev])} download={"inspection-" + i.p.id + ".ics"} onClick={(e) => e.stopPropagation()} aria-label="Add to calendar" className="circle-btn circle-btn--sm">↓</a>
+                    <a href={icsFile([i.ev])} download={"inspection-" + i.p.id + "-" + k + ".ics"} aria-label={"Add " + i.p.address + " inspection to calendar"} className="circle-btn circle-btn--sm oh-row__ics">↓</a>
                     <span data-arrow aria-hidden="true" className="circle-btn circle-btn--sm" style={{ background: "#fff", borderColor: "rgba(17,19,24,.08)" }}>→</span>
                   </div>
-                </Link>
+                </div>
               );
             })}
           </div>

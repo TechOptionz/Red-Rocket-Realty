@@ -33,9 +33,61 @@ npm run build && npm start
   `Pill`, `Lines`, `Crumb`, `Success`.
 - `src/components/home/` – the home page sections (intro sequence, parallax hero + search,
   accordion listings strip, statement fill, counters, team strip, testimonials, latest news, appraisal wizard, contact).
-- `src/data/rr-data.ts` – all content: listings, team, testimonials, guides, search options, photo map,
-  logo registry. Ported from `rr-data.js`; swap for a listing-feed API when one is wired up.
+- `src/data/rr-data.ts` – content: team, testimonials, guides, search options, photo map, logo registry, and the
+  static sample listings used only when Supabase isn't configured.
 - `src/lib/ics.ts` – calendar file generation for inspections.
+
+## Listings feed (LockedOn → SFTP → Supabase)
+
+LockedOn drops one REAXML file per listing change into `/upload` on the SFTP server. The importer picks them up,
+writes `public.listings` in Supabase and refreshes the site.
+
+```
+LockedOn ──REAXML──▶ SFTP /upload ──(every minute)──▶ /api/feed/sync ──▶ Supabase ──revalidateTag("listings")──▶ pages
+```
+
+**Setup (once)**
+
+1. Run `supabase/migrations/20261123000000_listings.sql` in the Supabase SQL editor.
+2. Copy `.env.example` to `.env.local` and fill it in. Add the same variables in Vercel.
+3. First import: `npm run feed:sync -- --backfill` (`--backfill` stops existing listings all showing as "New").
+4. Deploy to Vercel. `vercel.json` runs `/api/feed/sync` every minute (per-minute cron needs Vercel Pro; on Hobby, point
+   an external cron such as cron-job.org at `GET /api/feed/sync` with header `Authorization: Bearer $CRON_SECRET`).
+   Functions run in `syd1`, next to LockedOn's image bucket and the SFTP server.
+
+**Commands**
+
+| Command | What it does |
+| --- | --- |
+| `npm run feed:sync` | Import new files once |
+| `npm run feed:sync -- --watch` | Keep polling every 60 s (VPS / local alternative to Vercel Cron) |
+| `npm run feed:sync -- --force` | Re-apply every file (after a parser change) |
+| `npm run feed:sync -- --force --warm` | …and re-render every photo at the sizes the site requests |
+
+**How it behaves**
+
+- `feed_files` is a ledger of processed files, so each file is imported once. Files are applied oldest first, and an
+  update whose REAXML `modTime` is older than the stored one is ignored. A database lock stops overlapping runs.
+- `status="current"` shows under Buy (or Rent for `<rental>`); `sold` shows under Sold. `withdrawn`, `offmarket` and
+  `leased` hide the listing, and its page 404s.
+- Vendor details and the credentials attribute on `<propertyList>` are dropped while parsing and never stored. The
+  tables have RLS on with no public policies; the site reads with the secret key on the server only, and withheld
+  prices (`display="no"`) never reach the browser.
+- URLs are `/property/<address>-<8-char id>`. The id is stable, so if the agent edits the address, old links 308 to the
+  new slug.
+- Flags (`src/lib/listings/flags.ts`): Under contract, Auction <day time>, Inspection <day time> / Open now, New
+  (first seen within 7 days), New home, House & land, Deposit taken, Available <date>, Sold on <date>. They are computed
+  in Queensland time from the render timestamp, so server HTML and the browser agree, then follow the real clock.
+
+**Photos**
+
+LockedOn image URLs (`resize.lockedoncloud.com/lovii-w:…`) accept any width and 301 to the rendered file on S3
+(Sydney), which has no CDN or cache headers. `components/Photo.tsx` asks LockedOn for a near-size source (1080 or 2400 px
+for JPEG; 640/1080/1600 for PNG, which LockedOn can't convert), and Next's optimizer turns it into an edge-cached WebP.
+The importer pre-renders those sizes at LockedOn and stores a ~180-byte blur placeholder and aspect ratio per photo, so
+cards paint instantly and no visitor waits on a cold resize. If the optimizer ever fails to fetch, the photo falls back
+to LockedOn's own file instead of showing broken. LockedOn deletes rendered sizes after 180 days; the original stays,
+and the next request re-renders it.
 
 ## Notes carried over from the prototype
 

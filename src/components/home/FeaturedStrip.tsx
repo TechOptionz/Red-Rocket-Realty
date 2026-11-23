@@ -1,12 +1,14 @@
 "use client";
 import { useRef } from "react";
 import Link from "next/link";
-import { SALE, PAGES, propHref, specs } from "@/data/rr-data";
+import { PAGES, propHref, specs } from "@/data/rr-data";
+import { useListings } from "@/components/ListingsProvider";
 import Lines from "@/components/Lines";
 import Photo from "@/components/Photo";
 
 export default function FeaturedStrip() {
   const strip = useRef<HTMLDivElement>(null);
+  const { SALE } = useListings();
   const featured = SALE.filter((p) => p.photo).slice(0, 8);
 
   const scrollBy = (dir: number) => {

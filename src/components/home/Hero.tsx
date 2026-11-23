@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { PAGES, PHOTOS, SEARCH, suburbsFor, typesFor } from "@/data/rr-data";
+import { PAGES, PHOTOS, SEARCH } from "@/data/rr-data";
+import { useListings } from "@/components/ListingsProvider";
 import Photo from "@/components/Photo";
 
 type Mode = "buy" | "rent" | "sell";
@@ -10,6 +11,7 @@ type Mode = "buy" | "rent" | "sell";
 const HERO_VIDEO = { webm: "/videos/hero.webm", mp4: "/videos/hero.mp4", poster: "/videos/hero-poster.jpg" };
 
 export default function Hero({ onAppraise }: { onAppraise: (address: string) => void }) {
+  const { suburbsFor, typesFor } = useListings();
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("buy");
   const [suburb, setSuburb] = useState("");

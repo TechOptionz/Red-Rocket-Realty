@@ -7,7 +7,26 @@ export type Listing = {
   // Location map, read from the live listing page on 9 Oct 2026: pin = street address at zoom 17 (as the live site shows),
   // suburb = live site hides the street (suburb_mode), none = live page is gone (404), so no map is shown.
   map?: 'pin' | 'suburb' | 'none';
+  // ── Feed fields (Supabase / LockedOn REAXML). Absent on the static fallback data. ──
+  /** Which search the listing belongs to. Prefer this over `!!rent` / `status === 'Sold'` checks. */
+  mode?: 'buy' | 'rent' | 'sold';
+  slug?: string; state?: string;
+  /** Gallery in display order, with aspect ratio and a tiny blur placeholder for instant paint. */
+  images?: ListingImage[]; floorplanImages?: ListingImage[];
+  inspections?: { start: string; end: string }[];
+  auctionAt?: string | null; underOffer?: boolean; depositTaken?: boolean; newConstruction?: boolean; homeLand?: boolean;
+  listedAt?: string | null; soldDate?: string | null; dateAvailable?: string | null;
+  /** Disclosed figure for price filters and sorting (null when the price is withheld). */
+  priceValue?: number | null;
+  rentPeriod?: string | null; bond?: number | null;
+  agents?: { name: string; phone?: string; email?: string }[];
+  videoUrl?: string | null; tourUrl?: string | null;
+  allowances?: { pets?: boolean; furnished?: boolean; smokers?: boolean };
+  ensuites?: number | null; toilets?: number | null; garages?: number | null; carports?: number | null; buildingArea?: string;
+  /** Totals kept when the client payload trims photos and floor plans. */
+  photoCount?: number; hasFloorplan?: boolean;
 };
+export type ListingImage = { url: string; w?: number; h?: number; blur?: string };
 export type SocialKind = 'facebook' | 'instagram' | 'linkedin';
 export type Agent = {
   name: string; role: string; dept: string; mobile: string; email: string; photo: string; bio: string; slug: string;
@@ -151,31 +170,11 @@ export const RENT: Listing[] = [
 ];
 
 export type SearchMode = 'buy' | 'rent' | 'sold' | 'land';
-export const LISTINGS_BY_MODE: Record<SearchMode, Listing[]> = { buy: SALE, rent: RENT, sold: SOLD, land: LAND };
 export const SEARCH_MODE_NOUN: Record<SearchMode, string> = { buy: 'for sale', rent: 'for rent', sold: 'sold', land: 'for sale' };
-/** Suburbs that currently have at least one listing in a mode, busiest first then A–Z, so a search can only ever point at an area with results. */
-export const suburbCounts = (mode: SearchMode): { name: string; count: number }[] => {
-  const m = new Map<string, number>();
-  for (const p of LISTINGS_BY_MODE[mode]) if (p.suburb) m.set(p.suburb, (m.get(p.suburb) || 0) + 1);
-  return Array.from(m, ([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
-};
-/** Same suburbs, A–Z, for select menus. */
-export const suburbsFor = (mode: SearchMode) => suburbCounts(mode).map(s => s.name).sort((a, b) => a.localeCompare(b));
-/** Property types that currently have a listing in a mode. */
-export const typesFor = (mode: SearchMode) => Array.from(new Set(LISTINGS_BY_MODE[mode].map(p => p.type).filter((t): t is string => Boolean(t) && t !== 'Land'))).sort();
-/** Resolve free text to a suburb with listings in a mode: exact (case-insensitive) first, else the busiest suburb whose name contains the text. */
-export const matchSuburb = (mode: SearchMode, text: string): string | null => {
-  const t = text.trim().toLowerCase();
-  if (!t) return null;
-  const all = suburbCounts(mode);
-  const exact = all.find(s => s.name.toLowerCase() === t);
-  if (exact) return exact.name;
-  const starts = all.find(s => s.name.toLowerCase().startsWith(t));
-  if (starts) return starts.name;
-  const within = all.find(s => s.name.toLowerCase().includes(t));
-  return within ? within.name : null;
-};
-export const formatRent = (n: number) => '$' + n.toLocaleString('en-AU') + ' per week';
+export const formatRent = (n: number, period?: string | null) => '$' + n.toLocaleString('en-AU') + (/month/i.test(period || '') ? ' per month' : ' per week');
+/** Rental, from feed `mode` or the static data's weekly `rent`. */
+export const isRental = (p: Listing) => p.mode ? p.mode === 'rent' : !!p.rent;
+export const isSoldListing = (p: Listing) => p.mode ? p.mode === 'sold' : p.status === 'Sold';
 export const specs = (p: Listing): string[] => p.type === 'Land' ? [p.land + ' land'] : [p.beds + ' bed', p.baths + ' bath', p.cars + ' car'].concat(p.type ? [p.type] : []);
 export const propHref = (p: Listing) => P.property + "/" + p.id;
 

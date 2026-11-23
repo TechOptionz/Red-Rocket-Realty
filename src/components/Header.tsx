@@ -2,7 +2,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { NAV, NAV_TOP, NAV_COLS, NAV_SEARCH_MODES, SEARCH_MODE_NOUN, HOURS, CONTACT, PAGES, SALE, POSTS, postDate, specs, propHref, suburbCounts, matchSuburb, type SearchMode } from "@/data/rr-data";
+import { NAV, NAV_TOP, NAV_COLS, NAV_SEARCH_MODES, SEARCH_MODE_NOUN, HOURS, CONTACT, PAGES, POSTS, postDate, specs, propHref, type SearchMode } from "@/data/rr-data";
+import { useListings } from "@/components/ListingsProvider";
 import { useLogo } from "@/lib/useLogo";
 import { SocialLinks } from "@/components/SocialIcons";
 import Image from "next/image";
@@ -43,6 +44,7 @@ export default function Header() {
   const menuBtn = useRef<HTMLButtonElement>(null);
   const mobilePanel = useRef<HTMLDivElement>(null);
   const firstBtn = useRef<HTMLButtonElement>(null);
+  const { SALE, suburbCounts, matchSuburb } = useListings();
   const featured = SALE.find((p) => p.photo);
   // Feature rail carousels (desktop mega menu): up to four photographed listings and the four latest posts.
   const featSlides: CarouselSlide[] = SALE.filter((p) => p.photo).slice(0, 4).map((p) => ({

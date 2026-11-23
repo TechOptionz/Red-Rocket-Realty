@@ -2,13 +2,15 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { BUYER_TIPS, LAND, PAGES, PHOTOS, SALE, SELLER_TIPS } from "@/data/rr-data";
+import { BUYER_TIPS, PAGES, PHOTOS, SELLER_TIPS } from "@/data/rr-data";
+import { useListings } from "@/components/ListingsProvider";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import Success from "@/components/Success";
 import Photo from "@/components/Photo";
 
 export default function GuidesClient() {
+  const { SALE, LAND } = useListings();
   const sp = useSearchParams();
   const [guide, setGuide] = useState<"buyer" | "seller">(sp.get("guide") === "seller" ? "seller" : "buyer");
   const [active, setActive] = useState("");

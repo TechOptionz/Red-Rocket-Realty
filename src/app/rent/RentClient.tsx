@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { CONTACT, PAGES, PHOTOS, RENT } from "@/data/rr-data";
+import { CONTACT, PAGES, PHOTOS } from "@/data/rr-data";
+import { useListings } from "@/components/ListingsProvider";
 import Crumb from "@/components/Crumb";
 import Lines from "@/components/Lines";
 import PropertyCard from "@/components/PropertyCard";
@@ -23,6 +24,7 @@ const FAQS: [string, string][] = [
 ];
 
 export default function RentClient() {
+  const { RENT } = useListings();
   const [open, setOpen] = useState(0);
   const [sent, setSent] = useState(false);
   const [name, setName] = useState("");

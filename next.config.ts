@@ -4,6 +4,8 @@ const YEAR = 60 * 60 * 24 * 365;
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // Native / optional-native deps of the feed importer stay as plain node_modules requires on the server.
+  serverExternalPackages: ["ssh2", "ssh2-sftp-client", "sharp"],
   // Lets a production build run alongside `next dev` (which owns .next) without clobbering it.
   distDir: process.env.RR_DIST_DIR || ".next",
   images: {
@@ -16,6 +18,12 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 30,
     // Local sources may carry a cache-busting query (the brand marks use ?v=N); Next 16 will require this to be explicit.
     localPatterns: [{ pathname: "/brand/**" }, { pathname: "/photos/**" }, { pathname: "/videos/**" }],
+    // Listing photos from the LockedOn feed. resize.lockedoncloud.com 301s to the rendered file on S3 (Sydney);
+    // the optimizer follows it, re-encodes to WebP and caches the result at the edge (see components/Photo.tsx).
+    remotePatterns: [
+      { protocol: "https", hostname: "resize.lockedoncloud.com", pathname: "/**" },
+      { protocol: "https", hostname: "lovii.s3.ap-southeast-2.amazonaws.com", pathname: "/resize/**" },
+    ],
   },
   async headers() {
     return [

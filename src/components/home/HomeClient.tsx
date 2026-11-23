@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { ADVANTAGE, AREAS, CONTACT, PAGES, PHOTOS, SOLD, propHref, specs } from "@/data/rr-data";
+import { ADVANTAGE, AREAS, CONTACT, PAGES, PHOTOS, propHref, specs } from "@/data/rr-data";
+import { useListings } from "@/components/ListingsProvider";
 import Lines from "@/components/Lines";
 import Intro from "./Intro";
 import Hero from "./Hero";
@@ -26,6 +27,7 @@ const AREA_IMGS = [
 
 export default function HomeClient() {
   const [appr, setAppr] = useState<ApprState>({ step: 0, addr: "", kind: "" });
+  const { SOLD } = useListings();
   const sold = SOLD.filter((p) => p.photo).slice(0, 6);
 
   return (
