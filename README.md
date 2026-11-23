@@ -43,7 +43,7 @@ LockedOn drops one REAXML file per listing change into `/upload` on the SFTP ser
 writes `public.listings` in Supabase and refreshes the site.
 
 ```
-LockedOn ──REAXML──▶ SFTP /upload ──(every minute)──▶ /api/feed/sync ──▶ Supabase ──revalidateTag("listings")──▶ pages
+LockedOn ──REAXML──▶ SFTP /upload ──(Supabase pg_cron, every minute)──▶ /api/feed/sync ──▶ Supabase ──revalidateTag("listings")──▶ pages
 ```
 
 **Setup (once)**
@@ -51,9 +51,11 @@ LockedOn ──REAXML──▶ SFTP /upload ──(every minute)──▶ /api/f
 1. Run `supabase/migrations/20261123000000_listings.sql` in the Supabase SQL editor.
 2. Copy `.env.example` to `.env.local` and fill it in. Add the same variables in Vercel.
 3. First import: `npm run feed:sync -- --backfill` (`--backfill` stops existing listings all showing as "New").
-4. Deploy to Vercel. `vercel.json` runs `/api/feed/sync` every minute (per-minute cron needs Vercel Pro; on Hobby, point
-   an external cron such as cron-job.org at `GET /api/feed/sync` with header `Authorization: Bearer $CRON_SECRET`).
-   Functions run in `syd1`, next to LockedOn's image bucket and the SFTP server.
+4. Deploy to Vercel (functions run in `syd1`, next to LockedOn's image bucket and the SFTP server).
+5. Schedule the every-minute check in Supabase: fill in the two placeholders in `supabase/cron-feed-sync.sql`
+   (site URL and `CRON_SECRET`) and run it in the SQL editor. It uses pg_cron + pg_net to call `/api/feed/sync`
+   each minute, since Vercel Hobby only allows daily crons. `vercel.json` keeps a daily run as a backup; on Vercel
+   Pro you can set that schedule to `* * * * *` and skip this step.
 
 **Commands**
 
