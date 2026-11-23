@@ -370,7 +370,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
               <div className="enquire__agents">
                 {agents.map((a) => (
                   <div key={a.name} className="enquire__agent">
-                    <div className="enquire__face" style={{ position: "relative" }}>{a.photo ? <Photo src={a.photo} sizes="44px" position="center top" /> : a.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}</div>
+                    <div className="enquire__face" style={{ position: "relative" }}>{a.photo ? <Photo src={a.photo} sizes="52px" position="center top" /> : a.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}</div>
                     <div className="enquire__who"><b>{a.name}</b><span>{a.role}</span></div>
                     {a.mobile ? (
                       <a href={a.tel} className="enquire__call" aria-label={"Call " + a.name + " on " + a.mobile}>
