@@ -363,36 +363,41 @@ export default function PropertyClient({ p }: { p: Listing }) {
           <aside id="enquire" className="enquire">
             <div className="enquire__card">
               <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
-                <div style={{ display: "grid", gap: 4 }}><div className="kicker kicker--light" style={{ letterSpacing: ".14em" }}>{isRent ? (/month/i.test(p.rentPeriod || "") ? "Monthly rent" : "Weekly rent") : isSold ? (/\d/.test(priceText) ? "Sold price" : "Status") : "Price"}</div><div style={{ fontSize: "clamp(1.4rem,1.2rem + .8vw,1.9rem)", fontWeight: 800, letterSpacing: "-.02em", lineHeight: 1 }}>{isSold && feed ? (/\d/.test(priceText) ? priceText.replace(/^Sold /, "") : "Sold") : priceText}</div></div>
-                {inspections.length > 0 ? (<div style={{ textAlign: "right", display: "grid", gap: 2 }}><div className="kicker kicker--light" style={{ letterSpacing: ".14em" }}>{isRent ? "Next inspection" : "Next open home"}</div><div style={{ fontSize: 14, fontWeight: 700 }}>{inspections[0].day.replace(/ · .*/, "")} · {inspections[0].time}</div></div>)
+                <div style={{ display: "grid", gap: 4 }}><div className="kicker kicker--light" style={{ letterSpacing: ".14em" }}>{isRent ? (/month/i.test(p.rentPeriod || "") ? "Monthly rent" : "Weekly rent") : isSold ? (/\d/.test(priceText) ? "Sold price" : "Status") : "Price"}</div><div style={{ fontSize: "clamp(1.3rem,1.15rem + .5vw,1.55rem)", fontWeight: 800, letterSpacing: "-.02em", lineHeight: 1.05 }}>{isSold && feed ? (/\d/.test(priceText) ? priceText.replace(/^Sold /, "") : "Sold") : priceText}</div></div>
+                {inspections.length > 0 ? (<div style={{ textAlign: "right", display: "grid", gap: 2 }}><div className="kicker kicker--light" style={{ letterSpacing: ".14em" }}>{isRent ? "Next inspection" : "Next open home"}</div><div style={{ fontSize: 14, fontWeight: 700, whiteSpace: "nowrap" }}>{inspections[0].day.replace(/ · .*/, "")} · {inspections[0].time}</div></div>)
                   : available ? (<div style={{ textAlign: "right", display: "grid", gap: 2 }}><div className="kicker kicker--light" style={{ letterSpacing: ".14em" }}>Availability</div><div style={{ fontSize: 14, fontWeight: 700 }}>{available}</div></div>) : null}
               </div>
+              <div className="enquire__agents">
+                {agents.map((a) => (
+                  <div key={a.name} className="enquire__agent">
+                    <div className="enquire__face" style={{ position: "relative" }}>{a.photo ? <Photo src={a.photo} sizes="52px" position="center top" /> : a.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}</div>
+                    <div className="enquire__who"><b>{a.name}</b><span>{a.role}</span></div>
+                    {a.mobile ? (
+                      <a href={a.tel} className="enquire__call" aria-label={"Call " + a.name + " on " + a.mobile}>
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" /></svg>
+                        {a.mobile}
+                      </a>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
               {!sent ? (
-                <form style={{ display: "grid", gap: 12 }} onSubmit={(e) => { e.preventDefault(); setName(String(new FormData(e.currentTarget).get("name") || "").split(" ")[0]); setSent(true); }}>
+                <form className="enquire__form" onSubmit={(e) => { e.preventDefault(); setName(String(new FormData(e.currentTarget).get("name") || "").split(" ")[0]); setSent(true); }}>
                   <label className="field field--dark">Full name<input name="name" required autoComplete="name" className="input input--dark" /></label>
-                  <label className="field field--dark">Email<input name="email" type="email" required autoComplete="email" className="input input--dark" /></label>
-                  <label className="field field--dark">Phone <span className="opt">(optional)</span><input name="phone" type="tel" autoComplete="tel" className="input input--dark" /></label>
-                  <label className="field field--dark">Comments<textarea name="comments" required rows={3} placeholder={"I’d like to know more about " + p.address + "."} className="input input--dark" /></label>
+                  <div className="enquire__row">
+                    <label className="field field--dark">Email<input name="email" type="email" required autoComplete="email" className="input input--dark" /></label>
+                    <label className="field field--dark"><span>Phone <span className="opt">(optional)</span></span><input name="phone" type="tel" autoComplete="tel" className="input input--dark" /></label>
+                  </div>
+                  <label className="field field--dark">Message<textarea name="comments" required rows={2} placeholder={"I’d like to know more about " + p.address + "."} className="input input--dark" /></label>
                   <input type="hidden" name="property" value={p.address} />
                   <input type="hidden" name="listingId" value={p.listingId || p.id} />
-                  <button type="submit" className="pill pill--red" style={{ justifyContent: "center", marginTop: 4 }}>Send enquiry</button>
-                  <div style={{ fontSize: 12, lineHeight: 1.5, color: "var(--grey-3)" }}>By sending you agree to our <a href="https://redrocketrealty.com.au/privacy-policy/" target="_blank" rel="noopener" style={{ color: "var(--grey-light)", fontWeight: 700 }}>Privacy Policy</a>. The listing agent is notified directly.</div>
+                  <button type="submit" className="pill pill--red" style={{ justifyContent: "center" }}>{"Email " + (isRent ? "the rentals team" : agent.first)}</button>
+                  <div style={{ fontSize: 12, lineHeight: 1.5, color: "var(--grey-3)" }}>By sending you agree to our <a href="https://redrocketrealty.com.au/privacy-policy/" target="_blank" rel="noopener" style={{ color: "var(--grey-light)", fontWeight: 700 }}>Privacy Policy</a>.</div>
                 </form>
               ) : (
                 <Success title="Enquiry sent." light onReset={() => setSent(false)}>Thanks, {name}. {agent.first} will be in touch about {p.address}.</Success>
               )}
             </div>
-            {agents.map((a) => (
-              <div key={a.name} className="enquire__agent">
-                <div className="enquire__face" style={{ position: "relative", backgroundImage: a.photo ? undefined : "repeating-linear-gradient(135deg,rgba(17,19,24,.035) 0 8px,transparent 8px 16px)" }}>{a.photo ? <Photo src={a.photo} sizes="72px" position="center top" /> : a.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}</div>
-                <div style={{ display: "grid", gap: 2, minWidth: 0 }}>
-                  <div style={{ fontSize: 17, fontWeight: 800, letterSpacing: "-.01em" }}>{a.name}</div>
-                  <div style={{ fontSize: 13, color: "var(--grey)" }}>{a.role}</div>
-                  <a href={a.tel} style={{ fontSize: 14, fontWeight: 700, color: "var(--brand-red)", textDecoration: "none", marginTop: 4 }}>{a.mobile}</a>
-                  <a href={"mailto:" + a.email + "?subject=" + encodeURIComponent(p.address + ", " + p.suburb)} style={{ fontSize: 13, color: "var(--grey-2)", textDecoration: "none", wordBreak: "break-all" }}>{a.email}</a>
-                </div>
-              </div>
-            ))}
             <Link href={suburbHref + "#alerts"} className="enquire__alert"><span>Get alerts for new listings in {p.suburb}</span><span aria-hidden="true" style={{ color: "var(--brand-red)" }}>→</span></Link>
           </aside>
         </div>

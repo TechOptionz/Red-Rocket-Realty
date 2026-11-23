@@ -104,9 +104,23 @@
 .placeholder--stripe { background: #d6d9df; background-image: repeating-linear-gradient(135deg, rgba(17, 19, 24, .035) 0 12px, transparent 12px 24px); border: 0; }
 .eoi { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding: 28px 32px; border-radius: 20px; background: var(--bg); }
 .enquire { position: sticky; top: 128px; display: grid; gap: 16px; scroll-margin-top: 128px; }
-.enquire__card { background: var(--ink-2); color: #fff; border-radius: 24px; padding: 28px; display: grid; gap: 20px; }
-.enquire__agent { border: 1px solid var(--line); border-radius: 24px; padding: 20px; display: flex; gap: 16px; align-items: center; }
-.enquire__face { flex: none; width: 72px; height: 72px; border-radius: 50%; overflow: hidden; background: #d6d9df; background-size: cover; background-position: center top; display: grid; place-items: center; font: 500 9px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--grey); text-align: center; }
+.enquire__card { background: var(--ink-2); color: #fff; border-radius: 24px; padding: 24px; display: grid; gap: 16px; max-height: calc(100vh - 144px); max-height: calc(100dvh - 144px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, .25) transparent; }
+/* Contact person first: who to talk to and a one-tap call, then the form. */
+.enquire__agents { display: grid; gap: 12px; padding: 14px 0; border-top: 1px solid rgba(255, 255, 255, .12); border-bottom: 1px solid rgba(255, 255, 255, .12); }
+.enquire__agent { display: flex; gap: 12px; align-items: center; min-width: 0; }
+.enquire__face { flex: none; width: 52px; height: 52px; border-radius: 50%; overflow: hidden; background: rgba(255, 255, 255, .12); display: grid; place-items: center; font: 700 13px/1 var(--font); letter-spacing: .04em; text-transform: uppercase; color: #fff; }
+.enquire__who { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.enquire__who b { font-size: 15px; font-weight: 800; letter-spacing: -.01em; line-height: 1.25; }
+.enquire__who span { font-size: 12.5px; line-height: 1.3; color: var(--grey-light); }
+.enquire__card .enquire__call { flex: none; display: inline-flex; align-items: center; gap: 7px; height: 40px; margin: 0; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .28); color: #fff; font-size: 14px; font-weight: 700; white-space: nowrap; text-decoration: none; transition: background .25s, border-color .25s; }
+.enquire__card .enquire__call:hover { background: #fff; border-color: #fff; color: var(--ink); }
+.enquire__form { display: grid; gap: 10px; }
+.enquire__form .input { height: 46px; }
+.enquire__form textarea.input { height: auto; padding: 10px 16px; min-height: 62px; }
+.enquire__row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 980px) { .enquire__card { max-height: none; overflow: visible; } }
+.enquire__row .field { white-space: nowrap; align-content: start; }
+@media (max-width: 460px) { .enquire__row { grid-template-columns: 1fr; } .enquire__agent { display: grid; grid-template-columns: 52px minmax(0, 1fr); row-gap: 10px; } .enquire__card .enquire__call { grid-column: 2; justify-self: start; } }
 .enquire__alert { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; border-radius: 16px; background: var(--bg); color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 700; transition: background .3s; }
 .enquire__alert:hover { background: #e9ebee; color: var(--ink); }
 @media (max-width: 980px) { .prop-cols { grid-template-columns: 1fr; } .enquire { position: static; } .gallery { grid-template-columns: 1fr; } .gallery__thumbs, .gallery--col .gallery__thumbs { grid-template-columns: repeat(4, 1fr); grid-template-rows: none; grid-auto-rows: 1fr; } .gallery--col .gallery__thumbs { grid-template-columns: repeat(var(--thumb-rows, 2), 1fr); } .gallery--three .gallery__thumbs { grid-template-columns: repeat(3, 1fr); } .gallery--three .gallery__thumbs > :first-child { grid-column: auto; } .gallery__thumb { min-height: 0; aspect-ratio: 4/3; } .gallery--col .gallery__thumb { aspect-ratio: 16/8; } .gallery--solo .gallery__main { aspect-ratio: 3/2; } }
