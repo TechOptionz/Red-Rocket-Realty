@@ -116,7 +116,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
   };
   const rentals = { name: "Red Rocket Realty Rentals", role: "Rentals and inspections", mobile: CONTACT.phone, tel: CONTACT.phoneHref, email: CONTACT.inspections, first: "Our rentals team", photo: "" };
   const agents = isRent ? [rentals]
-    : p.agents?.length ? p.agents.slice(0, 2).map((a) => toAgent(a.name, a.phone, a.email))
+    : p.agents?.length ? p.agents.slice(0, 4).map((a) => toAgent(a.name, a.phone, a.email))
     : p.agent ? [toAgent(p.agent)]
     : [toAgent("Parnam Singh Heir", "0434289285", "parnam@redrocketrealty.com.au")];
   const agent = agents[0];
@@ -370,7 +370,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
               <div className="enquire__agents">
                 {agents.map((a) => (
                   <div key={a.name} className="enquire__agent">
-                    <div className="enquire__face" style={{ position: "relative" }}>{a.photo ? <Photo src={a.photo} sizes="52px" position="center top" /> : a.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}</div>
+                    <div className="enquire__face" style={{ position: "relative" }}>{a.photo ? <Photo src={a.photo} sizes="44px" position="center top" /> : a.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}</div>
                     <div className="enquire__who"><b>{a.name}</b><span>{a.role}</span></div>
                     {a.mobile ? (
                       <a href={a.tel} className="enquire__call" aria-label={"Call " + a.name + " on " + a.mobile}>
