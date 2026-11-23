@@ -5,13 +5,13 @@ import Image from "next/image";
 import { CONTACT, PAGES, agentByName, decorate, formatRent, isRental, isSoldListing, specs, telHref, type Listing } from "@/data/rr-data";
 import { icsFile, icsFor, icsTimedEvent } from "@/lib/ics";
 import { availableLabel, fmtDate, fmtDay, fmtRange, fmtRelDay, fmtTime, upcomingInspections } from "@/lib/listings/flags";
-import { lockedOnAt } from "@/lib/feed/lockedon-image";
 import Lines from "@/components/Lines";
 import PropertyCard from "@/components/PropertyCard";
 import Success from "@/components/Success";
 import Photo, { loaderFor } from "@/components/Photo";
 import { FLOORPLAN_DIMS } from "@/data/floorplan-dims";
 import Lightbox from "@/components/Lightbox";
+import FloorplanViewer from "@/components/FloorplanViewer";
 import PropertyMap from "@/components/PropertyMap";
 import ListingFlags from "@/components/ListingFlags";
 import { useListings, useNow } from "@/components/ListingsProvider";
@@ -97,6 +97,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
   const [name, setName] = useState("");
   const [shareLabel, setShareLabel] = useState("Share");
   const [lb, setLb] = useState<number | null>(null);
+  const [fp, setFp] = useState<number | null>(null);
 
   const feed = !!p.mode;
   const isRent = isRental(p), isSold = isSoldListing(p), isLand = p.type === "Land", isSale = !isRent && !isSold;
@@ -125,8 +126,8 @@ export default function PropertyClient({ p }: { p: Listing }) {
   const thumbs = photos.slice(1, 5);
   const dec = decorate(p);
   const floorplans = feed
-    ? (p.floorplanImages || []).map((f) => ({ src: f.url, w: f.w || 2000, h: f.h || 1400, full: lockedOnAt(f.url, 2400, 90) }))
-    : (p.floorplans || []).map((src) => ({ src, w: (FLOORPLAN_DIMS[src] || [1600, 1200])[0], h: (FLOORPLAN_DIMS[src] || [1600, 1200])[1], full: src }));
+    ? (p.floorplanImages || []).map((f) => ({ src: f.url, w: f.w || 2000, h: f.h || 1400 }))
+    : (p.floorplans || []).map((src) => ({ src, w: (FLOORPLAN_DIMS[src] || [1600, 1200])[0], h: (FLOORPLAN_DIMS[src] || [1600, 1200])[1] }));
 
   // Inspections: real times from the feed (upcoming only); the static data has one display string.
   const inspections = feed
@@ -215,11 +216,12 @@ export default function PropertyClient({ p }: { p: Listing }) {
         {(floorplans.length || p.videoUrl || p.tourUrl) ? (
           <div className="media-bar">
             {photos.length > 1 ? <button type="button" className="pill pill--ghost pill--sm" onClick={() => setLb(0)}><Icon k="photos" size={16} /> {photos.length} photos</button> : null}
-            {floorplans.length ? <a href="#floorplan" className="pill pill--ghost pill--sm"><Icon k="plan" size={16} /> Floor plan</a> : null}
+            {floorplans.length ? <button type="button" className="pill pill--ghost pill--sm" onClick={() => setFp(0)}><Icon k="plan" size={16} /> Floor plan</button> : null}
             {p.videoUrl ? <a href="#video" className="pill pill--ghost pill--sm"><Icon k="play" size={16} /> Video</a> : null}
             {p.tourUrl ? <a href={p.tourUrl} target="_blank" rel="noopener" className="pill pill--ghost pill--sm">3D tour ↗</a> : null}
           </div>
         ) : null}
+        {fp !== null && floorplans.length ? <FloorplanViewer plans={floorplans} index={fp} title={p.address} subtitle={placeLine} onClose={() => setFp(null)} onIndex={setFp} /> : null}
         {lb !== null && photos.length ? <Lightbox photos={photos} index={lb} title={p.address} subtitle={placeLine} onClose={() => setLb(null)} onIndex={setLb} /> : null}
         <div className="prop-head">
           <div style={{ display: "grid", gap: 14, minWidth: 0 }}>
@@ -244,7 +246,7 @@ export default function PropertyClient({ p }: { p: Listing }) {
               {isSold && feed && p.soldDate ? <div className="prop-price__sub">Sold on {fmtDate(p.soldDate + "T00:00:00+10:00")}</div> : null}
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "flex-end" }}>
-              {floorplans.length ? <a href="#floorplan" className="pill pill--ghost pill--sm">Floor plan</a> : null}
+              {floorplans.length ? <button type="button" className="pill pill--ghost pill--sm" onClick={() => setFp(0)}>Floor plan</button> : null}
               {brochureHref ? <a href={brochureHref} target="_blank" rel="noopener" className="pill pill--ghost pill--sm">Brochure</a> : null}
               <button type="button" onClick={share} className="pill pill--ghost pill--sm">{shareLabel}</button>
             </div>
@@ -322,11 +324,11 @@ export default function PropertyClient({ p }: { p: Listing }) {
                 {floorplans.length ? (
                   <div style={{ display: "grid", gap: 16 }}>
                     {floorplans.map((f, i) => (
-                      <a key={f.src} href={f.full} target="_blank" rel="noopener" className="floorplan" aria-label={"Open floor plan " + (i + 1) + " full size"}>
+                      <button key={f.src} type="button" onClick={() => setFp(i)} className="floorplan" aria-label={"View floor plan " + (floorplans.length > 1 ? i + 1 + " " : "") + "full screen"}>
                         <Image loader={loaderFor(f.src)} src={f.src} alt={"Floor plan " + (floorplans.length > 1 ? i + 1 : "") + " for " + p.address + ", " + p.suburb} width={f.w} height={f.h} sizes="(max-width: 980px) 100vw, 60vw" quality={85} style={{ width: "100%", height: "auto" }} />
-                      </a>
+                      </button>
                     ))}
-                    <p className="small">Click a plan to open it full size.</p>
+                    <p className="small">Click the plan to view it full screen and zoom in.</p>
                   </div>
                 ) : (
                   <div style={{ padding: "18px 0", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)", fontSize: 15, color: "var(--grey-2)" }}>No floor plan has been supplied for this property. Download the brochure or contact the agent for layout details.</div>
