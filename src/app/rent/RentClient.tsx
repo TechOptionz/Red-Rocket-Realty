@@ -23,6 +23,9 @@ const FAQS: [string, string][] = [
   ["What happens when I move out?", "Give the notice period in your agreement (usually 14 days on a periodic tenancy). Clean to the entry condition report standard, return all keys, and we complete the exit report with you so the bond is refunded promptly."],
 ];
 
+/** Rentals shown on this page before pointing to the full search. */
+const SHOWN = 9;
+
 export default function RentClient() {
   const { RENT } = useListings();
   const [open, setOpen] = useState(0);
@@ -41,22 +44,33 @@ export default function RentClient() {
               <p className="hero__lead" style={{ animation: "none" }}>Houses and townhouses across Logan, managed by our largest team. Inspection times published, applications handled quickly.</p>
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-              <Link data-mag href={PAGES.listings + "?mode=rent"} className="pill pill--white pill--arrow"><span>Browse rentals</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
+              <a data-mag href="#rentals" className="pill pill--white pill--arrow"><span>Browse rentals</span><span className="pill__arrow" aria-hidden="true">→</span></a>
               <a href="#apply" className="pill pill--ghost-light">Apply</a>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section--bg" style={{ padding: "var(--sec-y) 0", overflow: "hidden" }}>
-        <div className="sec-head px">
+      <section id="rentals" className="section--bg" style={{ padding: "var(--sec-y) var(--pad-x)", scrollMarginTop: 96 }}>
+        <div className="sec-head" style={{ marginBottom: 40 }}>
           <div className="sec-head__text"><div className="kicker">For rent</div><Lines className="h2" lines={["Available now and coming up."]} /></div>
-          <Link href={PAGES.listings + "?mode=rent"} className="pill pill--dark" style={{ flex: "none" }}>All {RENT.length} rentals</Link>
+          <Link href={PAGES.listings + "?mode=rent"} className="pill pill--dark" style={{ flex: "none" }}>Search all {RENT.length} rentals</Link>
         </div>
-        <div className="strip">
-          {RENT.map((p) => <PropertyCard key={p.id} p={p} width="min(380px,82vw)" showMeta addrFormat="suburb-type" />)}
-          <div className="strip-end" aria-hidden="true" />
-        </div>
+        {RENT.length > 0 ? (
+          <div className="results results--grid">
+            {RENT.slice(0, SHOWN).map((p) => <PropertyCard key={p.id} p={p} showMeta style={{ opacity: 1 }} />)}
+          </div>
+        ) : (
+          <div className="empty">
+            <div className="empty__title">No rentals are listed right now.</div>
+            <p className="body" style={{ lineHeight: 1.55 }}>New rentals are added as soon as they are ready. Call the rentals team on <a href={CONTACT.phoneHref} style={{ color: "var(--ink)", fontWeight: 700 }}>{CONTACT.phone}</a> to hear what is coming up.</p>
+          </div>
+        )}
+        {RENT.length > SHOWN ? (
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 40 }}>
+            <Link href={PAGES.listings + "?mode=rent"} className="pill pill--dark pill--arrow"><span>View all {RENT.length} rentals</span><span className="pill__arrow" aria-hidden="true">→</span></Link>
+          </div>
+        ) : null}
       </section>
 
       <section id="apply" className="section section--white" style={{ scrollMarginTop: 100 }}>
