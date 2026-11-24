@@ -52,7 +52,7 @@ export default function RentalSearch({ rentals }: { rentals: Listing[] }) {
   }
   return (
     <>
-      <form className="search-bar filters" style={{ marginTop: 0, marginBottom: 40 }} aria-label="Search rentals" onSubmit={(e) => { e.preventDefault(); resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>
+      <form className="search-bar filters" style={{ marginBottom: 48 }} aria-label="Search rentals" onSubmit={(e) => { e.preventDefault(); resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>
         <label className="search-field search-field--sm" style={{ flexBasis: 170 }}><span>Suburb</span><select value={suburb} onChange={(e) => setSuburb(e.target.value)}><option value="">Any suburb</option>{suburbs.map((o) => <option key={o} value={o}>{o}</option>)}</select></label>
         {types.length > 1 && <label className="search-field search-field--sm" style={{ flexBasis: 150 }}><span>Property type</span><select value={ptype} onChange={(e) => setPtype(e.target.value)}><option value="">Any type</option>{types.map((o) => <option key={o} value={o}>{o}</option>)}</select></label>}
         <label className="search-field search-field--sm" style={{ flexBasis: 130 }}><span>Rent from</span><select value={pfrom} onChange={(e) => setPfrom(e.target.value)}><option value="">Any</option>{SEARCH.rentPrices.map((o) => <option key={o.v} value={o.v}>{o.label}</option>)}</select></label>

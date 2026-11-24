@@ -47,10 +47,7 @@ export default function RentClient() {
         </div>
       </section>
 
-      <section id="rentals" className="section--bg" style={{ padding: "var(--sec-y) var(--pad-x)", scrollMarginTop: 96 }}>
-        <div className="sec-head" style={{ marginBottom: 32 }}>
-          <div className="sec-head__text"><div className="kicker">For rent</div><Lines className="h2" lines={["Available now and coming up."]} /></div>
-        </div>
+      <section id="rentals" className="section--bg" style={{ padding: "0 var(--pad-x) var(--sec-y)", scrollMarginTop: 72 }}>
         <RentalSearch rentals={RENT} />
       </section>
 
