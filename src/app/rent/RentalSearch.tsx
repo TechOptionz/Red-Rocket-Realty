@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CONTACT, SEARCH, type Listing } from "@/data/rr-data";
 import PropertyCard from "@/components/PropertyCard";
 
@@ -17,7 +17,9 @@ export default function RentalSearch({ rentals }: { rentals: Listing[] }) {
   const [beds, setBeds] = useState("");
   const [baths, setBaths] = useState("");
   const [sort, setSort] = useState("new");
+  const [view, setView] = useState<"grid" | "list">("grid");
   const [limit, setLimit] = useState(PAGE);
+  const resultsRef = useRef<HTMLDivElement>(null);
   useEffect(() => setLimit(PAGE), [suburb, ptype, pfrom, pto, beds, baths, sort]);
 
   const suburbs = Array.from(new Set(rentals.map((p) => p.suburb))).sort();
@@ -50,25 +52,32 @@ export default function RentalSearch({ rentals }: { rentals: Listing[] }) {
   }
   return (
     <>
-      <form className="search-bar filters" style={{ marginTop: 0, marginBottom: 32 }} aria-label="Search rentals" onSubmit={(e) => e.preventDefault()}>
+      <form className="search-bar filters" style={{ marginTop: 0, marginBottom: 40 }} aria-label="Search rentals" onSubmit={(e) => { e.preventDefault(); resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>
         <label className="search-field search-field--sm" style={{ flexBasis: 170 }}><span>Suburb</span><select value={suburb} onChange={(e) => setSuburb(e.target.value)}><option value="">Any suburb</option>{suburbs.map((o) => <option key={o} value={o}>{o}</option>)}</select></label>
         {types.length > 1 && <label className="search-field search-field--sm" style={{ flexBasis: 150 }}><span>Property type</span><select value={ptype} onChange={(e) => setPtype(e.target.value)}><option value="">Any type</option>{types.map((o) => <option key={o} value={o}>{o}</option>)}</select></label>}
         <label className="search-field search-field--sm" style={{ flexBasis: 130 }}><span>Rent from</span><select value={pfrom} onChange={(e) => setPfrom(e.target.value)}><option value="">Any</option>{SEARCH.rentPrices.map((o) => <option key={o.v} value={o.v}>{o.label}</option>)}</select></label>
         <label className="search-field search-field--sm" style={{ flexBasis: 130 }}><span>Rent to</span><select value={pto} onChange={(e) => setPto(e.target.value)}><option value="">Any</option>{SEARCH.rentPrices.map((o) => <option key={o.v} value={o.v}>{o.label}</option>)}</select></label>
         <label className="search-field search-field--sm" style={{ flexBasis: 110 }}><span>Bedrooms</span><select value={beds} onChange={(e) => setBeds(e.target.value)}><option value="">Any</option>{["1", "2", "3", "4", "5"].map((b) => <option key={b} value={b}>{b}+</option>)}</select></label>
         <label className="search-field search-field--sm" style={{ flexBasis: 110 }}><span>Bathrooms</span><select value={baths} onChange={(e) => setBaths(e.target.value)}><option value="">Any</option>{["1", "2", "3"].map((b) => <option key={b} value={b}>{b}+</option>)}</select></label>
+        <div className="filters__foot">
+          {active && <button type="button" className="pill pill--link pill--sm" onClick={clear}>Clear all</button>}
+          <button type="submit" className="pill pill--red" style={{ height: 48 }}>Search</button>
+        </div>
       </form>
-      <div className="results-bar">
+      <div ref={resultsRef} className="results-bar" style={{ scrollMarginTop: 110 }}>
         <div style={{ fontSize: 14, color: "var(--grey)", fontWeight: 500 }} aria-live="polite">
-          {list.length === 0 ? "No rentals match" : <>Showing <b style={{ color: "var(--ink)", fontWeight: 800 }}>{Math.min(limit, list.length)}</b> of <b style={{ color: "var(--ink)", fontWeight: 800 }}>{list.length}</b> {list.length === 1 ? "rental" : "rentals"}</>}
+          {list.length === 0 ? "No properties match" : <>Showing <b style={{ color: "var(--ink)", fontWeight: 800 }}>{Math.min(limit, list.length)}</b> of <b style={{ color: "var(--ink)", fontWeight: 800 }}>{list.length}</b> {list.length === 1 ? "property" : "properties"}</>}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
-          {active && <button type="button" className="pill pill--link pill--sm" onClick={clear}>Clear filters</button>}
           <label className="sort">Sort<select value={sort} onChange={(e) => setSort(e.target.value)}>{SORTS.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select></label>
+          <div role="group" aria-label="View" className="seg seg--sm hide-m" style={{ padding: 3, gap: 2 }}>
+            <button type="button" aria-label="Grid view" aria-pressed={view === "grid"} className="seg__btn" data-on={view === "grid" ? "1" : "0"} onClick={() => setView("grid")}>Grid</button>
+            <button type="button" aria-label="List view" aria-pressed={view === "list"} className="seg__btn" data-on={view === "list" ? "1" : "0"} onClick={() => setView("list")}>List</button>
+          </div>
         </div>
       </div>
       {list.length > 0 ? (
-        <div className="results results--grid">
+        <div className={"results results--" + view}>
           {list.slice(0, limit).map((p) => <PropertyCard key={p.id} p={p} showMeta style={{ opacity: 1 }} />)}
         </div>
       ) : (
